@@ -12,8 +12,14 @@ gem 'rails', '~> 5.2.1'
 gem 'bootstrap-sass'
 gem 'sass-rails', '~> 5.0'
 gem 'jquery-rails'
+gem 'font-awesome-rails'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.8'
+  gem 'haml'
+end
 
 group :development do
   gem 'fasterer'
@@ -21,13 +27,14 @@ group :development do
   gem 'pry'
   gem 'rubocop', require: false
   gem 'rubocop-rspec'
-  gem 'haml'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
 end
 
 group :test do
+  gem 'shoulda-matchers'
+  gem 'rails-controller-testing'
   gem 'capybara', '>= 2.15'
   gem 'chromedriver-helper'
   gem 'rspec'
