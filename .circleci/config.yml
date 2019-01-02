@@ -17,6 +17,7 @@ jobs:
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: book_store_test
+          DATABASE_URL: "postgres://ubuntu@localhost:5432/book_store_test"
 
     steps:
       - checkout
@@ -42,8 +43,6 @@ jobs:
           command: |
             bundle exec rake db:create db:schema:load --trace
             bundle exec rake db:migrate
-        environment:
-          DATABASE_URL: "postgres://ubuntu@localhost:5432/book_store_test"
 
       - run:
           name: run tests
