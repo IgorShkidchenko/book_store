@@ -5,10 +5,18 @@
 version: 2
 jobs:
   build:
-    docker:
-       - image: circleci/ruby:2.5.1-node-browsers
-
     working_directory: ~/repo
+    docker:
+      - image: circleci/ruby:2.5.1-node-browsers
+        environment:
+          PG_HOST: localhost
+          PG_USER: ubuntu
+          RAILS_ENV: test
+          RACK_ENV: test
+      - image: postgres:9.6-jessie
+        environment:
+          POSTGRES_USER: ubuntu
+          POSTGRES_DB: book_store_test
 
     steps:
       - checkout
@@ -28,6 +36,14 @@ jobs:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+      - run:
+          name: Set up DB
+          command: |
+            bundle exec rake db:create db:schema:load --trace
+            bundle exec rake db:migrate
+        environment:
+          DATABASE_URL: "postgres://ubuntu@localhost:5432/book_store_test"
 
       - run:
           name: run tests
