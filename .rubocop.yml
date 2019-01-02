@@ -1,0 +1,18 @@
+require: rubocop-rspec
+
+Metrics/LineLength:
+  Max: 120
+
+Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/BlockLength:
+  ExcludedMethods: ['describe']
+
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'config/**/*'
