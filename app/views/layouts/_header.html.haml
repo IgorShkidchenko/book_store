@@ -6,7 +6,8 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand Bookstore
+      %a.navbar-brand
+        = t('layout.header.bookstore')
       %a.shop-link.pull-right.visible-xs{href: "#"}
         %span.shop-icon
           %span.shop-quantity 3
@@ -19,9 +20,9 @@
           %span{'aria-hidden': "true"} &times;
         %ul.nav.navbar-nav
           %li
-            %a{href: "#"} Home
+            = link_to t('layout.link.home'), root_path
           %li
-            %a{type: "button", 'data-toggle': "collapse", href: "#menu", 'aria-expanded': "false", 'aria-controls': "menu"} Shop
+            %a{type: "button", 'data-toggle': "collapse", href: "#menu", 'aria-expanded': "false", 'aria-controls': "menu"}= t('layout.link.shop')
             %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
               %li
                 %a.collapse-link{href: "#"} Mobile development
@@ -30,13 +31,13 @@
               %li
                 %a.collapse-link{href: "#"} Web design
           %li
-            %a{href: "#"} My account
+            = link_to t('layout.link.my_account'), '#'
       .hidden-xs
         %ul.nav.navbar-nav
           %li
-            %a{href: "#"} Home
+            = link_to t('layout.link.home'), root_path
           %li.dropdown
-            %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"} Shop
+            %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}= t('layout.link.shop')
             %ul.dropdown-menu
               %li
                 %a{href: "#"} Mobile development
@@ -46,6 +47,6 @@
                 %a{href: "#"} Web design
               %li.divider{role: "separator"}
               %li
-                %a{href: "#"} Log out
+                = link_to t('layout.link.log_out'), '#'
           %li
-            %a{href: "#"} My account
+            = link_to t('layout.link.my_account'), '#'

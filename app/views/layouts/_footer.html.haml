@@ -4,26 +4,28 @@
       .col-sm-9
         %ul.list-inline.general-align.mb-25
           %li
-            %a.nav-link{href: "#"} Home
+            = link_to t('layout.link.home'), root_path, class: 'nav-link'
           %li
-            %a.nav-link{href: "#"} Shop
+            = link_to t('layout.link.shop'), '#', class: 'nav-link'
           %li
-            %a.nav-link{href: "#"} Orders
+            = link_to t('layout.link.orders'), '#', class: 'nav-link'
           %li
-            %a.nav-link{href: "#"} Settings
+            = link_to t('layout.link.settings'), '#', class: 'nav-link'
       .col-sm-3
-        %p.general-nav-mail support@bookstore.com
-        %p.general-nav-number (555)-555-5555
+        %p.general-nav-mail
+          = t('layout.footer.mail')
+        %p.general-nav-number
+          = t('layout.footer.number')
         %ul.list-inline.general-align
           %li
-            %a.nav-link{href: "https://www.facebook.com"}
+            = link_to "https://www.facebook.com", class: 'nav-link' do
               %i.fa.fa-facebook{'aria-hidden': "true"}
           %li
-            %a.nav-link{href: "https://twitter.com"}
+            = link_to "https://twitter.com", class: 'nav-link' do
               %i.fa.fa-twitter{'aria-hidden': "true"}
           %li
-            %a.nav-link{href: "https://plus.google.com/discover"}
+            = link_to "https://plus.google.com/discover", class: 'nav-link' do
               %i.fa.fa-google-plus{'aria-hidden': "true"}
           %li
-            %a.nav-link{href: "https://www.instagram.com"}
+            = link_to "https://www.instagram.com", class: 'nav-link' do
               %i.fa.fa-instagram{'aria-hidden': "true"}
