@@ -22,14 +22,12 @@
           %li
             = link_to t('layout.link.home'), root_path
           %li
-            %a{type: "button", 'data-toggle': "collapse", href: "#menu", 'aria-expanded': "false", 'aria-controls': "menu"}= t('layout.link.shop')
+            %a{type: "button", 'data-toggle': "collapse", href: "#menu", 'aria-expanded': "false", 'aria-controls': "menu"}
+              = t('layout.link.shop')
             %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
-              %li
-                %a.collapse-link{href: "#"} Mobile development
-              %li
-                %a.collapse-link{href: "#"} Photo
-              %li
-                %a.collapse-link{href: "#"} Web design
+              - Category.all.each do |category|
+                %li
+                  = link_to category.name, "#", class: 'collapse-link'
           %li
             = link_to t('layout.link.my_account'), '#'
       .hidden-xs
@@ -37,14 +35,12 @@
           %li
             = link_to t('layout.link.home'), root_path
           %li.dropdown
-            %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}= t('layout.link.shop')
+            %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+              = t('layout.link.shop')
             %ul.dropdown-menu
-              %li
-                %a{href: "#"} Mobile development
-              %li
-                %a{href: "#"} Photo
-              %li
-                %a{href: "#"} Web design
+              - Category.all.each do |category|
+                %li
+                  = link_to category.name, categories_index_path
               %li.divider{role: "separator"}
               %li
                 = link_to t('layout.link.log_out'), '#'

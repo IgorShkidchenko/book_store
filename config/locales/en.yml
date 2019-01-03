@@ -5,7 +5,7 @@ en:
       shop: Shop
       orders: Orders
       settings: Settings
-      my_acc: My account
+      my_account: My account
       log_out: Log out
     footer:
       mail: support@bookstore.com
@@ -18,3 +18,13 @@ en:
     start_button: Get Started
     best_sellers: Best Sellers
     buy_button: Buy Now
+  catalog:
+    title: Сatalog
+    view_more_button: View More
+    all: All
+    dropdown:
+      newest: Newest first
+      popular: Popular first
+      price_ASC: 'Price: Low to hight'
+      price_DESC: 'Price: Hight to low'
+    price: "€%{price}"

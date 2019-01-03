@@ -1,0 +1,144 @@
+%main.container
+  %h1.general-title-margin
+    = t('catalog.title')
+  .hidden-xs.clearfix
+    .dropdowns.pull-right
+      .dropdown.width-240
+        %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+          = t('catalog.dropdown.newest')
+          %i.fa.fa-angle-down.dropdown-icon.pull-right
+        %ul.dropdown-menu
+          %li
+            = link_to t('catalog.dropdown.newest'), '#'
+          %li
+            = link_to t('catalog.dropdown.popular'), '#'
+          %li
+            = link_to t('catalog.dropdown.price_ASC'), '#'
+          %li
+            = link_to t('catalog.dropdown.price_DESC'), '#'
+    %ul.list-inline.pt-10.mb-25.mr-240
+      %li.mr-35
+        %a.filter-link{href: "#"}
+          = t('catalog.all')
+          %span.badge.general-badge
+            = Book.all.count
+      - Category.all.each do |category|
+        %li.mr-35
+          = link_to "#", class: 'filter-link' do
+            = category.name
+            %span.badge.general-badge
+              = category.books.count
+  .dropdowns.mb-25.visible-xs
+    %p.lead.small.mb-10 Filter by category
+    .dropdown
+      %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+        = t('catalog.dropdown.newest')
+        %i.fa.fa-angle-down.dropdown-icon.pull-right
+      %ul.dropdown-menu
+        %li
+          = link_to t('catalog.dropdown.newest'), '#'
+        %li
+          = link_to t('catalog.dropdown.popular'), '#'
+        %li
+          = link_to t('catalog.dropdown.price_ASC'), '#'
+        %li
+          = link_to t('catalog.dropdown.price_DESC'), '#'
+    %p.lead.small.mb-10 Sort by
+    .dropdown
+      %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+        = t('catalog.dropdown.newest')
+        %i.fa.fa-angle-down.dropdown-icon.pull-right
+      %ul.dropdown-menu
+        %li
+          = link_to t('catalog.dropdown.newest'), '#'
+        %li
+          = link_to t('catalog.dropdown.popular'), '#'
+        %li
+          = link_to t('catalog.dropdown.price_ASC'), '#'
+        %li
+          = link_to t('catalog.dropdown.price_DESC'), '#'
+  .mb-120
+    .row
+      - Book.all.each do |book|
+        .col-xs-6.col-sm-3
+          .general-thumb-wrap
+            .thumbnail.general-thumbnail
+              %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+              .thumb-hover
+                .general-thumb-link-wrap
+                  %a.thumb-hover-link{href: "#"}
+                    %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+                  %a.thumb-hover-link{href: "#"}
+                    %i.fa.fa-shopping-cart.thumb-icon
+          .general-thumb-info
+            %p.title
+              = book.title
+            %p.font-16.in-gold-500
+              = t('catalog.price', price: book.price)
+            %span.divider-sm
+            %p.lead.small
+              = book.authors.map(&:name).join(', ')
+    .row.mb-25
+      .col-xs-6.col-sm-3
+        .general-thumb-wrap
+          .thumbnail.general-thumbnail
+            %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+            .thumb-hover
+              .general-thumb-link-wrap
+                %a.thumb-hover-link{href: "#"}
+                  %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+                %a.thumb-hover-link{href: "#"}
+                  %i.fa.fa-shopping-cart.thumb-icon
+        .general-thumb-info
+          %p.title Android Programming for Beginners
+          %p.font-16.in-gold-500 €28.50
+          %span.divider-sm
+          %p.lead.small John Horton
+      .col-xs-6.col-sm-3
+        .general-thumb-wrap
+          .thumbnail.general-thumbnail.disabled
+            %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+            .thumb-hover
+              .general-thumb-link-wrap
+                %a.thumb-hover-link{href: "#"}
+                  %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+                %a.thumb-hover-link{href: "#"}
+                  %i.fa.fa-shopping-cart.thumb-icon
+        .general-thumb-info
+          %p.title Android Programming for Beginners
+          %p.font-16.in-gold-500 €28.50
+          %span.divider-sm
+          %p.lead.small Bass Jobsen, David Cochran, Ian Whitley
+      .col-xs-6.col-sm-3
+        .general-thumb-wrap
+          .thumbnail.general-thumbnail
+            %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+            .thumb-hover-link
+              .general-thumb-link-wrap
+                %a.thumb-hover-link{href: "#"}
+                  %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+                %a.thumb-hover-link{href: "#"}
+                  %i.fa.fa-shopping-cart.thumb-icon
+        .general-thumb-info
+          %p.title Android Programming for Beginners
+          %p.font-16.in-gold-500 €28.50
+          %span.divider-sm
+          %p.lead.small Bass Jobsen, David Cochran, Ian Whitley
+      .col-xs-6.col-sm-3
+        .general-thumb-wrap
+          .thumbnail.general-thumbnail
+            %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+            .thumb-hover
+              .general-thumb-link-wrap
+                %a.thumb-hover-link{href: "#"}
+                  %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+                %a.thumb-hover-link{href: "#"}
+                  %i.fa.fa-shopping-cart.thumb-icon
+        .general-thumb-info
+          %p.title Android Programming for Beginners
+          %p.font-16.in-gold-500 €28.50
+          %span.divider-sm
+          %p.lead.small Bass Jobsen, David Cochran, Ian Whitley
+    .text-center
+      %button.btn.btn-primary
+        = t('catalog.view_more_button')
