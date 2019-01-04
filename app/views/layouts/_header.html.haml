@@ -25,9 +25,9 @@
             %a{type: "button", 'data-toggle': "collapse", href: "#menu", 'aria-expanded': "false", 'aria-controls': "menu"}
               = t('layout.link.shop')
             %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
-              - Category.all.each do |category|
+              - @categories.each do |category|
                 %li
-                  = link_to category.name, "#", class: 'collapse-link'
+                  = link_to category.name, categories_index_path(category_id: category.id), class: 'collapse-link'
           %li
             = link_to t('layout.link.my_account'), '#'
       .hidden-xs
@@ -38,9 +38,9 @@
             %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
               = t('layout.link.shop')
             %ul.dropdown-menu
-              - Category.all.each do |category|
+              - @categories.each do |category|
                 %li
-                  = link_to category.name, categories_index_path
+                  = link_to category.name, categories_index_path(category_id: category.id)
               %li.divider{role: "separator"}
               %li
                 = link_to t('layout.link.log_out'), '#'
