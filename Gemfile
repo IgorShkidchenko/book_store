@@ -11,9 +11,9 @@ gem 'rails', '~> 5.2.1'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 gem 'haml'
+gem 'faker', require: false
 
 group :development, :test do
-  gem 'faker', require: false
   gem 'rspec-rails', '~> 3.8'
 end
 
