@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'book/show'
-  get 'categories/index'
   root 'home#index'
+  get 'books/show', as: 'book'
+  get 'categories/index', as: 'shop'
 end

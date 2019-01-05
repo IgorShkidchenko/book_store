@@ -5,7 +5,8 @@ en:
       shop: Shop
       orders: Orders
       settings: Settings
-      my_account: My account
+      sign_in: Sign in
+      sign_up: Sign up
       log_out: Log out
     footer:
       mail: support@bookstore.com
@@ -27,4 +28,22 @@ en:
       popular: Popular first
       price_ASC: 'Price: Low to hight'
       price_DESC: 'Price: Hight to low'
+      title_ASC: 'Title: A - Z'
+      title_DESC: 'Title: Z - A'
+  book:
+    page:
+      back: Back to results
+      add_to_card: Add to Cart
+      description: Description
+      read_more: Read More
+      published: Year of publication
+      dimensions: Dimensions
+      materials: Materials
+      write_review: Write a Review
+      score: Score
+      title: Title
+      review: Review
+      post: Post
     price: "€%{price}"
+    dimensions: "H: %{width} x W: %{height} x D: %{depth}"
+    short_description: "%{description}..."

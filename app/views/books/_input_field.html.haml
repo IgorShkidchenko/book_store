@@ -1,0 +1,25 @@
+:javascript
+  $(document).ready(function(){
+    var quantitiy=0;
+
+    $('.plus').click(function(e){
+      e.preventDefault();
+      var quantity = parseInt($('#quantity').val());
+        $('#quantity').val(quantity + 1);
+    });
+
+    $('.minus').click(function(e){
+      e.preventDefault();
+      var quantity = parseInt($('#quantity').val());
+        if(quantity>1){
+          $('#quantity').val(quantity - 1);
+        }
+    });
+  });
+.col-xs-5.col-md-3
+  .input-group.general-position
+    %btn.btn-link.input-link.btn-number.minus{"data-field": "", "data-type": "minus", role: 'button', type: "button", href: "#" }
+      %i.fa.fa-minus.line-height-40
+    %input#quantity.form-control.quantity-input{min: "1", name: "quantity", type: "text", value: "1"}
+    %btn.btn-link.input-link.btn-number.plus{"data-field": "", "data-type": "plus", role: 'button', type: "button", href: "#" }
+      %i.fa.fa-plus.line-height-40

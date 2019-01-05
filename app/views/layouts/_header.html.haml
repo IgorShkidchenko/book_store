@@ -27,9 +27,11 @@
             %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
               - @categories.each do |category|
                 %li
-                  = link_to category.name, categories_index_path(category_id: category.id), class: 'collapse-link'
+                  = link_to category.name, shop_path(category_id: category.id), class: 'collapse-link'
           %li
-            = link_to t('layout.link.my_account'), '#'
+            = link_to t('layout.link.sign_up'), '#'
+          %li
+            = link_to t('layout.link.sign_in'), '#'
       .hidden-xs
         %ul.nav.navbar-nav
           %li
@@ -40,9 +42,11 @@
             %ul.dropdown-menu
               - @categories.each do |category|
                 %li
-                  = link_to category.name, categories_index_path(category_id: category.id)
+                  = link_to category.name, shop_path(category_id: category.id)
               %li.divider{role: "separator"}
               %li
                 = link_to t('layout.link.log_out'), '#'
           %li
-            = link_to t('layout.link.my_account'), '#'
+            = link_to t('layout.link.sign_up'), '#'
+          %li
+            = link_to t('layout.link.sign_in'), '#'

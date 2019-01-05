@@ -9,22 +9,26 @@
           %i.fa.fa-angle-down.dropdown-icon.pull-right
         %ul.dropdown-menu
           %li
-            = link_to t('catalog.dropdown.newest'), categories_index_path(category_id: @category&.id, filter: 'created_at')
+            = link_to t('catalog.dropdown.newest'), shop_path(category_id: @category&.id, filter: 'created_at')
           %li
             = link_to t('catalog.dropdown.popular'), '#'
           %li
-            = link_to t('catalog.dropdown.price_ASC'), categories_index_path(category_id: @category&.id, filter: 'price')
+            = link_to t('catalog.dropdown.price_ASC'), shop_path(category_id: @category&.id, filter: 'price')
           %li
-            = link_to t('catalog.dropdown.price_DESC'), categories_index_path(category_id: @category&.id, filter: 'price', reverse: true)
+            = link_to t('catalog.dropdown.price_DESC'), shop_path(category_id: @category&.id, filter: 'price', reverse: true)
+          %li
+            = link_to t('catalog.dropdown.title_ASC'), shop_path(category_id: @category&.id, filter: 'title')
+          %li
+            = link_to t('catalog.dropdown.title_DESC'), shop_path(category_id: @category&.id, filter: 'title', reverse: true)
     %ul.list-inline.pt-10.mb-25.mr-240
       %li.mr-35
-        = link_to categories_index_path, class: 'filter-link' do
+        = link_to shop_path, class: 'filter-link' do
           = t('catalog.all')
           %span.badge.general-badge
             = @all_books.count
       - @categories.each do |category|
         %li.mr-35
-          = link_to categories_index_path(category_id: category.id), class: 'filter-link' do
+          = link_to shop_path(category_id: category.id), class: 'filter-link' do
             = category.name
             %span.badge.general-badge
               = category.books.count
@@ -36,37 +40,27 @@
         %i.fa.fa-angle-down.dropdown-icon.pull-right
       %ul.dropdown-menu
         %li
-          = link_to t('catalog.dropdown.newest'), categories_index_path(category_id: @category&.id, filter: 'created_at', tester: :asd)
+          = link_to t('catalog.dropdown.newest'), shop_path(category_id: @category&.id, filter: 'created_at', tester: :asd)
         %li
           = link_to t('catalog.dropdown.popular'), '#'
         %li
-          = link_to t('catalog.dropdown.price_ASC'), categories_index_path(category_id: @category&.id, filter: 'price')
+          = link_to t('catalog.dropdown.price_ASC'), shop_path(category_id: @category&.id, filter: 'price')
         %li
-          = link_to t('catalog.dropdown.price_DESC'), categories_index_path(category_id: @category&.id, filter: 'price', reverse: true)
-    %p.lead.small.mb-10 filter by
-    .dropdown
-      %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-        = t('catalog.dropdown.newest')
-        %i.fa.fa-angle-down.dropdown-icon.pull-right
-      %ul.dropdown-menu
+          = link_to t('catalog.dropdown.price_DESC'), shop_path(category_id: @category&.id, filter: 'price', reverse: true)
         %li
-          = link_to t('catalog.dropdown.newest'), categories_index_path(category_id: @category&.id, filter: 'created_at', tester: :asd)
+          = link_to t('catalog.dropdown.title_ASC'), shop_path(category_id: @category&.id, filter: 'title')
         %li
-          = link_to t('catalog.dropdown.popular'), '#'
-        %li
-          = link_to t('catalog.dropdown.price_ASC'), categories_index_path(category_id: @category&.id, filter: 'price')
-        %li
-          = link_to t('catalog.dropdown.price_DESC'), categories_index_path(category_id: @category&.id, filter: 'price', reverse: true)
+          = link_to t('catalog.dropdown.title_DESC'), shop_path(category_id: @category&.id, filter: 'title', reverse: true)
   .mb-120
     .row
       - @chosen_books.each do |book|
-        .col-xs-6.col-sm-3
+        .col-xs-6.col-sm-3.MY_CUSTOM_CLASS
           .general-thumb-wrap
             .thumbnail.general-thumbnail
               %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
               .thumb-hover
                 .general-thumb-link-wrap
-                  %a.thumb-hover-link{href: "#"}
+                  = link_to book_path(book_id: book.id), class: 'thumb-hover-link' do
                     %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
                   %a.thumb-hover-link{href: "#"}
                     %i.fa.fa-shopping-cart.thumb-icon
@@ -74,10 +68,9 @@
             %p.title
               = book.title
             %p.font-16.in-gold-500
-              = t('catalog.price', price: book.price)
+              = t('book.price', price: book.price)
             %span.divider-sm
-            %p.lead.small.MY_CUSTOM_CLASS
-              = book.authors.map(&:name).join(', ')
-    .text-center
-      %button.btn.btn-primary
-        = t('catalog.view_more_button')
+            %p.lead.small
+              = book.authors_as_string
+      .text-center
+        = paginate @chosen_books

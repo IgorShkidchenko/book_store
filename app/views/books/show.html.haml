@@ -1,0 +1,113 @@
+%main.container
+  = link_to :back, class: 'general-back-link' do
+    %i.fa.fa-long-arrow-left.mr-15
+    = t('book.page.back')
+  .row
+    .col-sm-6
+      .product-gallery
+        .mb-20
+          %img.img-responsive{src: "https://www.bramstein.com/static/smashing-book-5-photo-stack.9d5d114e3e.jpg"}
+        .images.clearfix
+          %a.img-link{href: "#"}
+            %img{src: "https://www.bramstein.com/static/smashing-book-5-photo-stack.9d5d114e3e.jpg"}
+          %a.img-link{href: "#"}
+            %img{src: "https://www.bramstein.com/static/smashing-book-5-photo-stack.9d5d114e3e.jpg"}
+          %a.img-link{href: "#"}
+            %img{src: "https://www.bramstein.com/static/smashing-book-5-photo-stack.9d5d114e3e.jpg"}
+    .col-sm-6
+      %h1.mt-res-0
+        = @book.title
+      %p.lead.small
+        = @book.authors_as_string
+      .row
+        .col-xs-12.col-md-4
+          %p.h1.in-gold-500.mt-10
+            = t('book.price', price: @book.price)
+        = render partial: 'input_field'
+        .col-xs-7.col-md-5
+          %button.btn.btn-default.pull-right.general-position
+            = t('book.page.add_to_cart')
+      .general-info-wrap.divider-lg
+        %p
+          = t('book.page.description')
+        %p.lead.small.line-height-2
+          = t('book.short_description', description: @book.description[0..250])
+          %a.in-gold-500.ml-10{href: "#"}
+            = t('book.page.read_more')
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left
+            = t('book.page.published')
+          %p.lead.small.pull-right
+            = @book.published_year
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left
+            = t('book.page.dimensions')
+          %p.lead.small.pull-right
+            = t('book.dimensions', width: @book.width, height: @book.height, depth: @book.depth,)
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left
+            = t('book.page.materials')
+          %p.lead.small.pull-right
+            = @book.materials
+  .mb-80
+    %h3
+      = t('book.page.write_review')
+    %p.general-info-text
+      = t('book.page.score')
+    .mb-15
+      %i.fa.fa-star.rate-empty
+      %i.fa.fa-star.rate-empty
+      %i.fa.fa-star.rate-empty
+      %i.fa.fa-star.rate-empty
+      %i.fa.fa-star.rate-empty
+    %form.row
+      .col-md-8
+        .mb-40
+          .form-group
+            %label.control-label.input-label.in-grey-600{for: "title"}
+              = t('book.page.title')
+            %input#title.form-control{name:"title", type: "text"}
+          .form-group
+            %label.control-label.input-label.in-grey-600{for: "review"}
+              = t('book.page.review')
+            %textarea#review.form-control{name:"review", type: "text"}
+        .text-right
+          %button.btn.disabled.mb-20
+            = t('book.page.post')
+  .mb-80
+    %h3.in-gold-500.mb-25 Reviews (3)
+    .general-message-wrap.divider-lg
+      .clearfix
+        %img.img-circle.logo-size.inlide-block.pull-left{src: "https://www.smashingmagazine.com/wp-content/uploads/2015/09/smashing-book-5-2-large.jpg"}
+        .ml-70
+          %div
+            .general-message-date.hidden-xs 11/11/16
+            .max-240
+              .general-message-verified Verified Reviewer
+              .general-message-name Rita J. Lewis
+          .mb-15
+            %i.fa.fa-star.rate-star
+            %i.fa.fa-star.rate-star
+            %i.fa.fa-star.rate-star
+            %i.fa.fa-star.rate-star
+            %i.fa.fa-star.rate-star
+          %p Thank you BookStore, I was very pleased to receive my order for the Moleskine diary so soon after placing the order.
+    .general-message-wrap.divider-lg
+      .clearfix
+        %span.img-circle.logo-size.inlide-block.pull-left.logo-empty M
+        .ml-70
+          %div
+            .general-message-date.hidden-xs 11/11/16
+            .max-240
+              .general-message-verified.pull-right Verified Reviewer
+              .general-message-name May J. Novoa
+          .mb-15
+            %i.fa.fa-star.rate-star
+            %i.fa.fa-star.rate-star
+            %i.fa.fa-star.rate-star
+            %i.fa.fa-star.rate-star
+            %i.fa.fa-star.rate-star.rate-empty
+          %p If ‘Get a better job’ had landed on my desk a year ago, I might have been dismissive of it. Instead I was prepared to be open-minded. There have been many occasions where I turned to career books with practical activities to look for some inspiration when developing education activities for learners or assessment.

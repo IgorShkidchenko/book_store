@@ -3,6 +3,7 @@ class CategoriesController < ApplicationController
     @all_books = Book.all
     params[:category_id] ? set_books_with_category : set_all_books
     set_filter if params[:filter]
+    paginate_chosen_books
   end
 
   private
@@ -19,5 +20,9 @@ class CategoriesController < ApplicationController
   def set_filter
     @chosen_books = @chosen_books.sort_by(&params[:filter].to_sym)
     @chosen_books.reverse! if params[:reverse]
+  end
+
+  def paginate_chosen_books
+    @chosen_books = Kaminari.paginate_array(@chosen_books).page(params[:page]).per(12)
   end
 end

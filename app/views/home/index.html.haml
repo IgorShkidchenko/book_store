@@ -3,33 +3,24 @@
     %ol.carousel-indicators
       %li.active{'data-target': "#slider", 'data-slide-to': "0"}
       %li{'data-target': "#slider", 'data-slide-to': "1"}
+      %li{'data-target': "#slider", 'data-slide-to': "2"}
     .carousel-inner{role: "listbox"}
-      .item.active
-        .row
-          .col-sm-5
-            .general-img-wrap
-              %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-          .col-sm-7
-            .mb-60
-              %h1 Real-Life Responsive Web Design
-              %p.lead Smart front-end techniques and design patterns derived from real-life responsive projects
-              %p.lead.small Vitaly Friedman, Daniel Mall,Vitaly Friedman
-              .general-align
-                %button.disabled.btn
-                  = t('home.buy_button')
-      .item
-        .row
-          .col-sm-5
-            .general-img-wrap
-              %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-          .col-sm-7
-            .mb-60
-              %h1 Real-Life Responsive Web Design
-              %p.lead Smart front-end techniques and design patterns derived from real-life responsive projects
-              %p.lead.small Vitaly Friedman, Daniel Mall,Vitaly Friedman
-              .general-align
-                %button.btn.btn-primary
-                  = t('home.buy_button')
+      - Book.latest_three.each_with_index do |book, index|
+        %div{'class': "item#{' active' if index.zero?}"}
+          .row
+            .col-sm-5
+              .general-img-wrap
+                %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+            .col-sm-7
+              .mb-60
+                %h1
+                  = book.title
+                %p.lead
+                  = t('book.short_description', description: book.description[0..150])
+                %p.lead.small
+                  = book.authors_as_string
+                .general-align
+                  = link_to t('home.buy_button'), '#', class: 'button btn btn-primary'
     %a.left.carousel-control{href: "#slider", role: "button", 'data-slide': "prev"}
       %span.icon-prev{'aria-hidden': "true"}
       %span.sr-only Previous
@@ -43,73 +34,29 @@
     .mb-res-50
       %p
         = t('home.about_us')
-    %button.btn.btn-default
-      = t('home.start_button')
+    = link_to t('home.start_button'), shop_path, class: 'button btn btn-default'
   .mb-35
     %h3
-      = t('home.best_sellers')
+      = t('home.best_sellers') + ' UNDEFINED CLASS ORDER FOR NOW, NOT SORTED'
+      / A grade view of 4 books, that was sold more than all others in -- EACH CATEGORY --
     .row
-      .col-sm-6.col-md-3
-        .general-thumb-wrap
-          .thumbnail.general-thumbnail
-            %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-            .thumb-hover
-              .general-thumb-link-wrap
-                %a.thumb-hover-link{href: "#"}
-                  %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-                %a.thumb-hover-link{href: "#"}
-                  %i.fa.fa-shopping-cart.thumb-icon
-        .mb-35
-          .clearfix
-            %p.pull-right.font-16.in-gold-500 €28.50
-            %p.title.mr-55 Android Programming for Beginners
-          %span.divider-sm
-          %p.lead.small John Horton
-      .col-sm-6.col-md-3
-        .general-thumb-wrap
-          .thumbnail.general-thumbnail.disabled
-            %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-            .thumb-hover
-              .general-thumb-link-wrap
-                %a.thumb-hover-link{href: "#"}
-                  %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-                %a.thumb-hover-link{href: "#"}
-                  %i.fa.fa-shopping-cart.thumb-icon
-        .mb-35
-          .clearfix
-            %p.pull-right.font-16.in-gold-500 €28.50
-            %p.title.mr-55 Android Programming for Beginners
-          %span.divider-sm
-          %p.lead.small John Horton
-      .col-sm-6.col-md-3
-        .general-thumb-wrap
-          .thumbnail.general-thumbnail
-            %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-            .thumb-hover
-              .general-thumb-link-wrap
-                %a.thumb-hover-link{href: "#"}
-                  %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-                %a.thumb-hover-link{href: "#"}
-                  %i.fa.fa-shopping-cart.thumb-icon
-        .mb-35
-          .clearfix
-            %p.pull-right.font-16.in-gold-500 €28.50
-            %p.title.mr-55 Android Programming for Beginners
-          %span.divider-sm
-          %p.lead.small John Horton
-      .col-sm-6.col-md-3
-        .general-thumb-wrap
-          .thumbnail.general-thumbnail
-            %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-            .thumb-hover
-              .general-thumb-link-wrap
-                %a.thumb-hover-link{href: "#"}
-                  %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-                %a.thumb-hover-link{href: "#"}
-                  %i.fa.fa-shopping-cart.thumb-icon
-        .mb-35
-          .clearfix
-            %p.pull-right.font-16.in-gold-500 €28.50
-            %p.title.mr-55 Android Programming for Beginners
-          %span.divider-sm
-          %p.lead.small John Horton
+      - Book.all.sample(4).each do |book|
+        .col-sm-6.col-md-3
+          .general-thumb-wrap
+            .thumbnail.general-thumbnail
+              %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+              .thumb-hover
+                .general-thumb-link-wrap
+                  = link_to book_path(book_id: book.id), class: 'thumb-hover-link' do
+                    %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+                  %a.thumb-hover-link{href: "#"}
+                    %i.fa.fa-shopping-cart.thumb-icon
+          .mb-35
+            .clearfix
+              %p.pull-right.font-16.in-gold-500
+                = book.price
+              %p.title.mr-55
+                = book.title
+            %span.divider-sm
+            %p.lead.small
+              = book.authors_as_string
