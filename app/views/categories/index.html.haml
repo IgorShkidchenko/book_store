@@ -4,22 +4,7 @@
   .hidden-xs.clearfix
     .dropdowns.pull-right
       .dropdown.width-240
-        %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-          = t('catalog.dropdown.newest')
-          %i.fa.fa-angle-down.dropdown-icon.pull-right
-        %ul.dropdown-menu
-          %li
-            = link_to t('catalog.dropdown.newest'), shop_path(category_id: @category&.id, filter: 'created_at')
-          %li
-            = link_to t('catalog.dropdown.popular'), '#'
-          %li
-            = link_to t('catalog.dropdown.price_ASC'), shop_path(category_id: @category&.id, filter: 'price')
-          %li
-            = link_to t('catalog.dropdown.price_DESC'), shop_path(category_id: @category&.id, filter: 'price', reverse: true)
-          %li
-            = link_to t('catalog.dropdown.title_ASC'), shop_path(category_id: @category&.id, filter: 'title')
-          %li
-            = link_to t('catalog.dropdown.title_DESC'), shop_path(category_id: @category&.id, filter: 'title', reverse: true)
+        = render partial: 'dropdown_menu'
     %ul.list-inline.pt-10.mb-25.mr-240
       %li.mr-35
         = link_to shop_path, class: 'filter-link' do
@@ -35,42 +20,10 @@
   .dropdowns.mb-25.visible-xs
     %p.lead.small.mb-10 Filter by category
     .dropdown
-      %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-        = t('catalog.dropdown.newest')
-        %i.fa.fa-angle-down.dropdown-icon.pull-right
-      %ul.dropdown-menu
-        %li
-          = link_to t('catalog.dropdown.newest'), shop_path(category_id: @category&.id, filter: 'created_at', tester: :asd)
-        %li
-          = link_to t('catalog.dropdown.popular'), '#'
-        %li
-          = link_to t('catalog.dropdown.price_ASC'), shop_path(category_id: @category&.id, filter: 'price')
-        %li
-          = link_to t('catalog.dropdown.price_DESC'), shop_path(category_id: @category&.id, filter: 'price', reverse: true)
-        %li
-          = link_to t('catalog.dropdown.title_ASC'), shop_path(category_id: @category&.id, filter: 'title')
-        %li
-          = link_to t('catalog.dropdown.title_DESC'), shop_path(category_id: @category&.id, filter: 'title', reverse: true)
+      = render partial: 'dropdown_menu'
   .mb-120
     .row
       - @chosen_books.each do |book|
-        .col-xs-6.col-sm-3.MY_CUSTOM_CLASS
-          .general-thumb-wrap
-            .thumbnail.general-thumbnail
-              %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-              .thumb-hover
-                .general-thumb-link-wrap
-                  = link_to book_path(book_id: book.id), class: 'thumb-hover-link' do
-                    %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-                  %a.thumb-hover-link{href: "#"}
-                    %i.fa.fa-shopping-cart.thumb-icon
-          .general-thumb-info
-            %p.title
-              = book.title
-            %p.font-16.in-gold-500
-              = t('book.price', price: book.price)
-            %span.divider-sm
-            %p.lead.small
-              = book.authors_as_string
+        = render partial: 'books/book', locals: { book: book }
       .text-center
         = paginate @chosen_books

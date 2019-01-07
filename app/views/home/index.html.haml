@@ -41,22 +41,4 @@
       / A grade view of 4 books, that was sold more than all others in -- EACH CATEGORY --
     .row
       - Book.all.sample(4).each do |book|
-        .col-sm-6.col-md-3
-          .general-thumb-wrap
-            .thumbnail.general-thumbnail
-              %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
-              .thumb-hover
-                .general-thumb-link-wrap
-                  = link_to book_path(book_id: book.id), class: 'thumb-hover-link' do
-                    %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-                  %a.thumb-hover-link{href: "#"}
-                    %i.fa.fa-shopping-cart.thumb-icon
-          .mb-35
-            .clearfix
-              %p.pull-right.font-16.in-gold-500
-                = book.price
-              %p.title.mr-55
-                = book.title
-            %span.divider-sm
-            %p.lead.small
-              = book.authors_as_string
+        = render partial: 'books/book', locals: { book: book }
