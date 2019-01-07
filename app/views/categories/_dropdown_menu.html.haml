@@ -9,8 +9,8 @@
   %li
     = link_to t('catalog.dropdown.price_ASC'), shop_path(category_id: @category&.id, filter: 'price')
   %li
-    = link_to t('catalog.dropdown.price_DESC'), shop_path(category_id: @category&.id, filter: 'price', reverse: true)
+    = link_to t('catalog.dropdown.price_DESC'), shop_path(category_id: @category&.id, filter: 'price desc')
   %li
     = link_to t('catalog.dropdown.title_ASC'), shop_path(category_id: @category&.id, filter: 'title')
   %li
-    = link_to t('catalog.dropdown.title_DESC'), shop_path(category_id: @category&.id, filter: 'title', reverse: true)
+    = link_to t('catalog.dropdown.title_DESC'), shop_path(category_id: @category&.id, filter: 'title desc')

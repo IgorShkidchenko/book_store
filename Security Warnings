@@ -1,0 +1,32 @@
+
+[1m[35m== Brakeman Report ==
+[0m
+[32mApplication Path[0m: /home/ihorshkidchenko/RubyGarage/book_store
+[32mRails Version[0m: 5.2.2
+[32mBrakeman Version[0m: 4.3.1
+[32mScan Date[0m: 2019-01-07 15:25:19 +0200
+[32mDuration[0m: 2.574671954 seconds
+[32mChecks Run[0m: BasicAuth, BasicAuthTimingAttack, ContentTag, CreateWith, CrossSiteScripting, DefaultRoutes, Deserialize, DetailedExceptions, DigestDoS, DynamicFinders, EscapeFunction, Evaluation, Execute, FileAccess, FileDisclosure, FilterSkipping, ForgerySetting, HeaderDoS, I18nXSS, JRubyXML, JSONEncoding, JSONParsing, LinkTo, LinkToHref, MailTo, MassAssignment, MimeTypeDoS, ModelAttrAccessible, ModelAttributes, ModelSerialize, NestedAttributes, NestedAttributesBypass, NumberToCurrency, PermitAttributes, QuoteTableName, Redirect, RegexDoS, Render, RenderDoS, RenderInline, ResponseSplitting, RouteDoS, SQL, SQLCVEs, SSLVerify, SafeBufferManipulation, SanitizeMethods, SelectTag, SelectVulnerability, Send, SendFile, SessionManipulation, SessionSettings, SimpleFormat, SingleQuotes, SkipBeforeFilter, StripTags, SymbolDoSCVE, TranslateBug, UnsafeReflection, ValidationRegex, WithoutProtection, XMLDoS, YAMLParsing
+
+[1m[35m== Overview ==
+[0m
+[32mControllers[0m: 4
+[32mModels[0m: 5
+[32mTemplates[0m: 10
+[32mErrors[0m: 0
+[32mSecurity Warnings[0m: 1
+
+[1m[35m== Warning Types ==
+[0m
+[32mSQL Injection[0m: 1
+
+[1m[35m== Warnings ==
+[0m
+[32mConfidence[0m: [31mHigh[0m
+[32mCategory[0m: SQL Injection
+[32mCheck[0m: SQL
+[32mMessage[0m: Possible SQL injection
+[32mCode[0m: Book.order("#{[33mparams[:filter][0m}")
+[32mFile[0m: app/controllers/categories_controller.rb
+[32mLine[0m: 14
+

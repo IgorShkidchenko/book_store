@@ -27,6 +27,7 @@ group :development, :production do
 end
 
 group :development do
+  gem 'brakeman'
   gem 'fasterer', require: false
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'pry', require: false

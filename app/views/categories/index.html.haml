@@ -10,7 +10,7 @@
         = link_to shop_path, class: 'filter-link' do
           = t('catalog.all')
           %span.badge.general-badge
-            = @all_books.count
+            = @books.count
       - @categories.each do |category|
         %li.mr-35
           = link_to shop_path(category_id: category.id), class: 'filter-link' do
@@ -25,5 +25,5 @@
     .row
       - @chosen_books.each do |book|
         = render partial: 'books/book', locals: { book: book }
-      .text-center
-        = paginate @chosen_books
+    .text-center
+      = paginate @chosen_books
