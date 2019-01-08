@@ -1,9 +1,11 @@
 class CategoriesController < ApplicationController
+  include Pagy::Backend
+
   VALID_FILTERS = %W[title title\ desc price price\ desc created_at].freeze
 
   def index
     set_page_variables
-    @chosen_books = (@category&.books || @books).order(validate_filter).includes(:authors).page(params[:page]).per(12)
+    @pagy, @chosen_books = pagy((@category&.books || @books).order(validate_filter).includes(:authors), items: 12)
   end
 
   private

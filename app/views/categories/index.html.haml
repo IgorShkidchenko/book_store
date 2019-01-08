@@ -26,4 +26,4 @@
       - @chosen_books.each do |book|
         = render partial: 'books/book', locals: { book: book }
     .text-center
-      = paginate @chosen_books
+      = pagy_bootstrap_nav(@pagy).html_safe
