@@ -1,7 +1,7 @@
 require 'faker'
 
 def random_image
-  "public/img/#{rand(1..16)}.jpg"
+  "public/img/#{rand(1..15)}.jpg"
 end
 
 30.times { Author.create(name: Faker::Book.author) }

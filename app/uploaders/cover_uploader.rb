@@ -8,8 +8,8 @@ class CoverUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-  def default_url(*args)
-    'default.jpg'
+  def default_url
+    ActionController::Base.helpers.asset_path([version_name, "default.jpg"].compact.join('_'))
   end
 
   # Process files as they are uploaded:
@@ -19,20 +19,12 @@ class CoverUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
-  version :show_page_big do
-    process resize_to_fit: [550, nil]
+  version :w500 do
+    process resize_to_fit: [554, nil]
   end
 
-  version :show_page_small do
-    process resize_to_fit: [50, nil]
-  end
-
-  version :home_slider do
-    process resize_to_fit: [250, nil]
-  end
-
-  version :catalog do
-    process resize_to_fit: [150, nil]
+  version :w150 do
+    process resize_to_fit: [165, nil]
   end
 
   def extension_whitelist

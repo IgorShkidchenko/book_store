@@ -6,10 +6,10 @@
     .col-sm-6
       .product-gallery
         .mb-20
-          %img.img-responsive.centered{src: @book.cover_url(:show_page_big), alt: t('book.cover_alt', title: @book.title)}
+          %img.img-responsive.centered{src: @book.cover_url(:w500), alt: t('book.cover_alt', title: @book.title)}
         .images.clearfix
           - 3.times do
-            = image_tag @book.cover_url(:show_page_small), alt: t('book.cover_alt', title: @book.title)
+            = image_tag @book.cover_url(:w150), alt: t('book.cover_alt', title: @book.title), class: 'img-link'
     .col-sm-6
       %h1.mt-res-0
         = @book.title
