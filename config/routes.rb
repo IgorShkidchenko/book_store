@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
   root 'home#index'
-  get 'books/show', as: 'book'
-  get 'categories/index', as: 'shop'
+  resources :books, only: :show
+  resources :categories, only: :index
 end

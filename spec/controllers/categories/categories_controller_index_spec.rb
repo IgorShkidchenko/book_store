@@ -6,6 +6,6 @@ RSpec.describe CategoriesController, type: :controller do
 
     it { is_expected.to render_template('index') }
     it { is_expected.to respond_with(200) }
-    it { is_expected.to route(:get, '/categories/index').to(action: :index) }
+    it { is_expected.to route(:get, '/categories').to(action: :index) }
   end
 end

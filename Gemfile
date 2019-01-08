@@ -6,6 +6,7 @@ ruby '2.5.1'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise'
 gem 'faker', require: false
+gem 'friendly_id', '~> 5.2.4'
 gem 'haml'
 gem 'jbuilder', '~> 2.5'
 gem 'pagy'
@@ -42,6 +43,7 @@ end
 group :test do
   gem 'capybara', '>= 2.15'
   gem 'chromedriver-helper'
+  gem 'factory_bot_rails', '~> 4.0'
   gem 'rails-controller-testing'
   gem 'rspec'
   gem 'selenium-webdriver'

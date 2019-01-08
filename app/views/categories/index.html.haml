@@ -7,13 +7,13 @@
         = render partial: 'dropdown_menu'
     %ul.list-inline.pt-10.mb-25.mr-240
       %li.mr-35
-        = link_to shop_path, class: 'filter-link' do
+        = link_to categories_path, class: 'filter-link' do
           = t('catalog.all')
           %span.badge.general-badge
             = @books.count
       - @categories.each do |category|
         %li.mr-35
-          = link_to shop_path(category_id: category.id), class: 'filter-link' do
+          = link_to categories_path(category_id: category.id), class: 'filter-link' do
             = category.name
             %span.badge.general-badge
               = category.books.count

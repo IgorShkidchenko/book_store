@@ -26,7 +26,7 @@
             %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
               - @categories.each do |category|
                 %li
-                  = link_to category.name, shop_path(category_id: category.id), class: 'collapse-link'
+                  = link_to category.name, categories_path(category_id: category.id), class: 'collapse-link'
           = render partial: 'layouts/header/devise_links'
       .hidden-xs
         %ul.nav.navbar-nav
@@ -38,5 +38,5 @@
             %ul.dropdown-menu
               - @categories.each do |category|
                 %li
-                  = link_to category.name, shop_path(category_id: category.id)
+                  = link_to category.name, categories_path(category_id: category.id)
           = render partial: 'layouts/header/devise_links'
