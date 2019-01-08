@@ -1,8 +1,9 @@
 require_relative 'boot'
 
 require 'rails/all'
-
 Bundler.require(*Rails.groups)
+
+require 'carrierwave/orm/activerecord'
 
 module BookStore
   class Application < Rails::Application

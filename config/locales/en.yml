@@ -70,3 +70,4 @@ en:
     price: "€%{price}"
     dimensions: "H: %{width} x W: %{height} x D: %{depth}"
     short_description: "%{description}..."
+    cover_alt: "%{title}"

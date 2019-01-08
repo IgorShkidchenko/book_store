@@ -4,11 +4,13 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.5.1'
 
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'carrierwave', '~> 1.0'
 gem 'devise'
 gem 'faker', require: false
 gem 'friendly_id', '~> 5.2.4'
 gem 'haml'
 gem 'jbuilder', '~> 2.5'
+gem 'mini_magick'
 gem 'pagy'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'

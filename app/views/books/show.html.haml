@@ -6,14 +6,10 @@
     .col-sm-6
       .product-gallery
         .mb-20
-          %img.img-responsive{src: "https://www.bramstein.com/static/smashing-book-5-photo-stack.9d5d114e3e.jpg"}
+          = image_tag @book.cover_url(:show_page_big), class: 'img-responsive', alt: t('book.cover_alt', title: @book.title)
         .images.clearfix
-          %a.img-link{href: "#"}
-            %img{src: "https://www.bramstein.com/static/smashing-book-5-photo-stack.9d5d114e3e.jpg"}
-          %a.img-link{href: "#"}
-            %img{src: "https://www.bramstein.com/static/smashing-book-5-photo-stack.9d5d114e3e.jpg"}
-          %a.img-link{href: "#"}
-            %img{src: "https://www.bramstein.com/static/smashing-book-5-photo-stack.9d5d114e3e.jpg"}
+          - 3.times do
+            = image_tag @book.cover_url(:show_page_small), alt: t('book.cover_alt', title: @book.title)
     .col-sm-6
       %h1.mt-res-0
         = @book.title

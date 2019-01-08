@@ -1,5 +1,9 @@
 require 'faker'
 
+def random_image
+  "public/img/#{rand(1..16)}.jpg"
+end
+
 30.times { Author.create(name: Faker::Book.author) }
 
 Array.new(4) { Category.create(name: Faker::Book.genre) }.each do |category|
@@ -12,5 +16,12 @@ Array.new(4) { Category.create(name: Faker::Book.genre) }.each do |category|
                           width: Faker::Number.decimal(2),
                           depth: Faker::Number.decimal(2),
                           materials: Faker::Science.element).authors << Author.all.sample(Faker::Number.between(1, 3))
+  end
+
+  category.books.first(5).each do |book|
+    File.open(random_image) do |f|
+      book.cover = f
+    end
+    book.save!
   end
 end

@@ -18,3 +18,4 @@ AllCops:
     - 'config/**/*'
     - 'db/migrate/**/*'
     - 'db/schema.rb'
+    - 'app/uploaders/**/*'

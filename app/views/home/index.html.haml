@@ -10,7 +10,7 @@
           .row
             .col-sm-5
               .general-img-wrap
-                %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+                = image_tag book.cover_url(:home_slider), class: 'img-shadow general-thumbnail-img', alt: t('book.cover_alt', title: book.title)
             .col-sm-7
               .mb-60
                 %h1

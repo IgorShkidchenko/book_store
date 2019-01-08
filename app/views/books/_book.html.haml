@@ -1,7 +1,7 @@
 .col-xs-6.col-sm-3.MY_CUSTOM_CLASS
   .general-thumb-wrap
     .thumbnail.general-thumbnail
-      %img.img-shadow.general-thumbnail-img{src: "http://jonathantweedy.com/resources/thumbs/SmashingBook5ResponsiveWebDesign.jpg", alt: "design-book"}
+      = image_tag book.cover_url(:catalog), class: 'img-shadow general-thumbnail-img', alt: t('book.cover_alt', title: book.title)
       .thumb-hover
         .general-thumb-link-wrap
           = link_to book_path(id: book), class: 'thumb-hover-link' do
