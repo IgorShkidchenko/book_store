@@ -29,3 +29,4 @@
 .rspec
 /coverage
 Security Warnings
+/public/uploads/*
