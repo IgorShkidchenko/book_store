@@ -9,7 +9,7 @@ class CoverUploader < CarrierWave::Uploader::Base
   end
 
   def default_url(*args)
-    'default.jpeg'
+    'default.jpg'
   end
 
   # Process files as they are uploaded:
@@ -20,19 +20,19 @@ class CoverUploader < CarrierWave::Uploader::Base
   # end
 
   version :show_page_big do
-    process resize_to_fit: [555, 380]
+    process resize_to_fit: [550, nil]
   end
 
   version :show_page_small do
-    process resize_to_fit: [172, 117]
+    process resize_to_fit: [50, nil]
   end
 
   version :home_slider do
-    process resize_to_fit: [250, 398]
+    process resize_to_fit: [250, nil]
   end
 
   version :catalog do
-    process resize_to_fit: [156, 249]
+    process resize_to_fit: [150, nil]
   end
 
   def extension_whitelist
