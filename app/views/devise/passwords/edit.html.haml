@@ -1,0 +1,14 @@
+%main.container.general-main-wrap
+  .text-center
+    %h3.general-login-title
+      = t('devise_pages.password.edit.set')
+  = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: 'general-form' }, validate: true) do |f|
+    = f.hidden_field :reset_password_token
+    .form-group.mb-30
+      = f.label :password, t('devise_pages.password.edit.type'), class: 'control-label input-label'
+      = f.password_field :password, placeholder: t('devise_pages.password.edit.type'), class: 'form-control', autofocus: true, autocomplete: "off"
+    .form-group.mb-40
+      = f.label :password_confirmation, t('devise_pages.password.edit.confirm'), class: 'control-label input-label'
+      = f.password_field :password_confirmation, placeholder: t('devise_pages.password.edit.confirm'), class: 'form-control', autocomplete: "off"
+    .form-group.mb-25
+      = f.submit t('devise_pages.password.edit.submit'), class: 'btn btn-default center-block mb-20'

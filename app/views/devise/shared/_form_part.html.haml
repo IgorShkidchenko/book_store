@@ -1,0 +1,7 @@
+.form-group.mb-30
+  = f.label :email, t('devise_pages.password.new.enter_email'), class: 'control-label input-label'
+  = f.email_field :email, autofocus: true, class: 'form-control', placeholder: t('devise_pages.password.new.enter_email')
+.form-group.mb-30
+  = f.label :password,  t('devise_pages.form.password'), class: 'control-label input-label'
+  = f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: t('devise_pages.form.password')
+  = link_to 'Forgot password?', new_password_path(resource_name), class: 'help-block in-gold-500' if forgot

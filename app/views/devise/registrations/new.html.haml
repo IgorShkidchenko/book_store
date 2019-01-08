@@ -1,0 +1,14 @@
+%main.container.general-main-wrap
+  = render partial: 'devise/shared/title', locals: { title: t('devise_pages.sign_up') }
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'general-form' }) do |f|
+    = render partial: 'devise/shared/form_part', locals: { f: f, forgot: nil }
+    .form-group.mb-30
+      = f.label :password_confirmation, t('devise_pages.password.edit.confirm'), class: 'control-label input-label'
+      = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: t('devise_pages.password.edit.confirm')
+    .text-center
+      = f.submit t('devise_pages.sign_up'), class: 'btn btn-default mb-20'
+  .text-center
+    = link_to t('devise_pages.back'), :back, class: 'btn btn-default mb-20'
+  %p.general-sign-text.text-center
+    = t('devise_pages.sign_up_page.have_account')
+    = link_to t('devise_pages.log_in'), new_user_session_path, class: 'in-gold-500'

@@ -1,0 +1,13 @@
+%main.container.general-main-wrap
+  .text-center
+    %h1.mb-30
+      = t('devise_pages.password.new.forgot')
+    %p.general-password-text
+      = t('devise_pages.password.new.instructions')
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post , class: 'general-form' }) do |f|
+      .form-group.mb-25
+        = f.email_field :email, placeholder: t('devise_pages.password.new.enter_email'), autofocus: true, class: 'form-control'
+      .form-group.mb-25
+        = f.submit t('devise_pages.password.new.submit'), class: 'btn btn-default center-block mb-20'
+      .text-center
+        = link_to 'Cancel', new_user_session_path, class: 'in-gold-500 mb-20'

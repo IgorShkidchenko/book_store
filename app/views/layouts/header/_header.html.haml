@@ -6,8 +6,7 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand
-        = t('layout.header.bookstore')
+      = link_to t('layout.header.bookstore'), root_path, class: 'navbar-brand'
       %a.shop-link.pull-right.visible-xs{href: "#"}
         %span.shop-icon
           %span.shop-quantity 3
@@ -28,10 +27,7 @@
               - @categories.each do |category|
                 %li
                   = link_to category.name, shop_path(category_id: category.id), class: 'collapse-link'
-          %li
-            = link_to t('layout.link.sign_up'), '#'
-          %li
-            = link_to t('layout.link.sign_in'), '#'
+          = render partial: 'layouts/header/devise_links'
       .hidden-xs
         %ul.nav.navbar-nav
           %li
@@ -43,10 +39,4 @@
               - @categories.each do |category|
                 %li
                   = link_to category.name, shop_path(category_id: category.id)
-              %li.divider{role: "separator"}
-              %li
-                = link_to t('layout.link.log_out'), '#'
-          %li
-            = link_to t('layout.link.sign_up'), '#'
-          %li
-            = link_to t('layout.link.sign_in'), '#'
+          = render partial: 'layouts/header/devise_links'

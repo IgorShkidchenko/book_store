@@ -5,7 +5,7 @@ en:
       shop: Shop
       orders: Orders
       settings: Settings
-      sign_in: Sign in
+      log_in: Log in
       sign_up: Sign up
       log_out: Log out
     footer:
@@ -13,6 +13,29 @@ en:
       number: (555)-555-5555
     header:
       bookstore: Bookstore
+  devise_pages:
+    password:
+      new:
+        forgot: Forgot your password?
+        instructions: "We'll email you instructions on how to reset it"
+        enter_email: Enter your email
+        submit: Email Instructions
+      edit:
+        set: Set new password
+        type: Type a new Password
+        confirm: Confirm Password
+        submit: Change
+    log_in: Log in
+    sign_up: Sign up
+    back: Back to Store
+    or: or
+    login_page:
+      remember: Remember me
+      dont_have_account: Don’t have an Account?
+    sign_up_page:
+      have_account: Already have an Account?
+    form:
+      password: Password
   home:
     welcome: Welcome to our amazing Bookstore!
     about_us: We pore through hundreds of new books each month and select the five best we can find to share with our members.

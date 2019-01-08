@@ -1,0 +1,19 @@
+%main.container.general-main-wrap
+  = render partial: 'devise/shared/title', locals: { title: t('devise_pages.log_in') }
+  = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'general-form' }) do |f|
+    = render partial: 'devise/shared/form_part', locals: { f: f , forgot: true}
+    - if devise_mapping.rememberable?
+      .form-group.checkbox.text-center.mb-30
+        %label.checkbox-label
+          = f.check_box :remember_me, hidden: "true" , class: 'checkbox-input'
+          %span.checkbox-icon
+            %i.fa.fa-check
+          %span.checkbox-text
+            = t('devise_pages.login_page.remember')
+    .text-center
+      = f.submit t('devise_pages.log_in'), class: 'btn btn-default mb-20'
+  .text-center
+    = link_to t('devise_pages.back'), :back, class: 'btn btn-default mb-20'
+  %p.general-sign-text.text-center
+    = t('devise_pages.login_page.dont_have_account')
+    = link_to t('devise_pages.sign_up'), new_user_registration_path, class: 'in-gold-500'
