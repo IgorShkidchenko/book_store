@@ -32,8 +32,7 @@
           = t('book.page.description')
         %p.lead.small.line-height-2
           = t('book.short_description', description: @book.description[0..250])
-          %a.in-gold-500.ml-10{href: "#"}
-            = t('book.page.read_more')
+          = link_to t('book.page.read_more'), '#', class: 'in-gold-500 ml-10'
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left
