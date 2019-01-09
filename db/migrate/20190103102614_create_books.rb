@@ -9,9 +9,12 @@ class CreateBooks < ActiveRecord::Migration[5.2]
       t.float :width
       t.float :depth
       t.string :materials
+      t.string :slug
+      t.string :cover
       t.references :category, foreign_key: true
 
       t.timestamps
     end
   end
+  add_index :books, :slug, unique: true
 end
