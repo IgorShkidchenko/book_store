@@ -13,6 +13,7 @@ en:
       number: (555)-555-5555
     header:
       bookstore: Bookstore
+    title: "%{title} | Bookstore"
   devise_pages:
     password:
       new:

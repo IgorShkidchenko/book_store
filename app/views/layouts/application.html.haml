@@ -1,13 +1,9 @@
 !!!
 %html
   %head
-    %meta{content: "text/html; charset=UTF-8", "http-equiv": "Content-Type"}/
-    %meta{name: "viewport", content: "width=device-width"}
-    %title BookStore
-    = csrf_meta_tags
-    = csp_meta_tag
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = render partial: 'layouts/rails_assets'
+    %title
+      = t('layout.title', title: yield(:title))
   %body
     = render partial: 'layouts/header/header'
     = yield

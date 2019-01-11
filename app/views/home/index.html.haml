@@ -1,10 +1,11 @@
+- provide(:title, t('layout.link.home'))
 %main.container
-  #slider.carousel.slide{'data-ride': "carousel"}
+  #slider.carousel.slide{'data-ride': 'carousel'}
     %ol.carousel-indicators
-      %li.active{'data-target': "#slider", 'data-slide-to': "0"}
-      %li{'data-target': "#slider", 'data-slide-to': "1"}
-      %li{'data-target': "#slider", 'data-slide-to': "2"}
-    .carousel-inner{role: "listbox"}
+      %li.active{'data-target': '#slider', 'data-slide-to': '0'}
+      %li{'data-target': '#slider', 'data-slide-to': '1'}
+      %li{'data-target': '#slider', 'data-slide-to': '2'}
+    .carousel-inner{role: 'listbox'}
       - Book.latest_three.each_with_index do |book, index|
         %div{'class': "item#{' active' if index.zero?}"}
           .row
@@ -21,11 +22,11 @@
                   = book.authors_as_string
                 .general-align
                   = link_to t('home.buy_button'), '#', class: 'button btn btn-primary'
-    %a.left.carousel-control{href: "#slider", role: "button", 'data-slide': "prev"}
-      %span.icon-prev{'aria-hidden': "true"}
+    %a.left.carousel-control{href: '#slider', role: 'button', 'data-slide': 'prev'}
+      %span.icon-prev{'aria-hidden': 'true'}
       %span.sr-only Previous
-    %a.right.carousel-control{href: "#slider", role: "button", 'data-slide': "next"}
-      %span.icon-next{'aria-hidden': "true"}
+    %a.right.carousel-control{href: '#slider', role: 'button', 'data-slide': 'next'}
+      %span.icon-next{'aria-hidden': 'true'}
       %span.sr-only Next
 .container
   .jumbotron.text-center.mb-0
@@ -37,8 +38,8 @@
     = link_to t('home.start_button'), categories_path, class: 'button btn btn-default'
   .mb-35
     %h3
-      = t('home.best_sellers') + ' UNDEFINED CLASS ORDER FOR NOW, NOT SORTED'
+      = t('home.best_sellers')
       / A grade view of 4 books, that was sold more than all others in -- EACH CATEGORY --
     .row
-      - Book.all.sample(4).each do |book|
+      - Book.all.includes(:authors).sample(4).each do |book|
         = render partial: 'books/book', locals: { book: book }

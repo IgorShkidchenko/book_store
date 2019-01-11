@@ -1,3 +1,4 @@
+- provide(:title, @book.title)
 %main.container
   = link_to :back, class: 'general-back-link' do
     %i.fa.fa-long-arrow-left.mr-15
@@ -19,7 +20,7 @@
         .col-xs-12.col-md-4
           %p.h1.in-gold-500.mt-10
             = t('book.price', price: @book.price)
-        = render partial: 'input_field'
+        = render 'input_field'
         .col-xs-7.col-md-5
           %button.btn.btn-default.pull-right.general-position
             = t('book.page.add_to_cart')
@@ -27,8 +28,12 @@
         %p
           = t('book.page.description')
         %p.lead.small.line-height-2
-          = t('book.short_description', description: @book.description[0..250])
-          = link_to t('book.page.read_more'), '#', class: 'in-gold-500 ml-10'
+          = @book.description[0..250]
+          %span#dots ...
+          %span#more
+            = @book.description[250..-1]
+          %button.btn.btn-link.in-gold-500.ml-10#myBtn{ onclick: 'readMore()' }
+            = t('book.page.read_more')
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left

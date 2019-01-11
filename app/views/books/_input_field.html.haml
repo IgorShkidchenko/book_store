@@ -1,21 +1,3 @@
-:javascript
-  $(document).ready(function(){
-    var quantitiy=0;
-
-    $('.plus').click(function(e){
-      e.preventDefault();
-      var quantity = parseInt($('#quantity').val());
-        $('#quantity').val(quantity + 1);
-    });
-
-    $('.minus').click(function(e){
-      e.preventDefault();
-      var quantity = parseInt($('#quantity').val());
-        if(quantity>1){
-          $('#quantity').val(quantity - 1);
-        }
-    });
-  });
 .col-xs-5.col-md-3
   .input-group.general-position
     %btn.btn-link.input-link.btn-number.minus{"data-field": "", "data-type": "minus", role: 'button', type: "button", href: "#" }

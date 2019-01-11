@@ -13,6 +13,6 @@ class Book < ApplicationRecord
   end
 
   def self.latest_three
-    Book.last(3)
+    Book.limit(5).order('id desc').includes(:authors)
   end
 end

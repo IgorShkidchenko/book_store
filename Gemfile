@@ -33,9 +33,11 @@ end
 
 group :development do
   gem 'brakeman'
+  gem 'bullet'
   gem 'fasterer', require: false
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'pry', require: false
+  gem 'rails_best_practices'
   gem 'rubocop', require: false
   gem 'rubocop-rspec', require: false
   gem 'spring'

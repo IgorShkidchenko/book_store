@@ -19,3 +19,7 @@ AllCops:
     - 'db/migrate/**/*'
     - 'db/schema.rb'
     - 'app/uploaders/**/*'
+
+Style/ClassAndModuleChildren:
+  Exclude:
+    - 'app/controllers/users/omniauth_callbacks_controller.rb'

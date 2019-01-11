@@ -59,6 +59,9 @@ GEM
       sass (>= 3.3.4)
     brakeman (4.3.1)
     builder (3.2.3)
+    bullet (5.9.0)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     capybara (3.12.0)
       addressable
       mini_mime (>= 0.1.3)
@@ -76,6 +79,8 @@ GEM
     chromedriver-helper (2.1.0)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
+    code_analyzer (0.4.8)
+      sexp_processor
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -96,6 +101,7 @@ GEM
     diff-lcs (1.3)
     docile (1.3.1)
     erubi (1.8.0)
+    erubis (2.7.0)
     execjs (2.7.0)
     factory_bot (4.11.1)
       activesupport (>= 3.0.0)
@@ -211,6 +217,14 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.0.4)
       loofah (~> 2.2, >= 2.2.2)
+    rails_best_practices (1.19.4)
+      activesupport
+      code_analyzer (>= 0.4.8)
+      erubis
+      i18n
+      json
+      require_all (~> 2.0)
+      ruby-progressbar
     railties (5.2.2)
       actionpack (= 5.2.2)
       activesupport (= 5.2.2)
@@ -223,6 +237,7 @@ GEM
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     regexp_parser (1.3.0)
+    require_all (2.0.0)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
@@ -308,6 +323,7 @@ GEM
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.4.1)
+    uniform_notifier (1.12.1)
     warden (1.2.7)
       rack (>= 1.0)
     web-console (3.7.0)
@@ -328,6 +344,7 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   bootstrap-sass
   brakeman
+  bullet
   capybara (>= 2.15)
   carrierwave (~> 1.0)
   chromedriver-helper
@@ -350,6 +367,7 @@ DEPENDENCIES
   puma (~> 3.11)
   rails (~> 5.2.1)
   rails-controller-testing
+  rails_best_practices
   rspec
   rspec-rails (~> 3.8)
   rubocop

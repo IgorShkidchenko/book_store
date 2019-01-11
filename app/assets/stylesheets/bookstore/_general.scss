@@ -338,3 +338,43 @@ img {
 .MY_CUSTOM_CLASS {
   height: 550px;
 }
+
+.pagination > li.active {
+  a {
+    background-color: #cfd0d3;
+    border-color: #cfd0d3;
+  }
+
+  a:hover {
+    background-color: #cfd0d3;
+    border-color: #cfd0d3;
+  }
+
+  a:focus {
+    background-color: #cfd0d3;
+    border-color: #cfd0d3;
+  }
+}
+
+.pagination > li {
+  a {
+    color: #c6a075;
+  }
+
+  a:hover {
+    color: #c6a075;
+  }
+
+  a:focus {
+    color: #c6a075;
+  }
+}
+
+#more {
+  display: none;
+}
+
+#myBtn {
+  padding-left: unset;
+  text-decoration: none;
+}
