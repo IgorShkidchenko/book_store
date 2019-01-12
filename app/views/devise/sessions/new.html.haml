@@ -1,6 +1,8 @@
 %main.container.general-main-wrap
   = render partial: 'devise/shared/title', locals: { title: t('devise_pages.log_in') }
-  = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'general-form' }) do |f|
+  = simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'general-form' }, |
+    defaults: { input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group mb-30' }, |
+    label_html: { class: 'control-label input-label' } }) do |f|
     = render partial: 'devise/shared/form_part', locals: { f: f , forgot: true}
     - if devise_mapping.rememberable?
       .form-group.checkbox.text-center.mb-30
@@ -11,7 +13,7 @@
           %span.checkbox-text
             = t('devise_pages.login_page.remember')
     .text-center
-      = f.submit t('devise_pages.log_in'), class: 'btn btn-default mb-20'
+      = f.button :submit, t('devise_pages.log_in'), class: 'btn-default mb-20'
   .text-center
     = link_to t('devise_pages.back'), :back, class: 'btn btn-default mb-20'
   %p.general-sign-text.text-center
