@@ -1,4 +1,12 @@
 class Book < ApplicationRecord
+  VALID_FILTERS = {
+    title: 'title',
+    title_desc: 'title desc',
+    price: 'price',
+    price_desc: 'price desc',
+    newest: 'created_at'
+  }.freeze
+
   extend FriendlyId
   friendly_id :title, use: :slugged
 
@@ -7,6 +15,8 @@ class Book < ApplicationRecord
   belongs_to :category
   has_many :book_authors
   has_many :authors, through: :book_authors
+
+  scope :filtred, ->(filter) { order(filter).includes(:authors) }
 
   def authors_as_string
     authors.map(&:name).join(', ')

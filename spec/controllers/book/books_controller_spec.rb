@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe BooksController, type: :controller do
   describe 'when visit show page' do
-    let(:library) { FactoryBot.create(:category_with_book) }
+    let(:library) { FactoryBot.create(:category, :with_book) }
 
     before { get :show, params: { id: library.books.first.id } }
 
