@@ -8,7 +8,10 @@ require 'rspec/rails'
 require 'capybara/rspec'
 require 'capybara/rails'
 require 'faker'
+require 'devise'
+require 'database_cleaner'
 
+require "#{::Rails.root}/spec/support/macroses/controller_macros.rb"
 Dir[File.dirname(__FILE__) + '/support/*.rb'].each { |file| require file }
 
 begin

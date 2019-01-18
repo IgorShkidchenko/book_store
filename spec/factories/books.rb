@@ -8,5 +8,13 @@ FactoryBot.define do
     width { Faker::Number.decimal(2) }
     depth { Faker::Number.decimal(2) }
     materials { Faker::Science.element }
+    slug { Faker::Book.title }
+    cover { nil }
+
+    trait :with_author do
+      after(:create) do |book|
+        create(:author, books: [book])
+      end
+    end
   end
 end

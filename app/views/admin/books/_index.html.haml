@@ -1,0 +1,14 @@
+- context.instance_eval do
+  - selectable_column
+  - id_column
+  - column :cover do |book|
+    - image_tag(book.cover.url , width: 150, height: 200)
+  - column :category
+  - column :title
+  - column :authors do |book|
+    - book.authors_as_string
+  - column :description do |book|
+    - t('book.short_description', description: book.description[0..150])
+  - column :price do |book|
+    - t('book.price', price: book.price)
+  - actions

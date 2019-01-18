@@ -14,7 +14,9 @@ class Book < ApplicationRecord
 
   belongs_to :category
   has_many :book_authors
-  has_many :authors, through: :book_authors
+  has_many :authors, through: :book_authors, dependent: :destroy
+
+  validates_presence_of :title
 
   scope :filtred, ->(filter) { order(filter).includes(:authors) }
 
@@ -23,6 +25,6 @@ class Book < ApplicationRecord
   end
 
   def self.latest_three
-    Book.limit(5).order('id desc').includes(:authors)
+    Book.limit(3).order('id desc').includes(:authors)
   end
 end

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe BookAuthor, type: :model do
-  context 'with assosiation' do
+  context 'with assosiations' do
     it { is_expected.to belong_to(:author) }
     it { is_expected.to belong_to(:book) }
     it { is_expected.to have_db_column(:created_at).of_type(:datetime).with_options(null: false) }

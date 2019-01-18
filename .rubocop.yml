@@ -6,6 +6,9 @@ Metrics/LineLength:
 Documentation:
   Enabled: false
 
+NamedSubject:
+  Enabled: false
+
 Style/FrozenStringLiteralComment:
   Enabled: false
 
