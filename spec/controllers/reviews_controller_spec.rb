@@ -9,7 +9,7 @@ RSpec.describe ReviewsController, type: :controller do
     before { post :create, params: { review: valid_attributes } }
 
     it { is_expected.to respond_with(302) }
-    it { expect(flash[:success]).to eq I18n.t('review.success_msg') }
-    it { expect(response).to redirect_to book_path(book.id) }
+    it { is_expected.to set_flash[:success].to(I18n.t('review.success_msg')) }
+    it { is_expected.to redirect_to(book_path(book.id)) }
   end
 end

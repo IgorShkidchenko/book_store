@@ -12,7 +12,7 @@ RSpec.describe Author, type: :model do
     it { is_expected.to have_many(:books).through(:book_authors).dependent(:destroy) }
   end
 
-  context 'with validations' do
+  context 'when validations' do
     it { is_expected.to validate_presence_of(:name) }
   end
 end

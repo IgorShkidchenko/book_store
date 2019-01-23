@@ -75,3 +75,4 @@ en:
     post: Post
     count: "Reviews (%{count})"
     success_msg: Thanks for Review. It will be published as soon as Admin will approve it.
+    validation_format_msg: "permit only this special symbols !#$%&'*+-/=?^_`{|}~."

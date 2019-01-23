@@ -21,6 +21,11 @@ RSpec.describe Book, type: :model do
     it { is_expected.to belong_to(:category) }
     it { is_expected.to have_many(:book_authors) }
     it { is_expected.to have_many(:authors).through(:book_authors).dependent(:destroy) }
+    it { is_expected.to have_many(:reviews) }
+  end
+
+  context 'when validates' do
+    it { is_expected.to validate_presence_of(:title) }
   end
 
   context 'when #latest_three' do

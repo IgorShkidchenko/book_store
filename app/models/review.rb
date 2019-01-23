@@ -13,5 +13,19 @@ class Review < ApplicationRecord
   scope :approved, -> { where(status: STATUSES[:approved]) }
   scope :rejected, -> { where(status: STATUSES[:rejected]) }
 
-  validates_presence_of :title
+  validates :title,
+            presence: true,
+            length: { maximum: 80 },
+            format: {
+              with: %r{\A[\w!#$%&'*+\-/=?^_`{|}~\s]+.\z},
+              message: I18n.t('review.validation_format_msg')
+            }
+
+  validates :body,
+            presence: true,
+            length: { maximum: 500 },
+            format: {
+              with: %r{\A[\w!#$%&'*+\-/=?^_`{|}~\s]+.\z},
+              message: I18n.t('review.validation_format_msg')
+            }
 end
