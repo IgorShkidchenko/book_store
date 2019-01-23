@@ -6,12 +6,11 @@ class Review < ApplicationRecord
   }.freeze
 
   belongs_to :user
-  delegate :email, to: :user, prefix: true
   belongs_to :book
 
-  scope :unprocessed, -> { where(status: STATUSES[:unprocessed]) }
-  scope :approved, -> { where(status: STATUSES[:approved]) }
-  scope :rejected, -> { where(status: STATUSES[:rejected]) }
+  scope :unprocessed, -> { where(status: STATUSES[:unprocessed]).includes(:user) }
+  scope :approved, -> { where(status: STATUSES[:approved]).includes(:user) }
+  scope :rejected, -> { where(status: STATUSES[:rejected]).includes(:user) }
 
   validates :title,
             presence: true,

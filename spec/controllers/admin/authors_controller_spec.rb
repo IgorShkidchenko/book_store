@@ -110,7 +110,7 @@ RSpec.describe Admin::AuthorsController, type: :controller do
 
       it { is_expected.to respond_with 200 }
       it { expect(assigns(:author)).to eq author }
-      it { expect(page).to have_content(author.name) }
+      it { expect(page).to have_content author.name }
     end
 
     describe 'when destroy' do

@@ -24,7 +24,7 @@
       = render 'dropdown_menu', category: @category
   .mb-120
     .row
-      - @chosen_books.each do |book|
+      - chosen_books.each do |book|
         = render book
     .text-center
       = pagy_bootstrap_nav(@pagy).html_safe

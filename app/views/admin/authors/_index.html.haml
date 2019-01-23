@@ -3,4 +3,4 @@
   - actions defaults: false do |author|
     - (link_to t('admin.actions.view'), admin_author_path(author)) + |
       (link_to t('admin.actions.edit'), edit_admin_author_path(author)) + |
-      (link_to t('admin.actions.delete'), admin_author_path(author), method: :delete, data: { confirm: t('admin.delete_msg', quantity: author.books_quantity) }) |
+      (link_to t('admin.actions.delete'), admin_author_path(author), method: :delete, data: { confirm: t('admin.delete_msg', quantity: author.assosiated_books_quantity) }) |

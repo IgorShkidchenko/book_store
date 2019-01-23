@@ -7,7 +7,7 @@
   - column :authors do |book|
     - book.authors_as_string
   - column :description do |book|
-    - t('book.short_description', description: book.description[0..150])
+    - t('book.short_description', description: book.short_description)
   - column :price do |book|
     - t('book.price', price: book.price)
   - actions

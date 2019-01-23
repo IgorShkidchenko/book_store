@@ -6,7 +6,7 @@
       %li{'data-target': '#slider', 'data-slide-to': '1'}
       %li{'data-target': '#slider', 'data-slide-to': '2'}
     .carousel-inner{role: 'listbox'}
-      - Book.latest_three.each_with_index do |book, index|
+      - latest_three.each_with_index do |book, index|
         %div{'class': "item#{' active' if index.zero?}"}
           .row
             .col-sm-5
@@ -17,17 +17,17 @@
                 %h1
                   = book.title
                 %p.lead
-                  = t('book.short_description', description: book.description[0..150])
+                  = t('book.short_description', description: book.short_description)
                 %p.lead.small
                   = book.authors_as_string
                 .general-align
                   = link_to t('home.buy_button'), '#', class: 'button btn btn-primary'
     %a.left.carousel-control{href: '#slider', role: 'button', 'data-slide': 'prev'}
       %span.icon-prev{'aria-hidden': 'true'}
-      %span.sr-only Previous
+      %span.sr-only
     %a.right.carousel-control{href: '#slider', role: 'button', 'data-slide': 'next'}
       %span.icon-next{'aria-hidden': 'true'}
-      %span.sr-only Next
+      %span.sr-only
 .container
   .jumbotron.text-center.mb-0
     %h2.h1
@@ -39,7 +39,6 @@
   .mb-35
     %h3
       = t('home.best_sellers')
-      / A grade view of 4 books, that was sold more than all others in -- EACH CATEGORY --
     .row
-      - Book.all.includes(:authors).sample(4).each do |book|
+      - best_sellers.each do |book|
         = render partial: 'books/book', locals: { book: book }

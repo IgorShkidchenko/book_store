@@ -1,4 +1,5 @@
 ActiveAdmin.register Author do
+  decorate_with AuthorDecorator
   permit_params :name
 
   config.filters = false

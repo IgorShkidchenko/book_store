@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  decorates_assigned :chosen_books
   include Pagy::Backend
 
   def index

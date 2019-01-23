@@ -27,14 +27,4 @@ RSpec.describe Book, type: :model do
   context 'when validates' do
     it { is_expected.to validate_presence_of(:title) }
   end
-
-  context 'when #latest_three' do
-    before { FactoryBot.create_list(:book, 4) }
-
-    let(:method_result) { Book.latest_three }
-    let(:limit_size) { 3 }
-
-    it { expect(method_result.size).to eq limit_size }
-    it { expect(method_result.first.id).to eq Book.last.id }
-  end
 end

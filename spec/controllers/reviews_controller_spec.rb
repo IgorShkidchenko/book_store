@@ -10,6 +10,6 @@ RSpec.describe ReviewsController, type: :controller do
 
     it { is_expected.to respond_with(302) }
     it { is_expected.to set_flash[:success].to(I18n.t('review.success_msg')) }
-    it { is_expected.to redirect_to(book_path(book.id)) }
+    it { is_expected.to redirect_to('/') }
   end
 end

@@ -26,3 +26,6 @@ AllCops:
 Style/ClassAndModuleChildren:
   Exclude:
     - 'app/controllers/users/**/*'
+
+RSpec/MessageChain:
+  Enabled: false

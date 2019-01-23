@@ -11,7 +11,7 @@ RSpec.describe Admin::BooksController, type: :controller do
   describe 'when login' do
     let(:page) { Capybara::Node::Simple.new(response.body) }
     let(:category) { FactoryBot.create(:category, :with_book) }
-    let!(:book) { category.books.last }
+    let!(:book) { category.books.last.decorate }
 
     let(:valid_attributes) { (FactoryBot.attributes_for :book).merge(category_id: category.id) }
     let(:invalid_attributes) { { title: nil, category_id: category.id } }
@@ -28,7 +28,7 @@ RSpec.describe Admin::BooksController, type: :controller do
       it { expect(assigns(:books)).to include book }
       it { expect(page).to have_content book.title }
       it { expect(page).to have_content book.authors_as_string }
-      it { expect(page).to have_content I18n.t('book.short_description', description: book.description[0..150]) }
+      it { expect(page).to have_content I18n.t('book.short_description', description: book.short_description) }
       it { expect(page).to have_content I18n.t('book.price', price: book.price) }
       it { expect(page).to have_content I18n.t('admin.actions.view') }
       it { expect(page).to have_content I18n.t('admin.actions.edit') }
@@ -131,15 +131,15 @@ RSpec.describe Admin::BooksController, type: :controller do
 
       it { is_expected.to respond_with 200 }
       it { expect(assigns(:book)).to eq book }
-      it { expect(page).to have_content(book.title) }
-      it { expect(page).to have_content(book.description) }
-      it { expect(page).to have_content(book.price) }
-      it { expect(page).to have_content(book.category.name) }
-      it { expect(page).to have_content(book.materials) }
-      it { expect(page).to have_content(book.height) }
-      it { expect(page).to have_content(book.width) }
-      it { expect(page).to have_content(book.depth) }
-      it { expect(page).to have_content(book.cover) }
+      it { expect(page).to have_content book.title }
+      it { expect(page).to have_content book.description }
+      it { expect(page).to have_content book.price }
+      it { expect(page).to have_content book.category.name }
+      it { expect(page).to have_content book.materials }
+      it { expect(page).to have_content book.height }
+      it { expect(page).to have_content book.width }
+      it { expect(page).to have_content book.depth }
+      it { expect(page).to have_content book.cover }
     end
 
     describe 'when destroy' do

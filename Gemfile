@@ -10,6 +10,7 @@ gem 'bootstrap-sass'
 gem 'carrierwave', '~> 1.0'
 gem 'coffee-rails', '~> 4.2', require: false
 gem 'devise'
+gem 'draper'
 gem 'faker', require: false
 gem 'font-awesome-rails'
 gem 'friendly_id', '~> 5.2.4'

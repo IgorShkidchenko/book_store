@@ -2,7 +2,7 @@ class ReviewsController < ApplicationController
   def create
     review = Review.new review_params
     review.save ? flash[:success] = t('review.success_msg') : flash[:danger] = review.errors.full_messages.to_sentence
-    redirect_to book_path(review.book_id)
+    redirect_back fallback_location: root_path
   end
 
   private

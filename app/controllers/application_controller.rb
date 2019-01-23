@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  METHOD_GET = 'GET'.freeze
+
   before_action :set_header_variables
 
   def set_cookies
@@ -9,7 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def back_url_invalid?
-    request.referer.nil? || request.method != 'GET' || request.referer == request.url
+    request.referer.nil? || request.method != METHOD_GET || request.referer == request.url
   end
 
   private

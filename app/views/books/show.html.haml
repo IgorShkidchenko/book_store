@@ -1,4 +1,4 @@
-- provide(:title, @book.title)
+- provide(:title, book.title)
 %main.container
   = link_to @back, class: 'general-back-link' do
     %i.fa.fa-long-arrow-left.mr-15
@@ -7,19 +7,19 @@
     .col-sm-6
       .product-gallery
         .mb-20
-          = image_tag @book.cover_url(:w500), alt: t('book.cover_alt', title: @book.title), class: 'img-responsive centered'
+          = image_tag book.cover_url(:w500), alt: t('book.cover_alt', title: book.title), class: 'img-responsive centered'
         .images.clearfix
           - 3.times do
-            = image_tag @book.cover_url(:w150), alt: t('book.cover_alt', title: @book.title), class: 'img-link'
+            = image_tag book.cover_url(:w150), alt: t('book.cover_alt', title: book.title), class: 'img-link'
     .col-sm-6
       %h1.mt-res-0
-        = @book.title
+        = book.title
       %p.lead.small
-        = @book.authors_as_string
+        = book.authors_as_string
       .row
         .col-xs-12.col-md-4
           %p.h1.in-gold-500.mt-10
-            = t('book.price', price: @book.price)
+            = t('book.price', price: book.price)
         = render 'input_field'
         .col-xs-7.col-md-5
           %button.btn.btn-default.pull-right.general-position
@@ -28,10 +28,10 @@
         %p
           = t('book.page.description')
         %p.lead.small.line-height-2
-          = @book.description[0..250]
+          = book.medium_description
           %span#dots ...
           %span#more
-            = @book.description[250..-1]
+            = book.the_rest_of_description
           %button.btn.btn-link.in-gold-500.ml-10#myBtn{ onclick: 'readMore()' }
             = t('book.page.read_more')
       .general-info-wrap.divider-lg
@@ -39,17 +39,17 @@
           %p.pull-left
             = t('book.page.published')
           %p.lead.small.pull-right
-            = @book.published_year
+            = book.published_year
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left
             = t('book.page.dimensions')
           %p.lead.small.pull-right
-            = t('book.dimensions', width: @book.width, height: @book.height, depth: @book.depth,)
+            = t('book.dimensions', width: book.width, height: book.height, depth: book.depth,)
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left
             = t('book.page.materials')
           %p.lead.small.pull-right
-            = @book.materials
-  = render 'reviews/review', book: @book
+            = book.materials
+  = render 'reviews/review', book: book

@@ -22,8 +22,8 @@
             = f.button :submit, t('review.post'), class: 'btn-default mb-20'
 .mb-80
   %h3.in-gold-500.mb-25
-    = t('review.count', count: book.reviews.approved.count)
-  - book.reviews.approved.each do |review|
+    = t('review.count', count: book.approved_reviews_count)
+  - book.reviews.approved.decorate.each do |review|
     .general-message-wrap.divider-lg
       .clearfix
         %span.img-circle.logo-size.inlide-block.pull-left.logo-empty M
@@ -31,7 +31,7 @@
         .ml-70
           %div
             .general-message-date.hidden-xs
-              = review.created_at.strftime('%d/%m/%y')
+              = review.creation_date
             .max-240
               .general-message-verified.pull-right Verified Reviewer
               .general-message-name

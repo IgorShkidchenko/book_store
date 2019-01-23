@@ -20,12 +20,6 @@ class Book < ApplicationRecord
   validates_presence_of :title
 
   scope :filtred, ->(filter) { order(filter).includes(:authors) }
-
-  def authors_as_string
-    authors.map(&:name).join(', ')
-  end
-
-  def self.latest_three
-    Book.limit(3).order('id desc').includes(:authors)
-  end
+  scope :latest_three, -> { limit(3).order('id desc').includes(:authors) }
+  scope :best_sellers, -> { limit(4).includes(:authors) } # TEST / A grade view of 4 books, that was sold more than all others in -- EACH CATEGORY --
 end
