@@ -25,4 +25,4 @@ AllCops:
 
 Style/ClassAndModuleChildren:
   Exclude:
-    - 'app/controllers/users/omniauth_callbacks_controller.rb'
+    - 'app/controllers/users/**/*'

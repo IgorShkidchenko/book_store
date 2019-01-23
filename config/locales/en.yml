@@ -28,7 +28,7 @@ en:
         submit: Change
     log_in: Log in
     sign_up: Sign up
-    back: Back to Store
+    back: Back
     or: or
     login_page:
       remember: Remember me
@@ -63,12 +63,15 @@ en:
       published: Year of publication
       dimensions: Dimensions
       materials: Materials
-      write_review: Write a Review
-      score: Score
-      title: Title
-      review: Review
-      post: Post
     price: "€%{price}"
     dimensions: "H: %{width} x W: %{height} x D: %{depth}"
     short_description: "%{description}..."
     cover_alt: "%{title}"
+  review:
+    write_review: Write a Review
+    score: Score
+    title: Title
+    review: Review
+    post: Post
+    count: "Reviews (%{count})"
+    success_msg: Thanks for Review. It will be published as soon as Admin will approve it.

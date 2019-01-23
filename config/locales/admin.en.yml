@@ -3,9 +3,12 @@ en:
     delete_msg: "Are you sure you want to delete this item?
                 They are associated with %{quantity} of books"
     actions:
-      view: 'View'
-      edit: 'Edit'
-      delete: 'Delete'
+      view: View
+      edit: Edit
+      delete: Delete
+      show: Show
     dashboard:
       books_count: "Books quantity: %{count}"
       users_count: "Users quantity: %{count}"
+    column:
+      date: Date

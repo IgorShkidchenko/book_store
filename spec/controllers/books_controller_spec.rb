@@ -2,9 +2,12 @@ require 'rails_helper'
 
 RSpec.describe BooksController, type: :controller do
   describe 'when visit show page' do
-    let(:library) { FactoryBot.create(:category, :with_book) }
+    let(:book) { FactoryBot.create(:book) }
 
-    before { get :show, params: { id: library.books.first.id } }
+    before do
+      get :show, params: { id: book.id }
+      allow(Book).to receive(:find).and_return(book)
+    end
 
     it { is_expected.to render_template('show') }
     it { is_expected.to respond_with(200) }

@@ -24,7 +24,7 @@ RSpec.describe Book, type: :model do
   end
 
   context 'when #latest_three' do
-    before { FactoryBot.create_list(:book, 4, category: FactoryBot.build(:category)) }
+    before { FactoryBot.create_list(:book, 4) }
 
     let(:method_result) { Book.latest_three }
     let(:limit_size) { 3 }

@@ -6,6 +6,9 @@ end
 
 30.times { Author.create(name: Faker::Book.author) }
 
+User.create(email: 'user@example.com', password: 'password')
+AdminUser.create(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+
 Array.new(4) { Category.create(name: Faker::Book.genre) }.each do |category|
   Faker::Number.between(20, 50).times do
     category.books.create(title: Faker::Book.title,
@@ -23,5 +26,7 @@ Array.new(4) { Category.create(name: Faker::Book.genre) }.each do |category|
       book.cover = f
     end
     book.save!
+    book.reviews.create(title: Faker::Lorem.word, body: Faker::Lorem.sentence,
+                        rating: Faker::Number.between(1, 5), user_id: User.first.id)
   end
 end

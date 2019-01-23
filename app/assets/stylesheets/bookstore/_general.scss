@@ -335,8 +335,60 @@ img {
   }
 }
 
-.MY_CUSTOM_CLASS {
+.book-catalog {
   height: 550px;
+}
+
+.alert-danger {
+  color: #c59c71;
+}
+
+.rating {
+  float:left;
+}
+
+.rating:not(:checked) > input {
+  position:absolute;
+  left:-9999px;
+  clip:rect(0,0,0,0);
+}
+
+.rating:not(:checked) > label {
+  float:right;
+  width:1em;
+  padding:0 .1em;
+  overflow:hidden;
+  white-space:nowrap;
+  cursor:pointer;
+  font: normal normal normal 20px/1 FontAwesome;
+  color:#ddd;
+}
+
+.rating:not(:checked) > label:before {
+  content: '★ ';
+}
+
+.rating > input:checked ~ label {
+  color: #c59c71;
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+  color: #c59c71;
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+  color: #c59c71;
+}
+
+.rating > label:active {
+  position:relative;
+  top:2px;
+  left:2px;
 }
 
 .pagination > li.active {

@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
 
   def index
     @books = Book.all
-    @category = Category.find_by_id(params[:category_id]) if params[:category_id]
+    @category = Category.find(params[:category_id]) if params[:category_id]
     @pagy, @chosen_books = pagy(which_books_to_shown.filtred(validate_filter), items: 12)
   end
 

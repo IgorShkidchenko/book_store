@@ -1,0 +1,10 @@
+- context.instance_eval do
+  - column :book
+  - column :title
+  - column :body
+  - column t('admin.column.date') do |review|
+    - review.created_at.strftime('%d/%m/%y')
+  - column :user
+  - column :status
+  - actions defaults: false do |review|
+    - link_to t('admin.actions.show'), admin_review_path(review)

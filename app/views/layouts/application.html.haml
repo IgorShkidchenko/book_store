@@ -1,10 +1,11 @@
 !!!
 %html
   %head
-    = render partial: 'layouts/rails_assets'
+    = render 'layouts/rails_assets'
     %title
       = t('layout.title', title: yield(:title))
   %body
-    = render partial: 'layouts/header/header'
+    = render 'layouts/header/header'
+    = render 'layouts/flash'
     = yield
-    = render partial: 'layouts/footer'
+    = render 'layouts/footer'

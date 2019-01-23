@@ -11,6 +11,8 @@ FactoryBot.define do
     slug { Faker::Book.title }
     cover { nil }
 
+    category
+
     trait :with_author do
       after(:create) do |book|
         create(:author, books: [book])

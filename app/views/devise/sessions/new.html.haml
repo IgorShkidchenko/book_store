@@ -15,7 +15,7 @@
     .text-center
       = f.button :submit, t('devise_pages.log_in'), class: 'btn-default mb-20'
   .text-center
-    = link_to t('devise_pages.back'), :back, class: 'btn btn-default mb-20'
+    = link_to t('devise_pages.back'), @back, class: 'btn btn-default mb-20'
   %p.general-sign-text.text-center
     = t('devise_pages.login_page.dont_have_account')
     = link_to t('devise_pages.sign_up'), new_user_registration_path, class: 'in-gold-500'
