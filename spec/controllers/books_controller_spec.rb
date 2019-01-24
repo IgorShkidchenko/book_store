@@ -9,6 +9,7 @@ RSpec.describe BooksController, type: :controller do
       allow(Book).to receive(:find).and_return(book)
     end
 
+    it { expect(assigns(:book)).to eq book }
     it { is_expected.to render_template('show') }
     it { is_expected.to respond_with(200) }
     it { is_expected.to route(:get, '/books/1').to(action: :show, id: 1) }

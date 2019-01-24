@@ -9,13 +9,13 @@ FactoryBot.define do
     depth { Faker::Number.decimal(2) }
     materials { Faker::Science.element }
     slug { Faker::Book.title }
-    cover { nil }
 
     category
 
-    trait :with_author do
+    trait :with_author_and_cover do
       after(:create) do |book|
         create(:author, books: [book])
+        create(:cover, book: book)
       end
     end
   end

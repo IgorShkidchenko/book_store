@@ -11,21 +11,27 @@ AdminUser.create(email: 'admin@example.com', password: 'password', password_conf
 
 Array.new(4) { Category.create(name: Faker::Book.genre) }.each do |category|
   Faker::Number.between(20, 50).times do
-    category.books.create(title: Faker::Book.title,
-                          price: Faker::Number.decimal(2),
-                          description: Faker::Lorem.paragraph_by_chars(Faker::Number.between(300, 350), false),
-                          published_year: Faker::Number.between(2000, Time.now.year),
-                          height: Faker::Number.decimal(2),
-                          width: Faker::Number.decimal(2),
-                          depth: Faker::Number.decimal(2),
-                          materials: Faker::Science.element).authors << Author.all.sample(Faker::Number.between(1, 3))
+    book = category.books.create(title: Faker::Book.title,
+                                 price: Faker::Number.decimal(2),
+                                 description: Faker::Lorem.paragraph_by_chars(Faker::Number.between(300, 350), false),
+                                 published_year: Faker::Number.between(2000, Time.now.year),
+                                 height: Faker::Number.decimal(2),
+                                 width: Faker::Number.decimal(2),
+                                 depth: Faker::Number.decimal(2),
+                                 materials: Faker::Science.element)
+    book.authors << Author.all.sample(Faker::Number.between(1, 3))
+    book.covers.create
   end
 
   category.books.first(5).each do |book|
+    cover = book.covers.first
     File.open(random_image) do |f|
-      book.cover = f
+      cover.image = f
     end
-    book.save!
+    cover.save!
+    book.reviews.create(title: Faker::Lorem.word, body: Faker::Lorem.sentence, status: Review::STATUSES[:approved],
+                        rating: Faker::Number.between(1, 5), user_id: User.first.id)
+
     book.reviews.create(title: Faker::Lorem.word, body: Faker::Lorem.sentence,
                         rating: Faker::Number.between(1, 5), user_id: User.first.id)
   end

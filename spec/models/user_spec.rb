@@ -19,6 +19,6 @@ RSpec.describe User, type: :model do
   end
 
   context 'with assosiations' do
-    it { is_expected.to have_many(:reviews) }
+    it { is_expected.to have_many(:reviews).dependent(:destroy) }
   end
 end

@@ -9,9 +9,9 @@ class CoverUploader < CarrierWave::Uploader::Base
   end
 
   def default_url
-    return ActionController::Base.helpers.asset_path([version_name, "default.jpg"].compact.join('_')) if version_name
+    return ActionController::Base.helpers.asset_path([version_name, "default.png"].compact.join('_')) if version_name
 
-    'w500_default.jpg'
+    'w500_default.png'
   end
 
   # Process files as they are uploaded:

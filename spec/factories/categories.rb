@@ -4,7 +4,7 @@ FactoryBot.define do
 
     trait :with_book do
       after(:create) do |category|
-        create(:book, :with_author, category: category)
+        create(:book, :with_author_and_cover, category: category)
       end
     end
   end

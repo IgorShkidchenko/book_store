@@ -27,6 +27,10 @@ ActiveAdmin.register Review do
     end
   end
 
+  action_item :show_on_site, only: :show do
+    link_to t('admin.actions.show_on_site'), book_path(review.book_id) if review.status != Review::STATUSES[:unprocessed]
+  end
+
   index do
     render 'admin/reviews/index', context: self
   end

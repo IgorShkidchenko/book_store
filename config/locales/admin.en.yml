@@ -7,8 +7,14 @@ en:
       edit: Edit
       delete: Delete
       show: Show
+      show_on_site: Show on site
+      set_default_cover: Set to default cover
     dashboard:
       books_count: "Books quantity: %{count}"
       users_count: "Users quantity: %{count}"
     column:
       date: Date
+    book_form:
+      no_cover: no cover page yet
+      title: Book information
+      cover_title: Book covers

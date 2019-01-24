@@ -10,7 +10,6 @@ class CreateBooks < ActiveRecord::Migration[5.2]
       t.float :depth
       t.string :materials
       t.string :slug
-      t.string :cover
       t.references :category, foreign_key: true
 
       t.timestamps

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_23_090228) do
+ActiveRecord::Schema.define(version: 2019_01_24_080241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,11 +70,10 @@ ActiveRecord::Schema.define(version: 2019_01_23_090228) do
     t.float "width"
     t.float "depth"
     t.string "materials"
+    t.string "slug"
     t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "slug"
-    t.string "cover"
     t.index ["category_id"], name: "index_books_on_category_id"
     t.index ["slug"], name: "index_books_on_slug", unique: true
   end
@@ -83,6 +82,14 @@ ActiveRecord::Schema.define(version: 2019_01_23_090228) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "covers", force: :cascade do |t|
+    t.string "image"
+    t.bigint "book_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_covers_on_book_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -131,6 +138,7 @@ ActiveRecord::Schema.define(version: 2019_01_23_090228) do
   add_foreign_key "book_authors", "authors"
   add_foreign_key "book_authors", "books"
   add_foreign_key "books", "categories"
+  add_foreign_key "covers", "books"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"
 end

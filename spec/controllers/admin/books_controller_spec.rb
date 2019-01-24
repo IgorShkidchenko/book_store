@@ -10,11 +10,10 @@ RSpec.describe Admin::BooksController, type: :controller do
 
   describe 'when login' do
     let(:page) { Capybara::Node::Simple.new(response.body) }
-    let(:category) { FactoryBot.create(:category, :with_book) }
-    let!(:book) { category.books.last.decorate }
+    let!(:book) { FactoryBot.create(:book, :with_author_and_cover).decorate }
 
-    let(:valid_attributes) { (FactoryBot.attributes_for :book).merge(category_id: category.id) }
-    let(:invalid_attributes) { { title: nil, category_id: category.id } }
+    let(:valid_attributes) { (FactoryBot.attributes_for :book).merge(category_id: book.category_id) }
+    let(:invalid_attributes) { { title: nil, category_id: book.category_id } }
 
     render_views
     login_admin
@@ -49,7 +48,7 @@ RSpec.describe Admin::BooksController, type: :controller do
       it { expect(page).to have_field 'book_height' }
       it { expect(page).to have_field 'book_width' }
       it { expect(page).to have_field 'book_depth' }
-      it { expect(page).to have_field 'book_cover' }
+      it { expect(page).to have_content 'Book covers' }
     end
 
     describe 'when create with valid params' do
@@ -98,6 +97,7 @@ RSpec.describe Admin::BooksController, type: :controller do
       it { expect(page).to have_field 'book_height', with: book.height }
       it { expect(page).to have_field 'book_width', with: book.width }
       it { expect(page).to have_field 'book_depth', with: book.depth }
+      it { expect(page).to have_content I18n.t('admin.actions.set_default_cover') }
     end
 
     describe 'when update with valid params' do
@@ -110,6 +110,11 @@ RSpec.describe Admin::BooksController, type: :controller do
       it do
         book.reload
         expect(book.title).to eq valid_attributes[:title]
+      end
+
+      it do
+        book.reload
+        expect(book.covers.last).not_to eq nil
       end
     end
 
@@ -139,7 +144,9 @@ RSpec.describe Admin::BooksController, type: :controller do
       it { expect(page).to have_content book.height }
       it { expect(page).to have_content book.width }
       it { expect(page).to have_content book.depth }
-      it { expect(page).to have_content book.cover }
+      it { expect(page).to have_content I18n.t('admin.actions.show_on_site') }
+      it { expect(page).to have_content I18n.t('admin.actions.edit') }
+      it { expect(page).to have_content I18n.t('admin.actions.delete') }
     end
 
     describe 'when destroy' do
@@ -154,6 +161,18 @@ RSpec.describe Admin::BooksController, type: :controller do
         expect(response).to redirect_to(admin_books_path)
       end
     end
+
+    describe 'when set_default_cover' do
+      before { put :set_default_cover, params: { id: book.slug } }
+
+      it { is_expected.to respond_with 302 }
+      it { is_expected.to redirect_to admin_book_path(book) }
+
+      it do
+        book.reload
+        expect(book.covers.first).not_to eq nil
+      end
+    end
   end
 
   describe 'when routes' do
@@ -164,5 +183,6 @@ RSpec.describe Admin::BooksController, type: :controller do
     it { is_expected.to route(:get, '/admin/books/1/edit').to(action: :edit, id: 1) }
     it { is_expected.to route(:patch, '/admin/books/1').to(action: :update, id: 1) }
     it { is_expected.to route(:delete, '/admin/books/1').to(action: :destroy, id: 1) }
+    it { is_expected.to route(:put, '/admin/books/1/set_default_cover').to(action: :set_default_cover, id: 1) }
   end
 end

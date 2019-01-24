@@ -55,7 +55,7 @@ RSpec.describe Admin::ReviewsController, type: :controller do
       before { put :approved, params: { id: review.id } }
 
       it { is_expected.to respond_with 302 }
-      it { expect(response).to redirect_to admin_review_path(review) }
+      it { is_expected.to redirect_to admin_review_path(review) }
 
       it do
         review.reload
@@ -67,7 +67,7 @@ RSpec.describe Admin::ReviewsController, type: :controller do
       before { put :rejected, params: { id: review.id } }
 
       it { is_expected.to respond_with 302 }
-      it { expect(response).to redirect_to admin_review_path(review) }
+      it { is_expected.to redirect_to admin_review_path(review) }
 
       it do
         review.reload

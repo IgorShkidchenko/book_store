@@ -55,6 +55,7 @@ en:
       title_ASC: 'Title: A - Z'
       title_DESC: 'Title: Z - A'
   book:
+    covers_max_error: Maximum %{max} cover for one book
     page:
       back: Back to results
       add_to_card: Add to Cart

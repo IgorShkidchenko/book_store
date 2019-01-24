@@ -11,7 +11,6 @@ RSpec.describe Book, type: :model do
     it { is_expected.to have_db_column(:materials).of_type(:string) }
     it { is_expected.to have_db_column(:created_at).of_type(:datetime).with_options(null: false) }
     it { is_expected.to have_db_column(:updated_at).of_type(:datetime).with_options(null: false) }
-    it { is_expected.to have_db_column(:cover).of_type(:string) }
     it { is_expected.to have_db_column(:slug).of_type(:string) }
     it { is_expected.to have_db_index(:category_id) }
     it { is_expected.to have_db_index(:slug).unique }
@@ -21,7 +20,8 @@ RSpec.describe Book, type: :model do
     it { is_expected.to belong_to(:category) }
     it { is_expected.to have_many(:book_authors) }
     it { is_expected.to have_many(:authors).through(:book_authors).dependent(:destroy) }
-    it { is_expected.to have_many(:reviews) }
+    it { is_expected.to have_many(:reviews).dependent(:destroy) }
+    it { is_expected.to have_many(:covers).dependent(:destroy) }
   end
 
   context 'when validates' do
