@@ -48,7 +48,8 @@ RSpec.describe Admin::BooksController, type: :controller do
       it { expect(page).to have_field 'book_height' }
       it { expect(page).to have_field 'book_width' }
       it { expect(page).to have_field 'book_depth' }
-      it { expect(page).to have_content 'Book covers' }
+      it { expect(page).to have_content I18n.t('admin.book_form.cover_title') }
+      it { expect(page).to have_content I18n.t('admin.actions.create_with_faker') }
     end
 
     describe 'when create with valid params' do
@@ -97,7 +98,6 @@ RSpec.describe Admin::BooksController, type: :controller do
       it { expect(page).to have_field 'book_height', with: book.height }
       it { expect(page).to have_field 'book_width', with: book.width }
       it { expect(page).to have_field 'book_depth', with: book.depth }
-      it { expect(page).to have_content I18n.t('admin.actions.set_default_cover') }
     end
 
     describe 'when update with valid params' do
@@ -161,18 +161,6 @@ RSpec.describe Admin::BooksController, type: :controller do
         expect(response).to redirect_to(admin_books_path)
       end
     end
-
-    describe 'when set_default_cover' do
-      before { put :set_default_cover, params: { id: book.slug } }
-
-      it { is_expected.to respond_with 302 }
-      it { is_expected.to redirect_to admin_book_path(book) }
-
-      it do
-        book.reload
-        expect(book.covers.first).not_to eq nil
-      end
-    end
   end
 
   describe 'when routes' do
@@ -183,6 +171,5 @@ RSpec.describe Admin::BooksController, type: :controller do
     it { is_expected.to route(:get, '/admin/books/1/edit').to(action: :edit, id: 1) }
     it { is_expected.to route(:patch, '/admin/books/1').to(action: :update, id: 1) }
     it { is_expected.to route(:delete, '/admin/books/1').to(action: :destroy, id: 1) }
-    it { is_expected.to route(:put, '/admin/books/1/set_default_cover').to(action: :set_default_cover, id: 1) }
   end
 end

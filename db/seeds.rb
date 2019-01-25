@@ -20,11 +20,10 @@ Array.new(4) { Category.create(name: Faker::Book.genre) }.each do |category|
                                  depth: Faker::Number.decimal(2),
                                  materials: Faker::Science.element)
     book.authors << Author.all.sample(Faker::Number.between(1, 3))
-    book.covers.create
   end
 
   category.books.first(5).each do |book|
-    cover = book.covers.first
+    cover = book.covers.create
     File.open(random_image) do |f|
       cover.image = f
     end

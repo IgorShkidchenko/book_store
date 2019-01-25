@@ -11,7 +11,7 @@
           .row
             .col-sm-5
               .general-img-wrap
-                = image_tag book.covers.first.image_url(:w500), class: 'img-shadow general-thumbnail-img', alt: t('book.cover_alt', title: book.title)
+                = @representers_for_latest_three[index].main_book_cover
             .col-sm-7
               .mb-60
                 %h1
@@ -40,5 +40,5 @@
     %h3
       = t('home.best_sellers')
     .row
-      - best_sellers.each do |book|
-        = render partial: 'books/book', locals: { book: book }
+      - best_sellers.each_with_index do |book, index|
+        = render partial: 'books/book', locals: { book: book , representer: @representers_for_best_sellers[index] }

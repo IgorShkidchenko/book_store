@@ -1,7 +1,7 @@
 .col-xs-6.col-sm-3.book-catalog
   .general-thumb-wrap
     .thumbnail.general-thumbnail
-      = image_tag book.covers.first.image_url(:w500), class: 'img-shadow general-thumbnail-img', alt: t('book.cover_alt', title: book.title)
+      = representer.main_book_cover
       .thumb-hover
         .general-thumb-link-wrap
           = link_to book_path(id: book), class: 'thumb-hover-link' do

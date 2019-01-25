@@ -8,7 +8,7 @@ en:
       delete: Delete
       show: Show
       show_on_site: Show on site
-      set_default_cover: Set to default cover
+      create_with_faker: Create with faker
     dashboard:
       books_count: "Books quantity: %{count}"
       users_count: "Users quantity: %{count}"
