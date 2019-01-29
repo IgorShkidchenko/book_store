@@ -1,4 +1,5 @@
 en:
+  price: "€%{price}"
   layout:
     link:
       home: Home
@@ -58,13 +59,12 @@ en:
     covers_max_error: Maximum %{max} cover for one book
     page:
       back: Back to results
-      add_to_card: Add to Cart
+      add_to_cart: Add to Cart
       description: Description
       read_more: Read More
       published: Year of publication
       dimensions: Dimensions
       materials: Materials
-    price: "€%{price}"
     dimensions: "H: %{width} x W: %{height} x D: %{depth}"
     short_description: "%{description}..."
     cover_alt: "%{title}"
@@ -78,3 +78,18 @@ en:
     count: "Reviews (%{count})"
     success_msg: Thanks for Review. It will be published as soon as Admin will approve it.
     validation_format_msg: "permit only this special symbols !#$%&'*+-/=?^_`{|}~."
+  cart:
+    page:
+      title: Cart
+      enter_coupon: Enter Your Coupon Code
+      apply_coupon: Apply Coupon
+      order_summary: Order Summary
+      subtotal: 'Subtotal:'
+      coupon: 'Coupon:'
+      order_total: 'Order Total:'
+      cheackout: Checkout
+      book:
+        product: Product
+        price: Price
+        quantity: Quantity
+        subtotal: SubTotal

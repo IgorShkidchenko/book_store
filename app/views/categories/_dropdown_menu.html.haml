@@ -4,6 +4,6 @@
 %ul.dropdown-menu
   - Filter::VALID_FILTERS.keys.each do |filter|
     %li
-      = link_to t("catalog.dropdown.#{filter.to_s}"), categories_path(category_id: category&.id, filter: Filter::VALID_FILTERS[filter], page: params[:page])
+      = link_to t("catalog.dropdown.#{filter.to_s}"), categories_path(category_id: category, filter: Filter::VALID_FILTERS[filter], page: params[:page])
   %li
     = link_to t('catalog.dropdown.popular'), '#'

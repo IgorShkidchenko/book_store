@@ -28,13 +28,15 @@ RSpec.describe Review, type: :model do
     end
 
     context 'when format valid' do
+      let(:regular_exp) { "az!#$%&'*+-/=?^_`{|}~." }
+
       before do
-        allow_any_instance_of(Review).to receive(:title).and_return("az!#$%&'*+-/=?^_`{|}~.")
-        allow_any_instance_of(Review).to receive(:body).and_return("az!#$%&'*+-/=?^_`{|}~.")
+        allow_any_instance_of(Review).to receive(:title).and_return(regular_exp)
+        allow_any_instance_of(Review).to receive(:body).and_return(regular_exp)
       end
 
-      it { is_expected.to allow_value("az!#$%&'*+-/=?^_`{|}~.").for(:title).with_message(I18n.t('review.validation_format_msg')) }
-      it { is_expected.to allow_value("az!#$%&'*+-/=?^_`{|}~.").for(:body).with_message(I18n.t('review.validation_format_msg')) }
+      it { is_expected.to allow_value(regular_exp).for(:title).with_message(I18n.t('review.validation_format_msg')) }
+      it { is_expected.to allow_value(regular_exp).for(:body).with_message(I18n.t('review.validation_format_msg')) }
     end
 
     context 'when format invalid' do

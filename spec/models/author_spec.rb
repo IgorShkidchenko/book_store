@@ -8,8 +8,8 @@ RSpec.describe Author, type: :model do
   end
 
   context 'with assosiations' do
-    it { is_expected.to have_many(:book_authors) }
-    it { is_expected.to have_many(:books).through(:book_authors).dependent(:destroy) }
+    it { is_expected.to have_many(:book_authors).dependent(:destroy) }
+    it { is_expected.to have_many(:books).through(:book_authors) }
   end
 
   context 'when validations' do

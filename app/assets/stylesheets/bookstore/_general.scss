@@ -107,6 +107,7 @@ img {
   }
 }
 .general-position {
+  display: inherit;
   margin-top: 10px;
   margin-bottom: 30px;
 }
@@ -263,6 +264,7 @@ img {
     margin-bottom: 45px;
   }
   .general-position {
+    display: inherit;
     margin-top: 15px;
   }
   .general-img-wrap-table {
@@ -434,4 +436,8 @@ img {
 .small_covers {
   display: flex;
   justify-content: space-between;
+}
+
+.disable_minus {
+  pointer-events: none;
 }

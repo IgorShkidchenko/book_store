@@ -1,0 +1,4 @@
+$('.cart_link').html("<%= j render 'layouts/header/cart' %>");
+$('tr.<%= @order_item.id %>').fadeOut();
+$('div.<%= @order_item.id %>').fadeOut();
+$("div.<%= @order.id %>").replaceWith('<%= j render partial: 'carts/order_summary' %>');

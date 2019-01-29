@@ -19,7 +19,7 @@ ActiveAdmin.register Book do
   end
 
   action_item :create_with_faker, only: :new do
-    new_book_params = {
+    book_params = {
       title: Faker::Book.title,
       price: Faker::Number.decimal(2),
       description: Faker::Lorem.paragraph_by_chars(Faker::Number.between(300, 350), false),
@@ -30,6 +30,6 @@ ActiveAdmin.register Book do
       materials: Faker::Science.element,
       category_id: Category.first.id
     }
-    link_to t('admin.actions.create_with_faker'), admin_books_path(book: new_book_params), method: :post if Category.first
+    link_to t('admin.actions.create_with_faker'), admin_books_path(book: book_params), method: :post if Category.first
   end
 end

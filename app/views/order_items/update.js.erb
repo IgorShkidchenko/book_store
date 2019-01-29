@@ -1,0 +1,4 @@
+$('.cart_link').html('<%= j render 'layouts/header/cart' %>');
+$('td.<%= @order_item.id %>').replaceWith('<%= j render partial: 'carts/form' , locals: { order_item: @order_item } %>');
+$('span.<%= @order_item.id %>').html('<%= t('price', price: @order_item.total_price) %>');
+$('div.<%= @order.id %>').replaceWith('<%= j render partial: 'carts/order_summary' %>');

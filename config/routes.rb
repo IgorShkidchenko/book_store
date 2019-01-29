@@ -5,9 +5,11 @@ Rails.application.routes.draw do
                                     sessions: 'users/sessions',
                                     registrations: 'users/registrations' }
 
+  get '/users', to: redirect('/users/sign_up')
   root 'home#index'
   resources :books, only: :show
   resources :categories, only: :index
   resources :reviews, only: :create
-  get '/users', to: redirect('/users/sign_up')
+  resource :cart, only: :show
+  resources :order_items, only: [:create, :update, :destroy]
 end

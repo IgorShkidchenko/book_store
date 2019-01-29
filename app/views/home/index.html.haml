@@ -11,7 +11,7 @@
           .row
             .col-sm-5
               .general-img-wrap
-                = @representers_for_latest_three[index].main_book_cover
+                = book.main_book_cover
             .col-sm-7
               .mb-60
                 %h1
@@ -21,7 +21,7 @@
                 %p.lead.small
                   = book.authors_as_string
                 .general-align
-                  = link_to t('home.buy_button'), '#', class: 'button btn btn-primary'
+                  = link_to t('home.buy_button'), order_items_path(order_item: { book_id: book.id, quantity: 1 }), remote: true, method: :post, class: 'button btn btn-primary'
     %a.left.carousel-control{href: '#slider', role: 'button', 'data-slide': 'prev'}
       %span.icon-prev{'aria-hidden': 'true'}
       %span.sr-only
@@ -40,5 +40,5 @@
     %h3
       = t('home.best_sellers')
     .row
-      - best_sellers.each_with_index do |book, index|
-        = render partial: 'books/book', locals: { book: book , representer: @representers_for_best_sellers[index] }
+      - best_sellers.each do |book|
+        = render book

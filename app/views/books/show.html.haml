@@ -7,7 +7,7 @@
     .col-sm-6
       .product-gallery
         .mb-20
-          = presenter.main_book_cover
+          = book.main_book_cover
         .images.clearfix.small_covers
           - book.covers.drop(1).each do |cover|
             = image_tag cover.image_url(:w150), alt: t('book.cover_alt', title: book.title)
@@ -19,11 +19,8 @@
       .row
         .col-xs-12.col-md-4
           %p.h1.in-gold-500.mt-10
-            = t('book.price', price: book.price)
+            = t('price', price: book.price)
         = render 'input_field'
-        .col-xs-7.col-md-5
-          %button.btn.btn-default.pull-right.general-position
-            = t('book.page.add_to_cart')
       .general-info-wrap.divider-lg
         %p
           = t('book.page.description')

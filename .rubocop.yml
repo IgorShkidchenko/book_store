@@ -2,6 +2,8 @@ require: rubocop-rspec
 
 Metrics/LineLength:
   Max: 120
+  Exclude:
+    - 'app/admin/reviews.rb'
 
 Documentation:
   Enabled: false
@@ -13,7 +15,7 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 
 Metrics/BlockLength:
-  ExcludedMethods: ['describe']
+  ExcludedMethods: ['describe', 'ActiveAdmin.register']
 
 AllCops:
   Exclude:
@@ -28,4 +30,7 @@ Style/ClassAndModuleChildren:
     - 'app/controllers/users/**/*'
 
 RSpec/MessageChain:
+  Enabled: false
+
+RSpec/AnyInstance:
   Enabled: false
