@@ -4,7 +4,7 @@
   .general-img-wrap-table
     = Book.where(id: order_item.book_id).includes(:covers).first.decorate.main_book_cover
   %p.title
-    = link_to order_item.book.title, book_path(order_item.book)
+    = link_to order_item.book_title, book_path(order_item.book)
   %table.table
     %tr
       %td
@@ -12,12 +12,12 @@
           = t('cart.page.book.price')
       %td
         %span.font-16.in-gold-500
-          = t('price', price: order_item.book.price)
+          = t('price', price: order_item.book_price)
     %tr
       %td.vertical-middle
         %span.in-grey-600
           = t('cart.page.book.quantity')
-      = render partial: 'carts/form', locals: { order_item: order_item }
+      = render 'form', order_item: order_item
     %tr
       %td
         %span.in-grey-600

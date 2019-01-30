@@ -4,11 +4,11 @@
       = Book.where(id: order_item.book_id).includes(:covers).first.decorate.main_book_cover
   %td
     %p.title
-      = link_to order_item.book.title, book_path(order_item.book)
+      = link_to order_item.book_title, book_path(order_item.book)
   %td
     %span.font-16.in-gold-500
-      = t('price', price: order_item.book.price)
-  = render partial: 'carts/form', locals: { order_item: order_item }
+      = t('price', price: order_item.book_price)
+  = render 'form', order_item: order_item
   %td
     %span.font-16.in-gold-500{ class: "#{order_item.id}" }
       = t('price', price: order_item.total_price)

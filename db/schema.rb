@@ -122,7 +122,7 @@ ActiveRecord::Schema.define(version: 2019_01_27_181320) do
 
   create_table "orders", force: :cascade do |t|
     t.decimal "total_price", precision: 12, scale: 3
-    t.bigint "order_status_id"
+    t.bigint "order_status_id", default: 1
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

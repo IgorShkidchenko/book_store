@@ -93,3 +93,5 @@ en:
         price: Price
         quantity: Quantity
         subtotal: SubTotal
+  order_item:
+    error: is not a valid order.

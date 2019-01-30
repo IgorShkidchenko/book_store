@@ -16,7 +16,7 @@ $( document ).on('turbolinks:load', function(){
     });
 });
 
-function shake() {
+function cart_shake() {
     var div = document.getElementsByClassName('cart_link');
     var interval = 100;
     var distance = 10;

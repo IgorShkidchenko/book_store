@@ -4,7 +4,7 @@
     = t('cart.page.title')
   .visible-xs
     - @order_items.each do |order_item|
-      = render partial: 'carts/mobile_cart_row', locals: { order_item: order_item }
+      = render 'mobile_cart_row', order_item: order_item.decorate
   .hidden-xs
     %table.table.table-hover
       %tr.no-hover
@@ -23,7 +23,7 @@
             = t('cart.page.book.subtotal')
         %th.col-close
       - @order_items.each do |order_item|
-        = render partial: 'carts/cart_row', locals: { order_item: order_item }
+        = render 'cart_row', order_item: order_item.decorate
   .general-order-wrap
     .row
       .col-sm-4
@@ -34,6 +34,6 @@
           %div
             %button.btn.btn-primary.mr-5.mb-15
               = t('cart.page.apply_coupon')
-      = render partial: 'carts/order_summary'
+      = render 'order_summary', order: @order
   %button.btn.btn-default.mb-20.hidden-xs.center-block
     = t('cart.page.cheackout')

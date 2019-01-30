@@ -19,7 +19,7 @@ Array.new(4) { Category.create(name: Faker::Book.genre) }.each do |category|
                                  width: Faker::Number.decimal(2),
                                  depth: Faker::Number.decimal(2),
                                  materials: Faker::Science.element)
-    book.authors << Author.all.sample(Faker::Number.between(1, 3))
+    book.authors << Author.all.sample(Faker::Number.between(1, 2))
   end
 
   category.books.first(5).each do |book|
@@ -35,3 +35,5 @@ Array.new(4) { Category.create(name: Faker::Book.genre) }.each do |category|
                         rating: Faker::Number.between(1, 5), user_id: User.first.id)
   end
 end
+
+OrderStatus::STATUSES.each_pair { |_key, status_name| OrderStatus.create(name: status_name) }

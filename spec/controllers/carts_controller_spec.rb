@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe CartsController, type: :controller do
   describe 'when visit show page' do
-
     before do
       get :show
     end

@@ -4,8 +4,4 @@ class Order < ActiveRecord::Base
 
   has_many :order_items, dependent: :destroy
   has_many :books, through: :order_items
-
-  def update_total_price
-    update(total_price: order_items.includes(:book).map(&:total_price).sum)
-  end
 end

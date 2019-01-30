@@ -1,25 +1,26 @@
 class OrderItemsController < ApplicationController
+  ADD_QUANTITY = 'add'.freeze
+
   before_action :set_order
   before_action :set_order_item, only: %i[update destroy]
 
   respond_to :js
 
   def create
-    @order_item = @order.order_items.find_by_book_id(order_item_params[:book_id])
-    @order_item ? @order_item.update_quantity(order_item_params[:quantity].to_i) : create_new_item
-    update_total_prices
+    @order_item = NewOrderItemService.new(order_item_params, @order).call
+    UpdateTotalPricesService.new(item: @order_item, order: @order).call
     session[:order_id] ||= @order.id
   end
 
   def update
-    params[:order_item][:action] == 'add' ? @order_item.quantity += 1 : @order_item.quantity -= 1
-    @order_item.save
-    update_total_prices
+    params[:order_item][:command] == ADD_QUANTITY ? @order_item.quantity += 1 : @order_item.quantity -= 1
+    @order_item.save!
+    UpdateTotalPricesService.new(item: @order_item, order: @order).call
   end
 
   def destroy
-    @order_item.destroy
-    @order.update_total_price
+    @order_item.destroy!
+    UpdateTotalPricesService.new(order: @order).call
   end
 
   private
@@ -34,14 +35,5 @@ class OrderItemsController < ApplicationController
 
   def set_order_item
     @order_item = @order.order_items.find(params[:id])
-  end
-
-  def update_total_prices
-    @order_item.update_total_price
-    @order.update_total_price
-  end
-
-  def create_new_item
-    @order_item = @order.order_items.new(order_item_params)
   end
 end
