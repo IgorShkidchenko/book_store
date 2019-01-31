@@ -8,14 +8,14 @@ class OrderItemsController < ApplicationController
 
   def create
     @order_item = NewOrderItemService.new(order_item_params, @order).call
-    UpdateTotalPricesService.new(item: @order_item, order: @order).call
+    UpdateTotalPricesService.new(order_item: @order_item, order: @order).call
     session[:order_id] ||= @order.id
   end
 
   def update
     params[:order_item][:command] == ADD_QUANTITY ? @order_item.quantity += 1 : @order_item.quantity -= 1
     @order_item.save!
-    UpdateTotalPricesService.new(item: @order_item, order: @order).call
+    UpdateTotalPricesService.new(order_item: @order_item, order: @order).call
   end
 
   def destroy
@@ -34,6 +34,6 @@ class OrderItemsController < ApplicationController
   end
 
   def set_order_item
-    @order_item = @order.order_items.find(params[:id])
+    @order_item = OrderItem.find(params[:id])
   end
 end

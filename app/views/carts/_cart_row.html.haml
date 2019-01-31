@@ -1,13 +1,14 @@
 %tr{ class: "#{order_item.id}" }
   %td
     .general-img-wrap-table
-      = Book.where(id: order_item.book_id).includes(:covers).first.decorate.main_book_cover
+      = link_to book_path(order_item.book) do
+        = Book.where(id: order_item.book_id).includes(:covers).first.decorate.main_book_cover
   %td
-    %p.title
-      = link_to order_item.book_title, book_path(order_item.book)
+    %p.title.in-gold-500
+      = order_item.decorate.book_title
   %td
     %span.font-16.in-gold-500
-      = t('price', price: order_item.book_price)
+      = t('price', price: order_item.decorate.book_price)
   = render 'form', order_item: order_item
   %td
     %span.font-16.in-gold-500{ class: "#{order_item.id}" }

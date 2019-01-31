@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   resources :categories, only: :index
   resources :reviews, only: :create
   resource :cart, only: :show
+  resources :coupons, only: :update
   resources :order_items, only: [:create, :update, :destroy]
 end

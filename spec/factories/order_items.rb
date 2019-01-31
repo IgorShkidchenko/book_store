@@ -4,5 +4,6 @@ FactoryBot.define do
     total_price { Faker::Number.decimal(2) }
 
     book
+    order
   end
 end

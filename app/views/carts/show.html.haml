@@ -2,38 +2,36 @@
 %main.container.general-main-wrap
   %h1.general-title-margin
     = t('cart.page.title')
-  .visible-xs
-    - @order_items.each do |order_item|
-      = render 'mobile_cart_row', order_item: order_item.decorate
-  .hidden-xs
-    %table.table.table-hover
-      %tr.no-hover
-        %th.col-pic.pl-0
-          %span.in-grey-600
-            = t('cart.page.book.product')
-        %th.col-title
-        %th.col-price
-          %span.in-grey-600
-            = t('cart.page.book.price')
-        %th.col-quantity
-          %span.in-grey-600
-            = t('cart.page.book.quantity')
-        %th.col-total
-          %span.in-grey-600
-            = t('cart.page.book.subtotal')
-        %th.col-close
-      - @order_items.each do |order_item|
-        = render 'cart_row', order_item: order_item.decorate
-  .general-order-wrap
-    .row
-      .col-sm-4
-        .input-group.general-input-group
-          %label.input-label
-            = t('cart.page.enter_coupon')
-          %input.form-control.mb-30{type: "text", placeholder: t('cart.page.enter_coupon') }
-          %div
-            %button.btn.btn-primary.mr-5.mb-15
-              = t('cart.page.apply_coupon')
-      = render 'order_summary', order: @order
-  %button.btn.btn-default.mb-20.hidden-xs.center-block
-    = t('cart.page.cheackout')
+  - if @order_items.present?
+    .visible-xs
+      = render partial: 'carts/mobile_cart_row', collection: @order_items, as: :order_item
+    .hidden-xs
+      %table.table.table-hover
+        %tr.no-hover
+          %th.col-pic.pl-0
+            %span.in-grey-600
+              = t('cart.page.book.product')
+          %th.col-title
+          %th.col-price
+            %span.in-grey-600
+              = t('cart.page.book.price')
+          %th.col-quantity
+            %span.in-grey-600
+              = t('cart.page.book.quantity')
+          %th.col-total
+            %span.in-grey-600
+              = t('cart.page.book.subtotal')
+          %th.col-close
+        = render partial: 'carts/cart_row', collection: @order_items, as: :order_item
+    .general-order-wrap
+      .row
+        = render 'coupons/form', order: @order
+        = render 'order_summary', order: @order
+    %button.btn.btn-default.mb-20.hidden-xs.center-block
+      = t('cart.page.cheackout')
+  - else
+    .container
+      .jumbotron.text-center.mb-0
+        %h2.h1
+          = t('cart.page.empty_cart')
+        = link_to t('home.start_button'), categories_path, class: 'button btn btn-default'

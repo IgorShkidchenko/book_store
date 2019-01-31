@@ -2,3 +2,7 @@ $('.cart_link').html("<%= j render 'layouts/header/cart' %>");
 $('tr.<%= @order_item.id %>').fadeOut();
 $('div.<%= @order_item.id %>').fadeOut();
 $('div.<%= @order.id %>').replaceWith('<%= j render 'carts/order_summary', order: @order %>');
+
+if(<%= @order.order_items.count %> == 0){
+    location.reload();
+}

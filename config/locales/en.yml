@@ -88,6 +88,7 @@ en:
       coupon: 'Coupon:'
       order_total: 'Order Total:'
       cheackout: Checkout
+      empty_cart: Your cart is empty, fill it and coming back
       book:
         product: Product
         price: Price
@@ -95,3 +96,7 @@ en:
         subtotal: SubTotal
   order_item:
     error: is not a valid order.
+  coupon:
+    error_used: Coupon was already used
+    error_havent: Coupon does not exist
+    was_used: Coupon was used successfully

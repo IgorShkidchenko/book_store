@@ -9,18 +9,20 @@
             = t('cart.page.subtotal')
         %td
           %p.font-16
-            = t('price', price: order.total_price)
+            = t('price', price: order.subtotal_price)
       %tr
         %td
           %p.font-16
             = t('cart.page.coupon')
         %td
-          %p.font-16 ###
+          %p.font-16
+            = order.decorate.coupon_discount
       %tr
         %td
           %strong.font-17
             = t('cart.page.order_total')
         %td
-          %strong.font-17 ###
+          %strong.font-17
+            = t('price', price: order.total_price)
     %button.btn.btn-default.mb-20.visible-xs-inline-block
       = t('cart.page.cheackout')

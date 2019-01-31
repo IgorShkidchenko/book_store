@@ -18,3 +18,5 @@ en:
       no_cover: no cover page yet
       title: Book information
       cover_title: Book covers
+    coupon:
+      generate: Generate coupon
