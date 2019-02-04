@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 2019_01_30_141144) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
+    t.integer "books_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
+gem 'aasm'
 gem 'activeadmin'
 gem 'activeadmin_simplemde'
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -34,6 +35,8 @@ group :development, :test do
 end
 
 group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'brakeman'
   gem 'bullet'
   gem 'bundler-audit'

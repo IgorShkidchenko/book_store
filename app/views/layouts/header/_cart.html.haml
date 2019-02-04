@@ -5,13 +5,13 @@
     %span.icon-bar
     %span.icon-bar
   = link_to t('layout.header.bookstore'), root_path, class: 'navbar-brand'
-  - if order.id
+  - if order.persisted?
     = link_to order_path(order), class: 'shop-link pull-right visible-xs' do
       .cart_link
         %span.shop-icon
           %span.shop-quantity
             = order.cart_count
-- if order.id
+- if order.persisted?
   = link_to order_path(order), class: 'shop-link pull-right hidden-xs' do
     .cart_link
       %span.shop-icon
