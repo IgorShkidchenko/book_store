@@ -21,15 +21,18 @@ class BookDecorator < Draper::Decorator
     reviews.approved.count
   end
 
+  def dimensions
+    "H: #{book.width} x W: #{book.height} x D: #{book.depth}"
+  end
+
   def main_book_cover
-    if book.covers.present?
-      ActionController::Base.helpers.image_tag book.covers.first.image_url(:w500),
-                                               alt: I18n.t('book.cover_alt', title: book.title),
-                                               class: 'img-shadow general-thumbnail-img'
+    covers = book.covers
+
+    if covers.present?
+      h.image_tag covers.first.image_url(:w500), alt: I18n.t('book.cover_alt', title: book.title),
+                                                 class: 'img-shadow general-thumbnail-img'
     else
-      ActionController::Base.helpers.image_tag 'w500_default.png',
-                                               alt: I18n.t('book.cover_default'),
-                                               class: 'general-thumbnail-img'
+      h.image_tag 'w500_default.png', alt: I18n.t('book.cover_default'), class: 'general-thumbnail-img'
     end
   end
 end

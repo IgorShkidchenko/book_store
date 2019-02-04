@@ -23,6 +23,7 @@ gem 'pagy'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.1'
+gem 'rectify'
 gem 'sass-rails', '~> 5.0'
 gem 'simple_form'
 gem 'turbolinks', '~> 5'
@@ -35,10 +36,13 @@ end
 group :development do
   gem 'brakeman'
   gem 'bullet'
+  gem 'bundler-audit'
   gem 'fasterer', require: false
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'lol_dba'
   gem 'pry'
   gem 'rails_best_practices'
+  gem 'reek'
   gem 'rubocop', require: false
   gem 'rubocop-rspec', require: false
   gem 'spring'

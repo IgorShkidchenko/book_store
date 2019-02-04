@@ -1,2 +1,2 @@
-$('.cart_link').html('<%= j render 'layouts/header/cart' %>')
+$('.cart_part').html('<%= j render 'layouts/header/cart', order: current_order.decorate %>')
 cart_shake()

@@ -1,0 +1,16 @@
+detectors:
+  IrresponsibleModule:
+    enabled: false
+  InstanceVariableAssumption:
+    enabled: false
+
+directories:
+  'app/validators/':
+    UtilityFunction:
+      enabled: false
+
+exclude_paths:
+  - db/
+  - 'app/controllers/coupons_controller.rb'
+  - 'app/controllers/application_controller.rb'
+  - 'app/controllers/books_controller.rb'

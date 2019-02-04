@@ -5,16 +5,25 @@ module BackUrl
 
   included do
     def set_cookies
+      @referer = request.referer
       return @back = cookies[:back_url] if back_url_invalid?
 
-      cookies[:back_url] = request.referer
-      @back = cookies[:back_url]
+      cookies[:back_url] = @referer
+      @back = @referer
     end
 
     private
 
     def back_url_invalid?
-      request.referer.nil? || request.method != METHOD_GET || request.referer == request.url
+      !@referer || not_method_get? || page_was_refreshed?
+    end
+
+    def not_method_get?
+      request.method != METHOD_GET
+    end
+
+    def page_was_refreshed?
+      @referer == request.url
     end
   end
 end

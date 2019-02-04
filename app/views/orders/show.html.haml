@@ -4,7 +4,7 @@
     = t('cart.page.title')
   - if @order_items.present?
     .visible-xs
-      = render partial: 'carts/mobile_cart_row', collection: @order_items, as: :order_item
+      = render partial: 'orders/mobile_cart_row', collection: order_items, as: :order_item
     .hidden-xs
       %table.table.table-hover
         %tr.no-hover
@@ -22,7 +22,7 @@
             %span.in-grey-600
               = t('cart.page.book.subtotal')
           %th.col-close
-        = render partial: 'carts/cart_row', collection: @order_items, as: :order_item
+        = render partial: 'orders/cart_row', collection: order_items, as: :order_item
     .general-order-wrap
       .row
         = render 'coupons/form', order: @order
@@ -34,4 +34,4 @@
       .jumbotron.text-center.mb-0
         %h2.h1
           = t('cart.page.empty_cart')
-        = link_to t('home.start_button'), categories_path, class: 'button btn btn-default'
+        = link_to t('home.start_button'), books_path, class: 'button btn btn-default'

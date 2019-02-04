@@ -1,4 +1,18 @@
 class OrderItemDecorator < Draper::Decorator
   delegate_all
-  delegate :price, :title, to: :book, prefix: true
+
+  def minus_quantity_link
+    css_class = "input-link #{'disable_minus' if order_item.quantity == 1}"
+    h.link_to h.order_item_path(order_item, order_item: { command: nil }), remote: true, method: :put,
+                                                                           class: css_class do
+      h.content_tag(:i, '', class: 'fa fa-minus line-heaght-40')
+    end
+  end
+
+  def plus_quantity_link
+    h.link_to h.order_item_path(order_item, order_item: { command: OrderItemsController::ADD }),
+              remote: true, method: :put, class: 'input-link' do
+      h.content_tag(:i, '', class: 'fa fa-plus line-heaght-40')
+    end
+  end
 end

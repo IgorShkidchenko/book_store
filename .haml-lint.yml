@@ -1,0 +1,6 @@
+linters:
+  LineLength:
+    max: 150
+
+exclude:
+  - 'app/views/admin/**/*.haml'

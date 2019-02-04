@@ -13,11 +13,11 @@ class UpdateTotalPricesService
   private
 
   def update_order_item_total_price
-    @order_item.update(total_price: @order_item.quantity * @order_item.book.price)
+    @order_item.update(total_price: @order_item.quantity * @order_item.book_price)
   end
 
   def update_order_subtotal_price
-    @order.update(subtotal_price: @order.order_items.includes(:book).map(&:total_price).sum)
+    @order.update(subtotal_price: @order.order_items.sum(&:total_price))
   end
 
   def update_order_total_price
@@ -25,6 +25,6 @@ class UpdateTotalPricesService
   end
 
   def price_with_coupon
-    @order.subtotal_price - @order.coupon.discount
+    @order.subtotal_price - @order.coupon_discount
   end
 end

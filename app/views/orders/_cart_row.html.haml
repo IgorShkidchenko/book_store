@@ -1,0 +1,18 @@
+%tr{ class: order_item.id.to_s }
+  %td
+    .general-img-wrap-table
+      = link_to category_book_path(order_item.book.category_id, order_item.book) do
+        = order_item.book.decorate.main_book_cover
+  %td
+    %p.title.in-gold-500
+      = order_item.book_title
+  %td
+    %span.font-16.in-gold-500
+      = t('price', price: order_item.book_price)
+  = render 'form', order_item: order_item
+  %td
+    %span.font-16.in-gold-500{ class: order_item.id.to_s }
+      = t('price', price: order_item.total_price)
+  %td
+    = button_to order_item_path(order_item), remote: true, method: :delete, class: 'close general-cart-close' do
+      %span{ 'aria-hidden': 'true' } &times;

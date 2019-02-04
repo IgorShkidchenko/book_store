@@ -8,17 +8,17 @@ class Filter
   }.freeze
 
   def initialize(params, books)
-    @params = params
+    @filter = params[:filter]
     @books = books
   end
 
   def call
-    @books.order(choose_filter).includes(:authors)
+    @books.order(chosen_filter).includes(:authors)
   end
 
   private
 
-  def choose_filter
-    @params[:filter] if VALID_FILTERS.value? @params[:filter]
+  def chosen_filter
+    @filter if VALID_FILTERS.value?(@filter)
   end
 end

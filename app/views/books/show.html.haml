@@ -29,7 +29,7 @@
           %span#dots ...
           %span#more
             = book.the_rest_of_description
-          %button.btn.btn-link.in-gold-500.ml-10#myBtn{ onclick: 'readMore()' }
+          %button.btn.btn-link.in-gold-500.ml-10#read-more-btn{ onclick: 'readMore()' }
             = t('book.page.read_more')
       .general-info-wrap.divider-lg
         .clearfix
@@ -42,7 +42,7 @@
           %p.pull-left
             = t('book.page.dimensions')
           %p.lead.small.pull-right
-            = t('book.dimensions', width: book.width, height: book.height, depth: book.depth,)
+            = book.dimensions
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left

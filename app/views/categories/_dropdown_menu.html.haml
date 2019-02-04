@@ -1,9 +1,0 @@
-%a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-  = t('catalog.dropdown.newest')
-  %i.fa.fa-angle-down.dropdown-icon.pull-right
-%ul.dropdown-menu
-  - Filter::VALID_FILTERS.keys.each do |filter|
-    %li
-      = link_to t("catalog.dropdown.#{filter.to_s}"), categories_path(category_id: category, filter: Filter::VALID_FILTERS[filter], page: params[:page])
-  %li
-    = link_to t('catalog.dropdown.popular'), '#'

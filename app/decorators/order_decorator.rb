@@ -4,6 +4,11 @@ class OrderDecorator < Draper::Decorator
   delegate_all
 
   def coupon_discount
-    order.coupon ? I18n.t('price', price: order.coupon.discount) : NO_DISCOUNT_QUANTITY
+    coupon = order.coupon
+    coupon ? I18n.t('price', price: coupon.discount) : NO_DISCOUNT_QUANTITY
+  end
+
+  def cart_count
+    order.order_items.sum(&:quantity)
   end
 end

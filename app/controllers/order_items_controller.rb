@@ -1,5 +1,5 @@
 class OrderItemsController < ApplicationController
-  ADD_QUANTITY = 'add'.freeze
+  ADD = 'add'.freeze
 
   before_action :set_order
   before_action :set_order_item, only: %i[update destroy]
@@ -13,8 +13,7 @@ class OrderItemsController < ApplicationController
   end
 
   def update
-    params[:order_item][:command] == ADD_QUANTITY ? @order_item.quantity += 1 : @order_item.quantity -= 1
-    @order_item.save!
+    params[:order_item][:command] == ADD ? @order_item.increment!(:quantity) : @order_item.decrement!(:quantity)
     UpdateTotalPricesService.new(order_item: @order_item, order: @order).call
   end
 

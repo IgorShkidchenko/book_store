@@ -1,3 +1,19 @@
-%span.shop-icon
-  %span.shop-quantity
-    = current_order.order_items.map(&:quantity).sum
+.navbar-header
+  %button.navbar-toggle.pull-left{ type: 'button', 'data-toggle': 'collapse', 'data-target': '#navbar' }
+    %span.sr-only
+    %span.icon-bar
+    %span.icon-bar
+    %span.icon-bar
+  = link_to t('layout.header.bookstore'), root_path, class: 'navbar-brand'
+  - if order.id
+    = link_to order_path(order), class: 'shop-link pull-right visible-xs' do
+      .cart_link
+        %span.shop-icon
+          %span.shop-quantity
+            = order.cart_count
+- if order.id
+  = link_to order_path(order), class: 'shop-link pull-right hidden-xs' do
+    .cart_link
+      %span.shop-icon
+        %span.shop-quantity
+          = order.cart_count

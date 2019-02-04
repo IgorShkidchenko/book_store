@@ -65,7 +65,6 @@ en:
       published: Year of publication
       dimensions: Dimensions
       materials: Materials
-    dimensions: "H: %{width} x W: %{height} x D: %{depth}"
     short_description: "%{description}..."
     cover_alt: "%{title}"
     cover_default: Default book cover

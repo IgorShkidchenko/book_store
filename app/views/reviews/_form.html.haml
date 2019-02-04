@@ -5,12 +5,12 @@
     = t('review.score')
   .row
     .col-md-8
-      = simple_form_for(Review.new, url: reviews_path, html: { class: 'mb-40' }, |
-        defaults: { input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' }, |
+      = simple_form_for(Review.new, url: reviews_path, html: { class: 'mb-40' },
+        defaults: { input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' },
         label_html: { class: 'control-label input-label in-grey-600' } }) do |f|
         .mb-15.rating
           = f.collection_radio_buttons :rating, [[5], [4], [3], [2], [1]], :first, :last, item_wrapper_tag: false, boolean_style: :inline do |button|
-            = button.radio_button + button.label {"#{:rating.to_s}_#{button.to_s}"}
+            = button.radio_button + button.label { :rating.to_s + '_' + button.to_s }
         %br
         %br
         = f.input :title, input_html: { id: 'title' }, label: t('review.title')

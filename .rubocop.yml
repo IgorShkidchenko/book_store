@@ -29,6 +29,10 @@ Style/ClassAndModuleChildren:
   Exclude:
     - 'app/controllers/users/**/*'
 
+Metrics/AbcSize:
+  Exclude:
+    - 'app/controllers/coupons_controller.rb'
+
 RSpec/MessageChain:
   Enabled: false
 

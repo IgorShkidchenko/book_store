@@ -1,11 +1,11 @@
 %main.container.general-main-wrap
   = render 'devise/shared/title', title: t('devise_pages.sign_up')
-  = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'general-form' }, |
-    defaults: { input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group mb-30' }, |
+  = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'general-form' },
+    defaults: { input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group mb-30' },
     label_html: { class: 'control-label input-label' } }) do |f|
     = render 'devise/shared/form_part', f: f, forgot: nil
-    = f.input :password_confirmation, |
-      label: t('devise_pages.password.edit.confirm'), placeholder: t('devise_pages.password.edit.confirm'), autocomplete: 'off'
+    = f.input :password_confirmation,
+    label: t('devise_pages.password.edit.confirm'), placeholder: t('devise_pages.password.edit.confirm'), autocomplete: 'off'
     .text-center
       = f.button :submit, t('devise_pages.sign_up'), class: 'btn-default mb-20'
   .text-center

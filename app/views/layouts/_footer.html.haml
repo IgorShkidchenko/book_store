@@ -6,7 +6,7 @@
           %li
             = link_to t('layout.link.home'), root_path, class: 'nav-link'
           %li
-            = link_to t('layout.link.shop'), categories_path, class: 'nav-link'
+            = link_to t('layout.link.shop'), books_path, class: 'nav-link'
           - if user_signed_in?
             %li
               = link_to t('layout.link.orders'), '#', class: 'nav-link'
@@ -19,14 +19,14 @@
           = t('layout.footer.number')
         %ul.list-inline.general-align
           %li
-            = link_to "https://www.facebook.com", class: 'nav-link' do
-              %i.fa.fa-facebook{'aria-hidden': "true"}
+            = link_to 'https://www.facebook.com', class: 'nav-link' do
+              %i.fa.fa-facebook{ 'aria-hidden': 'true' }
           %li
-            = link_to "https://twitter.com", class: 'nav-link' do
-              %i.fa.fa-twitter{'aria-hidden': "true"}
+            = link_to 'https://twitter.com', class: 'nav-link' do
+              %i.fa.fa-twitter{ 'aria-hidden': 'true' }
           %li
-            = link_to "https://plus.google.com/discover", class: 'nav-link' do
-              %i.fa.fa-google-plus{'aria-hidden': "true"}
+            = link_to 'https://plus.google.com/discover', class: 'nav-link' do
+              %i.fa.fa-google-plus{ 'aria-hidden': 'true' }
           %li
-            = link_to "https://www.instagram.com", class: 'nav-link' do
-              %i.fa.fa-instagram{'aria-hidden': "true"}
+            = link_to 'https://www.instagram.com', class: 'nav-link' do
+              %i.fa.fa-instagram{ 'aria-hidden': 'true' }

@@ -1,9 +1,0 @@
-%td{ class: "#{order_item.id}" }
-  .input-group
-    = link_to order_item_path(order_item, order_item: { command: nil }), remote: true, |
-    method: :put, class: "input-link #{'disable_minus' if order_item.quantity == 1}" do
-      %i.fa.fa-minus.line-heaght-40
-    %input.form-control.quantity-input{ type: "text", value: "#{order_item.quantity}", readonly: true , min: '1' }
-    = link_to order_item_path(order_item, order_item: { command: OrderItemsController::ADD_QUANTITY }), |
-    remote: true, method: :put, class: 'input-link' do
-      %i.fa.fa-plus.line-heaght-40

@@ -6,11 +6,16 @@ Rails.application.routes.draw do
                                     registrations: 'users/registrations' }
 
   get '/users', to: redirect('/users/sign_up')
-  root 'home#index'
-  resources :books, only: :show
-  resources :categories, only: :index
+
+  root 'pages#home'
+
+  resources :books, only: :index
+  resources :categories, only: :show do
+    resources :books, only: [:index, :show]
+  end
+
   resources :reviews, only: :create
-  resource :cart, only: :show
   resources :coupons, only: :update
+  resources :orders, only: :show
   resources :order_items, only: [:create, :update, :destroy]
 end

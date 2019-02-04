@@ -1,3 +1,3 @@
-module CategoriesHelper
+module BooksHelper
   include Pagy::Frontend
 end

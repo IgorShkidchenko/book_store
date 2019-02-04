@@ -75,5 +75,6 @@ config.action_mailer.default_url_options = { host: 'localhost:3000' }
     Bullet.enable = true
     Bullet.rails_logger = true
     Bullet.add_footer = true
+    Bullet.add_whitelist type: :unused_eager_loading, class_name: "Category", association: :books
   end
 end
