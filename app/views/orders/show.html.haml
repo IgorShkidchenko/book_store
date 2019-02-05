@@ -7,26 +7,16 @@
       = render partial: 'orders/mobile_cart_row', collection: order_items, as: :order_item
     .hidden-xs
       %table.table.table-hover
-        %tr.no-hover
-          %th.col-pic.pl-0
-            %span.in-grey-600
-              = t('cart.page.book.product')
-          %th.col-title
-          %th.col-price
-            %span.in-grey-600
-              = t('cart.page.book.price')
-          %th.col-quantity
-            %span.in-grey-600
-              = t('cart.page.book.quantity')
-          %th.col-total
-            %span.in-grey-600
-              = t('cart.page.book.subtotal')
-          %th.col-close
+        = render 'orders/item_titles_row'
         = render partial: 'orders/cart_row', collection: order_items, as: :order_item
     .general-order-wrap
       .row
         = render 'coupons/form', order: @order
-        = render 'order_summary', order: @order
+        .col-sm-8
+          .res-mr-200.text-center.general-text-right
+            = render 'order_summary', order: @order, right: true
+            %button.btn.btn-default.mb-20.visible-xs-inline-block
+              = t('cart.page.cheackout')
     %button.btn.btn-default.mb-20.hidden-xs.center-block
       = t('cart.page.cheackout')
   - else

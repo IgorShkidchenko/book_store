@@ -9,7 +9,7 @@
   %td
     %span.font-16.in-gold-500
       = t('price', price: order_item.book_price)
-  = render 'form', order_item: order_item
+  = render 'orders/form', order_item: order_item
   %td
     %span.font-16.in-gold-500{ class: order_item.id.to_s }
       = t('price', price: order_item.total_price)

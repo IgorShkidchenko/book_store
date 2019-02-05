@@ -1,4 +1,4 @@
 $('.cart_part').html('<%= j render 'layouts/header/cart', order: @order.decorate %>');
 $('td.<%= @order_item.id %>').replaceWith('<%= j render 'orders/form' , order_item: @order_item.decorate %>');
 $('span.<%= @order_item.id %>').html('<%= t('price', price: @order_item.total_price) %>');
-$('div.<%= @order.id %>').replaceWith('<%= j render 'orders/order_summary', order: @order %>');
+$('div.<%= @order.id %>').replaceWith('<%= j render 'orders/order_summary', order: @order, right: true %>');

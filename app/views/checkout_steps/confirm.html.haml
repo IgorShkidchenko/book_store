@@ -1,0 +1,94 @@
+- provide(:title, t('checkout.confirm'))
+%main.container.general-main-wrap
+  %h1.general-title-margin
+    = t('checkout.title')
+  %ul.steps.list-inline
+    %li.step.done
+      %span.step-number
+        %i.fa.fa-check.step-icon
+      %span.step-text.hidden-xs
+        = t('checkout.address')
+    %li.step-divider
+    %li.step.done
+      %span.step-number
+        %i.fa.fa-check.step-icon
+      %span.step-text.hidden-xs
+        = t('checkout.delivery')
+    %li.step-divider
+    %li.step.done
+      %span.step-number
+        %i.fa.fa-check.step-icon
+      %span.step-text.hidden-xs
+        = t('checkout.payment')
+    %li.step-divider
+    %li.step.active
+      %span.step-number
+        = t('checkout.steps_numbers.fourth')
+      %span.step-text.hidden-xs
+        = t('checkout.confirm')
+    %li.step-divider
+    %li.step
+      %span.step-number
+        = t('checkout.steps_numbers.fifth')
+      %span.step-text.hidden-xs
+        = t('checkout.complete')
+  .row.mb-20
+    .col-sm-3
+      %h3.general-subtitle
+        = t('checkout.address_page.billing')
+      %p.general-address
+        John Doe
+        %span.general-edit
+          = t('checkout.address_page.edit_link')
+        %br
+        44 Fifth Ave v231
+        %br
+        New York NY 1001
+        %br
+        United States
+        %br
+        Phone +16507599755
+    .col-sm-3
+      %h3.general-subtitle
+        = t('checkout.address_page.shipping')
+      %p.general-address
+        John Doe
+        %span.general-edit
+          = t('checkout.address_page.edit_link')
+        %br
+        44 Fifth Ave v231
+        %br
+        New York NY 1001
+        %br
+        United States
+        %br
+        Phone +16507599755
+    .col-sm-3
+      %h3.general-subtitle
+        = t('checkout.confirm_page.shipments')
+      %p.general-address
+        Delivery Next Day!
+        %span.general-edit
+          = t('checkout.address_page.edit_link')
+        %br
+        By train
+    .col-sm-3
+      %h3.general-subtitle
+        = t('checkout.confirm_page.payment_info')
+      %p.general-address
+        ** ** ** 8756
+        %span.general-edit
+          = t('checkout.address_page.edit_link')
+        %br
+        12/2018
+  .visible-xs
+    = render partial: 'orders/mobile_cart_row', collection: current_order.order_items.map(&:decorate), as: :order_item
+  .hidden-xs.divider-lg.pt-20
+    %table.table.table-hover
+      = render 'orders/item_titles_row'
+      = render partial: 'orders/cart_row', collection: current_order.order_items.map(&:decorate), as: :order_item
+  .text-center.general-text-right
+    = render 'orders/order_summary', order: current_order, right: true
+  .text-center
+    %button.btn.btn-default.mb-20
+      = t('checkout.buttons.place_order')

@@ -17,7 +17,7 @@ RSpec.describe Book, type: :model do
   end
 
   context 'with assosiations' do
-    it { is_expected.to belong_to(:category) }
+    it { is_expected.to belong_to(:category).counter_cache(true) }
     it { is_expected.to have_many(:book_authors).dependent(:destroy) }
     it { is_expected.to have_many(:authors).through(:book_authors) }
     it { is_expected.to have_many(:order_items).dependent(:destroy) }

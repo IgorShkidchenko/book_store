@@ -1,28 +1,25 @@
-.col-sm-8{ class: order.id.to_s }
-  .res-mr-200.text-center.general-text-right
-    %p.in-gold-500.font-18
-      = t('cart.page.order_summary')
-    %table.general-summary-table.general-summary-table-right.general-text-right
-      %tr
-        %td
-          %p.font-16
-            = t('cart.page.subtotal')
-        %td
-          %p.font-16
-            = t('price', price: order.subtotal_price)
-      %tr
-        %td
-          %p.font-16
-            = t('cart.page.coupon')
-        %td
-          %p.font-16
-            = order.decorate.coupon_discount
-      %tr
-        %td
-          %strong.font-17
-            = t('cart.page.order_total')
-        %td
-          %strong.font-17
-            = t('price', price: order.total_price)
-    %button.btn.btn-default.mb-20.visible-xs-inline-block
-      = t('cart.page.cheackout')
+%div{ class: order.id.to_s }
+  %p.in-gold-500.font-18
+    = t('cart.page.order_summary')
+  %table.general-summary-table{ class: "#{'general-summary-table-right general-text-right' if right}" }
+    %tr
+      %td
+        %p.font-16
+          = t('cart.page.subtotal')
+      %td
+        %p.font-16
+          = t('price', price: order.subtotal_price)
+    %tr
+      %td
+        %p.font-16
+          = t('cart.page.coupon')
+      %td
+        %p.font-16
+          = order.decorate.coupon_discount
+    %tr
+      %td
+        %strong.font-17
+          = t('cart.page.order_total')
+      %td
+        %strong.font-17
+          = t('price', price: order.total_price)

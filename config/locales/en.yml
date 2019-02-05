@@ -99,3 +99,52 @@ en:
     error_used: Coupon was already used
     error_havent: Coupon does not exist
     was_used: Coupon was used successfully
+  checkout:
+    title: Cheackout
+    address: Address
+    delivery: Delivery
+    payment: Payment
+    confirm: Confirm
+    complete: Complete
+    buttons:
+      next: Save and Continue
+      place_order: Place Order
+      back_to_store: Back to Store
+    steps_numbers:
+      first: '1'
+      second: '2'
+      third: '3'
+      fourth: '4'
+      fifth: '5'
+    address_page:
+      billing: Billing Address
+      shipping: Shipping Address
+      required_fields: all fields are required
+      use_billing_button: Use Billing Adress
+      form:
+        first_name: First Name
+        last_name: Last Name
+        city: City
+        zip: Zip
+        country: Country
+        country_select: Select a country
+        phone: Phone
+        phone_example: Example +355 66 123 4567
+    delivery_page:
+      method: Method
+      days: Days
+      price: Price
+    payment_page:
+      credit_card: Credit Card
+      form:
+        number: Card Number
+        name: Name on Card
+        expire: MM / YY
+        cvv: CVV
+    confirm_page:
+      edit_link: edit
+      shipments: Shipments
+      payment_info: Payment Information
+    complete_page:
+      thank_you: Thank You for your Order!
+      msg_was_sent: "An order confirmation has been has been sent to %{email}"

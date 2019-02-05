@@ -1,0 +1,115 @@
+- provide(:title, t('checkout.address'))
+%main.container
+  %h1.general-title-margin
+    = t('checkout.title')
+  %ul.steps.list-inline
+    %li.step.active
+      %span.step-number
+        = t('checkout.steps_numbers.first')
+      %span.step-text.hidden-xs
+        = t('checkout.address')
+    %li.step-divider
+    %li.step
+      %span.step-number
+        = t('checkout.steps_numbers.second')
+      %span.step-text.hidden-xs
+        = t('checkout.delivery')
+    %li.step-divider
+    %li.step
+      %span.step-number
+        = t('checkout.steps_numbers.third')
+      %span.step-text.hidden-xs
+        = t('checkout.payment')
+    %li.step-divider
+    %li.step
+      %span.step-number
+        = t('checkout.steps_numbers.fourth')
+      %span.step-text.hidden-xs
+        = t('checkout.confirm')
+    %li.step-divider
+    %li.step
+      %span.step-number
+        = t('checkout.steps_numbers.fifth')
+      %span.step-text.hidden-xs
+        = t('checkout.complete')
+  %form.res-mb-100
+    .hidden-xs.hidden-sm
+      .row
+        .col-md-5
+          %h3.general-subtitle
+            = t('checkout.address_page.billing')
+          %p.general-info-text
+            = t('checkout.address_page.required_fields')
+        .col-md-5.col-md-offset-1
+          %h3.general-subtitle
+            = t('checkout.address_page.shipping')
+    .row
+      .col-md-5.mb-40
+        .visible-xs.visible-sm
+          %h3.general-subtitle
+            = t('checkout.address_page.billing')
+          %p.general-info-text
+            = t('checkout.address_page.required_fields')
+        .form-group.has-error
+          %label.control-label.input-label{ for: 'firstName' } First Name
+          %input.form-control{ name:'fname', type: 'text', placeholder: 'First Name' }
+          %span.help-block Please enter your first name
+        .form-group
+          %label.control-label.input-label{ for: 'lastName' } Last Name
+          %input.form-control{ name:'lname', type: 'text', placeholder: 'Last Name' }
+        .form-group
+          %label.control-label.input-label{ for: 'address' } Address
+          %input.form-control{ name: 'address', type: 'text', placeholder: 'Address' }
+        .form-group
+          %label.control-label.input-label{ for: 'city' } City
+          %input.form-control{ name: 'city', type: 'text', placeholder: 'City' }
+        .form-group
+          %label.control-label.input-label{ for: 'zip' } Zip
+          %input.form-control{ name: 'zip', type: 'text', placeholder: 'Zip' }
+        .form-group
+          %label.control-label.input-label{ for: 'сountry' } Country
+          %input.form-control{ name: 'country', type: 'text', placeholder: 'Select a country' }
+        .form-group
+          %label.control-label.input-label{ for: 'phone' } Phone
+          %input.form-control{ name: 'phone', type: 'tel', placeholder: 'Example +355 66 123 4567' }
+      .col-md-5.col-md-offset-1.mb-60
+        .visible-xs.visible-sm
+          %h3.general-subtitle
+            = t('checkout.address_page.shipping')
+        .form-group.has-error
+          %label.control-label.input-label{ for: 'firstName' } First Name
+          %input.form-control{ name:'fname', type: 'text', placeholder: 'First Name' }
+          %span.help-block Please enter your first name
+        .form-group
+          %label.control-label.input-label{ for: 'lastName' } Last Name
+          %input.form-control{ name:'lname', type: 'text', placeholder: 'Last Name' }
+        .form-group
+          %label.control-label.input-label{ for: 'address' } Address
+          %input.form-control{ name: 'address', type: 'text', placeholder: 'Address' }
+        .form-group
+          %label.control-label.input-label{ for: 'city' } City
+          %input.form-control{ name: 'city', type: 'text', placeholder: 'City' }
+        .form-group
+          %label.control-label.input-label{ for: 'zip' } Zip
+          %input.form-control{ name: 'zip', type: 'text', placeholder: 'Zip' }
+        .form-group
+          %label.control-label.input-label{ for: 'сountry' } Country
+          %select.form-control{ name: 'country', placeholder: 'Select a country' }
+            %option London
+            %option London
+            %option London
+        .form-group
+          %label.control-label.input-label{ for: 'phone' } Phone
+          %input.form-control{ name: 'phone', type: 'tel', placeholder: 'Example +355 66 123 4567' }
+        .form-group.checkbox
+          %label.checkbox-label
+            %input.checkbox-input{ type: 'checkbox', hidden: 'true' }
+            %span.checkbox-icon
+              %i.fa.fa-check
+            %span.checkbox-text
+              = t('checkout.address_page.use_billing_button')
+    .general-text-align.mb-60
+      = render 'orders/order_summary', order: current_order, right: false
+    .text-center
+      %button.btn.btn-default.mb-80
+        = t('checkout.buttons.next')

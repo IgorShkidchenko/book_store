@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_30_141144) do
+ActiveRecord::Schema.define(version: 2019_02_05_143753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,21 @@ ActiveRecord::Schema.define(version: 2019_01_30_141144) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  end
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "address"
+    t.string "city"
+    t.integer "zip"
+    t.string "country"
+    t.integer "phone"
+    t.string "addressable_type"
+    t.bigint "addressable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 
   create_table "admin_users", force: :cascade do |t|
@@ -100,6 +115,28 @@ ActiveRecord::Schema.define(version: 2019_01_30_141144) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_covers_on_book_id"
+  end
+
+  create_table "credit_cards", force: :cascade do |t|
+    t.string "number"
+    t.string "name"
+    t.string "expire_date"
+    t.string "cvv"
+    t.bigint "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_credit_cards_on_order_id"
+  end
+
+  create_table "delivery_methods", force: :cascade do |t|
+    t.string "name"
+    t.integer "min_days"
+    t.integer "max_days"
+    t.float "cost"
+    t.bigint "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_delivery_methods_on_order_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -178,6 +215,8 @@ ActiveRecord::Schema.define(version: 2019_01_30_141144) do
   add_foreign_key "books", "categories"
   add_foreign_key "coupons", "orders"
   add_foreign_key "covers", "books"
+  add_foreign_key "credit_cards", "orders"
+  add_foreign_key "delivery_methods", "orders"
   add_foreign_key "order_items", "books"
   add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "order_statuses"

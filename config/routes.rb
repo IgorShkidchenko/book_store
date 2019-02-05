@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   resources :coupons, only: :update
   resources :orders, only: :show
   resources :order_items, only: [:create, :update, :destroy]
+  resources :checkout_steps, only: [:show, :update]
 end

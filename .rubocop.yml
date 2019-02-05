@@ -29,6 +29,10 @@ Style/ClassAndModuleChildren:
   Exclude:
     - 'app/controllers/users/**/*'
 
+Style/UnneededInterpolation:
+  Exclude:
+    - 'app/views/orders/**/*'
+
 Metrics/AbcSize:
   Exclude:
     - 'app/controllers/coupons_controller.rb'

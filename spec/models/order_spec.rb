@@ -16,5 +16,8 @@ RSpec.describe Order, type: :model do
     it { is_expected.to have_many(:order_items).dependent(:destroy) }
     it { is_expected.to have_many(:books).through(:order_items) }
     it { is_expected.to have_one(:coupon) }
+    it { is_expected.to have_many(:addresses).dependent(:destroy) }
+    it { is_expected.to have_one(:delivery_method).dependent(:destroy) }
+    it { is_expected.to have_one(:credit_card).dependent(:destroy) }
   end
 end

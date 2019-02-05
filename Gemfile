@@ -29,12 +29,15 @@ gem 'sass-rails', '~> 5.0'
 gem 'simple_form'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
+gem 'wicked'
 
 group :development, :test do
+  gem 'pry-byebug'
   gem 'rspec-rails', '~> 3.8'
 end
 
 group :development do
+  gem 'awesome_rails_console'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'brakeman'
@@ -43,7 +46,6 @@ group :development do
   gem 'fasterer', require: false
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'lol_dba'
-  gem 'pry'
   gem 'rails_best_practices'
   gem 'reek'
   gem 'rubocop', require: false

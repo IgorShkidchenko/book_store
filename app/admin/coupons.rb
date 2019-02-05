@@ -12,7 +12,7 @@ ActiveAdmin.register Coupon do
   config.per_page = [10, 50, 100]
 
   action_item :generate_coupon, only: :index do
-    link_to t('admin.coupon.generate'), admin_coupons_path(coupon: { key: SecureRandom.base64 }), method: :post
+    link_to t('admin.coupon.generate'), admin_coupons_path(coupon: { key: SecureRandom.base64(12) }), method: :post
   end
 
   index do

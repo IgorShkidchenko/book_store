@@ -1,0 +1,60 @@
+- provide(:title, t('checkout.payment'))
+%main.container.mb-res-50
+  %h1.general-title-margin
+    = t('checkout.title')
+  %ul.steps.list-inline
+    %li.step.done
+      %span.step-number
+        %i.fa.fa-check.step-icon
+      %span.step-text.hidden-xs
+        = t('checkout.address')
+    %li.step-divider
+    %li.step.done
+      %span.step-number
+        %i.fa.fa-check.step-icon
+      %span.step-text.hidden-xs
+        = t('checkout.delivery')
+    %li.step-divider
+    %li.step.active
+      %span.step-number
+        = t('checkout.steps_numbers.third')
+      %span.step-text.hidden-xs
+        = t('checkout.payment')
+    %li.step-divider
+    %li.step
+      %span.step-number
+        = t('checkout.steps_numbers.fourth')
+      %span.step-text.hidden-xs
+        = t('checkout.confirm')
+    %li.step-divider
+    %li.step
+      %span.step-number
+        = t('checkout.steps_numbers.fifth')
+      %span.step-text.hidden-xs
+        = t('checkout.complete')
+  %h3.general-subtitle
+    = t('checkout.payment_page.credit_card')
+  %form.max-600.mb-80
+    .form-group.has-error
+      %label.control-label.input-label{ for: 'cardNumber' } Card Number
+      %input.form-control{ type: 'number', name: 'cardnumber', placeholder: 'Card Number' }
+      %span.help-block Please enter a valid credit card number
+    .row
+      .col-sm-6
+        .form-group
+          %label.control-label.input-label{ for: 'cardName' } Name on Card
+          %input.form-control{ type: 'text', name: 'ccname', placeholder: 'Name on Card' }
+      .col-sm-3
+        .form-group
+          %label.control-label.input-label{ for: 'firstName' } MM / YY
+          %input.form-control{ name: 'exp-date', type: 'text', placeholder: 'MM / YY' }
+      .col-sm-3
+        .form-group.relative
+          %label.control-label.input-label{ for: 'firstName' } CVV
+          %input.form-control{ name: 'cvc', type: 'number', placeholder: 'CVV' }
+          %i.fa.fa-question-circle.general-form-help
+  .general-text-align
+    = render 'orders/order_summary', order: current_order, right: false
+  .text-center
+    %button.btn.btn-default.mb-80
+      = t('checkout.buttons.next')

@@ -1,0 +1,33 @@
+%main.container
+  .row
+    .col-md-5.mb-40
+      .text-center
+        %h3.general-subtitle Returning Customer
+        %a.general-login-icon{href: "#"}
+          %i.fa.fa-facebook-official
+        %p.general-login-text or
+      %form.general-form
+        .mb-40
+          %p.mb-15 Log In with Password
+          .form-group.mb-30
+            %label.control-label.input-label{for: "email"} Enter Email
+            %input#email.form-control{name:"email", type: "email", placeholder: "Enter Email"}
+          .form-group.mb-30
+            %label.control-label.input-label{for: "password"} Password
+            %input#password.form-control{name:"password", type: "password", placeholder: "Password"}
+            %a.help-block.in-gold-500{href: "#"} Forgot password?
+        %button.btn.disabled.mb-20 Log In with Password
+    .col-md-5.col-md-offset-1.mb-60
+      .text-center
+        %h3.general-subtitle New Customer
+        %a.general-login-icon{href: "#"}
+          %i.fa.fa-facebook-official
+        %p.general-login-text or
+      %form.general-form
+        .mb-40
+          %p.mb-5 Quik Register
+          %p.general-info-text.font-12.mb-20 You’ll be able to create password later
+          .form-group.mb-30
+            %label.control-label.input-label{for: "email"} Enter Email
+            %input#email.form-control{name:"email", type: "email", placeholder: "Enter Email"}
+        %button.btn.disabled.mb-20 Continue to Checkout
