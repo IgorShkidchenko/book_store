@@ -10,8 +10,8 @@ RSpec.describe BooksController, type: :controller do
     end
 
     it { expect(assigns(:book)).to eq book }
-    it { is_expected.to render_template('show') }
-    it { is_expected.to respond_with(200) }
+    it { is_expected.to render_template 'show' }
+    it { is_expected.to respond_with 200 }
     it { is_expected.to route(:get, '/categories/1/books/2').to(action: :show, category_id: 1, id: 2) }
   end
 
@@ -27,8 +27,8 @@ RSpec.describe BooksController, type: :controller do
 
     it { expect(assigns(:category)).to eq category }
     it { expect(assigns(:chosen_books)).to include book }
-    it { is_expected.to render_template('index') }
-    it { is_expected.to respond_with(200) }
+    it { is_expected.to render_template 'index' }
+    it { is_expected.to respond_with 200 }
     it { is_expected.to route(:get, '/categories/1/books').to(action: :index, category_id: 1) }
   end
 end

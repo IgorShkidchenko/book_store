@@ -75,7 +75,7 @@ RSpec.describe Admin::CategoriesController, type: :controller do
       before { get :edit, params: { id: category.id } }
 
       it { is_expected.to respond_with 200 }
-      it { expect(assigns(:category)).to eq(category) }
+      it { expect(assigns(:category)).to eq category }
       it { expect(page).to have_field('category_name', with: category.name) }
     end
 
@@ -110,7 +110,7 @@ RSpec.describe Admin::CategoriesController, type: :controller do
 
       it { is_expected.to respond_with 200 }
       it { expect(assigns(:category)).to eq category }
-      it { expect(page).to have_content(category.name) }
+      it { expect(page).to have_content category.name }
     end
 
     describe 'when destroy' do

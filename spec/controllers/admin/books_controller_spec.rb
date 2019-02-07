@@ -89,7 +89,7 @@ RSpec.describe Admin::BooksController, type: :controller do
       before { get :edit, params: { id: book.slug } }
 
       it { is_expected.to respond_with 200 }
-      it { expect(assigns(:book)).to eq(book) }
+      it { expect(assigns(:book)).to eq book }
       it { expect(page).to have_field 'book_title', with: book.title }
       it { expect(page).to have_field 'book_description', with: book.description }
       it { expect(page).to have_field 'book_price', with: book.price }

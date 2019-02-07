@@ -11,6 +11,7 @@ directories:
 
 exclude_paths:
   - db/
+  - spec/
   - 'app/controllers/coupons_controller.rb'
   - 'app/controllers/application_controller.rb'
   - 'app/controllers/books_controller.rb'

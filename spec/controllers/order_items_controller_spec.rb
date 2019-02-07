@@ -15,8 +15,8 @@ RSpec.describe OrderItemsController, type: :controller do
 
     before { post :create, xhr: true, params: { order_item: valid_params } }
 
-    it { is_expected.to respond_with(200) }
-    it { is_expected.to render_template('create') }
+    it { is_expected.to respond_with 200 }
+    it { is_expected.to render_template 'create' }
   end
 
   describe 'when update' do
@@ -25,8 +25,8 @@ RSpec.describe OrderItemsController, type: :controller do
       put :update, xhr: true, params: { id: order_item.id, order_item: { command: nil } }
     end
 
-    it { is_expected.to respond_with(200) }
-    it { is_expected.to render_template('update') }
+    it { is_expected.to respond_with 200 }
+    it { is_expected.to render_template 'update' }
   end
 
   describe 'when destroy' do
@@ -35,8 +35,8 @@ RSpec.describe OrderItemsController, type: :controller do
       delete :destroy, xhr: true, params: { id: order_item.id }
     end
 
-    it { is_expected.to respond_with(200) }
-    it { is_expected.to render_template('destroy') }
+    it { is_expected.to respond_with 200 }
+    it { is_expected.to render_template 'destroy' }
   end
 
   describe 'when routes' do

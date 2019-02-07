@@ -7,7 +7,5 @@ class CheckoutStepsController < ApplicationController
     render_wizard
   end
 
-  def update
-
-  end
+  def update; end
 end

@@ -68,7 +68,7 @@ RSpec.describe Admin::AdminUsersController, type: :controller do
       end
 
       it { is_expected.to respond_with 200 }
-      it { expect(assigns(:admin_user)).to be_a_new(AdminUser) }
+      it { expect(assigns(:admin_user)).to be_a_new AdminUser }
       it 'when AdminUser does not insrased', skip_before: true do
         expect do
           post :create, params: { admin_user: invalid_attributes }

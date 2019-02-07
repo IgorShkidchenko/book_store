@@ -63,7 +63,7 @@ RSpec.describe Admin::AuthorsController, type: :controller do
       end
 
       it { is_expected.to respond_with 200 }
-      it { expect(assigns(:author)).to be_a_new(Author) }
+      it { expect(assigns(:author)).to be_a_new Author }
       it 'when Author does not incrase', skip_before: true do
         expect do
           post :create, params: { author: invalid_attributes }
@@ -75,7 +75,7 @@ RSpec.describe Admin::AuthorsController, type: :controller do
       before { get :edit, params: { id: author.id } }
 
       it { is_expected.to respond_with 200 }
-      it { expect(assigns(:author)).to eq(author) }
+      it { expect(assigns(:author)).to eq author }
       it { expect(page).to have_field('author_name', with: author.name) }
     end
 

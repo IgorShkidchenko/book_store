@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   resources :books, only: :index
-  resources :categories, only: :show do
+  scope '/categories/:category_id', as: 'category' do
     resources :books, only: [:index, :show]
   end
 

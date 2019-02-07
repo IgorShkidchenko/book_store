@@ -28,7 +28,7 @@ ActiveAdmin.register Review do
   end
 
   action_item :show_on_site, only: :show do
-    link_to t('admin.actions.show_on_site'), category_books_path(book.category_id, book) if review.status != Review::STATUSES[:unprocessed]
+    link_to t('admin.actions.show_on_site'), category_books_path(book.category_id, book) if review.status == Review::STATUSES[:approved]
   end
 
   index do

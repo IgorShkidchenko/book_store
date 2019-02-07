@@ -9,8 +9,8 @@ RSpec.describe CouponsController, type: :controller do
       put :update, xhr: true, params: { id: :coupon, coupon: { key: coupon.key, order_id: order.id } }
     end
 
-    it { is_expected.to respond_with(200) }
-    it { is_expected.to render_template('update') }
+    it { is_expected.to respond_with 200 }
+    it { is_expected.to render_template 'update' }
     it { expect(order.coupon).to eq coupon }
   end
 
@@ -22,8 +22,8 @@ RSpec.describe CouponsController, type: :controller do
         put :update, xhr: true, params: { id: :coupon, coupon: { key: not_existing_key, order_id: order.id } }
       end
 
-      it { is_expected.to respond_with(200) }
-      it { is_expected.to render_template('update') }
+      it { is_expected.to respond_with 200 }
+      it { is_expected.to render_template 'update' }
       it { expect(flash[:danger]).to eq I18n.t('coupon.error_havent') }
       it { expect(order.coupon).to eq nil }
     end
@@ -34,8 +34,8 @@ RSpec.describe CouponsController, type: :controller do
         put :update, xhr: true, params: { id: :coupon, coupon: { key: coupon.key, order_id: order.id } }
       end
 
-      it { is_expected.to respond_with(200) }
-      it { is_expected.to render_template('update') }
+      it { is_expected.to respond_with 200 }
+      it { is_expected.to render_template 'update' }
       it { expect(flash[:danger]).to eq I18n.t('coupon.error_used') }
       it { expect(order.coupon).to eq nil }
     end
