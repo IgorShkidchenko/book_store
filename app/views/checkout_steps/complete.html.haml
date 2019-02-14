@@ -36,35 +36,34 @@
     %h3.general-subtitle
       = t('checkout.complete_page.thank_you')
     %p.fw-300
-      = t('checkout.complete_page.msg_was_sent', email: 'User.email')
+      = t('checkout.complete_page.msg_was_sent', email: order.user_email)
   .row.mb-20
     .col-sm-6
       .visible-xs
         %p.general-order-number.mb-0 Order #R25314582
         %p.general-address.mb-30
-          = current_order.created_at.strftime('%B %d, %Y')
+          = order.creation_date
       %p.general-address
-        John Doe
+        = @checkout_helper.billing.full_name
         %br
-        44 Fifth Ave v231
+          = @checkout_helper.billing.address.address
         %br
-        New York NY 1001
+          = @checkout_helper.billing.city_with_zip
         %br
-        United States
+          = @checkout_helper.billing.country
         %br
-        Phone +16507599755
+          = t('checkout.address_phone', number: @checkout_helper.billing.phone)
     .col-sm-6.hidden-xs.text-right
       %p.general-order-number.mb-0 Order #R25314582
       %p.general-address.mb-30
-        = current_order.created_at.strftime('%B %d, %Y')
+        = order.creation_date
   .visible-xs
-    = render partial: 'orders/mobile_cart_row', collection: current_order.order_items.map(&:decorate), as: :order_item
+    = render partial: 'orders/mobile_cart_row', collection: @checkout_helper.order_items, as: :order_item
   .hidden-xs.divider-lg.pt-20
     %table.table.table-hover
       = render 'orders/item_titles_row'
-      = render partial: 'orders/cart_row', collection: current_order.order_items.map(&:decorate), as: :order_item
+      = render partial: 'orders/cart_row', collection: @checkout_helper.order_items, as: :order_item
   .text-center.general-text-right
-    = render 'orders/order_summary', order: current_order, right: true
+    = render 'orders/order_summary', order: order, right: true
   .text-center
-    %button.btn.btn-default.mb-20
-      = t('checkout.buttons.back_to_store')
+    = link_to t('checkout.buttons.back_to_store'), books_path, class: 'btn btn-default mb-20'

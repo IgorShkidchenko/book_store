@@ -36,7 +36,8 @@ ActiveRecord::Schema.define(version: 2019_02_05_143753) do
     t.string "city"
     t.integer "zip"
     t.string "country"
-    t.integer "phone"
+    t.string "phone"
+    t.string "kind"
     t.string "addressable_type"
     t.bigint "addressable_id"
     t.datetime "created_at", null: false
@@ -121,7 +122,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_143753) do
     t.string "number"
     t.string "name"
     t.string "expire_date"
-    t.string "cvv"
+    t.integer "cvv"
     t.bigint "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -133,10 +134,8 @@ ActiveRecord::Schema.define(version: 2019_02_05_143753) do
     t.integer "min_days"
     t.integer "max_days"
     t.float "cost"
-    t.bigint "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["order_id"], name: "index_delivery_methods_on_order_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -172,8 +171,10 @@ ActiveRecord::Schema.define(version: 2019_02_05_143753) do
     t.decimal "subtotal_price", precision: 12, scale: 3
     t.bigint "order_status_id", default: 1
     t.bigint "user_id"
+    t.bigint "delivery_method_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["delivery_method_id"], name: "index_orders_on_delivery_method_id"
     t.index ["order_status_id"], name: "index_orders_on_order_status_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -216,9 +217,9 @@ ActiveRecord::Schema.define(version: 2019_02_05_143753) do
   add_foreign_key "coupons", "orders"
   add_foreign_key "covers", "books"
   add_foreign_key "credit_cards", "orders"
-  add_foreign_key "delivery_methods", "orders"
   add_foreign_key "order_items", "books"
   add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "delivery_methods"
   add_foreign_key "orders", "order_statuses"
   add_foreign_key "orders", "users"
   add_foreign_key "reviews", "books"

@@ -1,6 +1,6 @@
 SimpleForm.setup do |config|
   config.wrappers :default, class: :input,
-    hint_class: :field_with_hint, error_class: :field_with_errors, valid_class: :field_without_errors do |b|
+    hint_class: :field_with_hint, error_class: 'has-error', valid_class: :field_without_errors do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
@@ -10,7 +10,7 @@ SimpleForm.setup do |config|
     b.optional :readonly
     b.use :label_input
     b.use :hint,  wrap_with: { tag: :span, class: :hint }
-    b.use :error, wrap_with: { tag: :span, class: :error }
+    b.use :full_error, wrap_with: { tag: :span, class: 'help-block' }
   end
 
   config.default_wrapper = :default

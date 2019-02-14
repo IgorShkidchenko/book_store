@@ -8,7 +8,8 @@ RSpec.describe Address, type: :model do
     it { is_expected.to have_db_column(:city).of_type(:string) }
     it { is_expected.to have_db_column(:zip).of_type(:integer) }
     it { is_expected.to have_db_column(:country).of_type(:string) }
-    it { is_expected.to have_db_column(:phone).of_type(:integer) }
+    it { is_expected.to have_db_column(:phone).of_type(:string) }
+    it { is_expected.to have_db_column(:kind).of_type(:string) }
     it { is_expected.to have_db_column(:addressable_type).of_type(:string) }
     it { is_expected.to have_db_column(:addressable_id).of_type(:integer) }
     it { is_expected.to have_db_column(:created_at).of_type(:datetime).with_options(null: false) }

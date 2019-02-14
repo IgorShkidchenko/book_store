@@ -3,6 +3,7 @@ class Book < ApplicationRecord
   friendly_id :title, use: :slugged
 
   belongs_to :category, counter_cache: true
+
   has_many :book_authors, dependent: :destroy
   has_many :authors, through: :book_authors
   has_many :reviews, dependent: :destroy

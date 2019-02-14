@@ -34,27 +34,21 @@
         = t('checkout.complete')
   %h3.general-subtitle
     = t('checkout.payment_page.credit_card')
-  %form.max-600.mb-80
-    .form-group.has-error
-      %label.control-label.input-label{ for: 'cardNumber' } Card Number
-      %input.form-control{ type: 'number', name: 'cardnumber', placeholder: 'Card Number' }
-      %span.help-block Please enter a valid credit card number
+  = simple_form_for(@checkout_helper.credit_card, url: wizard_path, method: :put, html: { class: 'max-600 mb-80' },
+  defaults: { wrapper_html: { class: 'form-group' }, input_html: { class: 'form-control' },
+  label_html: { class: 'control-label input-label' } }) do |f|
+    = f.input :number, label: t('checkout.payment_page.form.number'), placeholder: t('checkout.payment_page.form.number')
     .row
       .col-sm-6
-        .form-group
-          %label.control-label.input-label{ for: 'cardName' } Name on Card
-          %input.form-control{ type: 'text', name: 'ccname', placeholder: 'Name on Card' }
+        = f.input :name, label: t('checkout.payment_page.form.name'), placeholder: t('checkout.payment_page.form.name')
       .col-sm-3
-        .form-group
-          %label.control-label.input-label{ for: 'firstName' } MM / YY
-          %input.form-control{ name: 'exp-date', type: 'text', placeholder: 'MM / YY' }
+        = f.input :expire_date, label: t('checkout.payment_page.form.expire'), placeholder: t('checkout.payment_page.form.expire')
       .col-sm-3
-        .form-group.relative
-          %label.control-label.input-label{ for: 'firstName' } CVV
-          %input.form-control{ name: 'cvc', type: 'number', placeholder: 'CVV' }
-          %i.fa.fa-question-circle.general-form-help
-  .general-text-align
-    = render 'orders/order_summary', order: current_order, right: false
-  .text-center
-    %button.btn.btn-default.mb-80
-      = t('checkout.buttons.next')
+        = f.input :cvv, as: :password, label: t('checkout.payment_page.form.cvv'), placeholder: t('checkout.payment_page.form.cvv')
+        %i.fa.fa-question-circle.general-form-help
+        %p.cvv_hint
+          = t('checkout.payment_page.form.cvv_hint')
+    .general-text-align
+      = render 'orders/order_summary', order: order, right: false
+    .text-center
+      = f.button :submit, t('checkout.buttons.next'), class: 'btn-default mb-80'

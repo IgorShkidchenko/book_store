@@ -18,35 +18,14 @@ RSpec.describe Review, type: :model do
   end
 
   describe 'when validates' do
-    context 'with out format' do
-      before { allow_any_instance_of(ReviewFormatValidator).to receive(:validate_each) }
+    let(:invalid_input) { '@' }
+    let(:message) { I18n.t('review.validation_format_msg') }
 
-      it { is_expected.to validate_presence_of(:title) }
-      it { is_expected.to validate_presence_of(:body) }
-      it { is_expected.to validate_length_of(:title).is_at_most(80) }
-      it { is_expected.to validate_length_of(:body).is_at_most(500) }
-    end
-
-    context 'when format valid' do
-      let(:regular_exp) { "az!#$%&'*+-/=?^_`{|}~." }
-
-      before do
-        allow_any_instance_of(Review).to receive(:title).and_return(regular_exp)
-        allow_any_instance_of(Review).to receive(:body).and_return(regular_exp)
-      end
-
-      it { is_expected.to allow_value(regular_exp).for(:title).with_message(I18n.t('review.validation_format_msg')) }
-      it { is_expected.to allow_value(regular_exp).for(:body).with_message(I18n.t('review.validation_format_msg')) }
-    end
-
-    context 'when format invalid' do
-      before do
-        allow_any_instance_of(Review).to receive(:title).and_return('@')
-        allow_any_instance_of(Review).to receive(:body).and_return('@')
-      end
-
-      it { is_expected.not_to allow_value('@').for(:title).with_message(I18n.t('review.validation_format_msg')) }
-      it { is_expected.not_to allow_value('@').for(:body).with_message(I18n.t('review.validation_format_msg')) }
-    end
+    it { is_expected.to validate_presence_of(:title) }
+    it { is_expected.to validate_presence_of(:body) }
+    it { is_expected.to validate_length_of(:title).is_at_most(80) }
+    it { is_expected.to validate_length_of(:body).is_at_most(500) }
+    it { is_expected.not_to allow_value(invalid_input).for(:title).with_message(message) }
+    it { is_expected.not_to allow_value(invalid_input).for(:body).with_message(message) }
   end
 end

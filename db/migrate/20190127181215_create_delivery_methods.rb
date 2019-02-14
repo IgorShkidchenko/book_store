@@ -6,7 +6,6 @@ class CreateDeliveryMethods < ActiveRecord::Migration[5.2]
       t.integer :max_days
       t.float :cost
 
-      t.references :order, foreign_key: true
       t.timestamps
     end
   end

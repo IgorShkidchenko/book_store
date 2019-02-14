@@ -3,10 +3,21 @@ detectors:
     enabled: false
   InstanceVariableAssumption:
     enabled: false
+  UtilityFunction:
+    enabled: false
+  MissingSafeMethod:
+    enabled: false
 
 directories:
-  'app/validators/':
-    UtilityFunction:
+  'app/services/':
+    TooManyInstanceVariables:
+      enabled: false
+    NilCheck:
+      enabled: false
+    DuplicateMethodCall:
+      enabled: false
+  'app/controllers/':
+    TooManyStatements:
       enabled: false
 
 exclude_paths:

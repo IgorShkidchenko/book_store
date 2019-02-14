@@ -32,7 +32,9 @@
         = t('checkout.steps_numbers.fifth')
       %span.step-text.hidden-xs
         = t('checkout.complete')
-  %form.res-mb-100
+  = simple_form_for(:checkout, url: wizard_path, method: :put, html: { class: 'res-mb-100' },
+  defaults: { input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' },
+  label_html: { class: 'control-label input-label' } }) do |f|
     .hidden-xs.hidden-sm
       .row
         .col-md-5
@@ -50,66 +52,23 @@
             = t('checkout.address_page.billing')
           %p.general-info-text
             = t('checkout.address_page.required_fields')
-        .form-group.has-error
-          %label.control-label.input-label{ for: 'firstName' } First Name
-          %input.form-control{ name:'fname', type: 'text', placeholder: 'First Name' }
-          %span.help-block Please enter your first name
-        .form-group
-          %label.control-label.input-label{ for: 'lastName' } Last Name
-          %input.form-control{ name:'lname', type: 'text', placeholder: 'Last Name' }
-        .form-group
-          %label.control-label.input-label{ for: 'address' } Address
-          %input.form-control{ name: 'address', type: 'text', placeholder: 'Address' }
-        .form-group
-          %label.control-label.input-label{ for: 'city' } City
-          %input.form-control{ name: 'city', type: 'text', placeholder: 'City' }
-        .form-group
-          %label.control-label.input-label{ for: 'zip' } Zip
-          %input.form-control{ name: 'zip', type: 'text', placeholder: 'Zip' }
-        .form-group
-          %label.control-label.input-label{ for: 'сountry' } Country
-          %input.form-control{ name: 'country', type: 'text', placeholder: 'Select a country' }
-        .form-group
-          %label.control-label.input-label{ for: 'phone' } Phone
-          %input.form-control{ name: 'phone', type: 'tel', placeholder: 'Example +355 66 123 4567' }
+        = f.simple_fields_for :billing, @checkput_helper.billing do |billing_address|
+          = render 'addresses/form', f: billing_address, current_type: Address::TYPES[:billing]
       .col-md-5.col-md-offset-1.mb-60
         .visible-xs.visible-sm
           %h3.general-subtitle
             = t('checkout.address_page.shipping')
-        .form-group.has-error
-          %label.control-label.input-label{ for: 'firstName' } First Name
-          %input.form-control{ name:'fname', type: 'text', placeholder: 'First Name' }
-          %span.help-block Please enter your first name
-        .form-group
-          %label.control-label.input-label{ for: 'lastName' } Last Name
-          %input.form-control{ name:'lname', type: 'text', placeholder: 'Last Name' }
-        .form-group
-          %label.control-label.input-label{ for: 'address' } Address
-          %input.form-control{ name: 'address', type: 'text', placeholder: 'Address' }
-        .form-group
-          %label.control-label.input-label{ for: 'city' } City
-          %input.form-control{ name: 'city', type: 'text', placeholder: 'City' }
-        .form-group
-          %label.control-label.input-label{ for: 'zip' } Zip
-          %input.form-control{ name: 'zip', type: 'text', placeholder: 'Zip' }
-        .form-group
-          %label.control-label.input-label{ for: 'сountry' } Country
-          %select.form-control{ name: 'country', placeholder: 'Select a country' }
-            %option London
-            %option London
-            %option London
-        .form-group
-          %label.control-label.input-label{ for: 'phone' } Phone
-          %input.form-control{ name: 'phone', type: 'tel', placeholder: 'Example +355 66 123 4567' }
-        .form-group.checkbox
+        .shipping_form
+          = f.simple_fields_for :shipping, @checkput_helper.shipping do |shipping_address|
+            = render 'addresses/form', f: shipping_address, current_type: Address::TYPES[:shipping]
+        .checkbox.form_group
           %label.checkbox-label
-            %input.checkbox-input{ type: 'checkbox', hidden: 'true' }
+            = check_box_tag 'checkout[clone_address]', true, false, class: 'checkbox-input checkbox-class', hidden: true
             %span.checkbox-icon
               %i.fa.fa-check
             %span.checkbox-text
               = t('checkout.address_page.use_billing_button')
     .general-text-align.mb-60
-      = render 'orders/order_summary', order: current_order, right: false
+      = render 'orders/order_summary', order: order, right: false
     .text-center
-      %button.btn.btn-default.mb-80
-        = t('checkout.buttons.next')
+      = f.button :submit, t('checkout.buttons.next'), class: 'btn-default mb-80'

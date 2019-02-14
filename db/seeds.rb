@@ -39,3 +39,7 @@ end
 OrderStatus::STATUSES.each_pair { |_key, status_name| OrderStatus.create(name: status_name) }
 
 10.times { Coupon.create(key: SecureRandom.base64(12)) }
+
+DeliveryMethod.create(name: 'Express Delivery', cost: 30, min_days: 1, max_days: 2)
+DeliveryMethod.create(name: 'Standart Delivery', cost: 10, min_days: 3, max_days: 7)
+DeliveryMethod.create(name: 'Pick up from our shop', cost: 0, min_days: 0, max_days: 0)

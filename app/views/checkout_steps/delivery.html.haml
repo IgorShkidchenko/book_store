@@ -34,93 +34,66 @@
         = t('checkout.complete')
   %h3.general-subtitle
     = t('checkout.delivery')
-  .visible-xs
-    .general-cart-item.divider-lg-bottom
-      %table.table
-        %tr
-          %td.col-half
-            %span.in-grey-600
-              = t('checkout.delivery_page.method')
-          %td.col-half
-            .form-group.radio.mt-0.mb-0
-              %label.radio-label
-                %input.radio-input{ type: 'radio', hidden: 'true' }
-                %span.radio-icon
-                %span.radio-text Delivery Next Day!
-        %tr
-          %td
-            %span.in-grey-600
-              = t('checkout.delivery_page.days')
-          %td
-            %span.font-16.fw-300 3 to 7 days
-        %tr
-          %td
-            %span.in-grey-600
-              = t('checkout.delivery_page.price')
-          %td
-            %span.font-16.in-gold-500 €5.00
-    .general-cart-item.divider-lg-bottom.mb-30
-      %table.table
-        %tr
-          %td.col-half
-            %span.in-grey-600
-              = t('checkout.delivery_page.method')
-          %td.col-half
-            .form-group.radio.mt-0.mb-0
-              %label.radio-label
-                %input.radio-input{ type: 'radio', hidden: 'true' }
-                %span.radio-icon
-                %span.radio-text Delivery Next Day!
-        %tr
-          %td
-            %span.in-grey-600
-              = t('checkout.delivery_page.days')
-          %td
-            %span.font-16.fw-300 3 to 7 days
-        %tr
-          %td
-            %span.in-grey-600
-              = t('checkout.delivery_page.price')
-          %td
-            %span.font-16.in-gold-500 €5.00
-  .hidden-xs.mb-res-50
-    %table.table.table-hover
-      %thead
-        %tr
-          %th.col-method
-            %span.in-grey-600.ml-40
-              = t('checkout.delivery_page.method')
-          %th
-            %span.in-grey-600
-              = t('checkout.delivery_page.days')
-          %th
-            %span.in-grey-600
-              = t('checkout.delivery_page.price')
-      %tbody
-        %tr
-          %td
-            .form-group.radio.mt-0.mb-0
-              %label.radio-label
-                %input.radio-input{ type: 'radio', hidden: 'true' }
-                %span.radio-icon
-                %span.radio-text Delivery Next Day!
-          %td
-            %span 3 to 7 days
-          %td
-            %span.font-16.in-gold-500 €28.50
-        %tr
-          %td
-            .form-group.radio.mt-0.mb-0
-              %label.radio-label
-                %input.radio-input{ type: 'radio', hidden: 'true' }
-                %span.radio-icon
-                %span.radio-text Delivery Next Day!
-          %td
-            %span 3 to 7 days
-          %td
-            %span.font-16.in-gold-500 €28.50
-  .general-text-align
-    = render 'orders/order_summary', order: current_order, right: false
-  .text-center
-    %button.btn.btn-default.mb-20
-      = t('checkout.buttons.next')
+  = simple_form_for(:checkout, url: wizard_path, method: :put) do |f|
+    .visible-xs
+      .general-cart-item.divider-lg-bottom
+        %table.table
+        - @checkout_helper.delivery_methods.each do |method|
+          %tr
+            %td.col-half
+              %span.in-grey-600
+                = t('checkout.delivery_page.method')
+            %td.col-half
+              .form-group.radio.mt-0.mb-0
+                %label.radio-label
+                  = radio_button_tag('checkout[delivery_method_id]', method.id, (method == order.delivery_method), hidden: true, class: 'radio-input')
+                  %span.radio-icon
+                  %span.radio-text
+                    = method.name
+          %tr
+            %td
+              %span.in-grey-600
+                = t('checkout.delivery_page.days')
+            %td
+              %span.font-16.fw-300
+                = method.decorate.delivery_days
+          %tr
+            %td
+              %span.in-grey-600
+                = t('checkout.delivery_page.price')
+            %td
+              %span.font-16.in-gold-500
+                = t('price', price: method.cost)
+    .hidden-xs.mb-res-50
+      %table.table.table-hover
+        %thead
+          %tr
+            %th.col-method
+              %span.in-grey-600.ml-40
+                = t('checkout.delivery_page.method')
+            %th
+              %span.in-grey-600
+                = t('checkout.delivery_page.days')
+            %th
+              %span.in-grey-600
+                = t('checkout.delivery_page.price')
+        %tbody
+        - @checkout_helper.delivery_methods.each do |method|
+          %tr
+            %td
+              .form-group.radio.mt-0.mb-0
+                %label.radio-label
+                  = radio_button_tag('checkout[delivery_method_id]', method.id, (method == order.delivery_method), hidden: true, class: 'radio-input')
+                  %span.radio-icon
+                  %span.radio-text
+                    = method.name
+            %td
+              %span
+                = method.decorate.delivery_days
+            %td
+              %span.font-16.in-gold-500
+                = t('price', price: method.cost)
+    .general-text-align
+      = render 'orders/order_summary', order: order, right: false
+    .text-center
+      = f.button :submit, t('checkout.buttons.next'), class: 'btn-default mb-80'

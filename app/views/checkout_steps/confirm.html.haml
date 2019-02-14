@@ -37,58 +37,51 @@
       %h3.general-subtitle
         = t('checkout.address_page.billing')
       %p.general-address
-        John Doe
-        %span.general-edit
-          = t('checkout.address_page.edit_link')
+        = @checkout_helper.billing.full_name
+        = link_to t('checkout.address_page.edit_link'), wizard_path(:address), class: 'general-edit'
         %br
-        44 Fifth Ave v231
+          = @checkout_helper.billing.address.address
         %br
-        New York NY 1001
+          = @checkout_helper.billing.city_with_zip
         %br
-        United States
+          = @checkout_helper.billing.country
         %br
-        Phone +16507599755
+          = t('checkout.address_phone', number: @checkout_helper.billing.phone)
     .col-sm-3
       %h3.general-subtitle
         = t('checkout.address_page.shipping')
       %p.general-address
-        John Doe
-        %span.general-edit
-          = t('checkout.address_page.edit_link')
+        = @checkout_helper.shipping.full_name
+        = link_to t('checkout.address_page.edit_link'), wizard_path(:address), class: 'general-edit'
         %br
-        44 Fifth Ave v231
+          = @checkout_helper.shipping.address.address
         %br
-        New York NY 1001
+          = @checkout_helper.shipping.city_with_zip
         %br
-        United States
+          = @checkout_helper.shipping.country
         %br
-        Phone +16507599755
+          = t('checkout.address_phone', number: @checkout_helper.shipping.phone)
     .col-sm-3
       %h3.general-subtitle
         = t('checkout.confirm_page.shipments')
       %p.general-address
-        Delivery Next Day!
-        %span.general-edit
-          = t('checkout.address_page.edit_link')
-        %br
-        By train
+        = order.delivery_method_name
+        = link_to t('checkout.address_page.edit_link'), wizard_path(:delivery), class: 'general-edit'
     .col-sm-3
       %h3.general-subtitle
         = t('checkout.confirm_page.payment_info')
       %p.general-address
-        ** ** ** 8756
-        %span.general-edit
-          = t('checkout.address_page.edit_link')
+        = @checkout_helper.credit_card.masked_number
+        = link_to t('checkout.address_page.edit_link'), wizard_path(:payment), class: 'general-edit'
         %br
-        12/2018
+        = @checkout_helper.credit_card.expire_date
   .visible-xs
-    = render partial: 'orders/mobile_cart_row', collection: current_order.order_items.map(&:decorate), as: :order_item
+    = render partial: 'orders/mobile_cart_row', collection: @checkout_helper.order_items, as: :order_item
   .hidden-xs.divider-lg.pt-20
     %table.table.table-hover
       = render 'orders/item_titles_row'
-      = render partial: 'orders/cart_row', collection: current_order.order_items.map(&:decorate), as: :order_item
+      = render partial: 'orders/cart_row', collection: @checkout_helper.order_items, as: :order_item
   .text-center.general-text-right
-    = render 'orders/order_summary', order: current_order, right: true
+    = render 'orders/order_summary', order: order, right: true
   .text-center
-    %button.btn.btn-default.mb-20
-      = t('checkout.buttons.place_order')
+    = link_to t('checkout.buttons.place_order'), next_wizard_path, class: 'btn btn-default mb-20'

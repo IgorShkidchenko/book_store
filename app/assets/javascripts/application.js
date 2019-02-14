@@ -15,4 +15,9 @@
 //= require bootstrap-sprockets
 //= require activestorage
 //= require turbolinks
-//= require_tree .
+//= require cable
+//= require active_admin
+//= require book
+//= require cart
+//= require checkout
+//= require flash

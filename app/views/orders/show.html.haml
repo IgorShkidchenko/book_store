@@ -14,11 +14,11 @@
         = render 'coupons/form', order: @order
         .col-sm-8
           .res-mr-200.text-center.general-text-right
-            = render 'order_summary', order: @order, right: true
+            = render 'order_summary', order: @order.decorate, right: true
             %button.btn.btn-default.mb-20.visible-xs-inline-block
               = t('cart.page.cheackout')
-    %button.btn.btn-default.mb-20.hidden-xs.center-block
-      = t('cart.page.cheackout')
+    .text-center
+      = link_to t('cart.page.cheackout'), checkout_step_path(:address), class: 'btn btn-default mb-20 hidden-xs'
   - else
     .container
       .jumbotron.text-center.mb-0

@@ -85,6 +85,7 @@ en:
       order_summary: Order Summary
       subtotal: 'Subtotal:'
       coupon: 'Coupon:'
+      delivery: 'Delivery:'
       order_total: 'Order Total:'
       cheackout: Checkout
       empty_cart: Your cart is empty, fill it and come back
@@ -125,6 +126,7 @@ en:
         first_name: First Name
         last_name: Last Name
         city: City
+        address: Address
         zip: Zip
         country: Country
         country_select: Select a country
@@ -134,6 +136,8 @@ en:
       method: Method
       days: Days
       price: Price
+      zero_days: Order would be ready after payment will be confirmed
+      method_days: "%{min} to %{max} days"
     payment_page:
       credit_card: Credit Card
       form:
@@ -141,6 +145,7 @@ en:
         name: Name on Card
         expire: MM / YY
         cvv: CVV
+        cvv_hint: Card Verification Value
     confirm_page:
       edit_link: edit
       shipments: Shipments
@@ -148,3 +153,10 @@ en:
     complete_page:
       thank_you: Thank You for your Order!
       msg_was_sent: "An order confirmation has been has been sent to %{email}"
+    errors:
+      only_letters: can contain only letters
+      only_numbers: can contain only numbers
+      phone: should start with + and contain only numbers
+      address: can contain only letters. numbers and this symbols ' ` " -
+      expire_date: should be in MM/YY format and contain only numbers
+    address_phone: "Phone %{number}"

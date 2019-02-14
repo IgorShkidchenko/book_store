@@ -14,6 +14,9 @@ NamedSubject:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
+Style/ClassAndModuleChildren:
+  Enabled: false
+
 Metrics/BlockLength:
   ExcludedMethods: ['describe', 'ActiveAdmin.register']
 
@@ -24,10 +27,6 @@ AllCops:
     - 'db/migrate/**/*'
     - 'db/schema.rb'
     - 'app/uploaders/**/*'
-
-Style/ClassAndModuleChildren:
-  Exclude:
-    - 'app/controllers/users/**/*'
 
 Style/UnneededInterpolation:
   Exclude:

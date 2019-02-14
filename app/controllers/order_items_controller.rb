@@ -7,7 +7,7 @@ class OrderItemsController < ApplicationController
   respond_to :js
 
   def create
-    @order_item = NewOrderItemService.new(order_item_params, @order).call
+    @order_item = NewOrderItemService.new(params: order_item_params, order: @order).call
     UpdateTotalPricesService.new(order_item: @order_item, order: @order).call
     session[:order_id] ||= @order.id
   end

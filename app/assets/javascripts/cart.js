@@ -14,12 +14,6 @@ $( document ).on('turbolinks:load', function(){
           $('#quantity').val(quantity - 1);
         }
     });
-
-    $(function() {
-        setInterval(function(){
-            $('.alert').slideUp(200);
-        }, 10000);
-    });
 });
 
 function cart_shake() {

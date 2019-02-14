@@ -15,7 +15,15 @@
           = t('cart.page.coupon')
       %td
         %p.font-16
-          = order.decorate.coupon_discount
+          = order.coupon_discount
+    - if order.delivery_method
+      %tr
+        %td
+          %p.font-16
+            = t('cart.page.delivery')
+        %td
+          %p.font-16
+            = t('price', price: order.delivery_method_cost)
     %tr
       %td
         %strong.font-17

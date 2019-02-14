@@ -1,5 +1,5 @@
 class NewOrderItemService
-  def initialize(params, order)
+  def initialize(params:, order:)
     @params = params
     @order = order
     @order_item = @order.order_items.find_by(book_id: @params[:book_id])
