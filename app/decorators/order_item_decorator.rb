@@ -15,4 +15,8 @@ class OrderItemDecorator < Draper::Decorator
       h.content_tag(:i, '', class: 'fa fa-plus line-heaght-40')
     end
   end
+
+  def total_price
+    I18n.t('price', price: quantity * book_price)
+  end
 end

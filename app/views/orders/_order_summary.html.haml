@@ -8,7 +8,7 @@
           = t('cart.page.subtotal')
       %td
         %p.font-16
-          = t('price', price: order.subtotal_price)
+          = order.subtotal_price
     %tr
       %td
         %p.font-16
@@ -30,4 +30,4 @@
           = t('cart.page.order_total')
       %td
         %strong.font-17
-          = t('price', price: order.total_price)
+          = order.total_price

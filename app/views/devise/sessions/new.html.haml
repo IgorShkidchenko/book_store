@@ -1,5 +1,9 @@
+- provide(:title, t('devise_pages.log_in'))
 %main.container.general-main-wrap
-  = render 'devise/shared/title', title: t('devise_pages.log_in')
+  .text-center
+    %h3.general-login-title
+      = t('devise_pages.log_in')
+    = render 'devise/shared/facebook'
   = simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'general-form' },
     defaults: { input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group mb-30' },
     label_html: { class: 'control-label input-label' } }) do |f|

@@ -1,9 +1,6 @@
 FactoryBot.define do
   factory :order do
-    subtotal_price { Faker::Number.decimal(3) }
-    total_price { Faker::Number.decimal(3) }
-
-    order_status
+    number { SecureRandom.hex(4) }
 
     trait :with_order_items do
       after(:create) do |order|

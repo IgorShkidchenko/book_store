@@ -7,19 +7,16 @@ class OrderItemsController < ApplicationController
   respond_to :js
 
   def create
-    @order_item = NewOrderItemService.new(params: order_item_params, order: @order).call
-    UpdateTotalPricesService.new(order_item: @order_item, order: @order).call
+    NewOrderItemService.new(params: order_item_params, order: @order).call
     session[:order_id] ||= @order.id
   end
 
   def update
     params[:order_item][:command] == ADD ? @order_item.increment!(:quantity) : @order_item.decrement!(:quantity)
-    UpdateTotalPricesService.new(order_item: @order_item, order: @order).call
   end
 
   def destroy
     @order_item.destroy!
-    UpdateTotalPricesService.new(order: @order).call
   end
 
   private

@@ -1,0 +1,14 @@
+.col-sm-3
+  %h3.general-subtitle
+    = t("checkout.address_page.#{address == @checkout_helper.billing ? 'billing' : 'shipping'}")
+  %p.general-address
+    = address.full_name
+    = link_to t('checkout.address_page.edit_link'), wizard_path(:address), class: 'general-edit'
+    %br
+      = address.street
+    %br
+      = address.city_with_zip
+    %br
+      = address.country
+    %br
+      = t('checkout.address_phone', number: address.phone)

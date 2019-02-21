@@ -5,7 +5,7 @@
     = t('review.score')
   .row
     .col-md-8
-      = simple_form_for(Review.new, url: reviews_path, html: { class: 'mb-40' },
+      = simple_form_for(Review.new, url: reviews_path, validate: true, html: { class: 'mb-40' },
         defaults: { input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' },
         label_html: { class: 'control-label input-label in-grey-600' } }) do |f|
         .mb-15.rating

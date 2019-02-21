@@ -1,0 +1,36 @@
+- provide(:title, t('checkout.quick_sing_in.title'))
+%main.container
+  .row
+    .col-md-5.mb-40
+      .text-center
+        %h3.general-subtitle
+          = t('checkout.quick_sign_in.returning_customer')
+        = render 'devise/shared/facebook'
+      = simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'general-form' },
+      defaults: { input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group mb-30' },
+      label_html: { class: 'control-label input-label' } }) do |f|
+        .mb-40
+          %p.mb-15
+            = t('checkout.quick_sing_in.login_with_pass')
+        = render 'devise/shared/form_part', f: f, forgot: true
+        = f.hidden_field :checkout_authenticate, value: true
+        = f.button :submit, t('checkout.quick_sing_in.login_with_pass'), class: 'btn-default mb-20'
+    .col-md-5.col-md-offset-1.mb-60
+      .text-center
+        %h3.general-subtitle
+          = t('checkout.quick_sing_in.new_customer')
+        = render 'devise/shared/facebook'
+      = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'general-form' },
+      defaults: { input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group mb-30' },
+      label_html: { class: 'control-label input-label' } }) do |f|
+        .mb-40
+          %p.mb-5
+            = t('checkout.quick_sing_in.title')
+          %p.general-info-text.font-12.mb-20
+            = t('checkout.quick_sing_in.password_later')
+          = f.input :email, label: t('devise_pages.password.new.enter_email'), autofocus: true, placeholder: t('devise_pages.password.new.enter_email')
+          - temporary_password = SecureRandom.base64(12)
+          = f.hidden_field :password, value: temporary_password
+          = f.hidden_field :password_confirmation, value: temporary_password
+          = f.hidden_field :checkout_authenticate, value: true
+        = f.button :submit, t('checkout.quick_sing_in.button_quick'), class: 'btn-default mb-20'

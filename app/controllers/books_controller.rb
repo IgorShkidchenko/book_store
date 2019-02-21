@@ -13,7 +13,7 @@ class BooksController < ApplicationController
   end
 
   def show
-    set_cookies
+    set_cookies_for_back_url
     @book = Book.friendly.find(params[:id])
   end
 

@@ -1,39 +1,41 @@
-class Checkout::UpdaterService
-  attr_reader :billing, :shipping, :credit_card, :order, :valid
-
-  def initialize(order)
-    @order = order
+class Checkout::UpdaterService < Checkout::BaseService
+  def initialize(order:, step:, params:)
+    super(order: order, step: step)
+    @params = params
   end
 
-  def insert_addresses_to_order(params)
-    @billing = AddressForm.new(params[:billing])
-    @shipping = chosen_shipping_address(params)
-    @billing.save(@order)
-    @shipping.save(@order)
-    @valid = addresses_created_successfully?
-  end
-
-  def insert_delivery_method_to_order(params)
-    @order.delivery_method_id = params[:delivery_method_id]
-    @valid = @order.save
-    UpdateTotalPricesService.new(order: @order).call if @valid
-  end
-
-  def insert_credit_card_to_order(params)
-    @credit_card = CreditCardForm.new(params)
-    @valid = @credit_card.save(@order)
+  def call
+    case @step
+    when :address then update_addresses
+    when :delivery then update_delivery_method
+    when :payment then update_credit_card
+    end
+    operation_valid?
   end
 
   private
 
-  def chosen_shipping_address(params)
-    return AddressForm.new(params[:shipping]) unless params[:clone_address]
-
-    params[:billing][:kind] = Address::TYPES[:shipping]
-    AddressForm.new(params[:billing])
+  def update_addresses
+    @billing = address_form(Address::TYPES[:billing])
+    @shipping = address_form(Address::TYPES[:shipping])
+    if operation_valid?(addresses_valid?)
+      order_address(Address::TYPES[:billing]).update(@params[:billing])
+      @params[:clone_address] ? clone_address : order_address(Address::TYPES[:shipping]).update(@params[:shipping])
+    end
   end
 
-  def addresses_created_successfully?
-    @billing.valid? && @shipping.valid?
+  def update_delivery_method
+    @order.delivery_method_id = @params[:delivery_method_id]
+    operation_valid?(@order.save)
+  end
+
+  def update_credit_card
+    @credit_card = credit_card_form
+    @order.credit_card.update(@params[:credit_card]) if operation_valid?(@credit_card.valid?)
+  end
+
+  def clone_address
+    @params[:billing][:kind] = Address::TYPES[:shipping]
+    order_address(Address::TYPES[:shipping]).update(@params[:billing])
   end
 end

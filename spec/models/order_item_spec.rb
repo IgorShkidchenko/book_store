@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe OrderItem, type: :model do
   context 'with database columns' do
     it { is_expected.to have_db_column(:quantity).of_type(:integer) }
-    it { is_expected.to have_db_column(:total_price).of_type(:decimal) }
     it { is_expected.to have_db_column(:created_at).of_type(:datetime).with_options(null: false) }
     it { is_expected.to have_db_column(:updated_at).of_type(:datetime).with_options(null: false) }
     it { is_expected.to have_db_index(:order_id) }

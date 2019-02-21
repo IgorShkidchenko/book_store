@@ -17,6 +17,7 @@ class NewOrderItemService
   end
 
   def create_new_item
-    @order.order_items.new(@params)
+    @order.save
+    @order.order_items.create(@params)
   end
 end

@@ -36,7 +36,6 @@ Array.new(4) { Category.create(name: Faker::Book.genre) }.each do |category|
   end
 end
 
-OrderStatus::STATUSES.each_pair { |_key, status_name| OrderStatus.create(name: status_name) }
 
 10.times { Coupon.create(key: SecureRandom.base64(12)) }
 

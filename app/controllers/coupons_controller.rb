@@ -18,6 +18,5 @@ class CouponsController < ApplicationController
 
   def set_coupon_to_order
     @coupon.update(order_id: @order.id)
-    UpdateTotalPricesService.new(order: @order).call
   end
 end

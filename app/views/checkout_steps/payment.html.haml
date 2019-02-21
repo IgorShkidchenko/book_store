@@ -34,7 +34,7 @@
         = t('checkout.complete')
   %h3.general-subtitle
     = t('checkout.payment_page.credit_card')
-  = simple_form_for(@checkout_helper.credit_card, url: wizard_path, method: :put, html: { class: 'max-600 mb-80' },
+  = simple_form_for(@checkout_helper.credit_card, as: 'order[credit_card]', url: wizard_path, validate: true, method: :put, html: { class: 'max-600 mb-80' },
   defaults: { wrapper_html: { class: 'form-group' }, input_html: { class: 'form-control' },
   label_html: { class: 'control-label input-label' } }) do |f|
     = f.input :number, label: t('checkout.payment_page.form.number'), placeholder: t('checkout.payment_page.form.number')

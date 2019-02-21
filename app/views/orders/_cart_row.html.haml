@@ -12,7 +12,7 @@
   = render 'orders/form', order_item: order_item
   %td
     %span.font-16.in-gold-500{ class: order_item.id.to_s }
-      = t('price', price: order_item.total_price)
+      = order_item.total_price
   %td
-    = button_to order_item_path(order_item), remote: true, method: :delete, class: 'close general-cart-close' do
+    = button_to order_item_path(order_item), remote: true, method: :delete, class: "close general-cart-close #{'hidden' if @order.in_progress?}" do
       %span{ 'aria-hidden': 'true' } &times;

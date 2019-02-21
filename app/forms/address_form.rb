@@ -2,7 +2,7 @@ class AddressForm
   include ActiveModel::Model
   include Virtus.model
 
-  ONLY_LETTERS_REGEX = /^[a-zA-Z]+$/.freeze
+  ONLY_LETTERS_REGEX = /\A^[a-zA-Z]+$\z/.freeze
   ADDRESS_REGEX = /[a-zA-Z0-9'`"-]/.freeze
   PLUS_WITH_NUMBERS_PHONE_REGEX = /\+{1}[0-9]/.freeze
 
@@ -10,7 +10,7 @@ class AddressForm
   attribute :last_name, String
   attribute :country, String
   attribute :city, String
-  attribute :address, String
+  attribute :street, String
   attribute :zip, Integer
   attribute :phone, String
   attribute :kind, String
@@ -20,7 +20,7 @@ class AddressForm
             length: { maximum: 50 },
             format: { with: ONLY_LETTERS_REGEX, message: I18n.t('checkout.errors.only_letters') }
 
-  validates :address,
+  validates :street,
             presence: true,
             length: { maximum: 50 },
             format: { with: ADDRESS_REGEX, message: I18n.t('checkout.errors.address') }
@@ -46,7 +46,7 @@ class AddressForm
   private
 
   def persist!
-    @address = @order.addresses.create!(first_name: first_name, last_name: last_name, address: address,
+    @address = @order.addresses.create!(first_name: first_name, last_name: last_name, street: street,
                                         country: country, city: city, zip: zip, phone: phone, kind: kind)
   end
 end

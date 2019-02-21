@@ -18,7 +18,8 @@
             %button.btn.btn-default.mb-20.visible-xs-inline-block
               = t('cart.page.cheackout')
     .text-center
-      = link_to t('cart.page.cheackout'), checkout_step_path(:address), class: 'btn btn-default mb-20 hidden-xs'
+      = link_to t('cart.page.cheackout'), (@order.user_id ? checkout_step_path(:address) : checkout_step_path(:quick_authenticate)),
+      class: 'btn btn-default mb-20 hidden-xs'
   - else
     .container
       .jumbotron.text-center.mb-0

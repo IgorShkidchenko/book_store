@@ -17,6 +17,9 @@ Style/FrozenStringLiteralComment:
 Style/ClassAndModuleChildren:
   Enabled: false
 
+Bundler/OrderedGems:
+  Enables: false
+
 Metrics/BlockLength:
   ExcludedMethods: ['describe', 'ActiveAdmin.register']
 

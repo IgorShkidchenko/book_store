@@ -4,7 +4,7 @@ module BackUrl
   METHOD_GET = 'GET'.freeze
 
   included do
-    def set_cookies
+    def set_cookies_for_back_url
       @referer = request.referer
       return @back = cookies[:back_url] if back_url_invalid?
 

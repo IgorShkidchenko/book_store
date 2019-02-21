@@ -2,7 +2,7 @@ class CreditCardForm
   include ActiveModel::Model
   include Virtus.model
 
-  ONLY_LETTERS_AND_SPACES_REGEX = /^[a-zA-Z\s]+$/.freeze
+  ONLY_LETTERS_AND_SPACES_REGEX = %r{\A^[a-zA-Z\s]+$\z}.freeze
   EXPIRE_DATE_FORMAT_MM_YY_REGEX = %r{\A^(0[1-9]|1[0-2])\/?([0-9]{2})$\z}.freeze
 
   attr_reader :credit_card

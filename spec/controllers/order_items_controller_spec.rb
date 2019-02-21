@@ -7,7 +7,6 @@ RSpec.describe OrderItemsController, type: :controller do
   before do
     allow(Order).to receive(:find).and_return(order)
     allow(NewOrderItemService).to receive_message_chain(:new, :call)
-    allow(UpdateTotalPricesService).to receive_message_chain(:new, :call)
   end
 
   describe 'when create' do

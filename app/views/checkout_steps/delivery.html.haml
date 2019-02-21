@@ -34,7 +34,7 @@
         = t('checkout.complete')
   %h3.general-subtitle
     = t('checkout.delivery')
-  = simple_form_for(:checkout, url: wizard_path, method: :put) do |f|
+  = simple_form_for(@order, url: wizard_path, validate: true, method: :put) do |f|
     .visible-xs
       .general-cart-item.divider-lg-bottom
         %table.table
@@ -46,7 +46,7 @@
             %td.col-half
               .form-group.radio.mt-0.mb-0
                 %label.radio-label
-                  = radio_button_tag('checkout[delivery_method_id]', method.id, (method == order.delivery_method), hidden: true, class: 'radio-input')
+                  = radio_button_tag('order[delivery_method_id]', method.id, (method == order.delivery_method), hidden: true, class: 'radio-input')
                   %span.radio-icon
                   %span.radio-text
                     = method.name
@@ -83,7 +83,7 @@
             %td
               .form-group.radio.mt-0.mb-0
                 %label.radio-label
-                  = radio_button_tag('checkout[delivery_method_id]', method.id, (method == order.delivery_method), hidden: true, class: 'radio-input')
+                  = radio_button_tag('order[delivery_method_id]', method.id, (method == order.delivery_method), hidden: true, class: 'radio-input')
                   %span.radio-icon
                   %span.radio-text
                     = method.name

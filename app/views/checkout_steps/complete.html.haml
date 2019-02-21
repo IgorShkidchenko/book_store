@@ -40,13 +40,14 @@
   .row.mb-20
     .col-sm-6
       .visible-xs
-        %p.general-order-number.mb-0 Order #R25314582
+        %p.general-order-number.mb-0
+          = t('checkout.complete_page.order_number', number: order.number)
         %p.general-address.mb-30
           = order.creation_date
       %p.general-address
         = @checkout_helper.billing.full_name
         %br
-          = @checkout_helper.billing.address.address
+          = @checkout_helper.billing.street
         %br
           = @checkout_helper.billing.city_with_zip
         %br
@@ -54,7 +55,8 @@
         %br
           = t('checkout.address_phone', number: @checkout_helper.billing.phone)
     .col-sm-6.hidden-xs.text-right
-      %p.general-order-number.mb-0 Order #R25314582
+      %p.general-order-number.mb-0
+        = t('checkout.complete_page.order_number', number: order.number)
       %p.general-address.mb-30
         = order.creation_date
   .visible-xs
@@ -62,7 +64,7 @@
   .hidden-xs.divider-lg.pt-20
     %table.table.table-hover
       = render 'orders/item_titles_row'
-      = render partial: 'orders/cart_row', collection: @checkout_helper.order_items, as: :order_item
+      = render partial: 'orders/cart_row', collection: @checkout_helper.order_items, as: :order_item, locals: { checkout_complete: true }
   .text-center.general-text-right
     = render 'orders/order_summary', order: order, right: true
   .text-center

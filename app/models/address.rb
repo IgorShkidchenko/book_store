@@ -6,6 +6,6 @@ class Address < ApplicationRecord
 
   belongs_to :addressable, polymorphic: true
 
-  scope :billing, -> { find_by(kind: TYPES[:billing]) }
-  scope :shipping, -> { find_by(kind: TYPES[:shipping]) }
+  scope :billing, -> { where(kind: TYPES[:billing]) }
+  scope :shipping, -> { where(kind: TYPES[:shipping]) }
 end

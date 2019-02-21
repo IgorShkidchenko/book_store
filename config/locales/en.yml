@@ -101,6 +101,7 @@ en:
     error_havent: Coupon does not exist
     was_used: Coupon was used successfully
   checkout:
+    follow_steps: Please follow steps, you can edit all data on confirm step
     title: Cheackout
     address: Address
     delivery: Delivery
@@ -117,6 +118,14 @@ en:
       third: '3'
       fourth: '4'
       fifth: '5'
+    quick_sing_in:
+      title: Quick Register
+      or: or
+      login_with_pass: Log In with Password
+      returning_customer: Returning Customer
+      new_customer: New Customer
+      password_later: "You’ll be able to create password later"
+      button_quick: Continue to Checkout
     address_page:
       billing: Billing Address
       shipping: Shipping Address
@@ -145,7 +154,7 @@ en:
         name: Name on Card
         expire: MM / YY
         cvv: CVV
-        cvv_hint: Card Verification Value
+        cvv_hint: 3-digit security code, usually found on the back of your card. American Express cards has 4-digit code, located on the front.
     confirm_page:
       edit_link: edit
       shipments: Shipments
@@ -153,6 +162,7 @@ en:
     complete_page:
       thank_you: Thank You for your Order!
       msg_was_sent: "An order confirmation has been has been sent to %{email}"
+      order_number: "Order %{number}"
     errors:
       only_letters: can contain only letters
       only_numbers: can contain only numbers
