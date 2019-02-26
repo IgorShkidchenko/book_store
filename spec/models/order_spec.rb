@@ -1,8 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Order, type: :model do
+  let(:new_status) { 'new' }
+
   context 'with database columns' do
-    it { is_expected.to have_db_column(:aasm_state).of_type(:string).with_options(default: Order::STATUSES[:new]) }
+    it { is_expected.to have_db_column(:aasm_state).of_type(:string).with_options(default: new_status) }
     it { is_expected.to have_db_column(:number).of_type(:string) }
     it { is_expected.to have_db_column(:created_at).of_type(:datetime).with_options(null: false) }
     it { is_expected.to have_db_column(:updated_at).of_type(:datetime).with_options(null: false) }
