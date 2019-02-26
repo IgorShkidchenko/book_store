@@ -175,3 +175,20 @@ en:
       expire_date: should be in MM/YY format and contain only numbers
       invalid_expire_date: "can't be in the past"
     address_phone: "Phone %{number}"
+  user_settings:
+    settings: Settings
+    address: Address
+    privacy: Privacy
+    success: "%{kind} address was successfuly changed"
+    billing: Billing Address
+    shipping: Shipping Address
+    save: Save
+    email: Email
+    enter_email: Enter Email
+    password: Password
+    old_password: Old Password
+    new_password: New Password
+    confirm_password: Confirm Password
+    remove: Remove Account
+    please_remove: Please Remove My Account
+    checkbox: I understand that all data will be lost

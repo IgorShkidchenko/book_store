@@ -14,7 +14,6 @@ class ApplicationController < ActionController::Base
   end
 end
 
-# TODO: user edit page
 # TODO: send email to user
 # TODO: orders active admin
 # TODO: devise no password

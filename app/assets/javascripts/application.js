@@ -21,5 +21,6 @@
 //= require cart
 //= require checkout
 //= require flash
+//= require user_settings
 //= require rails.validations
 //= require rails.validations.simple_form.bootstrap4

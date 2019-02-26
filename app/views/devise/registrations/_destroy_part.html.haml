@@ -1,0 +1,14 @@
+.col-sm-12
+  %p.in-gold-500.font-18.mb-25
+    = t('user_settings.remove')
+  %form
+    .general-settings-btn
+      = link_to t('user_settings.please_remove'), registration_path(current_user), class: 'btn btn-default disabled mb-20',
+      id: 'destroy_button', method: :delete
+    .form-group.checkbox.general-settings-checkbox
+      %label.checkbox-label
+        = check_box_tag resource, true, false, class: 'checkbox-input destroy_check', hidden: true
+        %span.checkbox-icon
+          %i.fa.fa-check
+        %span.checkbox-text
+          = t('user_settings.checkbox')

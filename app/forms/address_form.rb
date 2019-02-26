@@ -5,7 +5,6 @@ class AddressForm
   ONLY_LETTERS_REGEX = /\A^[a-zA-Z]+$\z/.freeze
   ADDRESS_REGEX = /[a-zA-Z0-9'`"-]/.freeze
   PLUS_WITH_NUMBERS_PHONE_REGEX = /\+{1}[0-9]/.freeze
-  ADDRESSES_KINDS_QUANTITY = 2
   TEXT_FIELD_MAX_LENGHT = 50
   ZIP_MAX_LENGHT = 10
   PHONE_MAX_LENGHT = 10
@@ -43,7 +42,8 @@ class AddressForm
     return false unless valid?
 
     @entity = entity
-    @entity.addresses.size == ADDRESSES_KINDS_QUANTITY ? modernize! : persist!
+    @address = @entity.addresses.find_by(kind: kind)
+    @address ? modernize! : persist!
     true
   end
 
@@ -55,7 +55,7 @@ class AddressForm
   end
 
   def modernize!
-    @entity.addresses.find_by(kind: kind).update!(first_name: first_name, last_name: last_name, street: street,
-                                                  country: country, city: city, zip: zip, phone: phone, kind: kind)
+    @address.update!(first_name: first_name, last_name: last_name, street: street,
+                     country: country, city: city, zip: zip, phone: phone, kind: kind)
   end
 end

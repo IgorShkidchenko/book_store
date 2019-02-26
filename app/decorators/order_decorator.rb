@@ -29,7 +29,7 @@ class OrderDecorator < Draper::Decorator
   def clone_address
     cloned = same_addresses?(self)
     h.check_box_tag 'order[clone_address]', (cloned ? true : false),
-    (cloned ? true : false), class: 'checkbox-input checkbox-class', hidden: true
+    (cloned ? true : false), class: 'checkbox-input checkbox-class clone_check', hidden: true
   end
 
   private

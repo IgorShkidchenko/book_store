@@ -1,5 +1,5 @@
 $( document ).on('turbolinks:load', function(){
-    $('.checkbox-class').change(function(e) {
+    $('.clone_check').change(function(e) {
         if(this.checked) {
             $('#shipping_form').slideUp(700);
         }
@@ -8,8 +8,10 @@ $( document ).on('turbolinks:load', function(){
         }
     });
 
-    if (document.getElementById('order_clone_address').value == 'true') {
-        document.getElementById('shipping_form').style.display = 'none'
+    if (document.getElementById('order_clone_address')) {
+        if (document.getElementById('order_clone_address').value == 'true') {
+            document.getElementById('shipping_form').style.display = 'none'
+        };
     };
 
     $('.general-form-help').click(function(){

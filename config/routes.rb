@@ -6,7 +6,6 @@ Rails.application.routes.draw do
                                     registrations: 'users/registrations' }
 
   get '/users', to: redirect('/users/sign_up')
-
   root 'pages#home'
 
   resources :books, only: %i[index show]
@@ -19,5 +18,9 @@ Rails.application.routes.draw do
   resources :orders, only: :show
   resources :order_items, only: %i[create update destroy]
   resources :checkout_steps, only: %i[show update]
-  resources :addresses, only: :create
+  resources :addresses, only: %i[create update]
+
+  resources :users do
+    resources :orders, only: %i[index show]
+  end
 end
