@@ -1,7 +1,7 @@
 %tr{ class: order_item.id.to_s }
   %td
     .general-img-wrap-table
-      = link_to category_book_path(order_item.book.category_id, order_item.book) do
+      = link_to book_path(order_item.book) do
         = order_item.book.decorate.main_book_cover
   %td
     %p.title.in-gold-500
@@ -14,5 +14,5 @@
     %span.font-16.in-gold-500{ class: order_item.id.to_s }
       = order_item.total_price
   %td
-    = button_to order_item_path(order_item), remote: true, method: :delete, class: "close general-cart-close #{'hidden' if @order.in_progress?}" do
+    = button_to order_item_path(order_item), remote: true, method: :delete, class: "close general-cart-close #{'hidden' if @order.may_canceled?}" do
       %span{ 'aria-hidden': 'true' } &times;

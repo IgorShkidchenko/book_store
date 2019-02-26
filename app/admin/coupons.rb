@@ -5,7 +5,7 @@ ActiveAdmin.register Coupon do
   includes :order
 
   scope :unused, default: true
-  scope :used
+  scope :was_used
   scope :all
 
   config.filters = false

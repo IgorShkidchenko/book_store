@@ -7,6 +7,12 @@ detectors:
     enabled: false
   MissingSafeMethod:
     enabled: false
+  ControlParameter:
+    enabled: false
+  TooManyConstants:
+    enabled: false
+  NilCheck:
+    enabled: false
 
 directories:
   'app/services/':
@@ -24,5 +30,4 @@ exclude_paths:
   - db/
   - spec/
   - 'app/controllers/coupons_controller.rb'
-  - 'app/controllers/application_controller.rb'
   - 'app/controllers/books_controller.rb'

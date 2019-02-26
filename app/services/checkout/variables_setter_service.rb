@@ -1,8 +1,9 @@
-class Checkout::VariablesSetterService < Checkout::BaseService
-  attr_reader :delivery_methods, :order_items
+class Checkout::VariablesSetterService
+  attr_reader :billing, :shipping, :credit_card, :delivery_methods, :order_items
 
   def initialize(order, step)
-    super(order: order, step: step)
+    @order = order
+    @step = step
   end
 
   def call
@@ -27,7 +28,7 @@ class Checkout::VariablesSetterService < Checkout::BaseService
   end
 
   def set_credit_card_variable
-    @credit_card = credit_card_form
+    @credit_card = CreditCardForm.new(@order.credit_card&.attributes)
   end
 
   def set_variables_for_confrim_page
@@ -44,5 +45,15 @@ class Checkout::VariablesSetterService < Checkout::BaseService
 
   def decorated_order_items
     @order.order_items.includes(book: :covers).map(&:decorate)
+  end
+
+  def address_form(kind)
+    AddressForm.new(order_address(kind)&.attributes)
+  end
+
+  def order_address(kind)
+    return @order.addresses.billing.last if kind == Address::TYPES[:billing]
+
+    @order.addresses.shipping.last
   end
 end

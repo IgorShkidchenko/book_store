@@ -4,6 +4,8 @@ Metrics/LineLength:
   Max: 120
   Exclude:
     - 'app/admin/reviews.rb'
+    - 'app/queries/**/*'
+    - 'spec/**/*'
 
 Documentation:
   Enabled: false
@@ -18,7 +20,7 @@ Style/ClassAndModuleChildren:
   Enabled: false
 
 Bundler/OrderedGems:
-  Enables: false
+  Enabled: false
 
 Metrics/BlockLength:
   ExcludedMethods: ['describe', 'ActiveAdmin.register']

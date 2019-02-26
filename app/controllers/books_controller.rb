@@ -1,6 +1,5 @@
 class BooksController < ApplicationController
-  BOOKS_ON_PAGE_QUANTITY = 12
-
+  include Rectify::ControllerHelpers
   include BackUrl
   include Pagy::Backend
   include BooksHelper
@@ -9,7 +8,8 @@ class BooksController < ApplicationController
   def index
     @categories = Category.all
     @category = Category.find_by(id: params[:category_id])
-    @pagy, @chosen_books = pagy(Filter.new(params, which_books_to_shown).call, items: BOOKS_ON_PAGE_QUANTITY)
+    @pagy, @chosen_books = pagy(BooksFilterQuery.new(params, which_books_to_shown).call)
+    present CatalogPresenter.new(params: params, category: @category)
   end
 
   def show

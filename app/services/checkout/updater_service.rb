@@ -1,7 +1,6 @@
 class Checkout::UpdaterService < Checkout::BaseService
   def initialize(order:, step:, params:)
-    super(order: order, step: step)
-    @params = params
+    super(order: order, step: step, params: params)
   end
 
   def call
@@ -16,12 +15,9 @@ class Checkout::UpdaterService < Checkout::BaseService
   private
 
   def update_addresses
-    @billing = address_form(Address::TYPES[:billing])
-    @shipping = address_form(Address::TYPES[:shipping])
-    if operation_valid?(addresses_valid?)
-      order_address(Address::TYPES[:billing]).update(@params[:billing])
-      @params[:clone_address] ? clone_address : order_address(Address::TYPES[:shipping]).update(@params[:shipping])
-    end
+    @billing = AddressForm.new(@params[:billing])
+    @shipping = chosen_shipping_address
+    operation_valid?(addresses_valid?)
   end
 
   def update_delivery_method
@@ -30,12 +26,7 @@ class Checkout::UpdaterService < Checkout::BaseService
   end
 
   def update_credit_card
-    @credit_card = credit_card_form
-    @order.credit_card.update(@params[:credit_card]) if operation_valid?(@credit_card.valid?)
-  end
-
-  def clone_address
-    @params[:billing][:kind] = Address::TYPES[:shipping]
-    order_address(Address::TYPES[:shipping]).update(@params[:billing])
+    @credit_card = CreditCardForm.new(@params[:credit_card])
+    operation_valid?(@credit_card.save(@order))
   end
 end

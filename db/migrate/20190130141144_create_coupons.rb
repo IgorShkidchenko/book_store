@@ -3,6 +3,7 @@ class CreateCoupons < ActiveRecord::Migration[5.2]
     create_table :coupons do |t|
       t.references :order, foreign_key: true
       t.string :key
+      t.boolean :used, default: false
       t.integer :discount, default: 10
 
       t.timestamps

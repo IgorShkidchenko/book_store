@@ -3,10 +3,10 @@ require 'rails_helper'
 describe 'Books page', type: :feature, js: true do
   let!(:book) { FactoryBot.create(:book, :with_author_and_cover).decorate }
 
-  before { visit category_book_path(book.category_id, book) }
+  before { visit book_path(book) }
 
   it 'current page is book' do
-    expect(page).to have_current_path category_book_path(book.category_id, book)
+    expect(page).to have_current_path book_path(book)
   end
 
   context 'when book data on page' do
@@ -31,6 +31,7 @@ describe 'Books page', type: :feature, js: true do
 
   context 'when back button' do
     before do
+      allow(BestSellersQuery).to receive(:call).and_return([book])
       first('.navbar-brand').click
       first('.thumbnail').hover
       first('.thumb-hover-link').click
@@ -49,7 +50,7 @@ describe 'Books page', type: :feature, js: true do
 
     before do
       page.set_rack_session(order_id: order.id)
-      visit category_book_path(book.category_id, book)
+      visit book_path(book)
     end
 
     it do

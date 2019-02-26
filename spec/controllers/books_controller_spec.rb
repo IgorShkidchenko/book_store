@@ -6,13 +6,13 @@ RSpec.describe BooksController, type: :controller do
 
     before do
       allow(Book).to receive(:find).and_return(book)
-      get :show, params: { category_id: book.category_id, id: book.id }
+      get :show, params: { id: book.id }
     end
 
     it { expect(assigns(:book)).to eq book }
     it { is_expected.to render_template 'show' }
     it { is_expected.to respond_with 200 }
-    it { is_expected.to route(:get, '/categories/1/books/2').to(action: :show, category_id: 1, id: 2) }
+    it { is_expected.to route(:get, '/books/2').to(action: :show, id: 2) }
   end
 
   describe 'when visit index page' do

@@ -1,4 +1,4 @@
-class Filter
+class BooksFilterQuery
   VALID_FILTERS = {
     title_asc: 'title',
     title_desc: 'title desc',

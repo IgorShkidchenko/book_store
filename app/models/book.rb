@@ -1,4 +1,7 @@
 class Book < ApplicationRecord
+  LATEST_THREE_QUANTITY = 3
+  BEST_SELLERS_QUANTITY = 4
+
   extend FriendlyId
   friendly_id :title, use: :slugged
 
@@ -13,6 +16,8 @@ class Book < ApplicationRecord
 
   accepts_nested_attributes_for :covers, allow_destroy: true
 
-  validates_presence_of :title
+  validates :title, presence: true
   validates :covers, covers_quantity: true
+
+  scope :latest_three, -> { limit(LATEST_THREE_QUANTITY).order('created_at desc').includes(:authors, :covers) }
 end

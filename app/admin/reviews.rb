@@ -11,6 +11,25 @@ ActiveAdmin.register Review do
   config.filters = false
   config.per_page = [10, 50, 100]
 
+  batch_action :approve, priority: 1, if: proc { @current_scope.scope_method == :unprocessed } do |ids|
+    Review.unprocessed.find(ids).each do |review|
+      review.update(status: Review::STATUSES[:approved])
+    end
+    redirect_to admin_reviews_path
+  end
+
+  batch_action :reject, priority: 2, if: proc { @current_scope.scope_method == :unprocessed } do |ids|
+    Review.unprocessed.find(ids).each do |review|
+      review.update(status: Review::STATUSES[:rejected])
+    end
+    redirect_to admin_reviews_path
+  end
+
+  batch_action :destroy do |ids|
+    Review.all.find(ids).each(&:destroy)
+    redirect_to admin_reviews_path
+  end
+
   Review::STATUSES.except(:unprocessed).each_pair do |key, value|
     action_item key, only: :show do
       if review.status == Review::STATUSES[:unprocessed]
@@ -28,10 +47,11 @@ ActiveAdmin.register Review do
   end
 
   action_item :show_on_site, only: :show do
-    link_to t('admin.actions.show_on_site'), category_books_path(book.category_id, book) if review.status == Review::STATUSES[:approved]
+    link_to t('admin.actions.show_on_site'), books_path(review.book) if review.status == Review::STATUSES[:approved]
   end
 
   index do
+    selectable_column
     render 'admin/reviews/index', context: self
   end
 end

@@ -58,12 +58,12 @@
         .visible-xs.visible-sm
           %h3.general-subtitle
             = t('checkout.address_page.shipping')
-        .shipping_form
+        #shipping_form
           = f.simple_fields_for :shipping, @checkout_helper.shipping do |shipping_address|
             = render 'addresses/form', f: shipping_address, current_type: Address::TYPES[:shipping]
         .checkbox.form_group
           %label.checkbox-label
-            = check_box_tag 'order[clone_address]', true, false, class: 'checkbox-input checkbox-class', hidden: true
+            = @order.decorate.clone_address
             %span.checkbox-icon
               %i.fa.fa-check
             %span.checkbox-text

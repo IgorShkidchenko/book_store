@@ -70,6 +70,7 @@ en:
     cover_default: Default book cover
   review:
     write_review: Write a Review
+    verified: Verified Reviewer
     score: Score
     title: Title
     review: Review
@@ -94,6 +95,9 @@ en:
         price: Price
         quantity: Quantity
         subtotal: SubTotal
+    errors:
+      unknow: Something went wrong, please refresh the page and try again
+      min_quantity: Quantity can't be less than 1
   order_item:
     error: is not a valid order.
   coupon:
@@ -151,7 +155,7 @@ en:
       credit_card: Credit Card
       form:
         number: Card Number
-        name: Name on Card
+        name: Card Name
         expire: MM / YY
         cvv: CVV
         cvv_hint: 3-digit security code, usually found on the back of your card. American Express cards has 4-digit code, located on the front.
@@ -169,4 +173,5 @@ en:
       phone: should start with + and contain only numbers
       address: can contain only letters. numbers and this symbols ' ` " -
       expire_date: should be in MM/YY format and contain only numbers
+      invalid_expire_date: "can't be in the past"
     address_phone: "Phone %{number}"

@@ -1,11 +1,19 @@
 class HeaderPresenter < Rectify::Presenter
-  attribute :categories, Category
-
   def header_categories(css_class: '')
-    categories.map do |category|
+    Category.all.map do |category|
       content_tag(:li) do
-        link_to category.name, category_books_path(category_id: category), class: css_class
+        link_to category.name, category_books_path(category_id: category), class: choosen_color?(css_class, category)
       end
     end.join.html_safe
+  end
+
+  private
+
+  def choosen_color?(css_class, category)
+    user_choose_category?(category) ? (css_class + 'in-gold-500') : css_class
+  end
+
+  def user_choose_category?(category)
+    params[:category_id]&.to_i == category.id
   end
 end

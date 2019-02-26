@@ -1,22 +1,21 @@
 class OrderItemsController < ApplicationController
-  ADD = 'add'.freeze
-
   before_action :set_order
   before_action :set_order_item, only: %i[update destroy]
 
   respond_to :js
 
   def create
-    NewOrderItemService.new(params: order_item_params, order: @order).call
-    session[:order_id] ||= @order.id
+    new_item = OrderItem::NewService.new(params: order_item_params, order: @order)
+    new_item.call ? session[:order_id] ||= @order.id : flash.now[:danger] = I18n.t('cart.errors.unknow')
   end
 
   def update
-    params[:order_item][:command] == ADD ? @order_item.increment!(:quantity) : @order_item.decrement!(:quantity)
+    updater = OrderItem::QuantityUpdaterService.new(@order_item, params)
+    flash.now[:danger] = I18n.t('cart.errors.min_quantity') unless updater.call
   end
 
   def destroy
-    @order_item.destroy!
+    flash.now[:danger] = I18n.t('cart.errors.unknow') unless @order_item.destroy
   end
 
   private

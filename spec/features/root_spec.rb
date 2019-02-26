@@ -4,7 +4,10 @@ describe 'Root page', type: :feature, js: true do
   let!(:category) { FactoryBot.create(:category, :with_book) }
   let(:book) { category.books.last }
 
-  before { visit root_path }
+  before do
+    allow(BestSellersQuery).to receive(:call).and_return([book])
+    visit root_path
+  end
 
   it 'current page is home' do
     expect(page).to have_current_path root_path
@@ -33,7 +36,7 @@ describe 'Root page', type: :feature, js: true do
   it 'redirect to book page' do
     first('.thumbnail').hover
     first('.thumb-hover-link').click
-    expect(page).to have_current_path category_book_path(book.category_id, book)
+    expect(page).to have_current_path book_path(book)
   end
 
   it 'redirect to catalog page' do

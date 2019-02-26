@@ -5,14 +5,15 @@
   - book.reviews.approved.decorate.each do |review|
     .general-message-wrap.divider-lg
       .clearfix
-        %span.img-circle.logo-size.inlide-block.pull-left.logo-empty M
-        // = image_tag "#", class: 'img-circle logo-size inlide-block pull-left'
+        %span.img-circle.logo-size.inlide-block.pull-left.logo-empty
+          = review.user_email.capitalize[0]
         .ml-70
           %div
             .general-message-date.hidden-xs
               = review.creation_date
             .max-240
-              .general-message-verified.pull-right Verified Reviewer
+              .general-message-verified.pull-right
+                = t('review.verified') if VerifiedUserQuery.new(review.book, review.user).call.any?
               .general-message-name
                 = review.user_email
           - if review.rating

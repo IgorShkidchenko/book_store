@@ -2,7 +2,7 @@
   %button.close.general-cart-close{ type: 'button', 'aria-label': 'Close' }
     %span{ 'aria-hidden': 'true' } &times;
   .general-img-wrap-table
-    = link_to category_book_path(order_item.book.category_id, order_item.book) do
+    = link_to book_path(order_item.book) do
       = order_item.book.decorate.main_book_cover
   %p.title.in-gold-500
     = order_item.book_title

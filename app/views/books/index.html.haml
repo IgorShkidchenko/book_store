@@ -5,7 +5,7 @@
   .hidden-xs.clearfix
     .dropdowns.pull-right
       .dropdown.width-240
-        = render 'dropdown_menu', category: @category
+        = render 'dropdown_menu'
     %ul.list-inline.pt-10.mb-25.mr-240
       %li.mr-35
         = link_to books_path, class: 'filter-link' do
@@ -14,14 +14,14 @@
             = @categories.sum(&:books_count)
       - @categories.each do |category|
         %li.mr-35
-          = link_to category_books_path(category), class: 'filter-link' do
+          = link_to category_books_path(category), class: "filter-link #{'in-gold-500' if @category == category}" do
             = category.name
             %span.badge.general-badge
               = category.books_count
   .dropdowns.mb-25.visible-xs
     %p.lead.small.mb-10
     .dropdown
-      = render 'dropdown_menu', category: @category
+      = render 'dropdown_menu'
   .mb-120
     .row
       = render partial: 'books/book', collection: chosen_books, as: :book

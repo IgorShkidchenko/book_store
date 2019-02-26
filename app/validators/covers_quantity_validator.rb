@@ -5,6 +5,8 @@ class CoversQuantityValidator < ActiveModel::EachValidator
     record.errors.add(attribute, I18n.t('book.covers_max_error', max: MAXIMUM_COVERS_QUANTITY)) if size_invalid?(value)
   end
 
+  private
+
   def size_invalid?(value)
     value.size > MAXIMUM_COVERS_QUANTITY
   end

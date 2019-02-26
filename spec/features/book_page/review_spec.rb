@@ -4,7 +4,7 @@ describe 'Review', type: :feature, js: true do
   let!(:book) { FactoryBot.create(:book, :with_author_and_cover).decorate }
   let!(:reviews) { FactoryBot.create_list(:review, 3, book_id: book.id, status: Review::STATUSES[:approved]) }
 
-  before { visit category_book_path(book.category_id, book) }
+  before { visit book_path(book) }
 
   it 'all approved reviews count' do
     FactoryBot.create(:review, book_id: book.id)
@@ -41,15 +41,15 @@ describe 'Review', type: :feature, js: true do
 
     it 'fill form with valid data' do
       first('label').click
-      fill_in 'review[title]', with: valid_attribute[:title]
-      fill_in 'review[body]', with: valid_attribute[:body]
+      fill_in 'review_form[title]', with: valid_attribute[:title]
+      fill_in 'review_form[body]', with: valid_attribute[:body]
       click_on I18n.t('review.post')
       expect(page).to have_selector 'div', text: I18n.t('review.success_msg')
     end
 
     it 'fill form with invalid data' do
-      fill_in 'review[title]', with: invalid_input
-      fill_in 'review[body]', with: invalid_input
+      fill_in 'review_form[title]', with: invalid_input
+      fill_in 'review_form[body]', with: invalid_input
       click_on I18n.t('review.post')
       expect(page).to have_selector 'div', text: I18n.t('review.validation_format_msg')
     end

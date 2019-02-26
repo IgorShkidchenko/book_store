@@ -5,6 +5,7 @@ describe 'Catalog page', type: :feature, js: true do
   let(:category_book) { category.books.second }
   let(:book) { FactoryBot.create(:book) }
   let(:pagy_button_name) { 'Next' }
+  let(:books_on_page_quantity) { 12 }
 
   before { visit category_books_path(category_id: category.id) }
 
@@ -13,7 +14,7 @@ describe 'Catalog page', type: :feature, js: true do
   end
 
   it 'valid quantity of books on page' do
-    expect(page).to have_selector '.title', count: BooksController::BOOKS_ON_PAGE_QUANTITY
+    expect(page).to have_selector '.title', count: books_on_page_quantity
   end
 
   it 'Pagy navigation' do
@@ -38,7 +39,7 @@ describe 'Catalog page', type: :feature, js: true do
 
   it 'filters' do
     first('.lead').click
-    Filter::VALID_FILTERS.keys do |filter|
+    BooksFilterQuery::VALID_FILTERS.keys do |filter|
       expect(page).to have_content I18n.t("catalog.dropdown.#{filter}")
     end
   end

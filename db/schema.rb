@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_143753) do
   create_table "coupons", force: :cascade do |t|
     t.bigint "order_id"
     t.string "key"
+    t.boolean "used", default: false
     t.integer "discount", default: 10
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

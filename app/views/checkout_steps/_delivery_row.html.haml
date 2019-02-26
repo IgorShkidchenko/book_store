@@ -1,0 +1,7 @@
+.form-group.radio.mt-0.mb-0
+  %label.radio-label
+    = radio_button_tag('order[delivery_method_id]', method.id,
+    (method == order.delivery_method || index.zero?), hidden: true, class: 'radio-input')
+    %span.radio-icon
+    %span.radio-text
+      = method.name

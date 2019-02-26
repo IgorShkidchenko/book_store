@@ -15,7 +15,7 @@ ActiveAdmin.register Book do
   form partial: 'form'
 
   action_item :show_on_site, only: :show do
-    link_to t('admin.actions.show_on_site'), category_books_path(book.category_id, book)
+    link_to t('admin.actions.show_on_site'), books_path(book)
   end
 
   action_item :create_with_faker, only: :new do

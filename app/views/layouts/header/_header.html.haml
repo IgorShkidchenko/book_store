@@ -13,7 +13,7 @@
             %a{ type: 'button', 'data-toggle': 'collapse', href: '#menu', 'aria-expanded': 'false', 'aria-controls': 'menu' }
               = t('layout.link.shop')
             %ul.collapse.list-unstyled.pl-30.mb-10#menu{ 'aria-expanded': 'false' }
-              = presenter.header_categories(css_class: 'collapse-link')
+              = @header_presenter.header_categories(css_class: 'collapse-link')
           = render partial: 'layouts/header/devise_links'
       .hidden-xs
         %ul.nav.navbar-nav
@@ -23,5 +23,5 @@
             %a.dropdown-toggle{ href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false' }
               = t('layout.link.shop')
             %ul.dropdown-menu
-              = presenter.header_categories
+              = @header_presenter.header_categories
           = render partial: 'layouts/header/devise_links'

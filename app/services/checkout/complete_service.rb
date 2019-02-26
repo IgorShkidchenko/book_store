@@ -11,6 +11,6 @@ class Checkout::CompleteService
   private
 
   def generate_order_number
-    "#R#{SecureRandom.hex(4)}#{@order.id}"
+    "#R#{Time.now.strftime('%Y%m%d%H%M%S')}#{@order.id}"
   end
 end

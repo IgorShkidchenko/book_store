@@ -9,9 +9,9 @@ Rails.application.routes.draw do
 
   root 'pages#home'
 
-  resources :books, only: :index
+  resources :books, only: %i[index show]
   scope '/categories/:category_id', as: 'category' do
-    resources :books, only: %i[index show]
+    resources :books, only: :index
   end
 
   resources :reviews, only: :create

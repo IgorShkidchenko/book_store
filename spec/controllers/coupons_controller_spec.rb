@@ -29,9 +29,10 @@ RSpec.describe CouponsController, type: :controller do
     end
 
     context 'when coupon was already used' do
+      let(:used_coupon) { FactoryBot.create(:coupon, :used) }
+
       before do
-        allow(Coupon).to receive(:used).and_return([coupon])
-        put :update, xhr: true, params: { id: :coupon, coupon: { key: coupon.key, order_id: order.id } }
+        put :update, xhr: true, params: { id: :used_coupon, coupon: { key: used_coupon.key, order_id: order.id } }
       end
 
       it { is_expected.to respond_with 200 }

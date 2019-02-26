@@ -36,7 +36,6 @@ Array.new(4) { Category.create(name: Faker::Book.genre) }.each do |category|
   end
 end
 
-
 10.times { Coupon.create(key: SecureRandom.base64(12)) }
 
 DeliveryMethod.create(name: 'Express Delivery', cost: 30, min_days: 1, max_days: 2)

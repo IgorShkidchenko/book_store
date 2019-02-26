@@ -38,18 +38,13 @@
     .visible-xs
       .general-cart-item.divider-lg-bottom
         %table.table
-        - @checkout_helper.delivery_methods.each do |method|
+        - @checkout_helper.delivery_methods.each_with_index do |method, index|
           %tr
             %td.col-half
               %span.in-grey-600
                 = t('checkout.delivery_page.method')
             %td.col-half
-              .form-group.radio.mt-0.mb-0
-                %label.radio-label
-                  = radio_button_tag('order[delivery_method_id]', method.id, (method == order.delivery_method), hidden: true, class: 'radio-input')
-                  %span.radio-icon
-                  %span.radio-text
-                    = method.name
+              = render 'delivery_row', method: method, index: index, order: order
           %tr
             %td
               %span.in-grey-600
@@ -78,15 +73,10 @@
               %span.in-grey-600
                 = t('checkout.delivery_page.price')
         %tbody
-        - @checkout_helper.delivery_methods.each do |method|
+        - @checkout_helper.delivery_methods.each_with_index do |method, index|
           %tr
             %td
-              .form-group.radio.mt-0.mb-0
-                %label.radio-label
-                  = radio_button_tag('order[delivery_method_id]', method.id, (method == order.delivery_method), hidden: true, class: 'radio-input')
-                  %span.radio-icon
-                  %span.radio-text
-                    = method.name
+              = render 'delivery_row', method: method, index: index, order: order
             %td
               %span
                 = method.decorate.delivery_days

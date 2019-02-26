@@ -1,4 +1,4 @@
-class NewOrderItemService
+class OrderItem::NewService
   def initialize(params:, order:)
     @params = params
     @order = order
@@ -6,14 +6,13 @@ class NewOrderItemService
   end
 
   def call
-    @order_item ? update_quantity_and_return_item : create_new_item
+    @order_item ? update_quantity : create_new_item
   end
 
   private
 
   def update_quantity_and_return_item
     @order_item.update(quantity: @order_item.quantity + @params[:quantity].to_i)
-    @order_item
   end
 
   def create_new_item

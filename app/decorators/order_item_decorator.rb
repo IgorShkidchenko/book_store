@@ -10,7 +10,7 @@ class OrderItemDecorator < Draper::Decorator
   end
 
   def plus_quantity_link
-    h.link_to h.order_item_path(order_item, order_item: { command: OrderItemsController::ADD }),
+    h.link_to h.order_item_path(order_item, order_item: { command: OrderItem::QuantityUpdaterService::ADD }),
               remote: true, method: :put, class: 'input-link' do
       h.content_tag(:i, '', class: 'fa fa-plus line-heaght-40')
     end

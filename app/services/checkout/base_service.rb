@@ -1,32 +1,26 @@
 class Checkout::BaseService
   attr_reader :billing, :shipping, :credit_card
 
-  def initialize(order:, step:)
+  def initialize(order:, step:, params:)
     @order = order
     @step = step
+    @params = params
   end
 
   private
 
   def addresses_valid?
-    @billing.valid? && @shipping.valid?
+    @billing.save(@order) & @shipping.save(@order)
   end
 
   def operation_valid?(condition = nil)
     @operation_valid ||= condition
   end
 
-  def address_form(kind)
-    AddressForm.new(order_address(kind)&.attributes) || AddressForm.new
-  end
+  def chosen_shipping_address
+    return AddressForm.new(@params[:shipping]) unless @params[:clone_address]
 
-  def order_address(kind)
-    return @order.addresses.billing.load.last if kind == Address::TYPES[:billing]
-
-    @order.addresses.shipping.load.last
-  end
-
-  def credit_card_form
-    CreditCardForm.new(@order.credit_card&.attributes) || CreditCardForm.new
+    @params[:billing][:kind] = Address::TYPES[:shipping]
+    AddressForm.new(@params[:billing])
   end
 end

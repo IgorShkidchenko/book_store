@@ -7,7 +7,7 @@ class Users::SessionsController < Devise::SessionsController
     set_flash_message!(:notice, :signed_in)
     sign_in(resource_name, resource)
     yield resource if block_given?
-    set_order_to_user(resource) # custom operation
+    insert_order_to_user(resource) # custom operation
     return redirect_to checkout_step_path(:address) if params[:user][:checkout_authenticate] # custom operation
 
     respond_with resource, location: after_sign_in_path_for(resource)
@@ -15,7 +15,7 @@ class Users::SessionsController < Devise::SessionsController
 
   private
 
-  def set_order_to_user(user)
+  def insert_order_to_user(user)
     current_order.update(user_id: user.id) if user_have_not_current_order?(user)
   end
 
