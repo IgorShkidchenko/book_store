@@ -9,13 +9,14 @@ describe 'Cart page', type: :feature, js: true do
   before do
     allow(BestSellersQuery).to receive(:call).and_return([book])
     page.set_rack_session(order_id: order.id)
-    visit root_path
-    first('.shop-link').click
+    visit order_order_items_path(order.id)
   end
 
   it 'current page is cart' do
+    visit root_path
+    first('.shop-link').click
     page.driver.browser.navigate.refresh
-    expect(page).to have_current_path order_path(order)
+    expect(page).to have_current_path order_order_items_path(order.id)
   end
 
   context 'when book data on page' do

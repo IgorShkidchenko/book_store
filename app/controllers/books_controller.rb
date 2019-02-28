@@ -8,7 +8,7 @@ class BooksController < ApplicationController
   def index
     @categories = Category.all
     @category = Category.find_by(id: params[:category_id])
-    @pagy, @chosen_books = pagy(BooksFilterQuery.new(params, which_books_to_shown).call)
+    @pagy, @chosen_books = pagy(which_books_to_shown)
     present CatalogPresenter.new(params: params, category: @category)
   end
 
@@ -20,6 +20,7 @@ class BooksController < ApplicationController
   private
 
   def which_books_to_shown
-    (@category ? @category.books : Book.all).includes(:covers)
+    books = (@category ? @category.books : Book.all).includes(:covers)
+    BooksFilterQuery.new(books: books, params: params).call
   end
 end

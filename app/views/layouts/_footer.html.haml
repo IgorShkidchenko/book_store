@@ -9,9 +9,9 @@
             = link_to t('layout.link.shop'), books_path, class: 'nav-link'
           - if user_signed_in?
             %li
-              = link_to t('layout.link.orders'), '#', class: 'nav-link'
+              = link_to t('layout.link.orders'), user_orders_path(current_user), class: 'nav-link'
             %li
-              = link_to t('layout.link.settings'), '#', class: 'nav-link'
+              = link_to t('layout.link.settings'), edit_user_registration_path, class: 'nav-link'
       .col-sm-3
         %p.general-nav-mail
           = t('layout.footer.mail')

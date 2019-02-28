@@ -33,29 +33,17 @@
       %span.step-text.hidden-xs
         = t('checkout.complete')
   .row.mb-20
-    = render 'checkout_steps/address_information', address: @checkout_helper.billing
-    = render 'checkout_steps/address_information', address: @checkout_helper.shipping
-    .col-sm-3
-      %h3.general-subtitle
-        = t('checkout.confirm_page.shipments')
-      %p.general-address
-        = order.delivery_method_name
-        = link_to t('checkout.address_page.edit_link'), wizard_path(:delivery), class: 'general-edit'
-    .col-sm-3
-      %h3.general-subtitle
-        = t('checkout.confirm_page.payment_info')
-      %p.general-address
-        = @checkout_helper.credit_card.masked_number
-        = link_to t('checkout.address_page.edit_link'), wizard_path(:payment), class: 'general-edit'
-        %br
-        = @checkout_helper.credit_card.expire_date
+    = render 'orders/order_info/address_information', address: order.addresses.billing.first.decorate, checkout: true
+    = render 'orders/order_info/address_information', address: order.addresses.shipping.first.decorate, checkout: true
+    = render 'orders/order_info/delivery_method_info', order: order, checkout: true
+    = render 'orders/order_info/card_info', credit_card: order.credit_card.decorate, checkout: true
   .visible-xs
-    = render partial: 'orders/mobile_cart_row', collection: @checkout_helper.order_items, as: :order_item
+    = render partial: 'order_items/cart/mobile_cart_row', collection: @checkout.order_items, as: :order_item
   .hidden-xs.divider-lg.pt-20
     %table.table.table-hover
-      = render 'orders/item_titles_row'
-      = render partial: 'orders/cart_row', collection: @checkout_helper.order_items, as: :order_item
+      = render 'order_items/cart/item_titles_row'
+      = render partial: 'order_items/cart/cart_row', collection: @checkout.order_items, as: :order_item
   .text-center.general-text-right
-    = render 'orders/order_summary', order: order, right: true
+    = render 'orders/order_info/order_summary', order: order, right: true
   .text-center
     = link_to t('checkout.buttons.place_order'), next_wizard_path, class: 'btn btn-default mb-20'

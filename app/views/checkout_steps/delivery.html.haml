@@ -38,7 +38,7 @@
     .visible-xs
       .general-cart-item.divider-lg-bottom
         %table.table
-        - @checkout_helper.delivery_methods.each_with_index do |method, index|
+        - @checkout.form.delivery_methods.each_with_index do |method, index|
           %tr
             %td.col-half
               %span.in-grey-600
@@ -73,7 +73,7 @@
               %span.in-grey-600
                 = t('checkout.delivery_page.price')
         %tbody
-        - @checkout_helper.delivery_methods.each_with_index do |method, index|
+        - @checkout.form.delivery_methods.each_with_index do |method, index|
           %tr
             %td
               = render 'delivery_row', method: method, index: index, order: order
@@ -84,6 +84,6 @@
               %span.font-16.in-gold-500
                 = t('price', price: method.cost)
     .general-text-align
-      = render 'orders/order_summary', order: order, right: false
+      = render 'orders/order_info/order_summary', order: order, right: false
     .text-center
       = f.button :submit, t('checkout.buttons.next'), class: 'btn-default mb-80'

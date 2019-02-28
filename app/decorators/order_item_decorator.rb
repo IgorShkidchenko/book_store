@@ -17,6 +17,6 @@ class OrderItemDecorator < Draper::Decorator
   end
 
   def total_price
-    I18n.t('price', price: quantity * book_price)
+    I18n.t('price', price: (quantity * book_price).round(2))
   end
 end

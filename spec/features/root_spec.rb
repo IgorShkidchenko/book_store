@@ -62,6 +62,7 @@ describe 'Root page', type: :feature, js: true do
     before do
       login_as(FactoryBot.create(:user), scope: :user)
       page.driver.browser.navigate.refresh
+      click_on I18n.t('layout.header.my_account')
     end
 
     it { expect(page).to have_selector 'a', text: I18n.t('layout.link.log_out') }

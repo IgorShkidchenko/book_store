@@ -15,12 +15,15 @@ Rails.application.routes.draw do
 
   resources :reviews, only: :create
   resources :coupons, only: :update
-  resources :orders, only: :show
-  resources :order_items, only: %i[create update destroy]
-  resources :checkout_steps, only: %i[show update]
   resources :addresses, only: %i[create update]
+  resources :checkout_steps, only: %i[show update]
+
+  resources :order_items, only: %i[create update destroy]
+  resources :orders, only: :show do
+    resources :order_items, only: :index
+  end
 
   resources :users do
-    resources :orders, only: %i[index show]
+    resources :orders, only: :index
   end
 end

@@ -33,21 +33,15 @@ class CreditCardForm
             length: { in: CVV_RANGE },
             numericality: { only_integer: true, message: I18n.t('checkout.errors.only_numbers') }
 
-  def save(order)
+  def save(order_id)
     return false unless valid?
 
-    @order = order
-    @order.credit_card ? modernize! : persist!
-    true
+    CreditCard.find_or_initialize_by(order_id: order_id).update_attributes(params)
   end
 
   private
 
-  def persist!
-    @order.create_credit_card!(number: number, name: name, expire_date: expire_date, cvv: cvv)
-  end
-
-  def modernize!
-    @order.credit_card.update!(number: number, name: name, expire_date: expire_date, cvv: cvv)
+  def params
+    { number: number, name: name, expire_date: expire_date, cvv: cvv }
   end
 end

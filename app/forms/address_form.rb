@@ -38,24 +38,20 @@ class AddressForm
             length: { maximum: PHONE_MAX_LENGHT },
             format: { with: PLUS_WITH_NUMBERS_PHONE_REGEX, message: I18n.t('checkout.errors.phone') }
 
+  validates :kind,
+            presence: true,
+            inclusion: { in: [Address::TYPES[:billing], Address::TYPES[:shipping]] }
+
   def save(entity)
     return false unless valid?
 
-    @entity = entity
-    @address = @entity.addresses.find_by(kind: kind)
-    @address ? modernize! : persist!
-    true
+    entity.addresses.find_or_initialize_by(kind: kind).update_attributes(params)
   end
 
   private
 
-  def persist!
-    @entity.addresses.create!(first_name: first_name, last_name: last_name, street: street,
-                              country: country, city: city, zip: zip, phone: phone, kind: kind)
-  end
-
-  def modernize!
-    @address.update!(first_name: first_name, last_name: last_name, street: street,
-                     country: country, city: city, zip: zip, phone: phone, kind: kind)
+  def params
+    { first_name: first_name, last_name: last_name, street: street,
+      country: country, city: city, zip: zip, phone: phone, kind: kind }
   end
 end

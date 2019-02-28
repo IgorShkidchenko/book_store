@@ -1,9 +1,9 @@
 .col-sm-3
   %h3.general-subtitle
-    = t("checkout.address_page.#{address == @checkout_helper.billing ? 'billing' : 'shipping'}")
+    = t("checkout.address_page.#{address.kind}")
   %p.general-address
     = address.full_name
-    = link_to t('checkout.address_page.edit_link'), wizard_path(:address), class: 'general-edit'
+    = link_to t('checkout.address_page.edit_link'), wizard_path(:address), class: 'general-edit' if checkout
     %br
       = address.street
     %br

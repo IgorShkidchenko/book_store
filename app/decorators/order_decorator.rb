@@ -27,9 +27,13 @@ class OrderDecorator < Draper::Decorator
   end
 
   def clone_address
-    cloned = same_addresses?(self)
-    h.check_box_tag 'order[clone_address]', (cloned ? true : false),
-    (cloned ? true : false), class: 'checkbox-input checkbox-class clone_check', hidden: true
+    cloned_status = same_addresses?(self)
+    h.check_box_tag 'order[clone_address]', cloned_status,
+                    cloned_status, class: 'checkbox-input checkbox-class clone_check', hidden: true
+  end
+
+  def status
+    aasm_state.capitalize.tr('_', ' ')
   end
 
   private
@@ -38,9 +42,9 @@ class OrderDecorator < Draper::Decorator
     return if order.addresses.empty?
 
     billing = order.addresses.billing.take.attributes.slice('first_name', 'last_name',
-                                                      'street', 'country', 'zip', 'phone', 'city')
+                                                            'street', 'country', 'zip', 'phone', 'city')
     shipping = order.addresses.shipping.take.attributes.slice('first_name', 'last_name',
-                                                        'street', 'country', 'zip', 'phone', 'city')
+                                                              'street', 'country', 'zip', 'phone', 'city')
     billing == shipping
   end
 end

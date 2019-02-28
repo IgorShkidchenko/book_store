@@ -52,14 +52,14 @@
             = t('checkout.address_page.billing')
           %p.general-info-text
             = t('checkout.address_page.required_fields')
-        = f.simple_fields_for :billing, @checkout_helper.billing do |billing_address|
+        = f.simple_fields_for :billing, @checkout.form.billing do |billing_address|
           = render 'addresses/form', f: billing_address, current_type: Address::TYPES[:billing]
       .col-md-5.col-md-offset-1.mb-60
         .visible-xs.visible-sm
           %h3.general-subtitle
             = t('checkout.address_page.shipping')
         #shipping_form
-          = f.simple_fields_for :shipping, @checkout_helper.shipping do |shipping_address|
+          = f.simple_fields_for :shipping, @checkout.form.shipping do |shipping_address|
             = render 'addresses/form', f: shipping_address, current_type: Address::TYPES[:shipping]
         .checkbox.form_group
           %label.checkbox-label
@@ -69,6 +69,6 @@
             %span.checkbox-text
               = t('checkout.address_page.use_billing_button')
     .general-text-align.mb-60
-      = render 'orders/order_summary', order: order, right: false
+      = render 'orders/order_info/order_summary', order: order, right: false
     .text-center
       = f.button :submit, t('checkout.buttons.next'), class: 'btn-default mb-80'

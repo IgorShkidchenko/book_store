@@ -11,7 +11,7 @@ class OrderItem::NewService
 
   private
 
-  def update_quantity_and_return_item
+  def update_quantity
     @order_item.update(quantity: @order_item.quantity + @params[:quantity].to_i)
   end
 

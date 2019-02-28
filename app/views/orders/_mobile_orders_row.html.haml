@@ -1,0 +1,27 @@
+%tr
+  %td.col-half
+    %span.in-grey-600
+      = t('orders.number')
+  %td.col-half
+    = link_to t('orders.order_uniq_number', number: order.number), order_path(order), class: 'general-order-number'
+%tr
+  %td
+    %span.in-grey-600
+      = t('orders.completed_at')
+  %td
+    %span.in-grey-900.font-16.fw-300
+      = order.creation_date
+%tr
+  %td
+    %span.in-grey-600
+      = t('orders.status')
+  %td
+    %span.font-16.fw-300{ class: "#{order.aasm_state == Order::COMPLETE_STATUS ? 'text-success' : 'in-grey-900'}" }
+      = order.status
+%tr
+  %td
+    %span.in-grey-600
+      = t('orders.total')
+  %td
+    %p.font-16
+      = order.total_price

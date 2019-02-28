@@ -1,8 +1,15 @@
 class OrderItemsController < ApplicationController
+  decorates_assigned :order_items
+
   before_action :set_order
   before_action :set_order_item, only: %i[update destroy]
 
   respond_to :js
+
+  def index
+    @order_items = OrderItemsQuery.new(@order).call
+    respond_to :html
+  end
 
   def create
     new_item = OrderItem::NewService.new(params: order_item_params, order: @order)
@@ -29,6 +36,6 @@ class OrderItemsController < ApplicationController
   end
 
   def set_order_item
-    @order_item = OrderItem.find(params[:id])
+    @order_item = OrderItem.find_by(id: params[:id])
   end
 end

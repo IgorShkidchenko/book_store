@@ -20,6 +20,7 @@ describe 'Sign in', type: :feature, js: true do
       it { expect(page).to have_content I18n.t('devise.sessions.signed_in') }
 
       it 'sign out' do
+        click_on I18n.t('layout.header.my_account')
         click_on I18n.t('layout.link.log_out')
         expect(page).to have_content I18n.t('devise.sessions.signed_out')
       end

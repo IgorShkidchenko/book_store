@@ -27,13 +27,12 @@ class ReviewForm
   def save
     return false unless valid?
 
-    persist!
-    true
+    Review.new(params).save!
   end
 
   private
 
-  def persist!
-    Review.create!(title: title, body: body, rating: rating, book_id: book_id, user_id: user_id)
+  def params
+    { title: title, body: body, rating: rating, book_id: book_id, user_id: user_id }
   end
 end

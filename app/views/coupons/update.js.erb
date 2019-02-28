@@ -1,3 +1,3 @@
-$('div.<%= @order.id %>').replaceWith('<%= j render 'orders/order_summary', order: @order.decorate, right: true %>');
+$('div.<%= @order.id %>').replaceWith('<%= j render 'orders/order_info/order_summary', order: @order.decorate, right: true %>');
 $('div.coupon').replaceWith('<%= j render 'coupons/form', order: @order %>');
 $('div.flash').html('<%= j render 'layouts/flash', locals: { danger: flash[:danger] } %>');

@@ -14,7 +14,7 @@
               = t('layout.link.shop')
             %ul.collapse.list-unstyled.pl-30.mb-10#menu{ 'aria-expanded': 'false' }
               = @header_presenter.header_categories(css_class: 'collapse-link')
-          = render partial: 'layouts/header/devise_links'
+          = render partial: 'layouts/header/user_links'
       .hidden-xs
         %ul.nav.navbar-nav
           %li
@@ -24,4 +24,4 @@
               = t('layout.link.shop')
             %ul.dropdown-menu
               = @header_presenter.header_categories
-          = render partial: 'layouts/header/devise_links'
+          = render partial: 'layouts/header/user_links'

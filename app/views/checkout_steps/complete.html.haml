@@ -41,31 +41,22 @@
     .col-sm-6
       .visible-xs
         %p.general-order-number.mb-0
-          = t('checkout.complete_page.order_number', number: order.number)
+          = t('orders.order_number', number: order.number)
         %p.general-address.mb-30
           = order.creation_date
-      %p.general-address
-        = @checkout_helper.billing.full_name
-        %br
-          = @checkout_helper.billing.street
-        %br
-          = @checkout_helper.billing.city_with_zip
-        %br
-          = @checkout_helper.billing.country
-        %br
-          = t('checkout.address_phone', number: @checkout_helper.billing.phone)
+      = render 'checkout_steps/billing_part', address: order.addresses.billing.first.decorate
     .col-sm-6.hidden-xs.text-right
       %p.general-order-number.mb-0
-        = t('checkout.complete_page.order_number', number: order.number)
+        = t('orders.order_number', number: order.number)
       %p.general-address.mb-30
         = order.creation_date
   .visible-xs
-    = render partial: 'orders/mobile_cart_row', collection: @checkout_helper.order_items, as: :order_item
+    = render partial: 'order_items/cart/mobile_cart_row', collection: @checkout.order_items, as: :order_item
   .hidden-xs.divider-lg.pt-20
     %table.table.table-hover
-      = render 'orders/item_titles_row'
-      = render partial: 'orders/cart_row', collection: @checkout_helper.order_items, as: :order_item, locals: { checkout_complete: true }
+      = render 'order_items/cart/item_titles_row'
+      = render partial: 'order_items/cart/cart_row', collection: @checkout.order_items, as: :order_item, locals: { checkout_complete: true }
   .text-center.general-text-right
-    = render 'orders/order_summary', order: order, right: true
+    = render 'orders/order_info/order_summary', order: order, right: true
   .text-center
     = link_to t('checkout.buttons.back_to_store'), books_path, class: 'btn btn-default mb-20'

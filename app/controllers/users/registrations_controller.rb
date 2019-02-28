@@ -10,14 +10,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def edit
-    @user = current_user
-    @billing = AddressForm.new(@user.addresses.billing.first&.attributes)
-    @shipping = AddressForm.new(@user.addresses.shipping.first&.attributes)
+    find_user_addresses
   end
 
   def update
-    @billing = AddressForm.new(@user.addresses.billing.first&.attributes)
-    @shipping = AddressForm.new(@user.addresses.shipping.first&.attributes)
+    find_user_addresses
     super
   end
 
@@ -41,6 +38,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def set_order_to_user
-    current_order.update(user_id: current_user.id) if session[:order_id]
+    current_order.update(user_id: resource.id) if session[:order_id]
+  end
+
+  def find_user_addresses
+    @billing = AddressForm.new(resource.addresses.billing.first&.attributes)
+    @shipping = AddressForm.new(resource.addresses.shipping.first&.attributes)
   end
 end

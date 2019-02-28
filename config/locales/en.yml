@@ -13,6 +13,7 @@ en:
       mail: support@bookstore.com
       number: (555)-555-5555
     header:
+      my_account: My account
       bookstore: Bookstore
     title: "%{title} | Bookstore"
   devise_pages:
@@ -89,7 +90,7 @@ en:
       delivery: 'Delivery:'
       order_total: 'Order Total:'
       cheackout: Checkout
-      empty_cart: Your cart is empty, fill it and come back
+      empty_cart: "Your cart is empty, let's remove this ugly text by buying some books"
       book:
         product: Product
         price: Price
@@ -166,7 +167,6 @@ en:
     complete_page:
       thank_you: Thank You for your Order!
       msg_was_sent: "An order confirmation has been has been sent to %{email}"
-      order_number: "Order %{number}"
     errors:
       only_letters: can contain only letters
       only_numbers: can contain only numbers
@@ -192,3 +192,21 @@ en:
     remove: Remove Account
     please_remove: Please Remove My Account
     checkbox: I understand that all data will be lost
+  orders:
+    my_orders: My Orders
+    sort_by: Sort by
+    number: Number
+    completed_at: Completed at
+    status: Status
+    total: Total
+    order_number: "Order %{number}"
+    order_uniq_number: "%{number}"
+    confirm: Order unconfirmed
+    no_orders: "You don't have any orders, let's remove this ugly text by buying some books"
+    no_orders_status: "You don't have orders in '%{status}' status"
+    filters:
+      all: All Orders
+      in_queue: Waiting for processing
+      in_delivery: In Delivery
+      delivered: Delivered
+      canceled: Canceled

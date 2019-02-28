@@ -1,10 +1,16 @@
 class OrdersController < ApplicationController
-  LATEST = 'created_at desc'.freeze
+  include Rectify::ControllerHelpers
 
-  decorates_assigned :order_items
+  decorates_assigned :order_items, :orders, :order
+
+  def index
+    @user = current_user
+    @orders = OrdersFilterQuery.new(user: @user, params: params).call
+    present MyOrdersPresenter.new(user: @user, params: params, order: @orders)
+  end
 
   def show
-    @order = Order.find(params[:id])
-    @order_items = @order.order_items.order(LATEST).includes(book: :covers)
+    @order = Order.find_by(id: params[:id])
+    @order_items = OrderItemsQuery.new(@order).call
   end
 end

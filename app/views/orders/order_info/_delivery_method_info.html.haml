@@ -1,0 +1,6 @@
+.col-sm-3
+  %h3.general-subtitle
+    = t('checkout.confirm_page.shipments')
+  %p.general-address
+    = order.delivery_method_name
+    = link_to t('checkout.address_page.edit_link'), wizard_path(:delivery), class: 'general-edit' if checkout

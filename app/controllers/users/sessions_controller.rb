@@ -4,16 +4,20 @@ class Users::SessionsController < Devise::SessionsController
 
   def create
     self.resource = warden.authenticate!(auth_options)
-    set_flash_message!(:notice, :signed_in)
-    sign_in(resource_name, resource)
-    yield resource if block_given?
-    insert_order_to_user(resource) # custom operation
-    return redirect_to checkout_step_path(:address) if params[:user][:checkout_authenticate] # custom operation
+    successful_sign_in(resource_name, resource)
+    return redirect_to checkout_step_path(:address) if params[:user][:checkout_authenticate]
 
     respond_with resource, location: after_sign_in_path_for(resource)
   end
 
   private
+
+  def successful_sign_in(resource_name, resource)
+    set_flash_message!(:notice, :signed_in)
+    sign_in(resource_name, resource)
+    yield resource if block_given?
+    insert_order_to_user(resource)
+  end
 
   def insert_order_to_user(user)
     current_order.update(user_id: user.id) if user_have_not_current_order?(user)
