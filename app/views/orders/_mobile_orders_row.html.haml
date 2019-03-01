@@ -16,7 +16,7 @@
     %span.in-grey-600
       = t('orders.status')
   %td
-    %span.font-16.fw-300{ class: "#{order.aasm_state == Order::COMPLETE_STATUS ? 'text-success' : 'in-grey-900'}" }
+    %span.font-16.fw-300{ class: "#{order.aasm_state == Order::PROCESSING_STATUSES[:delivered] ? 'text-success' : 'in-grey-900'}" }
       = order.status
 %tr
   %td

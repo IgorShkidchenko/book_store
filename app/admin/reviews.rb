@@ -47,7 +47,7 @@ ActiveAdmin.register Review do
   end
 
   action_item :show_on_site, only: :show do
-    link_to t('admin.actions.show_on_site'), books_path(review.book) if review.status == Review::STATUSES[:approved]
+    link_to t('admin.actions.show_on_site'), book_path(review.book) if review.status == Review::STATUSES[:approved]
   end
 
   index do

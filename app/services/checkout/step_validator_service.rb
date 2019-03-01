@@ -12,10 +12,7 @@ class Checkout::StepValidatorService
     return @new_step = CheckoutStepsController::STEPS[:complete] if checkout_in_complete_state
 
     @order.editing? ? user_edit_step : standart_steps_flow
-  end
-
-  def valid?
-    @new_step == @step
+    valid?
   end
 
   private
@@ -39,5 +36,9 @@ class Checkout::StepValidatorService
 
   def current_step_disallowed_on_edit_step
     @step == CheckoutStepsController::STEPS[:complete] && @step == CheckoutStepsController::STEPS[:authenticate]
+  end
+
+  def valid?
+    @new_step == @step
   end
 end

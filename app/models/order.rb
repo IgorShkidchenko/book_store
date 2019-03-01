@@ -2,14 +2,20 @@ class Order < ActiveRecord::Base
   include AASM
 
   AASM_COLUMN_NAME = 'aasm_state'.freeze
-  COMPLETE_STATUS = 'delivered'.freeze
+  PROCESSING_STATUSES = {
+    in_progress: 'in_progress',
+    in_queue: 'in_queue',
+    in_delivery: 'in_delivery',
+    delivered: 'delivered',
+    canceled: 'canceled'
+  }.freeze
 
   belongs_to :user, optional: true
   belongs_to :delivery_method, optional: true
 
   has_many :order_items, dependent: :destroy
   has_many :books, through: :order_items
-  has_one :coupon
+  has_one :coupon, dependent: :nullify
   has_many :addresses, as: :addressable, dependent: :destroy
   has_one :credit_card, dependent: :destroy
 

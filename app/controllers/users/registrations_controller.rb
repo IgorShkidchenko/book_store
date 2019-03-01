@@ -6,7 +6,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     return checkout_authenticate if params[:user][:checkout_authenticate]
 
     super
-    set_order_to_user
+    set_order_to_user if session[:order_id]
   end
 
   def edit
@@ -23,7 +23,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def checkout_authenticate
     build_resource(sign_up_params)
     if resource.save
-      authenticate_user(resource_name, resource)
+      authenticate_user
       redirect_to checkout_step_path(:address)
     else
       flash[:danger] = resource.errors.full_messages.to_sentence
@@ -31,14 +31,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  def authenticate_user(resource_name, resource)
+  def authenticate_user
     sign_up(resource_name, resource)
-    set_order_to_user
+    set_order_to_user if session[:order_id]
     resource_class.send_reset_password_instructions(resource_params)
   end
 
   def set_order_to_user
-    current_order.update(user_id: resource.id) if session[:order_id]
+    current_order.update(user_id: resource.id)
   end
 
   def find_user_addresses

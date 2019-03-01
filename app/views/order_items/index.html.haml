@@ -19,7 +19,7 @@
               = t('cart.page.cheackout')
     .text-center
       = link_to t('cart.page.cheackout'),
-      (@order.user_id ? checkout_step_path(:address) : checkout_step_path(:quick_authenticate)),
+      (user_signed_in? ? checkout_step_path(:address) : checkout_step_path(:quick_authenticate)),
       class: 'btn btn-default mb-20 hidden-xs'
   - else
     .container

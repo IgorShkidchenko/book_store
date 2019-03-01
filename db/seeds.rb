@@ -5,21 +5,24 @@ def random_image
 end
 
 30.times { Author.create(name: Faker::Book.author) }
+all_authors = Author.all
 
-User.create(email: 'user@example.com', password: 'password')
-AdminUser.create(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+password = 'password'
+User.create(email: 'user@example.com', password: password)
+AdminUser.create(email: 'admin@example.com', password: password, password_confirmation: password)
+user_id = User.first.id
 
 Array.new(4) { Category.create(name: Faker::Book.genre) }.each do |category|
-  Faker::Number.between(20, 50).times do
+  rand(20..50).times do
     book = category.books.create(title: Faker::Book.title,
                                  price: Faker::Number.decimal(2),
-                                 description: Faker::Lorem.paragraph_by_chars(Faker::Number.between(300, 350), false),
-                                 published_year: Faker::Number.between(2000, Time.now.year),
+                                 description: Faker::Lorem.paragraph_by_chars(rand(300..350), false),
+                                 published_year: rand(2000..Time.now.year),
                                  height: Faker::Number.decimal(2),
                                  width: Faker::Number.decimal(2),
                                  depth: Faker::Number.decimal(2),
                                  materials: Faker::Science.element)
-    book.authors << Author.all.sample(Faker::Number.between(1, 2))
+    book.authors << all_authors.sample(rand(1..2))
   end
 
   category.books.first(5).each do |book|
@@ -29,10 +32,10 @@ Array.new(4) { Category.create(name: Faker::Book.genre) }.each do |category|
     end
     cover.save!
     book.reviews.create(title: Faker::Lorem.word, body: Faker::Lorem.sentence, status: Review::STATUSES[:approved],
-                        rating: Faker::Number.between(1, 5), user_id: User.first.id)
+                        rating: rand(1..5), user_id: user_id)
 
     book.reviews.create(title: Faker::Lorem.word, body: Faker::Lorem.sentence,
-                        rating: Faker::Number.between(1, 5), user_id: User.first.id)
+                        rating: rand(1..5), user_id: user_id)
   end
 end
 
@@ -41,3 +44,10 @@ end
 DeliveryMethod.create(name: 'Express Delivery', cost: 30, min_days: 1, max_days: 2)
 DeliveryMethod.create(name: 'Standart Delivery', cost: 10, min_days: 3, max_days: 7)
 DeliveryMethod.create(name: 'Pick up from our shop', cost: 0, min_days: 0, max_days: 0)
+
+Order::PROCESSING_STATUSES.each_value { |status| Order.create(user_id: user_id, aasm_state: status) }
+
+book_ids = Book.ids
+Order.count.times do |index|
+  rand(1..3).times { OrderItem.create(order_id: index + 1, book_id: book_ids.sample, quantity: rand(1..2)) }
+end

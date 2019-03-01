@@ -12,6 +12,7 @@ en:
     dashboard:
       books_count: "Books quantity: %{count}"
       users_count: "Users quantity: %{count}"
+      orders_count: "Orders quantity: %{count}"
     column:
       date: Date
     book_form:

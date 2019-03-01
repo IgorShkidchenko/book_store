@@ -1,6 +1,7 @@
 class CatalogPresenter < Rectify::Presenter
   attribute :params
   attribute :category, Category
+  attribute :categories, Category
 
   def chosen_filter
     filter = params[:filter]
@@ -9,6 +10,10 @@ class CatalogPresenter < Rectify::Presenter
 
   def all_filters
     category ? filters_with_category : standart_filters
+  end
+
+  def all_books_count
+    categories.sum(&:books_count)
   end
 
   private

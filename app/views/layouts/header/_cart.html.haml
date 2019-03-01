@@ -10,10 +10,10 @@
       .cart_link
         %span.shop-icon
           %span.shop-quantity
-            = order.cart_count
+            = order.order_items_count
 - if order.persisted?
   = link_to order_order_items_path(order), class: 'shop-link pull-right hidden-xs' do
     .cart_link
       %span.shop-icon
         %span.shop-quantity
-          = order.cart_count
+          = order.order_items_count

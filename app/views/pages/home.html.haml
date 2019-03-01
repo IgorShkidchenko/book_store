@@ -21,7 +21,8 @@
                 %p.lead.small
                   = book.authors_as_string
                 .general-align
-                  = link_to t('home.buy_button'), order_items_path(order_item: { book_id: book.id, quantity: 1 }),
+                  = link_to t('home.buy_button'),
+                  order_items_path(order_item: { book_id: book.id, quantity: OrderItemDecorator::MINIMUM_QUANTITY }),
                   remote: true, method: :post, class: 'button btn btn-primary'
     %a.left.carousel-control{ href: '#slider', role: 'button', 'data-slide': 'prev' }
       %span.icon-prev{ 'aria-hidden': 'true' }

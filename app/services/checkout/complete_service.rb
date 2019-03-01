@@ -1,4 +1,7 @@
 class Checkout::CompleteService
+  FIRST_ORDER_NUMBER_SYMBOL = '#R'.freeze
+  CURRENT_DATE = '%Y%m%d%H%M%S'.freeze
+
   def initialize(order)
     @order = order
   end
@@ -11,6 +14,6 @@ class Checkout::CompleteService
   private
 
   def generate_order_number
-    "#R#{Time.now.strftime('%Y%m%d%H%M%S')}#{@order.id}"
+    FIRST_ORDER_NUMBER_SYMBOL + Time.now.strftime(CURRENT_DATE)
   end
 end

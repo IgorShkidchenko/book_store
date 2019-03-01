@@ -14,13 +14,6 @@ class CoverUploader < CarrierWave::Uploader::Base
     'w500_default.png'
   end
 
-  # Process files as they are uploaded:
-  # process scale: [200, 300]
-  #
-  # def scale(width, height)
-  #   # do something
-  # end
-
   version :w500 do
     process resize_to_fit: [554, nil]
   end
@@ -32,10 +25,4 @@ class CoverUploader < CarrierWave::Uploader::Base
   def extension_whitelist
     %w(jpg jpeg gif png)
   end
-
-  # Override the filename of the uploaded files:
-  # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  # def filename
-  #   "something.jpg" if original_filename
-  # end
 end

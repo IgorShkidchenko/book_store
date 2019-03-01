@@ -1,4 +1,4 @@
-class Order::FinderService
+class Orders::FinderService
   def initialize(order_id, user)
     @order_id = order_id
     @user = user

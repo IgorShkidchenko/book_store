@@ -9,7 +9,7 @@ class BooksController < ApplicationController
     @categories = Category.all
     @category = Category.find_by(id: params[:category_id])
     @pagy, @chosen_books = pagy(which_books_to_shown)
-    present CatalogPresenter.new(params: params, category: @category)
+    present CatalogPresenter.new(params: params, category: @category, categories: @categories)
   end
 
   def show

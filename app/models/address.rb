@@ -1,11 +1,11 @@
 class Address < ApplicationRecord
-  TYPES = {
+  KINDS = {
     billing: 'billing',
     shipping: 'shipping'
   }.freeze
 
   belongs_to :addressable, polymorphic: true
 
-  scope :billing, -> { where(kind: TYPES[:billing]) }
-  scope :shipping, -> { where(kind: TYPES[:shipping]) }
+  scope :billing, -> { where(kind: KINDS[:billing]) }
+  scope :shipping, -> { where(kind: KINDS[:shipping]) }
 end

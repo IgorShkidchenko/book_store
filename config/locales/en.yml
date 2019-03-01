@@ -206,7 +206,10 @@ en:
     no_orders_status: "You don't have orders in '%{status}' status"
     filters:
       all: All Orders
+      in_progress: Waiting for payment
       in_queue: Waiting for processing
       in_delivery: In Delivery
       delivered: Delivered
       canceled: Canceled
+  order_page:
+    title: Order Info

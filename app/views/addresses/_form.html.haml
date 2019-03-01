@@ -5,4 +5,4 @@
 = f.input :zip, as: :string, label: t('checkout.address_page.form.zip'), placeholder: t('checkout.address_page.form.zip')
 = f.input :country, priority: ['UA'], label: t('checkout.address_page.form.country'), placeholder: t('checkout.address_page.form.country_select')
 = f.input :phone, as: :tel, label: t('checkout.address_page.form.phone'), placeholder: t('checkout.address_page.form.phone_example')
-= f.hidden_field :kind, value: current_type
+= f.hidden_field :kind, value: address_kind

@@ -10,7 +10,7 @@ class OrderDecorator < Draper::Decorator
     coupon ? I18n.t('price', price: coupon.discount) : ZERO_AMOUNT
   end
 
-  def cart_count
+  def order_items_count
     order_items.sum(&:quantity)
   end
 
@@ -19,11 +19,11 @@ class OrderDecorator < Draper::Decorator
   end
 
   def subtotal_price
-    I18n.t('price', price: Order::PriceCalculatorService.new(self).subtotal_price)
+    I18n.t('price', price: Orders::PriceCalculatorService.new(self).subtotal_price)
   end
 
   def total_price
-    I18n.t('price', price: Order::PriceCalculatorService.new(self).total_price)
+    I18n.t('price', price: Orders::PriceCalculatorService.new(self).total_price)
   end
 
   def clone_address

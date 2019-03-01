@@ -5,6 +5,16 @@ class Checkout::FormVariablesService
     @order = order
   end
 
+  def call(step)
+    case step
+    when CheckoutStepsController::STEPS[:address] then set_addresses_variables
+    when CheckoutStepsController::STEPS[:delivery] then set_delivery_variable
+    when CheckoutStepsController::STEPS[:payment] then set_credit_card_variable
+    end
+  end
+
+  private
+
   def set_delivery_variable
     @delivery_methods = DeliveryMethod.all
   end
@@ -14,14 +24,12 @@ class Checkout::FormVariablesService
   end
 
   def set_addresses_variables
-    @billing = AddressForm.new chosed_address(Address::TYPES[:billing])
-    @shipping = AddressForm.new chosed_address(Address::TYPES[:shipping])
+    @billing = AddressForm.new chosed_address(Address::KINDS[:billing])
+    @shipping = AddressForm.new chosed_address(Address::KINDS[:shipping])
   end
 
-  private
-
   def chosed_address(kind)
-    if kind == Address::TYPES[:billing]
+    if kind == Address::KINDS[:billing]
       @order.addresses.billing.last&.attributes || @order.user.addresses.billing.last&.attributes
     else
       @order.addresses.shipping.last&.attributes || @order.user.addresses.shipping.last&.attributes

@@ -4,8 +4,9 @@ ActiveAdmin.register_page 'Dashboard' do
   content title: proc { I18n.t('active_admin.dashboard') } do
     div class: 'blank_slate_container', id: 'dashboard_default_message' do
       span class: 'blank_slate' do
-        para I18n.t('admin.dashboard.users_count', count: User.all.count)
-        para I18n.t('admin.dashboard.books_count', count: Book.all.count)
+        para I18n.t('admin.dashboard.users_count', count: User.count)
+        para I18n.t('admin.dashboard.books_count', count: Book.count)
+        para I18n.t('admin.dashboard.orders_count', count: Order.count)
       end
     end
   end

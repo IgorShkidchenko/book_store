@@ -1,6 +1,5 @@
 class OrdersFilterQuery
   CHECKOUT_STATUSES = %w[new fill_delivery fill_payment editing].freeze
-  VALID_FILTERS = %w[in_queue in_delivery delivered canceled].freeze
 
   def initialize(user:, params:)
     @filter = params[:filter]
@@ -14,7 +13,7 @@ class OrdersFilterQuery
   private
 
   def filter_valid?
-    VALID_FILTERS.include? @filter
+    Order::PROCESSING_STATUSES.value?(@filter)
   end
 
   def all_user_orders

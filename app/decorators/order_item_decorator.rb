@@ -1,8 +1,10 @@
 class OrderItemDecorator < Draper::Decorator
+  MINIMUM_QUANTITY = 1
+
   delegate_all
 
   def minus_quantity_link
-    css_class = "input-link #{'disable_minus' if order_item.quantity == 1}"
+    css_class = "input-link #{'disable_minus' if order_item.quantity == MINIMUM_QUANTITY}"
     h.link_to h.order_item_path(order_item, order_item: { command: nil }), remote: true, method: :put,
                                                                            class: css_class do
       h.content_tag(:i, '', class: 'fa fa-minus line-heaght-40')

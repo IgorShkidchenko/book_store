@@ -1,4 +1,4 @@
-class Order::PriceCalculatorService
+class Orders::PriceCalculatorService
   ZERO_AMOUNT = 0
 
   def initialize(order)

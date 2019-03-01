@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
   def index
     @user = current_user
     @orders = OrdersFilterQuery.new(user: @user, params: params).call
-    present MyOrdersPresenter.new(user: @user, params: params, order: @orders)
+    present MyOrdersPresenter.new(user: @user, params: params, orders: @orders)
   end
 
   def show

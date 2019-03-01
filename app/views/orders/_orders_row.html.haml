@@ -5,7 +5,7 @@
     %span.in-grey-900.font-16.fw-300
       = order.creation_date
   %td
-    %span.font-16.fw-300{ class: "#{order.aasm_state == Order::COMPLETE_STATUS ? 'text-success' : 'in-grey-900'}" }
+    %span.font-16.fw-300{ class: "#{order.aasm_state == Order::PROCESSING_STATUSES[:delivered] ? 'text-success' : 'in-grey-900'}" }
       = order.status
   %td
     %p.font-16

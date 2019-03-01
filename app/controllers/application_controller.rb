@@ -10,16 +10,6 @@ class ApplicationController < ActionController::Base
   end
 
   def current_order
-    Order::FinderService.new(session[:order_id], current_user).call
+    Orders::FinderService.new(session[:order_id], current_user).call
   end
 end
-
-# TODO: send email to user
-# TODO: orders active admin
-# TODO: devise no password
-# TODO: enum
-# TODO: cancancan
-# TODO: aws
-# TODO: english
-# TODO: tests
-# TODO: orders merge

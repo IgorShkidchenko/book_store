@@ -20,7 +20,7 @@ class BooksFilterQuery
   private
 
   def popular_books
-    @books.joins(:order_items).group(:id).order('count(order_items.id) desc')
+    @books.joins(:order_items).group(:id).order(BestSellersQuery::COUNT_BY_ITEMS_ID_DESC).includes(:authors)
   end
 
   def simple_ordered_books

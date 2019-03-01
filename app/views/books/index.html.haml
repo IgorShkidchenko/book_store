@@ -11,7 +11,7 @@
         = link_to books_path, class: 'filter-link' do
           = t('catalog.all')
           %span.badge.general-badge
-            = @categories.sum(&:books_count)
+            = presenter.all_books_count
       - @categories.each do |category|
         %li.mr-35
           = link_to category_books_path(category), class: "filter-link #{'in-gold-500' if @category == category}" do

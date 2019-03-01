@@ -17,6 +17,7 @@ class AddressForm
   attribute :zip, Integer
   attribute :phone, String
   attribute :kind, String
+  attribute :id, Integer
 
   validates :first_name, :last_name, :country, :city,
             presence: true,
@@ -40,7 +41,7 @@ class AddressForm
 
   validates :kind,
             presence: true,
-            inclusion: { in: [Address::TYPES[:billing], Address::TYPES[:shipping]] }
+            inclusion: { in: [Address::KINDS[:billing], Address::KINDS[:shipping]] }
 
   def save(entity)
     return false unless valid?

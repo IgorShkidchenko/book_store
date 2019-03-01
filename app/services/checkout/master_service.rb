@@ -7,30 +7,30 @@ class Checkout::MasterService
   end
 
   def show
-    @form = Checkout::FormVariablesService.new(@order)
     case @step
-    when CheckoutStepsController::STEPS[:address] then @form.set_addresses_variables
-    when CheckoutStepsController::STEPS[:delivery] then @form.set_delivery_variable
-    when CheckoutStepsController::STEPS[:payment] then @form.set_credit_card_variable
+    when CheckoutStepsController::STEPS[:authenticate] then nil
     when CheckoutStepsController::STEPS[:edit] then set_order_items
     when CheckoutStepsController::STEPS[:complete] then complete_checkout
+    else
+      @form = Checkout::FormVariablesService.new(@order)
+      @form.call(@step)
     end
   end
 
   def update(params)
-    @form = Checkout::UpdaterService.new(order: @order, params: params)
+    arguments = { order: @order, params: params }
     case @step
-    when CheckoutStepsController::STEPS[:address] then @form.change_addresses
-    when CheckoutStepsController::STEPS[:delivery] then @form.change_delivery_method
-    when CheckoutStepsController::STEPS[:payment] then @form.change_credit_card
+    when CheckoutStepsController::STEPS[:address] then @form = Checkout::Updater::AddressesService.new(arguments)
+    when CheckoutStepsController::STEPS[:delivery] then @form = Checkout::Updater::DeliveryMethodsService.new(arguments)
+    when CheckoutStepsController::STEPS[:payment] then @form = Checkout::Updater::CreditCardsService.new(arguments)
     end
+    @form.call
     @form.valid?
   end
 
   def step_valid?(authenticate)
     @step_validator = Checkout::StepValidatorService.new(order: @order, step: @step, authenticate: authenticate)
     @step_validator.call
-    @step_validator.valid?
   end
 
   private
