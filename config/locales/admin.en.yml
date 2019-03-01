@@ -21,3 +21,5 @@ en:
       cover_title: Book covers
     coupon:
       generate: Generate coupon
+    order:
+      status: State

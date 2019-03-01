@@ -51,7 +51,6 @@ ActiveAdmin.register Review do
   end
 
   index do
-    selectable_column
     render 'admin/reviews/index', context: self
   end
 end

@@ -37,7 +37,7 @@ describe 'Cart page', type: :feature, js: true do
 
   describe 'when change order_item quantity' do
     context 'when plus quantity' do
-      let!(:updated_order_price) { (book.price * order_item.quantity) + book.price }
+      let!(:updated_order_price) { ((book.price * order_item.quantity) + book.price).round(2) }
       let!(:incrased_quantity) { (order_item.quantity + 1).to_s }
 
       before do
@@ -52,8 +52,8 @@ describe 'Cart page', type: :feature, js: true do
     end
 
     context 'when minus quantity' do
+      let!(:updated_order_price) { ((book.price * order_item.quantity) - book.price).round(2) }
       let!(:decrased_quantity) { (order_item.quantity - 1).to_s }
-      let!(:updated_order_price) { (book.price * order_item.quantity) - book.price }
 
       before do
         sleep(1)

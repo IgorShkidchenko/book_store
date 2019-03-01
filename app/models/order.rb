@@ -19,6 +19,12 @@ class Order < ActiveRecord::Base
   has_many :addresses, as: :addressable, dependent: :destroy
   has_one :credit_card, dependent: :destroy
 
+  scope :in_progress, -> { where(aasm_state: PROCESSING_STATUSES[:in_progress]) }
+  scope :in_queue, -> { where(aasm_state: PROCESSING_STATUSES[:in_queue]) }
+  scope :in_delivery, -> { where(aasm_state: PROCESSING_STATUSES[:in_delivery]) }
+  scope :delivered, -> { where(aasm_state: PROCESSING_STATUSES[:delivered]) }
+  scope :canceled, -> { where(aasm_state: PROCESSING_STATUSES[:canceled]) }
+
   aasm column: AASM_COLUMN_NAME do
     state :new, initial: true
     state :fill_delivery
