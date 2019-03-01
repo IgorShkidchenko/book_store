@@ -29,7 +29,6 @@ RSpec.describe Admin::ReviewsController, type: :controller do
       it { expect(page).to have_content I18n.t('admin.column.date') }
       it { expect(page).to have_content review.user.email }
       it { expect(page).to have_content review.status }
-      it { expect(page).to have_content review.rating }
       it { expect(page).to have_content I18n.t('admin.actions.show') }
       it { expect(page).to have_content Review::STATUSES[:unprocessed] }
       it { expect(page).to have_content Review::STATUSES[:approved] }
