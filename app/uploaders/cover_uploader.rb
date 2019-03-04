@@ -1,11 +1,9 @@
 class CoverUploader < CarrierWave::Uploader::Base
-   include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
+  storage :aws
 
-  storage :file
-  # storage :fog
-
-  def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  def download_url(filename)
+    url(response_content_disposition: %Q{attachment; filename="#{filename}"})
   end
 
   def default_url

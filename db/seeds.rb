@@ -1,9 +1,5 @@
 require 'faker'
 
-def random_image
-  "public/img/#{rand(1..15)}.jpg"
-end
-
 30.times { Author.create(name: Faker::Book.author) }
 all_authors = Author.all
 
@@ -27,11 +23,6 @@ Array.new(4) { Category.create(name: Faker::Book.genre) }.each do |category|
   end
 
   category.books.first(5).each do |book|
-    cover = book.covers.create
-    File.open(random_image) do |f|
-      cover.image = f
-    end
-    cover.save!
     book.reviews.create(title: Faker::Lorem.word, body: Faker::Lorem.sentence, status: Review::STATUSES[:approved],
                         rating: rand(1..5), user_id: user.id)
 

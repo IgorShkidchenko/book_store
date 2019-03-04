@@ -9,6 +9,7 @@ gem 'activeadmin_simplemde'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap-sass'
 gem 'carrierwave', '~> 1.0'
+gem 'carrierwave-aws'
 gem 'cancancan', '~> 2.0'
 gem 'coffee-rails', '~> 4.2', require: false
 gem 'country_select'

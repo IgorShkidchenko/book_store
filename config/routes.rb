@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
-  DEVELOPMENT_ENVIRONMENT = 'development'.freeze
-
   require 'sidekiq/web'
-  mount Sidekiq::Web => '/sidekiq' if ENV['RAILS_ENV'] == DEVELOPMENT_ENVIRONMENT
+  mount Sidekiq::Web => '/sidekiq' if Rails.env.development?
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
