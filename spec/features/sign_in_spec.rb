@@ -38,10 +38,12 @@ describe 'Sign in', type: :feature, js: true do
       end
     end
 
-    it 'Facebook' do
-      valid_facebook_login_setup
-      first('.fa-facebook-official').click
-      expect(page).to have_current_path root_path
+    context 'when Facebook' do
+      it do
+        valid_facebook_login_setup
+        first('.fa-facebook-official').click
+        expect(page).to have_current_path root_path
+      end
     end
   end
 end

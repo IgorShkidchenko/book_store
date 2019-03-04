@@ -7,7 +7,7 @@ class AddressForm
   PLUS_WITH_NUMBERS_PHONE_REGEX = /\+{1}[0-9]/.freeze
   TEXT_FIELD_MAX_LENGHT = 50
   ZIP_MAX_LENGHT = 10
-  PHONE_MAX_LENGHT = 10
+  PHONE_MAX_LENGHT = 15
 
   attribute :first_name, String
   attribute :last_name, String

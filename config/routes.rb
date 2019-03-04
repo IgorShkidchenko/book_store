@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  DEVELOPMENT_ENVIRONMENT = 'development'.freeze
+
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq' if ENV['RAILS_ENV'] == DEVELOPMENT_ENVIRONMENT
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks',

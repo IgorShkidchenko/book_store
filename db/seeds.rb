@@ -7,10 +7,11 @@ end
 30.times { Author.create(name: Faker::Book.author) }
 all_authors = Author.all
 
-password = 'password'
-User.create(email: 'user@example.com', password: password)
+password = 'password'.freeze
+user = User.new(email: 'user@example.com', password: password)
+user.skip_confirmation!
+user.save!
 AdminUser.create(email: 'admin@example.com', password: password, password_confirmation: password)
-user_id = User.first.id
 
 Array.new(4) { Category.create(name: Faker::Book.genre) }.each do |category|
   rand(20..50).times do
@@ -32,10 +33,10 @@ Array.new(4) { Category.create(name: Faker::Book.genre) }.each do |category|
     end
     cover.save!
     book.reviews.create(title: Faker::Lorem.word, body: Faker::Lorem.sentence, status: Review::STATUSES[:approved],
-                        rating: rand(1..5), user_id: user_id)
+                        rating: rand(1..5), user_id: user.id)
 
     book.reviews.create(title: Faker::Lorem.word, body: Faker::Lorem.sentence,
-                        rating: rand(1..5), user_id: user_id)
+                        rating: rand(1..5), user_id: user.id)
   end
 end
 
@@ -45,7 +46,7 @@ DeliveryMethod.create(name: 'Express Delivery', cost: 30, min_days: 1, max_days:
 DeliveryMethod.create(name: 'Standart Delivery', cost: 10, min_days: 3, max_days: 7)
 DeliveryMethod.create(name: 'Pick up from our shop', cost: 0, min_days: 0, max_days: 0)
 
-Order::PROCESSING_STATUSES.each_value { |status| Order.create(user_id: user_id, aasm_state: status) }
+Order::PROCESSING_STATUSES.each_value { |status| Order.create(user_id: user.id, aasm_state: status) }
 
 book_ids = Book.ids
 Order.count.times do |index|

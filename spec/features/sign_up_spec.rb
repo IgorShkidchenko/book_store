@@ -15,7 +15,7 @@ describe 'Sign up', type: :feature, js: true do
     fill_in 'user[password]', with: valid_data[:password]
     fill_in 'user[password_confirmation]', with: valid_data[:password]
     first('.btn-default').click
-    expect(page).to have_content I18n.t('devise.registrations.signed_up')
+    expect(page).to have_content I18n.t('devise.registrations.signed_up_but_unconfirmed')
   end
 
   it 'sign up with invalid data' do

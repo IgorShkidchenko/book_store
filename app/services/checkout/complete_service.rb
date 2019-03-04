@@ -8,14 +8,14 @@ class Checkout::CompleteService
 
   def call
     final_updates if @order.in_progress!
-    # send email
+    OrderConfirmationMailerWorker.perform_async(@order.id)
   end
 
   private
 
   def final_updates
     @order.update(number: generate_order_number)
-    @order.coupon.update(used: true)
+    @order.coupon.update(used: true) if @order.coupon
   end
 
   def generate_order_number
