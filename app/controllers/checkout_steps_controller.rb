@@ -11,9 +11,9 @@ class CheckoutStepsController < ApplicationController
   include CheckoutStepsHelper
   include Wicked::Wizard
 
-  decorates_assigned :order
   before_action :set_order_and_checkout_master, :check_cart
   before_action :validate_step, only: :show
+  decorates_assigned :order
 
   steps STEPS[:authenticate], STEPS[:address], STEPS[:delivery], STEPS[:payment], STEPS[:edit], STEPS[:complete]
 

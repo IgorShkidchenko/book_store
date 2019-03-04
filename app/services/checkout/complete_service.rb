@@ -7,11 +7,16 @@ class Checkout::CompleteService
   end
 
   def call
-    @order.update(number: generate_order_number) if @order.in_progress!
+    final_updates if @order.in_progress!
     # send email
   end
 
   private
+
+  def final_updates
+    @order.update(number: generate_order_number)
+    @order.coupon.update(used: true)
+  end
 
   def generate_order_number
     FIRST_ORDER_NUMBER_SYMBOL + Time.now.strftime(CURRENT_DATE)

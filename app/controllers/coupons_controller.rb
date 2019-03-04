@@ -1,4 +1,5 @@
 class CouponsController < ApplicationController
+  authorize_resource
   respond_to :js
 
   def update

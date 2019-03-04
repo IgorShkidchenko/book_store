@@ -1,7 +1,11 @@
 class ApplicationController < ActionController::Base
-  before_action :set_header_presenter
   protect_from_forgery with: :exception
+  before_action :set_header_presenter
   helper_method :current_order
+
+  rescue_from CanCan::AccessDenied do
+    redirect_to root_path, flash: { danger: I18n.t('cancan.error') }
+  end
 
   private
 

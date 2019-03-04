@@ -1,13 +1,11 @@
 class AddressesController < ApplicationController
+  authorize_resource
   respond_to :js
+  before_action :change_address
 
-  def create
-    change_address
-  end
+  def create; end
 
-  def update
-    change_address
-  end
+  def update; end
 
   private
 
@@ -19,6 +17,6 @@ class AddressesController < ApplicationController
   end
 
   def address_params
-    params.require(:address_form).permit(%i[first_name last_name street city zip country phone kind])
+    params.require(:address_form).permit(%i[first_name last_name street city zip country phone kind id])
   end
 end

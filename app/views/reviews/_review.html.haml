@@ -1,4 +1,4 @@
-= render 'reviews/form', book: book if user_signed_in?
+= render 'reviews/form', book: book if can? :create, Review
 .mb-80
   %h3.in-gold-500.mb-25
     = t('review.count', count: book.approved_reviews_count)

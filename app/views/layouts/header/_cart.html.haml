@@ -4,7 +4,7 @@
     %span.icon-bar
     %span.icon-bar
     %span.icon-bar
-  = link_to t('layout.header.bookstore'), root_path, class: 'navbar-brand'
+  = link_to t('layout.header.bookstore'), root_path, class: 'navbar-brand in-gold-500'
   - if order.persisted?
     = link_to order_order_items_path(order), class: 'shop-link pull-right visible-xs' do
       .cart_link

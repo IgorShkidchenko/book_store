@@ -1,6 +1,4 @@
 class OrdersFilterQuery
-  CHECKOUT_STATUSES = %w[new fill_delivery fill_payment editing].freeze
-
   def initialize(user:, params:)
     @filter = params[:filter]
     @user = user
@@ -17,7 +15,7 @@ class OrdersFilterQuery
   end
 
   def all_user_orders
-    @user.orders.where.not(aasm_state: CHECKOUT_STATUSES).includes(:coupon, :delivery_method)
+    @user.orders.where.not(aasm_state: Order::CHECKOUT_STATUSES).includes(:coupon, :delivery_method)
   end
 
   def filtred_orders

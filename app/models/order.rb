@@ -2,6 +2,7 @@ class Order < ActiveRecord::Base
   include AASM
 
   AASM_COLUMN_NAME = 'aasm_state'.freeze
+  CHECKOUT_STATUSES = %w[new fill_delivery fill_payment editing].freeze
   PROCESSING_STATUSES = {
     in_progress: 'in_progress',
     in_queue: 'in_queue',
@@ -15,10 +16,11 @@ class Order < ActiveRecord::Base
 
   has_many :order_items, dependent: :destroy
   has_many :books, through: :order_items
-  has_one :coupon, dependent: :nullify
   has_many :addresses, as: :addressable, dependent: :destroy
+  has_one :coupon, dependent: :nullify
   has_one :credit_card, dependent: :destroy
 
+  scope :user_checkout_orders, ->(user_id) { where(aasm_state: CHECKOUT_STATUSES, user_id: user_id) }
   scope :in_progress, -> { where(aasm_state: PROCESSING_STATUSES[:in_progress]) }
   scope :in_queue, -> { where(aasm_state: PROCESSING_STATUSES[:in_queue]) }
   scope :in_delivery, -> { where(aasm_state: PROCESSING_STATUSES[:in_delivery]) }

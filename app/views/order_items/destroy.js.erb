@@ -4,6 +4,9 @@ $('div.<%= @order_item.id %>').fadeOut();
 $('div.<%= @order.id %>').replaceWith("<%= j render 'orders/order_info/order_summary', order: @order.decorate, right: true %>");
 $('.flash').html("<%= j render partial: 'layouts/flash', locals: { danger: flash[:danger] } %>");
 
-if('<%= @order.order_items.count == OrderItem::MINIMUN_QUANTITY %>'){
+var items_quantity = '<%= @order.order_items.count %>';
+var min_quantity = '<%= OrderItem::MINIMUN_QUANTITY %>';
+
+if(items_quantity == min_quantity){
     location.reload();
 }

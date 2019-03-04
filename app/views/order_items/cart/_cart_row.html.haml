@@ -14,5 +14,6 @@
     %span.font-16.in-gold-500{ class: order_item.id.to_s }
       = order_item.total_price
   %td
-    = button_to order_item_path(order_item), remote: true, method: :delete, class: "close general-cart-close #{'hidden' if @order.may_canceled?}" do
-      %span{ 'aria-hidden': 'true' } &times;
+    - if can? :destroy, order_item.order_item
+      = button_to order_item_path(order_item), remote: true, method: :delete, class: 'close general-cart-close' do
+        %span{ 'aria-hidden': 'true' } &times;

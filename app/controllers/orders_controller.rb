@@ -1,6 +1,8 @@
 class OrdersController < ApplicationController
   include Rectify::ControllerHelpers
 
+  load_resource only: :show
+  authorize_resource
   decorates_assigned :order_items, :orders, :order
 
   def index
@@ -10,7 +12,6 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find_by(id: params[:id])
     @order_items = OrderItemsQuery.new(@order).call
   end
 end

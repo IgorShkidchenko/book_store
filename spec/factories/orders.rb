@@ -13,5 +13,9 @@ FactoryBot.define do
         create(:coupon, order: order)
       end
     end
+
+    trait :with_user do
+      user
+    end
   end
 end

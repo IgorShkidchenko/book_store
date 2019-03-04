@@ -1,10 +1,10 @@
 class OrderItemsController < ApplicationController
-  decorates_assigned :order_items
-
-  before_action :set_order
-  before_action :set_order_item, only: %i[update destroy]
+  load_resource only: %i[update destroy]
+  authorize_resource
 
   respond_to :js
+  before_action :set_order
+  decorates_assigned :order_items
 
   def index
     @order_items = OrderItemsQuery.new(@order).call
@@ -33,9 +33,5 @@ class OrderItemsController < ApplicationController
 
   def set_order
     @order = current_order
-  end
-
-  def set_order_item
-    @order_item = OrderItem.find_by(id: params[:id])
   end
 end

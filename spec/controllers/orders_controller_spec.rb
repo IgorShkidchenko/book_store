@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe OrdersController, type: :controller do
-  let(:order) { FactoryBot.create(:order) }
+  let(:order) { FactoryBot.create(:order, :with_user) }
+  let(:user) { order.user }
 
   describe 'when visit show page' do
     before do
-      get :show, params: { id: order.id }, session: { order_id: order.id }
+      allow(controller).to receive(:current_user).and_return(user)
+      get :show, params: { id: order.id }
     end
 
     it { is_expected.to render_template 'show' }

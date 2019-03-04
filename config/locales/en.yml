@@ -213,3 +213,5 @@ en:
       canceled: Canceled
   order_page:
     title: Order Info
+  cancan:
+    error: AccessDenied

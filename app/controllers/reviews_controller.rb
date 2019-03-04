@@ -1,4 +1,6 @@
 class ReviewsController < ApplicationController
+  authorize_resource
+
   def create
     review = ReviewForm.new(review_params)
     review.save ? flash[:success] = t('review.success_msg') : flash[:danger] = review.errors.full_messages.to_sentence

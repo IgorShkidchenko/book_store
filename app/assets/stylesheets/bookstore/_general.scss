@@ -237,18 +237,26 @@ img {
   float: right;
 }
 
+.navbar-brand {
+  font-size: large;
+}
+
 /*flash*/
 
-.alert-alert {
+.alert-alert, .alert-danger  {
   background-color: #f2dede;
   border-color: #eed3d7;
   color: #b94a48;
+  width: 70%;
+  margin: 30px auto;
 }
 
-.alert-notice {
+.alert-notice, .alert-success {
   background-color: #dff0d8;
   border-color: #d6e9c6;
   color: #468847;
+  width: 70%;
+  margin: 30px auto;
 }
 
 @media (min-width: $grid-float-breakpoint) {
