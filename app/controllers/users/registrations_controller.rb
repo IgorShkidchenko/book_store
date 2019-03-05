@@ -22,6 +22,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def checkout_authenticate
     build_resource(sign_up_params)
+    resource.skip_confirmation!
     if resource.save
       authenticate_user
       redirect_to checkout_step_path(:address)
@@ -42,7 +43,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def find_user_addresses
-    @billing = AddressForm.new(resource.addresses.billing.first&.attributes)
-    @shipping = AddressForm.new(resource.addresses.shipping.first&.attributes)
+    user_addresses = resource.addresses
+    @billing = AddressForm.new(user_addresses.billing.first&.attributes)
+    @shipping = AddressForm.new(user_addresses.shipping.first&.attributes)
   end
 end

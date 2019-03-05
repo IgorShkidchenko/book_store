@@ -28,6 +28,7 @@ directories:
 
 exclude_paths:
   - db/
+  - config/initializers/
   - spec/
   - 'app/controllers/coupons_controller.rb'
   - 'app/controllers/books_controller.rb'

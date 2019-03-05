@@ -58,7 +58,7 @@
         .visible-xs.visible-sm
           %h3.general-subtitle
             = t('checkout.address_page.shipping')
-        #shipping_form
+        #shipping-form
           = f.simple_fields_for :shipping, @checkout.form.shipping do |shipping_address|
             = render 'addresses/form', f: shipping_address, address_kind: Address::KINDS[:shipping]
         .checkbox.form_group

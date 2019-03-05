@@ -15,7 +15,7 @@ class Checkout::CompleteService
 
   def final_updates
     @order.update(number: generate_order_number)
-    @order.coupon.update(used: true) if @order.coupon
+    @order.coupon&.update(used: true)
   end
 
   def generate_order_number

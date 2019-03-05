@@ -1,10 +1,10 @@
 $( document ).on('turbolinks:load', function(){
     $('.clone_check').change(function(e) {
         if(this.checked) {
-            $('#shipping_form').slideUp(700);
+            $('#shipping-form').slideUp(700);
         }
         else {
-            $('#shipping_form').slideDown(700);
+            $('#shipping-form').slideDown(700);
         }
     });
 

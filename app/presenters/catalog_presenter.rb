@@ -4,8 +4,8 @@ class CatalogPresenter < Rectify::Presenter
   attribute :categories, Category
 
   def chosen_filter
-    filter = params[:filter]
-    filter ? I18n.t("catalog.dropdown.#{BooksFilterQuery::VALID_FILTERS.key(filter)}") : I18n.t('catalog.dropdown.newest')
+    filter = BooksFilterQuery::VALID_FILTERS.key(params[:filter])
+    filter ? I18n.t("catalog.dropdown.#{filter}") : I18n.t('catalog.dropdown.newest')
   end
 
   def all_filters

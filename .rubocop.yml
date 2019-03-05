@@ -24,6 +24,12 @@ Bundler/OrderedGems:
 
 Metrics/BlockLength:
   ExcludedMethods: ['describe', 'ActiveAdmin.register']
+  Exclude:
+    - 'app/models/order.rb'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'app/models/ability.rb'
 
 AllCops:
   Exclude:
@@ -40,6 +46,9 @@ Style/UnneededInterpolation:
 Metrics/AbcSize:
   Exclude:
     - 'app/controllers/coupons_controller.rb'
+    - 'app/presenters/catalog_presenter.rb'
+    - 'app/controllers/users/registrations_controller.rb'
+    - 'app/services/checkout/form_variables_service.rb'
 
 RSpec/MessageChain:
   Enabled: false

@@ -39,12 +39,13 @@ class OrderDecorator < Draper::Decorator
   private
 
   def same_addresses?(order)
-    return if order.addresses.empty?
+    addresses = order.addresses
+    return if addresses.empty?
 
-    billing = order.addresses.billing.take.attributes.slice('first_name', 'last_name',
-                                                            'street', 'country', 'zip', 'phone', 'city')
-    shipping = order.addresses.shipping.take.attributes.slice('first_name', 'last_name',
-                                                              'street', 'country', 'zip', 'phone', 'city')
+    billing = addresses.billing.take.attributes.slice('first_name', 'last_name',
+                                                      'street', 'country', 'zip', 'phone', 'city')
+    shipping = addresses.shipping.take.attributes.slice('first_name', 'last_name',
+                                                        'street', 'country', 'zip', 'phone', 'city')
     billing == shipping
   end
 end

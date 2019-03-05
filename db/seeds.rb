@@ -37,7 +37,15 @@ DeliveryMethod.create(name: 'Express Delivery', cost: 30, min_days: 1, max_days:
 DeliveryMethod.create(name: 'Standart Delivery', cost: 10, min_days: 3, max_days: 7)
 DeliveryMethod.create(name: 'Pick up from our shop', cost: 0, min_days: 0, max_days: 0)
 
-Order::PROCESSING_STATUSES.each_value { |status| Order.create(user_id: user.id, aasm_state: status) }
+def uniq_code_number
+  Checkout::CompleteService::FIRST_ORDER_NUMBER_SYMBOL + Time.now.strftime(Checkout::CompleteService::CURRENT_DATE)
+end
+
+Order::PROCESSING_STATUSES.each_value do |status|
+  Order.create(user_id: user.id,
+               aasm_state: status,
+               number: uniq_code_number)
+end
 
 book_ids = Book.ids
 Order.count.times do |index|
