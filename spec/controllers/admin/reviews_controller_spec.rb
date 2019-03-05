@@ -22,7 +22,7 @@ RSpec.describe Admin::ReviewsController, type: :controller do
       it { is_expected.to respond_with 200 }
       it { is_expected.to render_template 'index' }
       it { expect(assigns(:reviews)).to include review }
-      it { expect(review.status).to eq Review::STATUSES[:unprocessed] }
+      it { expect(review.unprocessed?).to eq true }
       it { expect(page).to have_content review.book.title }
       it { expect(page).to have_content review.title }
       it { expect(page).to have_content review.body }
@@ -30,9 +30,9 @@ RSpec.describe Admin::ReviewsController, type: :controller do
       it { expect(page).to have_content review.user.email }
       it { expect(page).to have_content review.status }
       it { expect(page).to have_content I18n.t('admin.actions.show') }
-      it { expect(page).to have_content Review::STATUSES[:unprocessed] }
-      it { expect(page).to have_content Review::STATUSES[:approved] }
-      it { expect(page).to have_content Review::STATUSES[:rejected] }
+      it { expect(page).to have_content Review::STATUSES.key(0).to_s.capitalize }
+      it { expect(page).to have_content Review::STATUSES.key(1).to_s.capitalize }
+      it { expect(page).to have_content Review::STATUSES.key(2).to_s.capitalize }
     end
 
     describe 'when show' do
@@ -46,8 +46,8 @@ RSpec.describe Admin::ReviewsController, type: :controller do
       it { expect(page).to have_content review.rating }
       it { expect(page).to have_content review.user.email }
       it { expect(page).to have_content review.status }
-      it { expect(page).to have_content Review::STATUSES[:approved] }
-      it { expect(page).to have_content Review::STATUSES[:rejected] }
+      it { expect(page).to have_content Review::STATUSES.key(1).to_s.capitalize }
+      it { expect(page).to have_content Review::STATUSES.key(2).to_s.capitalize }
     end
 
     describe 'when approved' do
@@ -58,7 +58,7 @@ RSpec.describe Admin::ReviewsController, type: :controller do
 
       it do
         review.reload
-        expect(review.status).to eq Review::STATUSES[:approved]
+        expect(review.approved?).to eq true
       end
     end
 
@@ -70,7 +70,7 @@ RSpec.describe Admin::ReviewsController, type: :controller do
 
       it do
         review.reload
-        expect(review.status).to eq Review::STATUSES[:rejected]
+        expect(review.rejected?).to eq true
       end
     end
   end

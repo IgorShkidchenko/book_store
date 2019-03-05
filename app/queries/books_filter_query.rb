@@ -1,10 +1,10 @@
 class BooksFilterQuery
   VALID_FILTERS = {
-    title_asc: 'title',
+    title_asc: 'title asc',
     title_desc: 'title desc',
-    price_asc: 'price',
+    price_asc: 'price asc',
     price_desc: 'price desc',
-    newest: 'created_at',
+    created_at: 'created_at',
     popular: 'popular'
   }.freeze
 

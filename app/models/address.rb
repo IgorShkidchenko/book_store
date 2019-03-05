@@ -1,10 +1,12 @@
 class Address < ApplicationRecord
   KINDS = {
-    billing: 'billing',
-    shipping: 'shipping'
+    billing: 0,
+    shipping: 1
   }.freeze
 
   belongs_to :addressable, polymorphic: true
+
+  enum kind: { billing: KINDS[:billing], shipping: KINDS[:shipping] }
 
   scope :billing, -> { where(kind: KINDS[:billing]) }
   scope :shipping, -> { where(kind: KINDS[:shipping]) }

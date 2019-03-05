@@ -16,7 +16,7 @@ class AddressForm
   attribute :street, String
   attribute :zip, Integer
   attribute :phone, String
-  attribute :kind, String
+  attribute :kind, Integer
   attribute :id, Integer
 
   validates :first_name, :last_name, :country, :city,

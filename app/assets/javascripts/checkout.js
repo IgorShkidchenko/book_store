@@ -10,7 +10,7 @@ $( document ).on('turbolinks:load', function(){
 
     if (document.getElementById('order_clone_address')) {
         if (document.getElementById('order_clone_address').value == 'true') {
-            document.getElementById('shipping_form').style.display = 'none'
+            document.getElementById('shipping-form').style.display = 'none'
         };
     };
 

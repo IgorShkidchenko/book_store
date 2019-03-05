@@ -32,8 +32,8 @@ ActiveAdmin.register Review do
 
   Review::STATUSES.except(:unprocessed).each_pair do |key, value|
     action_item key, only: :show do
-      if review.status == Review::STATUSES[:unprocessed]
-        link_to Review::STATUSES[key],
+      if review.unprocessed?
+        link_to key.to_s.capitalize,
                 Review::STATUSES[:approved] == value ? approved_admin_review_path(review) : rejected_admin_review_path(review),
                 method: :put
       end
@@ -47,7 +47,7 @@ ActiveAdmin.register Review do
   end
 
   action_item :show_on_site, only: :show do
-    link_to t('admin.actions.show_on_site'), book_path(review.book) if review.status == Review::STATUSES[:approved]
+    link_to t('admin.actions.show_on_site'), book_path(review.book) if review.approved?
   end
 
   index do

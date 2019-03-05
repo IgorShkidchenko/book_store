@@ -5,7 +5,7 @@ class VerifiedUserQuery
   end
 
   def call
-    Order.where(user_id: @user.id, aasm_state: Order::PROCESSING_STATUSES[:delivered])
+    Order.where(user_id: @user.id, aasm_state: Order::STATUSES[:processing][:delivered])
          .joins(:order_items)
          .select(:book_id)
          .group(:book_id)

@@ -11,7 +11,7 @@ RSpec.describe OrderDecorator do
     context 'without coupon' do
       let(:order) { FactoryBot.create(:order).decorate }
 
-      it { expect(order.coupon_discount).to eq OrderDecorator::ZERO_AMOUNT }
+      it { expect(order.coupon_discount).to eq I18n.t('price', price: OrderDecorator::ZERO_AMOUNT) }
     end
   end
 end

@@ -5,7 +5,7 @@ class CatalogPresenter < Rectify::Presenter
 
   def chosen_filter
     filter = BooksFilterQuery::VALID_FILTERS.key(params[:filter])
-    filter ? I18n.t("catalog.dropdown.#{filter}") : I18n.t('catalog.dropdown.newest')
+    filter ? I18n.t("catalog.dropdown.#{filter}") : I18n.t('catalog.dropdown.created_at')
   end
 
   def all_filters
@@ -38,6 +38,7 @@ class CatalogPresenter < Rectify::Presenter
   end
 
   def as_string_value(filter)
-    filter.to_s.tr('_', ' ')
+    filter_as_string = filter.to_s
+    BooksFilterQuery::VALID_FILTERS[:created_at] == filter_as_string ? filter_as_string : filter_as_string.tr('_', ' ')
   end
 end

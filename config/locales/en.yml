@@ -50,7 +50,7 @@ en:
     view_more_button: View More
     all: All
     dropdown:
-      newest: Newest first
+      created_at: Newest first
       popular: Popular first
       price_asc: 'Price: Low to hight'
       price_desc: 'Price: Hight to low'
@@ -77,7 +77,7 @@ en:
     review: Review
     post: Post
     count: "Reviews (%{count})"
-    success_msg: Thanks for Review. It will be published as soon as Admin will approve it.
+    success_msg: Thanks for Review. It will be published as soon as Admin approves it.
     validation_format_msg: "permit only this special symbols !#$%&'*+-/=?^_`{|}~."
   cart:
     page:
@@ -98,7 +98,7 @@ en:
         subtotal: SubTotal
     errors:
       unknow: Something went wrong, please refresh the page and try again
-      min_quantity: Quantity can't be less than 1
+      min_quantity: "Quantity can't be less than 1"
   order_item:
     error: is not a valid order.
   coupon:
@@ -107,7 +107,7 @@ en:
     was_used: Coupon was used successfully
   checkout:
     follow_steps: Please follow steps, you can edit all data on confirm step
-    title: Cheackout
+    title: Checkout
     address: Address
     delivery: Delivery
     payment: Payment
@@ -130,7 +130,7 @@ en:
       returning_customer: Returning Customer
       new_customer: New Customer
       password_later: "You’ll be able to create password later"
-      button_quick: Continue to Checkout
+      button_quick: Proceed to Checkout
     address_page:
       billing: Billing Address
       shipping: Shipping Address
@@ -150,7 +150,7 @@ en:
       method: Method
       days: Days
       price: Price
-      zero_days: Order would be ready after payment will be confirmed
+      zero_days: Order will be ready after payment is confirmed
       method_days: "%{min} to %{max} days"
     payment_page:
       credit_card: Credit Card
@@ -159,19 +159,19 @@ en:
         name: Card Name
         expire: MM / YY
         cvv: CVV
-        cvv_hint: 3-digit security code, usually found on the back of your card. American Express cards has 4-digit code, located on the front.
+        cvv_hint: 3-digit security code, usually can be found on the back of your card. American Express card has 4-digit code, located on the front side.
     confirm_page:
       edit_link: edit
       shipments: Shipments
       payment_info: Payment Information
     complete_page:
       thank_you: Thank You for your Order!
-      msg_was_sent: "An order confirmation has been has been sent to %{email}"
+      msg_was_sent: "An order confirmation has been sent to %{email}"
     errors:
       only_letters: can contain only letters
       only_numbers: can contain only numbers
       phone: should start with + and contain only numbers
-      address: can contain only letters. numbers and this symbols ' ` " -
+      address: "can contain only letters, numbers and these symbols ' ` \" -"
       expire_date: should be in MM/YY format and contain only numbers
       invalid_expire_date: "can't be in the past"
     address_phone: "Phone %{number}"

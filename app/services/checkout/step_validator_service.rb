@@ -18,7 +18,7 @@ class Checkout::StepValidatorService
   private
 
   def standart_steps_flow
-    if @order.new? then @new_step = CheckoutStepsController::STEPS[:address]
+    if @order.fill_cart? then @new_step = CheckoutStepsController::STEPS[:address]
     elsif @order.fill_delivery? then @new_step = CheckoutStepsController::STEPS[:delivery]
     elsif @order.fill_payment? then @new_step = CheckoutStepsController::STEPS[:payment]
     end

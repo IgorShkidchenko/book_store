@@ -9,7 +9,7 @@ class MyOrdersPresenter < Rectify::Presenter
   end
 
   def valid_filters
-    Order::PROCESSING_STATUSES.values.map do |filter|
+    filters_as_string.map do |filter|
       content_tag(:li) do
         link_to t("orders.filters.#{filter}"), user_orders_path(user, filter: filter),
                 class: ('in-gold-500' if filter == params[:filter])
@@ -31,6 +31,10 @@ class MyOrdersPresenter < Rectify::Presenter
   end
 
   private
+
+  def filters_as_string
+    Order::STATUSES[:processing].keys.map(&:to_s)
+  end
 
   def user_have_orders
     orders.any? || params[:filter]

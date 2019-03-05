@@ -11,11 +11,11 @@ class OrdersFilterQuery
   private
 
   def filter_valid?
-    Order::PROCESSING_STATUSES.value?(@filter)
+    Order::STATUSES[:processing].key?(@filter&.to_sym)
   end
 
   def all_user_orders
-    @user.orders.where.not(aasm_state: Order::CHECKOUT_STATUSES).includes(:coupon, :delivery_method)
+    @user.orders.where.not(aasm_state: Order::STATUSES[:checkout].values).includes(:coupon, :delivery_method)
   end
 
   def filtred_orders

@@ -23,7 +23,7 @@ Array.new(4) { Category.create(name: Faker::Book.genre) }.each do |category|
   end
 
   category.books.first(5).each do |book|
-    book.reviews.create(title: Faker::Lorem.word, body: Faker::Lorem.sentence, status: Review::STATUSES[:approved],
+    book.reviews.create(title: Faker::Lorem.word, body: Faker::Lorem.sentence, status: 1,
                         rating: rand(1..5), user_id: user.id)
 
     book.reviews.create(title: Faker::Lorem.word, body: Faker::Lorem.sentence,
@@ -41,9 +41,9 @@ def uniq_code_number
   Checkout::CompleteService::FIRST_ORDER_NUMBER_SYMBOL + Time.now.strftime(Checkout::CompleteService::CURRENT_DATE)
 end
 
-Order::PROCESSING_STATUSES.each_value do |status|
+7.times do |index|
   Order.create(user_id: user.id,
-               aasm_state: status,
+               aasm_state: index,
                number: uniq_code_number)
 end
 

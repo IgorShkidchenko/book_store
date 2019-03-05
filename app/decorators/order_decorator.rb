@@ -1,5 +1,5 @@
 class OrderDecorator < Draper::Decorator
-  ZERO_AMOUNT = 0
+  ZERO_AMOUNT = 0.0
   MONTH_NAME_DAY_FULL_YEAR = '%B %d, %Y'.freeze
 
   delegate_all
@@ -7,7 +7,7 @@ class OrderDecorator < Draper::Decorator
   delegate :email, to: :user, prefix: true
 
   def coupon_discount
-    coupon ? I18n.t('price', price: coupon.discount) : ZERO_AMOUNT
+    coupon ? I18n.t('price', price: coupon.discount) : I18n.t('price', price: ZERO_AMOUNT)
   end
 
   def order_items_count

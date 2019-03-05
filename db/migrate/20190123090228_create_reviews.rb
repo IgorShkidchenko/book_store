@@ -4,7 +4,7 @@ class CreateReviews < ActiveRecord::Migration[5.2]
       t.string :title
       t.text :body
       t.integer :rating, default: 0
-      t.string :status, default: Review::STATUSES[:unprocessed]
+      t.integer :status, default: 0
       t.references :user, foreign_key: true
       t.references :book, foreign_key: true
 

@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_143753) do
     t.integer "zip"
     t.string "country"
     t.string "phone"
-    t.string "kind"
+    t.integer "kind"
     t.string "addressable_type"
     t.bigint "addressable_id"
     t.datetime "created_at", null: false
@@ -161,7 +161,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_143753) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "aasm_state"
+    t.integer "aasm_state"
     t.string "number"
     t.bigint "user_id"
     t.bigint "delivery_method_id"
@@ -175,7 +175,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_143753) do
     t.string "title"
     t.text "body"
     t.integer "rating", default: 0
-    t.string "status", default: "Unprocessed"
+    t.integer "status", default: 0
     t.bigint "user_id"
     t.bigint "book_id"
     t.datetime "created_at", null: false
