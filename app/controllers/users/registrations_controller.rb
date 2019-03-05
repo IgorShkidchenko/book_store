@@ -47,4 +47,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @billing = AddressForm.new(user_addresses.billing.first&.attributes)
     @shipping = AddressForm.new(user_addresses.shipping.first&.attributes)
   end
+
+  protected
+
+  def update_resource(resource, params)
+    return resource.update_without_password(params) unless params[:current_password]
+    super
+  end
 end

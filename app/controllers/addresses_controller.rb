@@ -13,7 +13,11 @@ class AddressesController < ApplicationController
     address = AddressForm.new(address_params)
     return flash.now[:danger] = address.errors.full_messages.to_sentence unless address.save(current_user)
 
-    flash.now[:success] = I18n.t('user_settings.success', kind: address.kind.capitalize)
+    flash.now[:success] = I18n.t('user_settings.success', kind: kind_name)
+  end
+
+  def kind_name
+    Address::KINDS.key(address.kind).to_s.capitalize
   end
 
   def address_params

@@ -34,11 +34,6 @@ class Order < ActiveRecord::Base
                      canceled: STATUSES[:processing][:canceled] }
 
   scope :user_checkout_orders, ->(user_id) { where(aasm_state: STATUSES[:checkout].values, user_id: user_id) }
-  scope :in_progress, -> { where(aasm_state: STATUSES[:processing][:in_progress]) }
-  scope :in_queue, -> { where(aasm_state: STATUSES[:processing][:in_queue]) }
-  scope :in_delivery, -> { where(aasm_state: STATUSES[:processing][:in_delivery]) }
-  scope :delivered, -> { where(aasm_state: STATUSES[:processing][:delivered]) }
-  scope :canceled, -> { where(aasm_state: STATUSES[:processing][:canceled]) }
 
   aasm column: AASM_COLUMN_NAME, enum: true do
     state :fill_cart, initial: true
