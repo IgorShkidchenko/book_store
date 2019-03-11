@@ -6,3 +6,4 @@ linters:
 
 exclude:
   - 'app/views/admin/**/*.haml'
+  - 'app/views/books/_input_field.html.haml'

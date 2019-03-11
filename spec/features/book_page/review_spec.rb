@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe 'Review', type: :feature, js: true do
-  let!(:book) { FactoryBot.create(:book, :with_author_and_cover).decorate }
-  let!(:reviews) { FactoryBot.create_list(:review, 3, book_id: book.id, status: Review::STATUSES[:approved]) }
+  let!(:book) { FactoryBot.create(:book, :with_author).decorate }
+  let!(:reviews) { FactoryBot.create_list(:review, 3, book_id: book.id, status: Review.statuses[:approved]) }
 
   before { visit book_path(book) }
 

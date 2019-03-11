@@ -1,4 +1,4 @@
-class MyOrdersPresenter < Rectify::Presenter
+class MyOrdersPresenter < ApplicationPresenter
   attribute :params
   attribute :user, User
   attribute :orders, Order
@@ -9,10 +9,10 @@ class MyOrdersPresenter < Rectify::Presenter
   end
 
   def valid_filters
-    filters_as_string.map do |filter|
+    proccessing_order_states.map do |filter|
       content_tag(:li) do
         link_to t("orders.filters.#{filter}"), user_orders_path(user, filter: filter),
-                class: ('in-gold-500' if filter == params[:filter])
+                class: (GOLD_TEXT if filter == params[:filter])
       end
     end.join.html_safe
   end
@@ -32,8 +32,8 @@ class MyOrdersPresenter < Rectify::Presenter
 
   private
 
-  def filters_as_string
-    Order::STATUSES[:processing].keys.map(&:to_s)
+  def proccessing_order_states
+    Order.aasm_states.keys.last(5)
   end
 
   def user_have_orders

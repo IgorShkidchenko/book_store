@@ -5,7 +5,7 @@ describe 'Root page', type: :feature, js: true do
   let(:book) { category.books.last }
 
   before do
-    allow(BestSellersQuery).to receive(:call).and_return([book])
+    allow(Books::BestSellersQuery).to receive(:call).and_return([book])
     visit root_path
   end
 
@@ -36,6 +36,7 @@ describe 'Root page', type: :feature, js: true do
   it 'redirect to book page' do
     first('.thumbnail').hover
     first('.thumb-hover-link').click
+    page.driver.browser.navigate.refresh
     expect(page).to have_current_path book_path(book)
   end
 
@@ -89,6 +90,13 @@ describe 'Root page', type: :feature, js: true do
       sleep(1)
       all('.thumb-hover-link').last.click
       expect(page).to have_selector '.shop-quantity', text: book_count_in_cart
+    end
+
+    it 'current book in the cart' do
+      click_on I18n.t('home.buy_button')
+      first('.shop-link').click
+      page.driver.browser.navigate.refresh
+      expect(page).to have_selector 'p', text: book.title
     end
   end
 end

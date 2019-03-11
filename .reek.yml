@@ -18,17 +18,18 @@ directories:
   'app/services/':
     TooManyInstanceVariables:
       enabled: false
-    NilCheck:
-      enabled: false
     DuplicateMethodCall:
       enabled: false
   'app/controllers/':
     TooManyStatements:
+      enabled: false
+  'app/decorators/':
+    TooManyStatements:
+      enabled: false
+    DuplicateMethodCall:
       enabled: false
 
 exclude_paths:
   - db/
   - config/initializers/
   - spec/
-  - 'app/controllers/coupons_controller.rb'
-  - 'app/controllers/books_controller.rb'

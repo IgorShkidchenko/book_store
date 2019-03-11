@@ -4,7 +4,7 @@
   - column :title
   - column :body
   - column t('admin.column.date') do |review|
-    - review.created_at.strftime('%d/%m/%y')
+    - review.creation_date
   - column :user
   - column :status
   - actions defaults: false do |review|

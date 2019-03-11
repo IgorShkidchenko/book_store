@@ -1,5 +1,6 @@
-Rails.application.routes.draw do
   require 'sidekiq/web'
+
+Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq' if Rails.env.development?
 
   devise_for :admin_users, ActiveAdmin::Devise.config

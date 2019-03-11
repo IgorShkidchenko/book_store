@@ -1,4 +1,4 @@
-class ValidExpireDateValidator < ActiveModel::EachValidator
+class ExpireDateInFutureValidator < ActiveModel::EachValidator
   CENTURY = 2000
   MONTH_DIGITS = (0..1).freeze
   YEAR_DIGITS = (3..4).freeze

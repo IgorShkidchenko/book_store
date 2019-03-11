@@ -16,6 +16,6 @@ class Ability
     can :read, Review
     can :update, Coupon
     can :create, Order
-    can %i[index create update destroy], OrderItem, order: Order.user_checkout_orders(user_id).last
+    can %i[index create update destroy], OrderItem, order: Order.orders_in_checkout_state_of_user(user_id)
   end
 end

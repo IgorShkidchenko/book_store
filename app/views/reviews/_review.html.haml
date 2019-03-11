@@ -1,7 +1,7 @@
 = render 'reviews/form', book: book if can? :create, Review
 .mb-80
   %h3.in-gold-500.mb-25
-    = t('review.count', count: book.approved_reviews_count)
+    = t('review.count', count: book.reviews.approved.size)
   - book.reviews.approved.decorate.each do |review|
     .general-message-wrap.divider-lg
       .clearfix

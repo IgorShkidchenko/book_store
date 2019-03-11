@@ -11,12 +11,12 @@ RSpec.describe Order, type: :model do
   end
 
   context 'with assosiations' do
-    it { is_expected.to belong_to(:user) }
-    it { is_expected.to belong_to(:delivery_method) }
+    it { is_expected.to belong_to(:user).without_validating_presence }
+    it { is_expected.to belong_to(:delivery_method).without_validating_presence }
     it { is_expected.to have_many(:order_items).dependent(:destroy) }
     it { is_expected.to have_many(:books).through(:order_items) }
-    it { is_expected.to have_one(:coupon) }
     it { is_expected.to have_many(:addresses).dependent(:destroy) }
+    it { is_expected.to have_one(:coupon) }
     it { is_expected.to have_one(:credit_card).dependent(:destroy) }
   end
 end

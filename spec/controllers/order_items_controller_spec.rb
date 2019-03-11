@@ -6,7 +6,7 @@ RSpec.describe OrderItemsController, type: :controller do
 
   before do
     allow(Order).to receive(:find).and_return(order)
-    allow(OrderItem::NewService).to receive_message_chain(:new, :call)
+    allow(OrderItems::NewCartItemService).to receive(:call)
   end
 
   describe 'when create' do
@@ -21,7 +21,7 @@ RSpec.describe OrderItemsController, type: :controller do
   describe 'when update' do
     before do
       allow(OrderItem).to receive(:find).and_return(order_item)
-      allow(OrderItem::QuantityUpdaterService).to receive_message_chain(:new, :call)
+      allow(OrderItems::QuantityUpdaterService).to receive(:call)
       put :update, xhr: true, params: { id: order_item.id, order_item: { command: nil } }
     end
 

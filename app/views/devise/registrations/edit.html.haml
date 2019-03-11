@@ -21,9 +21,9 @@
               = t('user_settings.shipping')
       .row
         .col-md-5.mb-40
-          = render 'address_part', address: @billing, address_kind: Address::KINDS[:billing]
+          = render 'address_part', address: @billing, address_kind: Address.kinds[:billing]
         .col-md-5.col-md-offset-1.mb-25
-          = render 'address_part', address: @shipping, address_kind: Address::KINDS[:shipping]
+          = render 'address_part', address: @shipping, address_kind: Address.kinds[:shipping]
     .tab-pane.fade#privacy{ role: 'tabpanel' }
       .row.mb-60
         = render 'email_part'

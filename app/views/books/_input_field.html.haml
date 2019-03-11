@@ -1,9 +1,11 @@
-= simple_form_for(current_order.order_items.new, remote: true, method: :post) do |f|
+= simple_form_for(OrderItem.new, url: order_items_path, method: :post, remote: true) do |f|
   .col-xs-5.col-md-3
     .input-group.general-position
       %btn.btn-link.input-link.btn-number.minus{ 'data-field': '', 'data-type': 'minus', role: 'button', type: 'button', href: '#' }
         %i.fa.fa-minus.line-height-40
-      = f.input :quantity, as: :string, input_html: { id: 'quantity', class: 'form-control quantity-input', min: '1', value: '1' }, label: false
+      = f.input :quantity, as: :string,
+      input_html: { id: 'quantity', class: 'form-control quantity-input', min: "#{OrderItemDecorator::MINIMUM_QUANTITY}", value: "#{OrderItemDecorator::MINIMUM_QUANTITY}" },
+      label: false
       %btn.btn-link.input-link.btn-number.plus{ 'data-field': '', 'data-type': 'plus', role: 'button', type: 'button', href: '#' }
         %i.fa.fa-plus.line-height-40
       = f.hidden_field :book_id, value: book.id

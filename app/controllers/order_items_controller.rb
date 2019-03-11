@@ -3,22 +3,22 @@ class OrderItemsController < ApplicationController
   authorize_resource
 
   respond_to :js
-  before_action :set_order
-  decorates_assigned :order_items
 
   def index
-    @order_items = OrderItemsQuery.new(@order).call
+    @order_items = Orders::OrderItemsQuery.call(current_order).decorate
     respond_to :html
   end
 
   def create
-    new_item = OrderItem::NewService.new(params: order_item_params, order: @order)
-    new_item.call ? session[:order_id] ||= @order.id : flash.now[:danger] = I18n.t('cart.errors.unknow')
+    result = OrderItems::NewCartItemService.call(params: order_item_params, order: current_order)
+    return session[:order_id] ||= current_order.id if result
+
+    flash.now[:danger] = I18n.t('cart.errors.unknow')
   end
 
   def update
-    updater = OrderItem::QuantityUpdaterService.new(@order_item, params)
-    flash.now[:danger] = I18n.t('cart.errors.min_quantity') unless updater.call
+    result = OrderItems::QuantityUpdaterService.call(item: @order_item, params: params)
+    flash.now[:danger] = I18n.t('cart.errors.min_quantity') unless result
   end
 
   def destroy
@@ -29,9 +29,5 @@ class OrderItemsController < ApplicationController
 
   def order_item_params
     params.require(:order_item).permit(:quantity, :book_id)
-  end
-
-  def set_order
-    @order = current_order
   end
 end

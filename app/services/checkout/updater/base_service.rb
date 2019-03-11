@@ -15,6 +15,10 @@ class Checkout::Updater::BaseService
   private
 
   def order_can_be_changed?
-    valid? && !@order.editing?
+    valid? && order_in_some_step_except_edit?
+  end
+
+  def order_in_some_step_except_edit?
+    @order.editing?.eql?(false)
   end
 end

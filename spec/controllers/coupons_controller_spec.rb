@@ -6,7 +6,8 @@ RSpec.describe CouponsController, type: :controller do
 
   describe 'when update with valid params' do
     before do
-      put :update, xhr: true, params: { id: :coupon, coupon: { key: coupon.key, order_id: order.id } }
+      allow(controller).to receive(:current_order).and_return(order)
+      put :update, xhr: true, params: { id: :coupon, coupon: { key: coupon.key } }
     end
 
     it { is_expected.to respond_with 200 }
@@ -19,7 +20,7 @@ RSpec.describe CouponsController, type: :controller do
       let(:not_existing_key) { 'some_key' }
 
       before do
-        put :update, xhr: true, params: { id: :coupon, coupon: { key: not_existing_key, order_id: order.id } }
+        put :update, xhr: true, params: { id: :coupon, coupon: { key: not_existing_key } }
       end
 
       it { is_expected.to respond_with 200 }
@@ -32,7 +33,7 @@ RSpec.describe CouponsController, type: :controller do
       let(:used_coupon) { FactoryBot.create(:coupon, :used) }
 
       before do
-        put :update, xhr: true, params: { id: :used_coupon, coupon: { key: used_coupon.key, order_id: order.id } }
+        put :update, xhr: true, params: { id: :used_coupon, coupon: { key: used_coupon.key } }
       end
 
       it { is_expected.to respond_with 200 }

@@ -23,3 +23,13 @@ en:
       generate: Generate coupon
     order:
       status: State
+    error:
+      not_found: Not found this records
+    batches:
+      approve: Approve
+      reject: Reject
+      delete: Delete
+      in_queue: In queue
+      in_delivery: In delivery
+      delivered: Delivered
+      canceled: Canceled

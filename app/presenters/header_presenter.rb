@@ -1,4 +1,4 @@
-class HeaderPresenter < Rectify::Presenter
+class HeaderPresenter < ApplicationPresenter
   def header_categories(css_class: '')
     Category.all.map do |category|
       content_tag(:li) do
@@ -10,7 +10,7 @@ class HeaderPresenter < Rectify::Presenter
   private
 
   def choosen_color?(css_class, category)
-    user_choose_category?(category) ? (css_class + 'in-gold-500') : css_class
+    user_choose_category?(category) ? (css_class + GOLD_TEXT) : css_class
   end
 
   def user_choose_category?(category)

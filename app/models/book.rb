@@ -1,7 +1,4 @@
 class Book < ApplicationRecord
-  LATEST_THREE_QUANTITY = 3
-  LATEST = 'created_at desc'.freeze
-
   extend FriendlyId
   friendly_id :title, use: :slugged
 
@@ -18,6 +15,4 @@ class Book < ApplicationRecord
 
   validates :title, presence: true
   validates :covers, covers_quantity: true
-
-  scope :latest_three, -> { limit(LATEST_THREE_QUANTITY).order(LATEST).includes(:authors, :covers) }
 end

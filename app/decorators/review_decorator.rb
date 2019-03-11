@@ -9,10 +9,10 @@ class ReviewDecorator < Draper::Decorator
   end
 
   def verified
-    I18n.t('review.verified') if VerifiedUserQuery.new(book, user).call.any?
+    I18n.t('review.verified') if Users::VerifiedQuery.call(book, user).any?
   end
 
   def user_logo
-    user_email.capitalize[0]
+    user_email.capitalize.first
   end
 end

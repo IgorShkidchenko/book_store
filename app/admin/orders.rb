@@ -1,7 +1,9 @@
 ActiveAdmin.register Order do
+  decorate_with OrderDecorator
+
   actions :index, :show
 
-  includes :coupon, :delivery_method
+  includes :coupon, :delivery_method, order_items: :book
 
   scope :in_progress, default: true
   scope :in_queue
@@ -10,26 +12,29 @@ ActiveAdmin.register Order do
   scope :canceled
 
   config.filters = false
-  config.per_page = [10, 50, 100]
 
-  batch_action :in_queue, if: proc { @current_scope.scope_method == :in_progress } do |ids|
-    Order.in_progress.find(ids).each(&:in_queue!)
-    redirect_to admin_orders_path
+  batch_action I18n.t('admin.batches.in_queue'), if: proc { @current_scope.scope_method == :in_progress } do |ids|
+    orders = Order.in_progress.where(id: ids)
+    orders.any? ? orders.each(&:in_queue!) : flash[:danger] = I18n.t('admin.error.not_found')
+    redirect_to(admin_orders_path)
   end
 
-  batch_action :in_delivery, if: proc { @current_scope.scope_method == :in_queue } do |ids|
-    Order.in_queue.find(ids).each(&:in_delivery!)
-    redirect_to admin_orders_path
+  batch_action I18n.t('admin.batches.in_delivery'), if: proc { @current_scope.scope_method == :in_queue } do |ids|
+    orders = Order.in_queue.where(id: ids)
+    orders.any? ? orders.each(&:in_delivery!) : flash[:danger] = I18n.t('admin.error.not_found')
+    redirect_to(admin_orders_path)
   end
 
-  batch_action :delivered, if: proc { @current_scope.scope_method == :in_delivery } do |ids|
-    Order.in_delivery.find(ids).each(&:delivered!)
-    redirect_to admin_orders_path
+  batch_action I18n.t('admin.batches.delivered'), if: proc { @current_scope.scope_method == :in_delivery } do |ids|
+    orders = Order.in_delivery.where(id: ids)
+    orders.any? ? orders.each(&:delivered!) : flash[:danger] = I18n.t('admin.error.not_found')
+    redirect_to(admin_orders_path)
   end
 
-  batch_action :canceled, if: proc { @current_scope.scope_method != :canceled } do |ids|
-    Order.find(ids).each(&:canceled!)
-    redirect_to admin_orders_path
+  batch_action I18n.t('admin.batches.canceled'), if: proc { @current_scope.scope_method != :canceled } do |ids|
+    orders = Order.where(id: ids)
+    orders.any? ? orders.each(&:canceled!) : flash[:danger] = I18n.t('admin.error.not_found')
+    redirect_to(admin_orders_path)
   end
 
   index do

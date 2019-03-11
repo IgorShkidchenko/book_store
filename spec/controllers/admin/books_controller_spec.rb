@@ -10,7 +10,7 @@ RSpec.describe Admin::BooksController, type: :controller do
 
   describe 'when login' do
     let(:page) { Capybara::Node::Simple.new(response.body) }
-    let!(:book) { FactoryBot.create(:book, :with_author_and_cover).decorate }
+    let!(:book) { FactoryBot.create(:book, :with_author).decorate }
 
     let(:valid_attributes) { (FactoryBot.attributes_for :book).merge(category_id: book.category_id) }
     let(:invalid_attributes) { { title: nil, category_id: book.category_id } }
@@ -49,7 +49,6 @@ RSpec.describe Admin::BooksController, type: :controller do
       it { expect(page).to have_field 'book_width' }
       it { expect(page).to have_field 'book_depth' }
       it { expect(page).to have_content I18n.t('admin.book_form.cover_title') }
-      it { expect(page).to have_content I18n.t('admin.actions.create_with_faker') }
     end
 
     describe 'when create with valid params' do
@@ -110,11 +109,6 @@ RSpec.describe Admin::BooksController, type: :controller do
       it do
         book.reload
         expect(book.title).to eq valid_attributes[:title]
-      end
-
-      it do
-        book.reload
-        expect(book.covers.last).not_to eq nil
       end
     end
 

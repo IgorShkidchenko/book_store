@@ -33,10 +33,10 @@
       %span.step-text.hidden-xs
         = t('checkout.complete')
   .row.mb-20
-    = render 'orders/order_info/address_information', address: order.addresses.billing.first.decorate, checkout: true
-    = render 'orders/order_info/address_information', address: order.addresses.shipping.first.decorate, checkout: true
-    = render 'orders/order_info/delivery_method_info', order: order, checkout: true
-    = render 'orders/order_info/card_info', credit_card: order.credit_card.decorate, checkout: true
+    = render 'orders/order_info/address_information', address: current_order.addresses.billing.first.decorate, checkout: true
+    = render 'orders/order_info/address_information', address: current_order.addresses.shipping.first.decorate, checkout: true
+    = render 'orders/order_info/delivery_method_info', order: current_order, checkout: true
+    = render 'orders/order_info/card_info', credit_card: current_order.credit_card.decorate, checkout: true
   .visible-xs
     = render partial: 'order_items/cart/mobile_cart_row', collection: @checkout.order_items, as: :order_item
   .hidden-xs.divider-lg.pt-20
@@ -44,6 +44,6 @@
       = render 'order_items/cart/item_titles_row'
       = render partial: 'order_items/cart/cart_row', collection: @checkout.order_items, as: :order_item
   .text-center.general-text-right
-    = render 'orders/order_info/order_summary', order: order, right: true
+    = render 'orders/order_info/order_summary', right: true
   .text-center
     = link_to t('checkout.buttons.place_order'), next_wizard_path, class: 'btn btn-default mb-20'

@@ -32,7 +32,7 @@
         = t('checkout.steps_numbers.fifth')
       %span.step-text.hidden-xs
         = t('checkout.complete')
-  = simple_form_for(@order, url: wizard_path, validate: true, method: :put, html: { class: 'res-mb-100' },
+  = simple_form_for(current_order, url: wizard_path, validate: true, method: :put, html: { class: 'res-mb-100' },
   defaults: { input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' },
   label_html: { class: 'control-label input-label' } }) do |f|
     .hidden-xs.hidden-sm
@@ -53,22 +53,22 @@
           %p.general-info-text
             = t('checkout.address_page.required_fields')
         = f.simple_fields_for :billing, @checkout.form.billing do |billing_address|
-          = render 'addresses/form', f: billing_address, address_kind: Address::KINDS[:billing]
+          = render 'addresses/form', f: billing_address, address_kind: Address.kinds[:billing]
       .col-md-5.col-md-offset-1.mb-60
         .visible-xs.visible-sm
           %h3.general-subtitle
             = t('checkout.address_page.shipping')
         #shipping-form
           = f.simple_fields_for :shipping, @checkout.form.shipping do |shipping_address|
-            = render 'addresses/form', f: shipping_address, address_kind: Address::KINDS[:shipping]
+            = render 'addresses/form', f: shipping_address, address_kind: Address.kinds[:shipping]
         .checkbox.form_group
           %label.checkbox-label
-            = @order.decorate.clone_address
+            = current_order.clone_address
             %span.checkbox-icon
               %i.fa.fa-check
             %span.checkbox-text
               = t('checkout.address_page.use_billing_button')
     .general-text-align.mb-60
-      = render 'orders/order_info/order_summary', order: order, right: false
+      = render 'orders/order_info/order_summary', right: false
     .text-center
       = f.button :submit, t('checkout.buttons.next'), class: 'btn-default mb-80'

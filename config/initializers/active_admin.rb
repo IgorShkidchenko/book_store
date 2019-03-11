@@ -1,6 +1,9 @@
+SITE_TITLE = 'Book Store'.freeze
+RG_LOGO_PATH = 'http://itcluster.dp.ua/wp-content/uploads/2018/07/rg400x200.png'.freeze
+
 ActiveAdmin.setup do |config|
-  config.site_title = "Book Store"
-  config.site_title_image = 'http://itcluster.dp.ua/wp-content/uploads/2018/07/rg400x200.png'
+  config.site_title = SITE_TITLE
+  config.site_title_image = RG_LOGO_PATH
   config.authentication_method = :authenticate_admin_user!
   config.current_user_method = :current_admin_user
   config.logout_link_path = :destroy_admin_user_session_path

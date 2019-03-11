@@ -9,11 +9,11 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def set_header_presenter
-    @header_presenter = HeaderPresenter.new.attach_controller(self)
+  def current_order
+    @current_order ||= Orders::FinderService.call(session[:order_id], current_user).decorate
   end
 
-  def current_order
-    Orders::FinderService.new(session[:order_id], current_user).call
+  def set_header_presenter
+    @header_presenter = HeaderPresenter.new.attach_controller(self)
   end
 end

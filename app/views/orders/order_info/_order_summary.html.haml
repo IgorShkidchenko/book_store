@@ -1,4 +1,4 @@
-%div{ class: order.id.to_s }
+%div{ class: current_order.id.to_s }
   %p.in-gold-500.font-18
     = t('cart.page.order_summary')
   %table.general-summary-table{ class: "#{'general-summary-table-right general-text-right' if right}" }
@@ -8,26 +8,26 @@
           = t('cart.page.subtotal')
       %td
         %p.font-16
-          = order.subtotal_price
+          = current_order.subtotal_price
     %tr
       %td
         %p.font-16
           = t('cart.page.coupon')
       %td
         %p.font-16
-          = order.coupon_discount
-    - if order.delivery_method
+          = current_order.coupon_discount
+    - if current_order.delivery_method
       %tr
         %td
           %p.font-16
             = t('cart.page.delivery')
         %td
           %p.font-16
-            = t('price', price: order.delivery_method_cost)
+            = t('price', price: current_order.delivery_method_cost)
     %tr
       %td
         %strong.font-17
           = t('cart.page.order_total')
       %td
         %strong.font-17
-          = order.total_price
+          = current_order.total_price

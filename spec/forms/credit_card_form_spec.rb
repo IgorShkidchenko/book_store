@@ -6,7 +6,7 @@ RSpec.describe CreditCardForm, type: :model do
     let(:invalid_input) { '@' }
     let(:invalid_date) { '1/1' }
 
-    before { allow_any_instance_of(ValidExpireDateValidator).to receive(:validate_each) }
+    before { allow_any_instance_of(ExpireDateInFutureValidator).to receive(:validate_each) }
 
     it { is_expected.to validate_presence_of(:number) }
     it { is_expected.to validate_presence_of(:name) }
@@ -22,9 +22,9 @@ RSpec.describe CreditCardForm, type: :model do
   end
 
   context 'with past validate expire date' do
-    let(:valid_date) { "12/#{Time.now.year - ValidExpireDateValidator::CENTURY}" }
-    let(:month_in_the_past) { "0#{Time.now.month - 1}/#{Time.now.year - ValidExpireDateValidator::CENTURY}" }
-    let(:year_in_the_past) { "12/#{Time.now.year - ValidExpireDateValidator::CENTURY - 1}" }
+    let(:valid_date) { "12/#{Time.now.year - ExpireDateInFutureValidator::CENTURY}" }
+    let(:month_in_the_past) { "0#{Time.now.month - 1}/#{Time.now.year - ExpireDateInFutureValidator::CENTURY}" }
+    let(:year_in_the_past) { "12/#{Time.now.year - ExpireDateInFutureValidator::CENTURY - 1}" }
 
     it { is_expected.to allow_value(valid_date).for(:expire_date).with_message(I18n.t('checkout.errors.expire_date')) }
     it { is_expected.not_to allow_value(month_in_the_past).for(:expire_date).with_message(I18n.t('checkout.errors.invalid_expire_date')) }

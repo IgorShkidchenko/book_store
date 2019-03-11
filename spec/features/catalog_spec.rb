@@ -39,7 +39,7 @@ describe 'Catalog page', type: :feature, js: true do
 
   it 'filters' do
     first('.lead').click
-    BooksFilterQuery::VALID_FILTERS.keys do |filter|
+    Books::FilterQuery::VALID_FILTERS.keys do |filter|
       expect(page).to have_content I18n.t("catalog.dropdown.#{filter}")
     end
   end

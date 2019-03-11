@@ -10,14 +10,14 @@ class AddressesController < ApplicationController
   private
 
   def change_address
-    address = AddressForm.new(address_params)
-    return flash.now[:danger] = address.errors.full_messages.to_sentence unless address.save(current_user)
+    @address = AddressForm.new(address_params)
+    return flash.now[:success] = I18n.t('user_settings.success', kind: kind_name) if @address.save(current_user)
 
-    flash.now[:success] = I18n.t('user_settings.success', kind: kind_name(address.kind))
+    flash.now[:danger] = @address.errors.full_messages.to_sentence
   end
 
-  def kind_name(kind)
-    Address::KINDS.key(kind).to_s.capitalize
+  def kind_name
+    Address.kinds.key(@address.kind).capitalize
   end
 
   def address_params

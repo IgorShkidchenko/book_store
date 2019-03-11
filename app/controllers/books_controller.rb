@@ -11,8 +11,8 @@ class BooksController < ApplicationController
 
   def index
     @categories = Category.all
-    @pagy, @chosen_books = pagy Paginators::BooksService.new(params: params, category: @category).call
-    present CatalogPresenter.new(params: params, category: @category, categories: @categories)
+    @pagy, @chosen_books = pagy(Paginators::BooksService.call(params: params, category: @category))
+    present(CatalogPresenter.new(params: params, category: @category, categories: @categories))
   end
 
   def show

@@ -214,4 +214,8 @@ en:
   order_page:
     title: Order Info
   cancan:
-    error: AccessDenied
+    error: Access Denied
+  mailer:
+    order:
+      subject: Book Order
+      message: "Your order number is %{number}."

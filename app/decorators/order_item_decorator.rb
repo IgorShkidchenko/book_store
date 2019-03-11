@@ -12,13 +12,19 @@ class OrderItemDecorator < Draper::Decorator
   end
 
   def plus_quantity_link
-    h.link_to h.order_item_path(order_item, order_item: { command: OrderItem::QuantityUpdaterService::ADD }),
+    h.link_to h.order_item_path(order_item, order_item: { command: OrderItems::QuantityUpdaterService::ADD_COMMAND }),
               remote: true, method: :put, class: 'input-link' do
       h.content_tag(:i, '', class: 'fa fa-plus line-heaght-40')
     end
   end
 
   def total_price
-    I18n.t('price', price: (quantity * book_price).round(2))
+    I18n.t('price', price: calculated_price)
+  end
+
+  private
+
+  def calculated_price
+    (quantity * book_price).round(2)
   end
 end

@@ -1,10 +1,10 @@
 - context.instance_eval do
   - selectable_column
   - column :cover do |book|
-    - if book.covers.present?
+    - if book.covers.exists?
       - image_tag(book.covers.first.image.url, width: 150, height: 200)
     - else
-      - image_tag('w500_default.png', width: 150, height: 200)
+      - image_tag(CoverUploader::DEFAULT_IMG_FILE_NAME, width: 150, height: 200)
   - column :category
   - column :title
   - column :authors do |book|

@@ -8,11 +8,10 @@ RSpec.describe ReviewsController, type: :controller do
 
     before do
       allow(controller).to receive(:current_user).and_return(user)
-      post :create, params: { review_form: valid_attributes }
+      post :create, xhr: true, params: { review_form: valid_attributes }
     end
 
-    it { is_expected.to respond_with(302) }
+    it { is_expected.to respond_with(200) }
     it { is_expected.to set_flash[:success].to(I18n.t('review.success_msg')) }
-    it { is_expected.to redirect_to('/') }
   end
 end

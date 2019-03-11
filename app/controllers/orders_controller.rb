@@ -6,12 +6,11 @@ class OrdersController < ApplicationController
   decorates_assigned :order_items, :orders, :order
 
   def index
-    @user = current_user
-    @orders = OrdersFilterQuery.new(user: @user, params: params).call
-    present MyOrdersPresenter.new(user: @user, params: params, orders: @orders)
+    @orders = Orders::FilterQuery.call(user: current_user, params: params)
+    present(MyOrdersPresenter.new(user: current_user, params: params, orders: @orders))
   end
 
   def show
-    @order_items = OrderItemsQuery.new(@order).call
+    @order_items = Orders::OrderItemsQuery.call(@order)
   end
 end

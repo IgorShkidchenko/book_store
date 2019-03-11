@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Books page', type: :feature, js: true do
-  let!(:book) { FactoryBot.create(:book, :with_author_and_cover).decorate }
+  let!(:book) { FactoryBot.create(:book, :with_author).decorate }
 
   before { visit book_path(book) }
 
@@ -31,7 +31,7 @@ describe 'Books page', type: :feature, js: true do
 
   context 'when back button' do
     before do
-      allow(BestSellersQuery).to receive(:call).and_return([book])
+      allow(Books::BestSellersQuery).to receive(:call).and_return([book])
       first('.navbar-brand').click
       first('.thumbnail').hover
       first('.thumb-hover-link').click

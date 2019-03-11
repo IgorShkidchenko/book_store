@@ -19,11 +19,11 @@ class OrderDecorator < Draper::Decorator
   end
 
   def subtotal_price
-    I18n.t('price', price: Orders::PriceCalculatorService.new(self).subtotal_price)
+    I18n.t('price', price: price_calculator.subtotal_price.round(2))
   end
 
   def total_price
-    I18n.t('price', price: Orders::PriceCalculatorService.new(self).total_price)
+    I18n.t('price', price: price_calculator.total_price.round(2))
   end
 
   def clone_address
@@ -38,14 +38,18 @@ class OrderDecorator < Draper::Decorator
 
   private
 
+  def price_calculator
+    @price_calculator ||= Orders::PriceCalculatorService.new(self)
+  end
+
   def same_addresses?(order)
     addresses = order.addresses
     return if addresses.empty?
 
-    billing = addresses.billing.take.attributes.slice('first_name', 'last_name',
-                                                      'street', 'country', 'zip', 'phone', 'city')
-    shipping = addresses.shipping.take.attributes.slice('first_name', 'last_name',
-                                                        'street', 'country', 'zip', 'phone', 'city')
-    billing == shipping
+    checked_attributes = %w[first_name last_name street country zip phone city]
+    billing_attributes = addresses.billing.take.attributes.slice(*checked_attributes)
+    shipping_attributes = addresses.shipping.take.attributes.slice(*checked_attributes)
+
+    billing_attributes.eql?(shipping_attributes)
   end
 end

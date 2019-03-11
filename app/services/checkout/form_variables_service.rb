@@ -24,12 +24,12 @@ class Checkout::FormVariablesService
   end
 
   def set_addresses_variables
-    @billing = AddressForm.new chosed_address(Address::KINDS[:billing])
-    @shipping = AddressForm.new chosed_address(Address::KINDS[:shipping])
+    @billing = AddressForm.new chosed_address(Address.kinds[:billing])
+    @shipping = AddressForm.new chosed_address(Address.kinds[:shipping])
   end
 
   def chosed_address(kind)
-    if kind == Address::KINDS[:billing]
+    if kind == Address.kinds[:billing]
       @order.addresses.billing.last&.attributes || @order.user.addresses.billing.last&.attributes
     else
       @order.addresses.shipping.last&.attributes || @order.user.addresses.shipping.last&.attributes

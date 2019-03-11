@@ -6,14 +6,18 @@ class Orders::PriceCalculatorService
   end
 
   def subtotal_price
-    @subtotal_price ||= (@order.order_items.includes(:book).sum { |item| item.book_price * item.quantity }).round(2)
+    @subtotal_price ||= @order.order_items.sum { |item| calculated_new_price(item) }
   end
 
   def total_price
-    (subtotal_price - coupon_amount + delivery_method_amount).round(2)
+    subtotal_price - coupon_amount + delivery_method_amount
   end
 
   private
+
+  def calculated_new_price(item)
+    item.book_price * item.quantity
+  end
 
   def coupon_amount
     @order.coupon&.discount || ZERO_AMOUNT

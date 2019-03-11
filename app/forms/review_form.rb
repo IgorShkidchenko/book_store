@@ -27,7 +27,7 @@ class ReviewForm
   def save
     return false unless valid?
 
-    Review.new(params).save!
+    Review.create!(params)
   end
 
   private

@@ -2,24 +2,24 @@
 %main.container.general-main-wrap
   %h1.general-title-margin
     = t('cart.page.title')
-  - if @order_items.present?
+  - if @order_items.any?
     .visible-xs
-      = render partial: 'order_items/cart/mobile_cart_row', collection: order_items, as: :order_item
+      = render partial: 'order_items/cart/mobile_cart_row', collection: @order_items, as: :order_item
     .hidden-xs
       %table.table.table-hover
         = render 'order_items/cart/item_titles_row'
-        = render partial: 'order_items/cart/cart_row', collection: order_items, as: :order_item
+        = render partial: 'order_items/cart/cart_row', collection: @order_items, as: :order_item
     .general-order-wrap
       .row
-        = render 'coupons/form', order: @order
+        = render 'coupons/form'
         .col-sm-8
           .res-mr-200.text-center.general-text-right
-            = render 'orders/order_info/order_summary', order: @order.decorate, right: true
+            = render 'orders/order_info/order_summary', right: true
             %button.btn.btn-default.mb-20.visible-xs-inline-block
               = t('cart.page.cheackout')
     .text-center
       = link_to t('cart.page.cheackout'),
-      (user_signed_in? ? checkout_step_path(:address) : checkout_step_path(:quick_authenticate)),
+      (user_signed_in? ? checkout_step_path(CheckoutStepsController::STEPS[:address]) : checkout_step_path(CheckoutStepsController::STEPS[:authenticate])),
       class: 'btn btn-default mb-20 hidden-xs'
   - else
     .container

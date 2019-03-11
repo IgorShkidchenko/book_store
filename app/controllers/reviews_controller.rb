@@ -1,10 +1,12 @@
 class ReviewsController < ApplicationController
   authorize_resource
+  respond_to :js
 
   def create
     review = ReviewForm.new(review_params)
-    review.save ? flash[:success] = t('review.success_msg') : flash[:danger] = review.errors.full_messages.to_sentence
-    redirect_back fallback_location: root_path
+    return flash[:success] = t('review.success_msg') if review.save
+
+    flash[:danger] = review.errors.full_messages.to_sentence
   end
 
   private

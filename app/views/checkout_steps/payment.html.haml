@@ -49,6 +49,6 @@
         %p.cvv_hint
           = t('checkout.payment_page.form.cvv_hint')
     .general-text-align
-      = render 'orders/order_info/order_summary', order: order, right: false
+      = render 'orders/order_info/order_summary', right: false
     .text-center
       = f.button :submit, t('checkout.buttons.next'), class: 'btn-default mb-80'

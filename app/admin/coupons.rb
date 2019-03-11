@@ -9,7 +9,6 @@ ActiveAdmin.register Coupon do
   scope :all
 
   config.filters = false
-  config.per_page = [10, 50, 100]
 
   action_item :generate_coupon, only: :index do
     link_to t('admin.coupon.generate'),

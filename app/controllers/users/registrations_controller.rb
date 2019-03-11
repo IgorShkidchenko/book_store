@@ -3,7 +3,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :set_cookies_for_back_url, only: %i[new create]
 
   def create
-    return checkout_authenticate if params[:user][:checkout_authenticate]
+    return checkout_authenticate if params.dig(:user, :checkout_authenticate)
 
     super
     set_order_to_user if session[:order_id]
@@ -25,10 +25,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     resource.skip_confirmation!
     if resource.save
       authenticate_user
-      redirect_to checkout_step_path(:address)
+      redirect_to checkout_step_path(CheckoutStepsController::STEPS[:address])
     else
       flash[:danger] = resource.errors.full_messages.to_sentence
-      redirect_to checkout_step_path(:quick_authenticate)
+      redirect_to checkout_step_path(CheckoutStepsController::STEPS[:authenticate])
     end
   end
 
@@ -39,19 +39,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def set_order_to_user
-    current_order.update(user_id: resource.id)
+    current_order.update(user: resource)
   end
 
   def find_user_addresses
-    user_addresses = resource.addresses
-    @billing = AddressForm.new(user_addresses.billing.first&.attributes)
-    @shipping = AddressForm.new(user_addresses.shipping.first&.attributes)
+    addresses_of_user = resource.addresses
+    @billing = AddressForm.new(addresses_of_user.billing.first&.attributes)
+    @shipping = AddressForm.new(addresses_of_user.shipping.first&.attributes)
   end
 
   protected
 
   def update_resource(resource, params)
     return resource.update_without_password(params) unless params[:current_password]
+
     super
   end
 end

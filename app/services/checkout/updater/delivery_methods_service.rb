@@ -6,15 +6,15 @@ class Checkout::Updater::DeliveryMethodsService < Checkout::Updater::BaseService
   end
 
   def call
-    id = @params[:delivery_method_id]
+    @id = @params[:delivery_method_id]
 
-    valid?(DeliveryMethod.find_by(id: id)) ? modernize(id) : return_delivery_methods
+    valid?(DeliveryMethod.where(id: @id).exists?) ? modernize : return_delivery_methods
   end
 
   private
 
-  def modernize(id)
-    @order.update(delivery_method_id: id)
+  def modernize
+    @order.update(delivery_method_id: @id)
     @order.fill_payment! if order_can_be_changed?
   end
 

@@ -41,7 +41,7 @@ class AddressForm
 
   validates :kind,
             presence: true,
-            inclusion: { in: [Address::KINDS[:billing], Address::KINDS[:shipping]] }
+            inclusion: { in: [Address.kinds[:billing], Address.kinds[:shipping]] }
 
   def save(entity)
     return false unless valid?

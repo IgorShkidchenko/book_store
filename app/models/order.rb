@@ -2,21 +2,6 @@ class Order < ActiveRecord::Base
   include AASM
 
   AASM_COLUMN_NAME = 'aasm_state'.freeze
-  STATUSES = {
-    checkout: {
-      fill_cart: 0,
-      fill_delivery: 1,
-      fill_payment: 2,
-      editing: 3
-    },
-    processing: {
-      in_progress: 4,
-      in_queue: 5,
-      in_delivery: 6,
-      delivered: 7,
-      canceled: 8
-    }
-  }.freeze
 
   belongs_to :user, optional: true
   belongs_to :delivery_method, optional: true
@@ -27,13 +12,10 @@ class Order < ActiveRecord::Base
   has_one :coupon, dependent: :nullify
   has_one :credit_card, dependent: :destroy
 
-  enum aasm_state: { fill_cart: STATUSES[:checkout][:fill_cart], fill_delivery: STATUSES[:checkout][:fill_delivery],
-                     fill_payment: STATUSES[:checkout][:fill_payment], editing: STATUSES[:checkout][:editing],
-                     in_progress: STATUSES[:processing][:in_progress], in_queue: STATUSES[:processing][:in_queue],
-                     in_delivery: STATUSES[:processing][:in_delivery], delivered: STATUSES[:processing][:delivered],
-                     canceled: STATUSES[:processing][:canceled] }
+  enum aasm_state: { fill_cart: 0, fill_delivery: 1, fill_payment: 2, editing: 3,
+                     in_progress: 4, in_queue: 5, in_delivery: 6, delivered: 7, canceled: 8 }
 
-  scope :user_checkout_orders, ->(user_id) { where(aasm_state: STATUSES[:checkout].values, user_id: user_id) }
+  scope :orders_in_checkout_state_of_user, ->(id) { where(user_id: id, aasm_state: Order.aasm_states.values.first(4)) }
 
   aasm column: AASM_COLUMN_NAME, enum: true do
     state :fill_cart, initial: true

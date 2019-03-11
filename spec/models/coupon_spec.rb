@@ -10,6 +10,6 @@ RSpec.describe Coupon, type: :model do
   end
 
   context 'with assosiations' do
-    it { is_expected.to belong_to(:order) }
+    it { is_expected.to belong_to(:order).without_validating_presence }
   end
 end

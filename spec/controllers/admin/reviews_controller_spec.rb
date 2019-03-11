@@ -30,9 +30,9 @@ RSpec.describe Admin::ReviewsController, type: :controller do
       it { expect(page).to have_content review.user.email }
       it { expect(page).to have_content review.status }
       it { expect(page).to have_content I18n.t('admin.actions.show') }
-      it { expect(page).to have_content Review::STATUSES.key(0).to_s.capitalize }
-      it { expect(page).to have_content Review::STATUSES.key(1).to_s.capitalize }
-      it { expect(page).to have_content Review::STATUSES.key(2).to_s.capitalize }
+      it { expect(page).to have_content Review.statuses.key(0).to_s.capitalize }
+      it { expect(page).to have_content Review.statuses.key(1).to_s.capitalize }
+      it { expect(page).to have_content Review.statuses.key(2).to_s.capitalize }
     end
 
     describe 'when show' do
@@ -46,8 +46,8 @@ RSpec.describe Admin::ReviewsController, type: :controller do
       it { expect(page).to have_content review.rating }
       it { expect(page).to have_content review.user.email }
       it { expect(page).to have_content review.status }
-      it { expect(page).to have_content Review::STATUSES.key(1).to_s.capitalize }
-      it { expect(page).to have_content Review::STATUSES.key(2).to_s.capitalize }
+      it { expect(page).to have_content Review.statuses.key(1).to_s.capitalize }
+      it { expect(page).to have_content Review.statuses.key(2).to_s.capitalize }
     end
 
     describe 'when approved' do

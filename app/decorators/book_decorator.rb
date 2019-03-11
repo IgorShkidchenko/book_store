@@ -1,4 +1,8 @@
 class BookDecorator < Draper::Decorator
+  SHORT_DESCRIPTION_LETTERS_QUANTITY = 150
+  MEDIUM_DESCRIPTION_LETTERS_QUANTITY = 250
+  REST_OF_DESCRIPTION_RANGE = (250..-1).freeze
+
   delegate_all
 
   def authors_as_string
@@ -6,19 +10,15 @@ class BookDecorator < Draper::Decorator
   end
 
   def short_description
-    description[0..150]
+    description.first(SHORT_DESCRIPTION_LETTERS_QUANTITY)
   end
 
   def medium_description
-    description[0..250]
+    description.first(MEDIUM_DESCRIPTION_LETTERS_QUANTITY)
   end
 
   def the_rest_of_description
-    description[250..-1]
-  end
-
-  def approved_reviews_count
-    reviews.approved.count
+    description[REST_OF_DESCRIPTION_RANGE]
   end
 
   def dimensions
@@ -26,13 +26,12 @@ class BookDecorator < Draper::Decorator
   end
 
   def main_book_cover
-    covers = book.covers
-
-    if covers.present?
-      h.image_tag covers.first.image_url(:w500), alt: I18n.t('book.cover_alt', title: book.title),
-                                                 class: 'img-shadow general-thumbnail-img'
+    if book.covers.exists?
+      h.image_tag book.covers.first.image_url(:w500), alt: I18n.t('book.cover_alt', title: book.title),
+                                                      class: 'img-shadow general-thumbnail-img'
     else
-      h.image_tag 'w500_default.png', alt: I18n.t('book.cover_default'), class: 'general-thumbnail-img'
+      h.image_tag CoverUploader::DEFAULT_IMG_FILE_NAME, alt: I18n.t('book.cover_default'),
+                                                        class: 'general-thumbnail-img'
     end
   end
 end

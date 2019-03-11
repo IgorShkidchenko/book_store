@@ -1,4 +1,8 @@
 class CoverUploader < CarrierWave::Uploader::Base
+  DEFAULT_IMG_FILE_NAME = 'w500_default.png'.freeze
+  MAIN_COVER_SIZE = 554
+  SMALL_COVER_SIZE = 165
+
   include CarrierWave::MiniMagick
   storage :aws
 
@@ -9,15 +13,15 @@ class CoverUploader < CarrierWave::Uploader::Base
   def default_url
     return ActionController::Base.helpers.asset_path([version_name, "default.png"].compact.join('_')) if version_name
 
-    'w500_default.png'
+    DEFAULT_IMG_FILE_NAME
   end
 
   version :w500 do
-    process resize_to_fit: [554, nil]
+    process resize_to_fit: [MAIN_COVER_SIZE, nil]
   end
 
   version :w150 do
-    process resize_to_fit: [165, nil]
+    process resize_to_fit: [SMALL_COVER_SIZE, nil]
   end
 
   def extension_whitelist

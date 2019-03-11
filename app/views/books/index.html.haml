@@ -14,7 +14,7 @@
             = presenter.all_books_count
       - @categories.each do |category|
         %li.mr-35
-          = link_to category_books_path(category), class: "filter-link #{'in-gold-500' if @category == category}" do
+          = link_to category_books_path(category), class: "filter-link #{'in-gold-500' if @category.eql?(category)}" do
             = category.name
             %span.badge.general-badge
               = category.books_count

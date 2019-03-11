@@ -3,8 +3,6 @@ require: rubocop-rspec
 Metrics/LineLength:
   Max: 120
   Exclude:
-    - 'app/admin/reviews.rb'
-    - 'app/queries/**/*'
     - 'spec/**/*'
 
 Documentation:
@@ -45,10 +43,11 @@ Style/UnneededInterpolation:
 
 Metrics/AbcSize:
   Exclude:
-    - 'app/controllers/coupons_controller.rb'
     - 'app/presenters/catalog_presenter.rb'
     - 'app/controllers/users/registrations_controller.rb'
     - 'app/services/checkout/form_variables_service.rb'
+    - 'app/decorators/book_decorator.rb'
+
 
 RSpec/MessageChain:
   Enabled: false

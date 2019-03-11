@@ -26,7 +26,7 @@ class CreditCardForm
   validates :expire_date,
             presence: true,
             format: { with: EXPIRE_DATE_FORMAT_MM_YY_REGEX, message: I18n.t('checkout.errors.expire_date') },
-            valid_expire_date: true
+            expire_date_in_future: true
 
   validates :cvv,
             presence: true,
