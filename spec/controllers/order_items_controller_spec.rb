@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe OrderItemsController, type: :controller do
-  let(:order_item) { FactoryBot.create(:order_item) }
+  let(:order_item) { create(:order_item) }
   let(:order) { order_item.order }
 
   before do
@@ -10,7 +10,7 @@ RSpec.describe OrderItemsController, type: :controller do
   end
 
   describe 'when create' do
-    let(:valid_params) { (FactoryBot.attributes_for :order_item).merge(order_id: order_item.order_id) }
+    let(:valid_params) { (attributes_for :order_item).merge(order_id: order_item.order_id) }
 
     before { post :create, xhr: true, params: { order_item: valid_params } }
 

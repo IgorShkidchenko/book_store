@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ReviewDecorator do
-  let(:review) { FactoryBot.build_stubbed(:review).decorate }
+  let(:review) { build_stubbed(:review).decorate }
 
   context 'when creation_date' do
     let(:standart_created_at) { '2019-01-23 15:35:45'.to_time }

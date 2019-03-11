@@ -10,7 +10,7 @@ RSpec.describe Admin::CouponsController, type: :controller do
 
   describe 'when login' do
     let(:page) { Capybara::Node::Simple.new(response.body) }
-    let!(:coupon) { FactoryBot.create(:coupon) }
+    let!(:coupon) { create(:coupon) }
 
     render_views
     login_admin

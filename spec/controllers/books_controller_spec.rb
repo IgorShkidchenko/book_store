@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe BooksController, type: :controller do
   describe 'when visit show page' do
-    let(:book) { FactoryBot.create(:book) }
+    let(:book) { create(:book) }
 
     before do
       allow(Book).to receive(:find).and_return(book)
@@ -16,7 +16,7 @@ RSpec.describe BooksController, type: :controller do
   end
 
   describe 'when visit index page' do
-    let(:category) { FactoryBot.create(:category, :with_book) }
+    let(:category) { create(:category, :with_book) }
     let(:book) { category.books.last.decorate }
 
     before do

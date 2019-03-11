@@ -10,7 +10,7 @@ RSpec.describe Admin::ReviewsController, type: :controller do
 
   describe 'when login' do
     let(:page) { Capybara::Node::Simple.new(response.body) }
-    let!(:review) { FactoryBot.create(:review) }
+    let!(:review) { create(:review) }
 
     render_views
     login_admin

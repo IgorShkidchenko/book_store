@@ -10,9 +10,9 @@ RSpec.describe Admin::CategoriesController, type: :controller do
 
   describe 'when login' do
     let(:page) { Capybara::Node::Simple.new(response.body) }
-    let!(:category) { FactoryBot.create(:category) }
+    let!(:category) { create(:category) }
 
-    let(:valid_attributes) { FactoryBot.attributes_for :category }
+    let(:valid_attributes) { attributes_for :category }
     let(:invalid_attributes) { { name: nil } }
 
     render_views

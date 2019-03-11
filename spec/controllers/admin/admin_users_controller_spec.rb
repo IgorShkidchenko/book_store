@@ -12,7 +12,7 @@ RSpec.describe Admin::AdminUsersController, type: :controller do
     let(:page) { Capybara::Node::Simple.new(response.body) }
     let(:admin) { subject.current_admin_user }
 
-    let(:valid_attributes) { FactoryBot.attributes_for :admin_user }
+    let(:valid_attributes) { attributes_for :admin_user }
     let(:invalid_attributes) { { email: nil } }
 
     render_views

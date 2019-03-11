@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Sign in', type: :feature, js: true do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { create(:user) }
 
   describe 'when sing in/out' do
     before do
@@ -16,8 +16,10 @@ describe 'Sign in', type: :feature, js: true do
         first('.btn-default').click
       end
 
-      it { expect(page).to have_current_path root_path }
-      it { expect(page).to have_content I18n.t('devise.sessions.signed_in') }
+      it 'successful redirect' do
+        expect(page).to have_current_path root_path
+        expect(page).to have_content I18n.t('devise.sessions.signed_in')
+      end
 
       it 'sign out' do
         click_on I18n.t('layout.header.my_account')

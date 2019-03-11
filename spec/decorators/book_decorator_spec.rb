@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe BookDecorator do
-  let(:book) { FactoryBot.build_stubbed(:book, :with_author).decorate }
+  let(:book) { build_stubbed(:book, :with_author).decorate }
 
   context 'when description' do
     let(:valid_short_description_size) { 150 }

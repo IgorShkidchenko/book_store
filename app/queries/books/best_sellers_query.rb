@@ -3,13 +3,13 @@ class Books::BestSellersQuery
 
   class << self
     def call
-      ids = Book.find_by_sql(best_sellers_ids_in_each_category_as_array).map(&:book_id)
+      ids = Book.find_by_sql(best_sellers_ids_sql_query).map(&:book_id)
       Book.where(id: ids).includes(:authors, :covers)
     end
 
     private
 
-    def best_sellers_ids_in_each_category_as_array
+    def best_sellers_ids_sql_query
       <<-SQL
         SELECT book_id FROM (
           SELECT (array_agg(books.id ORDER BY order_items.quantity DESC))[1] AS book_id, books.category_id

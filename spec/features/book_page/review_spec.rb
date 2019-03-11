@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 describe 'Review', type: :feature, js: true do
-  let!(:book) { FactoryBot.create(:book, :with_author).decorate }
-  let!(:reviews) { FactoryBot.create_list(:review, 3, book_id: book.id, status: Review.statuses[:approved]) }
+  let!(:book) { create(:book, :with_author).decorate }
+  let!(:reviews) { create_list(:review, 3, book_id: book.id, status: Review.statuses[:approved]) }
 
   before { visit book_path(book) }
 
   it 'all approved reviews count' do
-    FactoryBot.create(:review, book_id: book.id)
+    create(:review, book_id: book.id)
     expect(page).to have_selector 'h3.mb-25', text: Review.approved.size
   end
 
@@ -29,7 +29,7 @@ describe 'Review', type: :feature, js: true do
 
   context 'when user logged in' do
     let(:user) { reviews.first.user }
-    let(:valid_attribute) { FactoryBot.attributes_for :review }
+    let(:valid_attribute) { attributes_for :review }
     let(:invalid_input) { '@' }
 
     before do

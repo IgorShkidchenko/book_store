@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe CouponsController, type: :controller do
-  let(:coupon) { FactoryBot.create(:coupon) }
-  let(:order) { FactoryBot.create(:order) }
+  let(:coupon) { create(:coupon) }
+  let(:order) { create(:order) }
 
   describe 'when update with valid params' do
     before do
@@ -30,7 +30,7 @@ RSpec.describe CouponsController, type: :controller do
     end
 
     context 'when coupon was already used' do
-      let(:used_coupon) { FactoryBot.create(:coupon, :used) }
+      let(:used_coupon) { create(:coupon, :used) }
 
       before do
         put :update, xhr: true, params: { id: :used_coupon, coupon: { key: used_coupon.key } }

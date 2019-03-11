@@ -10,9 +10,9 @@ RSpec.describe Admin::AuthorsController, type: :controller do
 
   describe 'when login' do
     let(:page) { Capybara::Node::Simple.new(response.body) }
-    let!(:author) { FactoryBot.create(:author) }
+    let!(:author) { create(:author) }
 
-    let(:valid_attributes) { FactoryBot.attributes_for :author }
+    let(:valid_attributes) { attributes_for :author }
     let(:invalid_attributes) { { name: nil } }
 
     render_views

@@ -14,4 +14,4 @@
       = render 'order_items/cart/item_titles_row'
       = render partial: 'order_items/cart/cart_row', collection: order_items, as: :order_item
   .text-center.general-text-right
-    = render 'orders/order_info/order_summary', order: order, right: true
+    = render 'orders/order_info/order_summary', current_order: order, right: true

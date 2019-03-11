@@ -14,8 +14,16 @@ FactoryBot.define do
       end
     end
 
-    trait :with_user do
+    trait :completed_with_user do
+      after(:create) do |order|
+        order.addresses.create!(attributes_for(:address, :billing))
+        order.addresses.create!(attributes_for(:address, :shipping))
+        create(:credit_card, order: order)
+        create(:order_item, order: order)
+      end
       user
+      delivery_method
+      aasm_state { Order.aasm_states['delivered'] }
     end
   end
 end

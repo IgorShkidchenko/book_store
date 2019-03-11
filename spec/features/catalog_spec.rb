@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 describe 'Catalog page', type: :feature, js: true do
-  let!(:category) { FactoryBot.create(:category, :with_books) }
+  let!(:category) { create(:category, :with_books) }
   let(:category_book) { category.books.second }
-  let(:book) { FactoryBot.create(:book) }
+  let(:book) { create(:book) }
   let(:pagy_button_name) { 'Next' }
   let(:books_on_page_quantity) { 12 }
 
@@ -50,10 +50,10 @@ describe 'Catalog page', type: :feature, js: true do
     expect(page).to have_selector '#read-more-btn'
   end
 
-  context 'when book data on page' do
-    it { expect(page).to have_selector 'p', text: category_book.title }
-    it { expect(page).to have_selector 'p', text: category_book.decorate.authors_as_string }
-    it { expect(page).to have_selector 'p', text: I18n.t('price', price: category_book.price) }
-    it { expect(page).to have_selector '.general-thumbnail-img' }
+  it 'when book data on page' do
+    expect(page).to have_selector 'p', text: category_book.title
+    expect(page).to have_selector 'p', text: category_book.decorate.authors_as_string
+    expect(page).to have_selector 'p', text: I18n.t('price', price: category_book.price)
+    expect(page).to have_selector '.general-thumbnail-img'
   end
 end

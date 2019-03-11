@@ -57,6 +57,7 @@ group :development do
   gem 'reek', '~> 5.3', '>= 5.3.1'
   gem 'rubocop', '~> 0.65.0', require: false
   gem 'rubocop-rspec', '~> 1.32', require: false
+  gem 'heavens_door', '~> 0.2.2'
   gem 'spring', '~> 2.0', '>= 2.0.2'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'

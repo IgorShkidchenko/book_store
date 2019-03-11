@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Books page', type: :feature, js: true do
-  let!(:book) { FactoryBot.create(:book, :with_author).decorate }
+  let!(:book) { create(:book, :with_author).decorate }
 
   before { visit book_path(book) }
 
@@ -9,15 +9,15 @@ describe 'Books page', type: :feature, js: true do
     expect(page).to have_current_path book_path(book)
   end
 
-  context 'when book data on page' do
-    it { expect(page).to have_selector 'h1', text: book.title }
-    it { expect(page).to have_selector 'p', text: book.published_year }
-    it { expect(page).to have_selector 'p', text: book.materials }
-    it { expect(page).to have_selector 'p', text: book.authors_as_string }
-    it { expect(page).to have_selector 'p', text: book.dimensions }
-    it { expect(page).to have_selector 'p', text: book.medium_description }
-    it { expect(page).to have_selector 'p', text: I18n.t('price', price: book.price) }
-    it { expect(page).to have_selector '.general-thumbnail-img' }
+  it 'when book data on page' do
+    expect(page).to have_selector 'h1', text: book.title
+    expect(page).to have_selector 'p', text: book.published_year
+    expect(page).to have_selector 'p', text: book.materials
+    expect(page).to have_selector 'p', text: book.authors_as_string
+    expect(page).to have_selector 'p', text: book.dimensions
+    expect(page).to have_selector 'p', text: book.medium_description
+    expect(page).to have_selector 'p', text: I18n.t('price', price: book.price)
+    expect(page).to have_selector '.general-thumbnail-img'
   end
 
   context 'when readmore button' do
@@ -45,7 +45,7 @@ describe 'Books page', type: :feature, js: true do
   end
 
   context 'when add to cart' do
-    let(:order) { FactoryBot.create(:order) }
+    let(:order) { create(:order) }
     let(:book_count_in_cart) { order.order_items.size }
 
     before do

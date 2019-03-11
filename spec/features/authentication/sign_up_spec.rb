@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Sign up', type: :feature, js: true do
-  let(:valid_data) { FactoryBot.attributes_for :user }
+  let(:valid_data) { attributes_for :user }
   let(:invalid_input) { '@@' }
   let(:error_message) { 'Email is invalid' }
 
