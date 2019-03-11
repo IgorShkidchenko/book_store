@@ -65,10 +65,10 @@ describe 'Root page', type: :feature, js: true do
 
     before do
       login_as(user, scope: :user)
+      page.driver.browser.navigate.refresh
     end
 
     it 'header links' do
-      sleep(5)
       click_on I18n.t('layout.header.my_account')
       expect(page).to have_selector 'a', text: I18n.t('layout.link.log_out')
       expect(page).not_to have_selector 'a', text: I18n.t('layout.link.sign_up')
@@ -77,13 +77,11 @@ describe 'Root page', type: :feature, js: true do
 
     it 'redirect to orders of user' do
       click_on I18n.t('layout.link.orders')
-      sleep(5)
       expect(page).to have_current_path user_orders_path(user)
     end
 
     it 'redirect to settings of user' do
       click_on I18n.t('layout.link.settings')
-      sleep(5)
       expect(page).to have_current_path edit_user_registration_path
     end
   end

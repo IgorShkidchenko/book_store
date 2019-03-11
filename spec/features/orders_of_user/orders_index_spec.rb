@@ -17,7 +17,7 @@ describe 'Orders of User', type: :feature, js: true do
     expect(page).to have_selector 'a', text: order.number
     expect(page).to have_selector 'span', text: order.creation_date
     expect(page).to have_selector 'span', text: order.creation_date
-    expect(page).to have_selector 'p', text: I18n.t('price', price: order.total_price)
+    expect(page).to have_selector 'p', text: order.total_price
   end
 
   it 'when redirect on order page' do

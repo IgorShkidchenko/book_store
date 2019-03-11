@@ -55,7 +55,7 @@ describe 'Orders show', type: :feature, js: true do
   end
 
   it 'when order data on page' do
-    expect(page).to have_selector 'a', text: I18n.t('orders.order_number', number: order.number)
+    expect(page).to have_selector 'h4', text: I18n.t('orders.order_number', number: order.number)
     expect(page).to have_selector 'p', text: order.subtotal_price
     expect(page).to have_selector '.font-17', text: order.total_price
   end
