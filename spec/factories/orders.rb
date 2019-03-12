@@ -23,7 +23,7 @@ FactoryBot.define do
       end
       user
       delivery_method
-      aasm_state { Order.aasm_states['delivered'] }
+      aasm_state { Order.aasm_states[:delivered] }
     end
   end
 end

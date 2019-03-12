@@ -21,7 +21,7 @@ class Checkout::Updater::AddressesService < Checkout::Updater::BaseService
   def chosen_shipping_address
     return AddressForm.new(@params[:shipping]) unless @params[:clone_address]
 
-    @params[:billing][:kind] = Address.kinds[:shipping]
+    @params.dig(:billing, :kind) = Address.kinds[:shipping]
     AddressForm.new(@params[:billing])
   end
 end

@@ -5,15 +5,15 @@ FactoryBot.define do
     city { Faker::Games::Witcher.location }
     street { Faker::Address.street_name }
     phone { Faker::PhoneNumber.phone_number_with_country_code.first(10) }
-    zip { Faker::Address.zip }
-    country { Faker::Address.country }
+    zip { Faker::Number.number(5) }
+    country { Faker::Address.country_code }
 
     trait :billing do
-      kind { Address.kinds['billing'] }
+      kind { Address.kinds[:billing] }
     end
 
     trait :shipping do
-      kind { Address.kinds['shipping'] }
+      kind { Address.kinds[:shipping] }
     end
   end
 end

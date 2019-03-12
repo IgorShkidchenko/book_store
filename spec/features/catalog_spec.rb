@@ -11,29 +11,11 @@ describe 'Catalog page', type: :feature, js: true do
 
   it 'current page is catalog' do
     expect(page).to have_current_path category_books_path(category_id: category.id)
-  end
-
-  it 'valid quantity of books on page' do
     expect(page).to have_selector '.title', count: books_on_page_quantity
-  end
-
-  it 'Pagy navigation' do
     expect(page).to have_selector 'a', text: pagy_button_name, count: 1
-  end
-
-  it 'category link' do
     expect(page).to have_selector 'a', text: category.name, count: Category.count
-  end
-
-  it 'category books count' do
     expect(page).to have_selector '.badge', text: category.books.size
-  end
-
-  it 'all books link' do
     expect(page).to have_selector 'a', text: I18n.t('catalog.all'), count: 1
-  end
-
-  it 'all books count' do
     expect(page).to have_selector '.badge', text: Book.count
   end
 

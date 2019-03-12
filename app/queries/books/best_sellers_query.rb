@@ -16,7 +16,7 @@ class Books::BestSellersQuery
           FROM books
           LEFT JOIN order_items ON order_items.book_id = books.id
           LEFT JOIN orders ON orders.id = order_items.order_id
-          WHERE orders.aasm_state = #{Order.aasm_states['delivered']}
+          WHERE orders.aasm_state = #{Order.aasm_states[:delivered]}
           GROUP BY books.category_id
           LIMIT #{BEST_SELLERS_QUANTITY}
         ) AS book_ids

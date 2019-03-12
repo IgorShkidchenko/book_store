@@ -1,10 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe AddressForm, type: :model do
-  let(:valid_input) { 'text' }
-  let(:invalid_input) { 'text text' }
+  let(:valid_input) { 'text text' }
+  let(:invalid_input) { '@' }
   let(:address_valid_input) { "text 0-9'`\"-" }
-  let(:address_invalid_input) { '@' }
   let(:phone_valid_input) { '+30971234567' }
   let(:phone_invalid_input) { '30971234567' }
 
@@ -32,6 +31,6 @@ RSpec.describe AddressForm, type: :model do
   it { is_expected.not_to allow_value(invalid_input).for(:last_name).with_message(I18n.t('checkout.errors.only_letters')) }
   it { is_expected.not_to allow_value(invalid_input).for(:country).with_message(I18n.t('checkout.errors.only_letters')) }
   it { is_expected.not_to allow_value(invalid_input).for(:city).with_message(I18n.t('checkout.errors.only_letters')) }
-  it { is_expected.not_to allow_value(address_invalid_input).for(:street).with_message(I18n.t('checkout.errors.address')) }
+  it { is_expected.not_to allow_value(invalid_input).for(:street).with_message(I18n.t('checkout.errors.address')) }
   it { is_expected.not_to allow_value(phone_invalid_input).for(:phone).with_message(I18n.t('checkout.errors.phone')) }
 end

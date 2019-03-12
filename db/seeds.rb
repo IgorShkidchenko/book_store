@@ -73,7 +73,7 @@ Order.count.times do |index|
   rand(1..3).times { OrderItem.create!(order_id: index + 1, book_id: rand(1..50), quantity: rand(1..2)) }
 end
 
-completed_order = Order.find_by(aasm_state: Order.aasm_states['delivered'])
+completed_order = Order.find_by(aasm_state: Order.aasm_states[:delivered])
 4.times do |index|
   OrderItem.create!(order: completed_order, book: Book.find_by(category_id: index + 1), quantity: 1)
 end

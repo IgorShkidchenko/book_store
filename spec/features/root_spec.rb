@@ -11,25 +11,10 @@ describe 'Root page', type: :feature, js: true do
 
   it 'current page is home' do
     expect(page).to have_current_path root_path
-  end
-
-  it 'slider present' do
     expect(page).to have_selector '#slider'
-  end
-
-  it 'footer present' do
     expect(page).to have_selector 'a', text: I18n.t('layout.link.shop')
-  end
-
-  it 'header present' do
     expect(page).to have_selector '.cart_part'
-  end
-
-  it 'books showed on slider' do
     expect(page).to have_selector 'h1', text: book.title
-  end
-
-  it 'books on bestseller row' do
     expect(page).to have_selector '.title', text: book.title
   end
 

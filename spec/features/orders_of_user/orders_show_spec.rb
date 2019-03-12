@@ -14,7 +14,7 @@ describe 'Orders show', type: :feature, js: true do
     visit order_path(order)
   end
 
-  it 'current page is orders of user' do
+  it 'current page is orders show' do
     expect(page).to have_current_path order_path(order)
   end
 

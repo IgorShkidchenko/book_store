@@ -3,7 +3,6 @@ require 'rails_helper'
 describe 'Sign up', type: :feature, js: true do
   let(:valid_data) { attributes_for :user }
   let(:invalid_input) { '@@' }
-  let(:error_message) { 'Email is invalid' }
 
   before do
     visit root_path
@@ -15,7 +14,7 @@ describe 'Sign up', type: :feature, js: true do
     fill_in 'user[password]', with: valid_data[:password]
     fill_in 'user[password_confirmation]', with: valid_data[:password]
     first('.btn-default').click
-    expect(page).to have_content I18n.t('devise.registrations.signed_up_but_unconfirmed')
+    expect(page).to have_selector 'div', text: I18n.t('devise.registrations.signed_up_but_unconfirmed')
   end
 
   it 'sign up with invalid data' do
@@ -23,6 +22,6 @@ describe 'Sign up', type: :feature, js: true do
     fill_in 'user[password]', with: valid_data[:password]
     fill_in 'user[password_confirmation]', with: valid_data[:password]
     first('.btn-default').click
-    expect(page).to have_selector '.help-block', text: error_message
+    expect(page).to have_selector '.help-block', text: I18n.t('simple_form.error_notification.email')
   end
 end

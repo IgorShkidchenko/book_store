@@ -20,7 +20,7 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def insert_order_to_user
-    current_order.update(user_id: resource.id)
+    current_order.update(user: resource)
   end
 
   def user_have_current_order?

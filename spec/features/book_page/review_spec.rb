@@ -16,11 +16,13 @@ describe 'Review', type: :feature, js: true do
     let(:max_stars_count) { 5 }
     let(:approved_review_empty_stars) { max_stars_count - approved_review.rating }
 
-    it { expect(page).to have_selector 'h4', text: approved_review.title }
-    it { expect(page).to have_selector 'p', text: approved_review.body }
-    it { expect(first('.mb-15')).to have_selector '.rate-empty', count: approved_review_empty_stars }
-    it { expect(page).to have_selector '.general-message-name', text: approved_review.user_email }
-    it { expect(page).to have_selector '.general-message-date', text: approved_review.creation_date }
+    it do
+      expect(page).to have_selector 'h4', text: approved_review.title
+      expect(page).to have_selector 'p', text: approved_review.body
+      expect(first('.mb-15')).to have_selector '.rate-empty', count: approved_review_empty_stars
+      expect(page).to have_selector '.general-message-name', text: approved_review.user_email
+      expect(page).to have_selector '.general-message-date', text: approved_review.creation_date
+    end
   end
 
   it 'not logged in user cant see review form' do
@@ -29,7 +31,7 @@ describe 'Review', type: :feature, js: true do
 
   context 'when user logged in' do
     let(:user) { reviews.first.user }
-    let(:valid_attribute) { attributes_for :review }
+    let(:valid_attributes) { attributes_for :review }
     let(:invalid_input) { '@' }
 
     before do
@@ -41,8 +43,8 @@ describe 'Review', type: :feature, js: true do
 
     it 'fill form with valid data' do
       first('label').click
-      fill_in 'review_form[title]', with: valid_attribute[:title]
-      fill_in 'review_form[body]', with: valid_attribute[:body]
+      fill_in 'review_form[title]', with: valid_attributes[:title]
+      fill_in 'review_form[body]', with: valid_attributes[:body]
       click_on I18n.t('review.post')
       expect(page).to have_selector 'div', text: I18n.t('review.success_msg')
     end
