@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe OrdersController, type: :controller do
-  let(:order) { create(:order, :completed_with_user) }
+  let(:order) { create(:order_in_checkout_final_steps, :delivered) }
   let(:user) { order.user }
 
   describe 'when visit show page' do

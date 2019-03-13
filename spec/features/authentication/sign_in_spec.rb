@@ -13,7 +13,7 @@ describe 'Sign in', type: :feature, js: true do
       before do
         fill_in 'user[email]', with: user.email
         fill_in 'user[password]', with: user.password
-        first('.btn-default').click
+        click_button I18n.t('devise_pages.log_in')
       end
 
       it 'successful redirect' do
@@ -35,16 +35,8 @@ describe 'Sign in', type: :feature, js: true do
       it do
         fill_in 'user[email]', with: invalid_email
         fill_in 'user[password]', with: user.password
-        first('.btn-default').click
+        click_button I18n.t('devise_pages.log_in')
         expect(page).to have_selector 'div', text: I18n.t('devise.failure.not_found_in_database', authentication_keys: invalid_key)
-      end
-    end
-
-    context 'when Facebook' do
-      it do
-        valid_facebook_login_setup
-        first('.fa-facebook-official').click
-        expect(page).to have_current_path root_path
       end
     end
   end

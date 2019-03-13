@@ -1,21 +1,19 @@
 require 'rails_helper'
 
 describe 'Root page', type: :feature, js: true do
+  let!(:order) { create(:order_in_checkout_final_steps, :delivered) }
+  let(:book) { order.order_items.first.book }
   let!(:category) { create(:category, :with_book) }
-  let(:book) { category.books.last }
+  let(:book_on_slider) { category.books.last }
 
-  before do
-    allow(Books::BestSellersQuery).to receive(:call).and_return([book])
-    visit root_path
-  end
+  before { visit root_path }
 
   it 'current page is home' do
     expect(page).to have_current_path root_path
     expect(page).to have_selector '#slider'
     expect(page).to have_selector 'a', text: I18n.t('layout.link.shop')
     expect(page).to have_selector '.cart_part'
-    expect(page).to have_selector 'h1', text: book.title
-    expect(page).to have_selector '.title', text: book.title
+    expect(page).to have_selector 'h1', text: book_on_slider.title
   end
 
   it 'redirect to book page' do
@@ -28,7 +26,7 @@ describe 'Root page', type: :feature, js: true do
   it 'redirect to catalog page' do
     first('.dropdown-toggle').click
     click_link category.name
-    expect(page).to have_current_path category_books_path(category_id: book.category_id)
+    expect(page).to have_current_path category_books_path(category_id: book_on_slider.category_id)
   end
 
   it 'when book data on page' do

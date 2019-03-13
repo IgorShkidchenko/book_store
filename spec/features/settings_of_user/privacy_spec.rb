@@ -36,7 +36,7 @@ describe 'Privacy', type: :feature, js: true do
       fill_in 'user[email]', with: invalid_email
       first('.btn''.btn-default''.mb-35').click
       click_on I18n.t('user_settings.privacy')
-      expect(page).to have_selector '.help-block', text: I18n.t('simple_form.error_notification.email')
+      expect(page).to have_selector '.help-block', text: I18n.t('devise.errors.email')
     end
   end
 
@@ -55,7 +55,7 @@ describe 'Privacy', type: :feature, js: true do
       fill_in 'user[password_confirmation]', with: new_password
       first('.btn''.btn-default''.mb-10').click
       click_on I18n.t('user_settings.privacy')
-      expect(page).to have_selector '.help-block', text: I18n.t('simple_form.error_notification.password')
+      expect(page).to have_selector '.help-block', text: I18n.t('devise.errors.password')
     end
   end
 

@@ -3,7 +3,7 @@
     = t("checkout.address_page.#{address.kind}")
   %p.general-address
     = address.full_name
-    = link_to t('checkout.address_page.edit_link'), wizard_path(CheckoutStepsController::STEPS[:address]), class: 'general-edit' if checkout
+    = link_to t('checkout.confirm_page.edit_link'), wizard_path(CheckoutStepsController::STEPS[:address]), class: 'general-edit' if checkout
     %br
       = address.street
     %br

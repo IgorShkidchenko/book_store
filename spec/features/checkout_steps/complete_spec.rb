@@ -1,21 +1,25 @@
 require 'rails_helper'
 
-describe 'Orders show', type: :feature, js: true do
-  let(:order) { create(:order_in_checkout_final_steps, :delivered).decorate }
+describe 'Complete', type: :feature, js: true do
+  let(:order) { create(:order_in_checkout_final_steps, :confirm_step).decorate }
+  let(:user) { order.user }
   let(:order_item) { order.order_items.last.decorate }
   let(:book) { order.books.first }
   let(:user) { order.user }
   let(:billing) { order.addresses.billing.first.decorate }
-  let(:shipping) { order.addresses.shipping.first.decorate }
-  let(:credit_card) { order.credit_card.decorate }
 
   before do
     login_as(user, scope: :user)
-    visit order_path(order)
+    page.set_rack_session(order_id: order.id)
+    visit checkout_step_path(CheckoutStepsController::STEPS[:edit])
+    click_on I18n.t('checkout.buttons.place_order')
+    sleep(2)
   end
 
-  it 'current page is orders show' do
-    expect(page).to have_current_path order_path(order)
+  it 'current page is complete' do
+    expect(page).to have_current_path checkout_step_path(CheckoutStepsController::STEPS[:complete])
+    expect(page).to have_selector 'h3', text: I18n.t('checkout.complete_page.thank_you')
+    expect(page).to have_selector 'p', text: I18n.t('checkout.complete_page.msg_was_sent', email: user.email)
   end
 
   it 'when billing address data on page' do
@@ -24,23 +28,6 @@ describe 'Orders show', type: :feature, js: true do
     expect(page).to have_selector 'p', text: billing.city_with_zip
     expect(page).to have_selector 'p', text: billing.country
     expect(page).to have_selector 'p', text: I18n.t('checkout.address_phone', number: billing.phone)
-  end
-
-  it 'when shipping address data on page' do
-    expect(page).to have_selector 'p', text: shipping.full_name
-    expect(page).to have_selector 'p', text: shipping.street
-    expect(page).to have_selector 'p', text: shipping.city_with_zip
-    expect(page).to have_selector 'p', text: shipping.country
-    expect(page).to have_selector 'p', text: I18n.t('checkout.address_phone', number: shipping.phone)
-  end
-
-  it 'when credit_card data on page' do
-    expect(page).to have_selector 'p', text: credit_card.masked_number
-    expect(page).to have_selector 'p', text: credit_card.expire_date
-  end
-
-  it 'when delivery_method data on page' do
-    expect(page).to have_selector 'p', text: order.delivery_method_name
   end
 
   it 'when book data on page' do
@@ -55,8 +42,9 @@ describe 'Orders show', type: :feature, js: true do
   end
 
   it 'when order data on page' do
-    expect(page).to have_selector 'h4', text: I18n.t('orders.order_number', number: order.number)
+    expect(page).to have_selector 'p', text: I18n.t('price', price: order.delivery_method.cost)
     expect(page).to have_selector 'p', text: order.subtotal_price
+    expect(page).to have_selector 'p', text: order.creation_date
     expect(page).to have_selector '.font-17', text: order.total_price
   end
 

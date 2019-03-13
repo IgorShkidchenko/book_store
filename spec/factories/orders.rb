@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :order do
-    number { SecureRandom.hex(4) }
+    number { Checkout::CompleteService::FIRST_ORDER_NUMBER_SYMBOL + Time.now.strftime(Checkout::CompleteService::CURRENT_DATE) }
 
     trait :with_order_items do
       after(:create) do |order|
@@ -14,7 +14,28 @@ FactoryBot.define do
       end
     end
 
-    trait :completed_with_user do
+    factory :order_in_checkout_form_steps, parent: :order do
+      after(:create) do |order|
+        create(:order_item, order: order)
+      end
+      user
+
+      trait :delivery_step do
+        aasm_state { Order.aasm_states[:fill_delivery] }
+      end
+
+      trait :payment_step do
+        after(:create) do |order|
+          order.addresses.create!(attributes_for(:address, :billing))
+          order.addresses.create!(attributes_for(:address, :shipping))
+        end
+        delivery_method
+
+        aasm_state { Order.aasm_states[:fill_payment] }
+      end
+    end
+
+    factory :order_in_checkout_final_steps, parent: :order do
       after(:create) do |order|
         order.addresses.create!(attributes_for(:address, :billing))
         order.addresses.create!(attributes_for(:address, :shipping))
@@ -23,7 +44,14 @@ FactoryBot.define do
       end
       user
       delivery_method
-      aasm_state { Order.aasm_states[:delivered] }
+
+      trait :confirm_step do
+        aasm_state { Order.aasm_states[:editing] }
+      end
+
+      trait :delivered do
+        aasm_state { Order.aasm_states[:delivered] }
+      end
     end
   end
 end

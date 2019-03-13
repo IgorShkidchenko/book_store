@@ -13,7 +13,7 @@ describe 'Sign up', type: :feature, js: true do
     fill_in 'user[email]', with: valid_data[:email]
     fill_in 'user[password]', with: valid_data[:password]
     fill_in 'user[password_confirmation]', with: valid_data[:password]
-    first('.btn-default').click
+    click_button I18n.t('devise_pages.sign_up')
     expect(page).to have_selector 'div', text: I18n.t('devise.registrations.signed_up_but_unconfirmed')
   end
 
@@ -21,7 +21,7 @@ describe 'Sign up', type: :feature, js: true do
     fill_in 'user[email]', with: invalid_input
     fill_in 'user[password]', with: valid_data[:password]
     fill_in 'user[password_confirmation]', with: valid_data[:password]
-    first('.btn-default').click
-    expect(page).to have_selector '.help-block', text: I18n.t('simple_form.error_notification.email')
+    click_button I18n.t('devise_pages.sign_up')
+    expect(page).to have_selector '.help-block', text: I18n.t('devise.errors.email')
   end
 end

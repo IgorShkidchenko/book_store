@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Orders index', type: :feature, js: true do
-  let(:order) { create(:order, :completed_with_user).decorate }
+  let(:order) { create(:order_in_checkout_final_steps, :delivered).decorate }
   let(:user) { order.user }
 
   before do

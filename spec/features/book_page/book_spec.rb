@@ -30,8 +30,9 @@ describe 'Books page', type: :feature, js: true do
   end
 
   context 'when back button' do
+    let!(:order) { create(:order_in_checkout_final_steps, :delivered) }
+
     before do
-      allow(Books::BestSellersQuery).to receive(:call).and_return([book])
       first('.navbar-brand').click
       first('.thumbnail').hover
       first('.thumb-hover-link').click

@@ -14,7 +14,7 @@
             = t('checkout.quick_sing_in.login_with_pass')
         = render 'devise/shared/form_part', f: f, forgot: true
         = f.hidden_field :checkout_authenticate, value: true
-        = f.button :submit, t('checkout.quick_sing_in.login_with_pass'), class: 'btn-default mb-20'
+        = f.button :submit, t('devise_pages.log_in'), class: 'btn-default mb-20'
     .col-md-5.col-md-offset-1.mb-60
       .text-center
         %h3.general-subtitle
