@@ -70,11 +70,11 @@ describe 'Root page', type: :feature, js: true do
   end
 
   context 'when add to cart' do
-    let!(:order) { create(:order) }
-    let(:book_count_in_cart) { order.order_items.size }
+    let!(:new_order) { create(:order) }
+    let(:book_count_in_cart) { new_order.order_items.size }
 
     before do
-      page.set_rack_session(order_id: order.id)
+      page.set_rack_session(order_id: new_order.id)
       visit root_path
     end
 
@@ -85,8 +85,7 @@ describe 'Root page', type: :feature, js: true do
 
     it 'from book partial' do
       first('.thumbnail').hover
-      sleep(1)
-      all('.thumb-hover-link').last.click
+      first('.to_cart').click
       expect(page).to have_selector '.shop-quantity', text: book_count_in_cart
     end
 
@@ -94,7 +93,7 @@ describe 'Root page', type: :feature, js: true do
       click_on I18n.t('home.buy_button')
       first('.shop-link').click
       sleep(5)
-      expect(page).to have_selector 'p', text: book.title
+      expect(page).to have_selector 'p', text: book_on_slider.title
     end
   end
 end
