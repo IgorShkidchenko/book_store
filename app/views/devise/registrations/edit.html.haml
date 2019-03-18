@@ -27,5 +27,5 @@
     .tab-pane.fade#privacy{ role: 'tabpanel' }
       .row.mb-60
         = render 'email_part'
-        = render 'password_part'
+        = render 'password_part' if current_user.encrypted_password
         = render 'destroy_part'
