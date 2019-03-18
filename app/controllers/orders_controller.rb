@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
 
   def index
     @orders = Orders::FilterQuery.call(user: current_user, params: params)
-    present(MyOrdersPresenter.new(user: current_user, params: params, orders: @orders))
+    present(OrdersOfUserPresenter.new(user: current_user, params: params, orders: @orders))
   end
 
   def show

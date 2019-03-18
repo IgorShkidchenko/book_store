@@ -20,6 +20,9 @@ Style/ClassAndModuleChildren:
 Bundler/OrderedGems:
   Enabled: false
 
+RSpec/MultipleExpectations:
+  Enabled: false
+
 Metrics/BlockLength:
   ExcludedMethods: ['describe', 'ActiveAdmin.register']
   Exclude:

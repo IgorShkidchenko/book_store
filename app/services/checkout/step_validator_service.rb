@@ -8,10 +8,7 @@ class Checkout::StepValidatorService
   end
 
   def call
-    main_checkout_validation
-    return if @correct_step
-
-    @correct_step = validated_step
+    @correct_step = main_checkout_validation || validated_step
   end
 
   def valid?
@@ -21,8 +18,9 @@ class Checkout::StepValidatorService
   private
 
   def main_checkout_validation
-    @correct_step = CheckoutStepsController::STEPS[:authenticate] unless @authenticate
-    @correct_step = CheckoutStepsController::STEPS[:complete] if checkout_in_complete_state?
+    return CheckoutStepsController::STEPS[:authenticate] unless @authenticate
+
+    CheckoutStepsController::STEPS[:complete] if checkout_in_complete_state?
   end
 
   def checkout_in_complete_state?
@@ -41,10 +39,6 @@ class Checkout::StepValidatorService
   end
 
   def user_edit_steps
-    current_step_disallowed_on_edit_step? ? CheckoutStepsController::STEPS[:edit] : @step
-  end
-
-  def current_step_disallowed_on_edit_step?
-    [CheckoutStepsController::STEPS[:complete], CheckoutStepsController::STEPS[:authenticate]].include?(@step)
+    @step.eql?(CheckoutStepsController::STEPS[:authenticate]) ? CheckoutStepsController::STEPS[:edit] : @step
   end
 end

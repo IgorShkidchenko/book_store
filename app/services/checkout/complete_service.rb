@@ -7,8 +7,7 @@ class Checkout::CompleteService < ApplicationService
   end
 
   def call
-    return unless @order.in_progress!
-
+    @order.in_progress!
     @order.update(number: generate_order_number)
     @order.coupon&.update(used: true)
     OrderConfirmationMailerWorker.perform_async(@order.id)

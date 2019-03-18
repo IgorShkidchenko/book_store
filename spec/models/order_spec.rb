@@ -19,4 +19,16 @@ RSpec.describe Order, type: :model do
     it { is_expected.to have_one(:coupon) }
     it { is_expected.to have_one(:credit_card).dependent(:destroy) }
   end
+
+  context 'with enum' do
+    it { expect(Order.aasm_states[:fill_cart]).to eq 0 }
+    it { expect(Order.aasm_states[:fill_delivery]).to eq 1 }
+    it { expect(Order.aasm_states[:fill_payment]).to eq 2 }
+    it { expect(Order.aasm_states[:editing]).to eq 3 }
+    it { expect(Order.aasm_states[:in_progress]).to eq 4 }
+    it { expect(Order.aasm_states[:in_queue]).to eq 5 }
+    it { expect(Order.aasm_states[:in_delivery]).to eq 6 }
+    it { expect(Order.aasm_states[:delivered]).to eq 7 }
+    it { expect(Order.aasm_states[:canceled]).to eq 8 }
+  end
 end

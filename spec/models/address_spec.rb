@@ -19,4 +19,9 @@ RSpec.describe Address, type: :model do
   context 'with assosiations' do
     it { is_expected.to belong_to(:addressable) }
   end
+
+  context 'with enum' do
+    it { expect(Address.kinds[:billing]).to eq 0 }
+    it { expect(Address.kinds[:shipping]).to eq 1 }
+  end
 end

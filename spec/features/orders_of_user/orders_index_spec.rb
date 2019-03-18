@@ -25,4 +25,11 @@ describe 'Orders index', type: :feature, js: true do
     sleep(5)
     expect(page).to have_current_path order_path(order)
   end
+
+  it 'when show empty filter' do
+    click_on I18n.t('orders.filters.all')
+    click_on I18n.t('orders.filters.canceled')
+    expect(page).to have_selector 'a', text: I18n.t('orders.filters.all')
+    expect(page).to have_selector 'h1', text: I18n.t('orders.no_orders_status', status: I18n.t('orders.filters.canceled'))
+  end
 end

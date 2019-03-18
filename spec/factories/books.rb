@@ -17,5 +17,11 @@ FactoryBot.define do
         create(:author, books: [book])
       end
     end
+
+    trait :with_cover do
+      after(:create) do |book|
+        create(:cover, book: book)
+      end
+    end
   end
 end

@@ -35,6 +35,7 @@ RSpec.describe Admin::CategoriesController, type: :controller do
       before { get :new }
 
       it { is_expected.to respond_with 200 }
+      it { is_expected.to render_template 'new' }
       it { expect(assigns(:category)).to be_a_new Category }
       it { expect(page).to have_field 'category_name' }
     end
@@ -75,6 +76,7 @@ RSpec.describe Admin::CategoriesController, type: :controller do
       before { get :edit, params: { id: category.id } }
 
       it { is_expected.to respond_with 200 }
+      it { is_expected.to render_template 'edit' }
       it { expect(assigns(:category)).to eq category }
       it { expect(page).to have_field('category_name', with: category.name) }
     end
@@ -109,6 +111,7 @@ RSpec.describe Admin::CategoriesController, type: :controller do
       before { get :show, params: { id: category.id } }
 
       it { is_expected.to respond_with 200 }
+      it { is_expected.to render_template 'show' }
       it { expect(assigns(:category)).to eq category }
       it { expect(page).to have_content category.name }
     end

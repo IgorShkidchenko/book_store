@@ -39,6 +39,7 @@ RSpec.describe Admin::ReviewsController, type: :controller do
       before { get :show, params: { id: review.id } }
 
       it { is_expected.to respond_with 200 }
+      it { is_expected.to render_template 'show' }
       it { expect(assigns(:review)).to eq review }
       it { expect(page).to have_content review.book.title }
       it { expect(page).to have_content review.title }
@@ -50,7 +51,7 @@ RSpec.describe Admin::ReviewsController, type: :controller do
       it { expect(page).to have_content Review.statuses.key(2).to_s.capitalize }
     end
 
-    describe 'when approved' do
+    describe 'when approved button from show page' do
       before { put :approved, params: { id: review.id } }
 
       it { is_expected.to respond_with 302 }
@@ -62,7 +63,7 @@ RSpec.describe Admin::ReviewsController, type: :controller do
       end
     end
 
-    describe 'when rejected' do
+    describe 'when rejected button from show page' do
       before { put :rejected, params: { id: review.id } }
 
       it { is_expected.to respond_with 302 }
@@ -72,6 +73,40 @@ RSpec.describe Admin::ReviewsController, type: :controller do
         review.reload
         expect(review.rejected?).to eq true
       end
+    end
+
+    describe 'when batch actions' do
+      before { post :batch_action, params: { batch_action: action, collection_selection: [review.id] } }
+
+      context 'when approved' do
+        let(:action) { I18n.t('admin.batches.approve').downcase }
+
+        it { is_expected.to respond_with 302 }
+        it { is_expected.to redirect_to admin_reviews_path }
+
+        it do
+          review.reload
+          expect(review.approved?).to eq true
+        end
+      end
+
+      context 'when rejected' do
+        let(:action) { I18n.t('admin.batches.reject').downcase }
+
+        it { is_expected.to respond_with 302 }
+        it { is_expected.to redirect_to admin_reviews_path }
+
+        it do
+          review.reload
+          expect(review.rejected?).to eq true
+        end
+      end
+    end
+
+    it 'when delete batch action' do
+      expect do
+        post :batch_action, params: { batch_action: I18n.t('admin.batches.delete').downcase, collection_selection: [review.id] }
+      end.to change(Review, :count).by(-1)
     end
   end
 

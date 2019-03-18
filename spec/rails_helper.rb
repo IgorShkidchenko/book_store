@@ -4,6 +4,8 @@ require File.expand_path('../config/environment', __dir__)
 
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 
+require 'carrierwave/test/matchers'
+require 'cancan/matchers'
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'capybara/rails'

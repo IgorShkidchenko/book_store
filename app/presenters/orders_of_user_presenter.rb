@@ -1,4 +1,4 @@
-class MyOrdersPresenter < ApplicationPresenter
+class OrdersOfUserPresenter < ApplicationPresenter
   attribute :params
   attribute :user, User
   attribute :orders, Order

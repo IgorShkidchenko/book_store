@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Books page', type: :feature, js: true do
-  let!(:book) { create(:book, :with_author).decorate }
+  let!(:book) { create(:book, :with_author, :with_cover).decorate }
 
   before { visit book_path(book) }
 

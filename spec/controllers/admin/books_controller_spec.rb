@@ -38,6 +38,7 @@ RSpec.describe Admin::BooksController, type: :controller do
       before { get :new }
 
       it { is_expected.to respond_with 200 }
+      it { is_expected.to render_template 'new' }
       it { expect(assigns(:book)).to be_a_new Book }
       it { expect(page).to have_field 'book_title' }
       it { expect(page).to have_field 'book_description' }
@@ -88,6 +89,7 @@ RSpec.describe Admin::BooksController, type: :controller do
       before { get :edit, params: { id: book.slug } }
 
       it { is_expected.to respond_with 200 }
+      it { is_expected.to render_template 'edit' }
       it { expect(assigns(:book)).to eq book }
       it { expect(page).to have_field 'book_title', with: book.title }
       it { expect(page).to have_field 'book_description', with: book.description }
@@ -129,6 +131,7 @@ RSpec.describe Admin::BooksController, type: :controller do
       before { get :show, params: { id: book.slug } }
 
       it { is_expected.to respond_with 200 }
+      it { is_expected.to render_template 'show' }
       it { expect(assigns(:book)).to eq book }
       it { expect(page).to have_content book.title }
       it { expect(page).to have_content book.description }

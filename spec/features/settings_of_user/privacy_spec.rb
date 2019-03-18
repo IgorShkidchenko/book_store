@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Privacy', type: :feature, js: true do
   let(:user) { create(:user) }
-  let(:new_email) { user.email.succ  }
+  let(:new_email) { user.email.succ }
   let(:invalid_email) { '@@' }
   let(:new_password) { user.password.succ }
 
@@ -23,18 +23,18 @@ describe 'Privacy', type: :feature, js: true do
 
   context 'when email' do
     it 'user email in the field already' do
-       expect(page).to have_field('user[email]', with: user.email)
+      expect(page).to have_field('user[email]', with: user.email)
     end
 
     it 'valid input' do
       fill_in 'user[email]', with: new_email
-      first('.btn''.btn-default''.mb-35').click
+      first('.btn.btn-default.mb-35').click
       expect(page).to have_selector 'div', text: I18n.t('devise.registrations.updated')
     end
 
     it 'invalid input' do
       fill_in 'user[email]', with: invalid_email
-      first('.btn''.btn-default''.mb-35').click
+      first('.btn.btn-default.mb-35').click
       click_on I18n.t('user_settings.privacy')
       expect(page).to have_selector '.help-block', text: I18n.t('devise.errors.email')
     end
@@ -45,7 +45,7 @@ describe 'Privacy', type: :feature, js: true do
       fill_in 'user[current_password]', with: user.password
       fill_in 'user[password]', with: new_password
       fill_in 'user[password_confirmation]', with: new_password
-      first('.btn''.btn-default''.mb-10').click
+      first('.btn.btn-default.mb-10').click
       expect(page).to have_selector 'div', text: I18n.t('devise.registrations.updated')
     end
 
@@ -53,7 +53,7 @@ describe 'Privacy', type: :feature, js: true do
       fill_in 'user[current_password]', with: new_password
       fill_in 'user[password]', with: new_password
       fill_in 'user[password_confirmation]', with: new_password
-      first('.btn''.btn-default''.mb-10').click
+      first('.btn.btn-default.mb-10').click
       click_on I18n.t('user_settings.privacy')
       expect(page).to have_selector '.help-block', text: I18n.t('devise.errors.password')
     end

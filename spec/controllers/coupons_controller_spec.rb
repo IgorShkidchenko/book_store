@@ -1,49 +1,36 @@
 require 'rails_helper'
 
 RSpec.describe CouponsController, type: :controller do
-  let(:coupon) { create(:coupon) }
-  let(:order) { create(:order) }
+  let(:some_id) { rand(1..10) }
 
-  describe 'when update with valid params' do
-    before do
-      allow(controller).to receive(:current_order).and_return(order)
-      put :update, xhr: true, params: { id: :coupon, coupon: { key: coupon.key } }
-    end
-
-    it { is_expected.to respond_with 200 }
-    it { is_expected.to render_template 'update' }
-    it { expect(order.coupon).to eq coupon }
-  end
-
-  describe 'when update with invalid params' do
-    context 'with not_existing_key' do
-      let(:not_existing_key) { 'some_key' }
-
+  describe 'when #update' do
+    context 'with valid params' do
       before do
-        put :update, xhr: true, params: { id: :coupon, coupon: { key: not_existing_key } }
+        allow_any_instance_of(CouponForm).to receive(:save).and_return(true)
+        put :update, xhr: true, params: { id: some_id, coupon: { key: nil } }
       end
 
       it { is_expected.to respond_with 200 }
       it { is_expected.to render_template 'update' }
-      it { expect(flash[:danger]).to eq I18n.t('coupon.error_havent') }
-      it { expect(order.coupon).to eq nil }
+      it { is_expected.not_to set_flash.now[:danger] }
     end
 
-    context 'when coupon was already used' do
-      let(:used_coupon) { create(:coupon, :used) }
+    context 'with invalid params' do
+      let(:error) { I18n.t('coupon.error_havent') }
 
       before do
-        put :update, xhr: true, params: { id: :used_coupon, coupon: { key: used_coupon.key } }
+        allow_any_instance_of(CouponForm).to receive(:save).and_return(false)
+        allow_any_instance_of(CouponForm).to receive_message_chain(:errors, :full_messages, :to_sentence).and_return(error)
+        put :update, xhr: true, params: { id: some_id, coupon: { key: nil } }
       end
 
       it { is_expected.to respond_with 200 }
       it { is_expected.to render_template 'update' }
-      it { expect(flash[:danger]).to eq I18n.t('coupon.error_used') }
-      it { expect(order.coupon).to eq nil }
+      it { is_expected.to set_flash.now[:danger].to error }
     end
   end
 
   describe 'when routes' do
-    it { is_expected.to route(:put, '/coupons/1').to(action: :update, id: 1) }
+    it { is_expected.to route(:put, "/coupons/#{some_id}").to(action: :update, id: some_id) }
   end
 end

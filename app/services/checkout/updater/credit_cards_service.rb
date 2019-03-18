@@ -7,7 +7,13 @@ class Checkout::Updater::CreditCardsService < Checkout::Updater::BaseService
 
   def call
     @credit_card = CreditCardForm.new(@params[:credit_card])
-    valid?(@credit_card.save(@order.id))
+    valid?(credit_card_valid?)
     @order.editing! if order_can_be_changed?
+  end
+
+  private
+
+  def credit_card_valid?
+    @credit_card.save(@order.id)
   end
 end

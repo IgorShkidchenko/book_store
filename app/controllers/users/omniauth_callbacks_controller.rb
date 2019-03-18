@@ -5,13 +5,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def failure
-    redirect_to root_path
+    redirect_to root_path, flash: { danger: I18n.t('facebook.error') }
   end
 
   private
 
   def failed_login
     session['devise.facebook_data'] = request.env['omniauth.auth']
-    redirect_to new_user_registration_url
+    redirect_to new_user_registration_url, flash: { danger: I18n.t('facebook.error_authentication') }
   end
 end

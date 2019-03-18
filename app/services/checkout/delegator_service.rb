@@ -2,7 +2,7 @@ class Checkout::DelegatorService
   attr_reader :order, :form, :step_validator, :order_items
 
   def initialize(order:, step:)
-    @order = order.decorate
+    @order = order
     @step = step
   end
 
@@ -27,7 +27,6 @@ class Checkout::DelegatorService
   def step_valid?(authenticate)
     @step_validator = Checkout::StepValidatorService.new(order: @order, step: @step, authenticate: authenticate)
     @step_validator.call
-    puts @step_validator.valid?
     @step_validator.valid?
   end
 

@@ -10,7 +10,7 @@
           = book.main_book_cover
         .images.clearfix.small_covers
           - book.covers.drop(1).each do |cover|
-            = image_tag cover.image_url(:w150), alt: t('book.cover_alt', title: book.title)
+            = image_tag cover.image_url(:width_150), alt: t('book.cover_alt', title: book.title)
     .col-sm-6
       %h1.mt-res-0
         = book.title

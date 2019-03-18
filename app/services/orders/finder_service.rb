@@ -5,12 +5,12 @@ class Orders::FinderService < ApplicationService
   end
 
   def call
-    order_valid? ? @order : Order.new(user: @user)
+    order_in_progress? ? @order : Order.new(user: @user)
   end
 
   private
 
-  def order_valid?
+  def order_in_progress?
     @order && order_in_checkout_state?
   end
 

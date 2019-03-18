@@ -35,6 +35,7 @@ RSpec.describe Admin::AuthorsController, type: :controller do
       before { get :new }
 
       it { is_expected.to respond_with 200 }
+      it { is_expected.to render_template 'new' }
       it { expect(assigns(:author)).to be_a_new Author }
       it { expect(page).to have_field 'author_name' }
     end
@@ -75,6 +76,7 @@ RSpec.describe Admin::AuthorsController, type: :controller do
       before { get :edit, params: { id: author.id } }
 
       it { is_expected.to respond_with 200 }
+      it { is_expected.to render_template 'edit' }
       it { expect(assigns(:author)).to eq author }
       it { expect(page).to have_field('author_name', with: author.name) }
     end
@@ -109,6 +111,7 @@ RSpec.describe Admin::AuthorsController, type: :controller do
       before { get :show, params: { id: author.id } }
 
       it { is_expected.to respond_with 200 }
+      it { is_expected.to render_template 'show' }
       it { expect(assigns(:author)).to eq author }
       it { expect(page).to have_content author.name }
     end

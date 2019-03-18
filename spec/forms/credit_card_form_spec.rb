@@ -30,4 +30,22 @@ RSpec.describe CreditCardForm, type: :model do
     it { is_expected.not_to allow_value(month_in_the_past).for(:expire_date).with_message(I18n.t('checkout.errors.invalid_expire_date')) }
     it { is_expected.not_to allow_value(year_in_the_past).for(:expire_date).with_message(I18n.t('checkout.errors.invalid_expire_date')) }
   end
+
+  context 'when credit card #save' do
+    subject(:credit_card_form) { described_class.new(params) }
+
+    let(:params) { attributes_for(:credit_card) }
+    let(:order) { create(:order) }
+
+    it 'when successfuly' do
+      credit_card_form.save(order.id)
+      expect(order.credit_card.number).to eq params[:number]
+    end
+
+    it 'when failed' do
+      allow(credit_card_form).to receive(:valid?).and_return(false)
+      credit_card_form.save(order.id)
+      expect(order.credit_card).to eq nil
+    end
+  end
 end

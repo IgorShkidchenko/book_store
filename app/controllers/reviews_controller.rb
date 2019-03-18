@@ -4,9 +4,9 @@ class ReviewsController < ApplicationController
 
   def create
     review = ReviewForm.new(review_params)
-    return flash[:success] = t('review.success_msg') if review.save
+    return flash.now[:success] = t('review.success_msg') if review.save
 
-    flash[:danger] = review.errors.full_messages.to_sentence
+    flash.now[:danger] = review.errors.full_messages.to_sentence
   end
 
   private

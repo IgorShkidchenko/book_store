@@ -5,7 +5,6 @@ describe 'Complete', type: :feature, js: true do
   let(:user) { order.user }
   let(:order_item) { order.order_items.last.decorate }
   let(:book) { order.books.first }
-  let(:user) { order.user }
   let(:billing) { order.addresses.billing.first.decorate }
 
   before do

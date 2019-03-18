@@ -29,7 +29,7 @@ en:
       approve: Approve
       reject: Reject
       delete: Delete
-      in_queue: In queue
-      in_delivery: In delivery
+      in_queue: In Queue
+      in_delivery: In Delivery
       delivered: Delivered
       canceled: Canceled

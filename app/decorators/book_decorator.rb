@@ -27,8 +27,8 @@ class BookDecorator < Draper::Decorator
 
   def main_book_cover
     if book.covers.exists?
-      h.image_tag book.covers.first.image_url(:w500), alt: I18n.t('book.cover_alt', title: book.title),
-                                                      class: 'img-shadow general-thumbnail-img'
+      h.image_tag book.covers.first.image_url(:width_500), alt: I18n.t('book.cover_alt', title: book.title),
+                                                           class: 'img-shadow general-thumbnail-img'
     else
       h.image_tag CoverUploader::DEFAULT_IMG_FILE_NAME, alt: I18n.t('book.cover_default'),
                                                         class: 'general-thumbnail-img'

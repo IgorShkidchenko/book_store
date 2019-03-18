@@ -18,4 +18,10 @@ RSpec.describe Review, type: :model do
     it { is_expected.to belong_to(:user) }
     it { is_expected.to belong_to(:book) }
   end
+
+  context 'with enum' do
+    it { expect(Review.statuses[:unprocessed]).to eq 0 }
+    it { expect(Review.statuses[:approved]).to eq 1 }
+    it { expect(Review.statuses[:rejected]).to eq 2 }
+  end
 end

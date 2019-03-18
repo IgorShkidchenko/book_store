@@ -15,7 +15,7 @@ class Books::FilterQuery < ApplicationQuery
   end
 
   def call
-    @filter == VALID_FILTERS[:popular] ? popular_books : simple_ordered_books
+    @filter.eql?(VALID_FILTERS[:popular]) ? popular_books : simple_ordered_books
   end
 
   private

@@ -18,6 +18,7 @@ FactoryBot.define do
       after(:create) do |order|
         create(:order_item, order: order)
       end
+
       user
 
       trait :delivery_step do
@@ -29,6 +30,7 @@ FactoryBot.define do
           order.addresses.create!(attributes_for(:address, :billing))
           order.addresses.create!(attributes_for(:address, :shipping))
         end
+
         delivery_method
 
         aasm_state { Order.aasm_states[:fill_payment] }
@@ -42,11 +44,24 @@ FactoryBot.define do
         create(:credit_card, order: order)
         create(:order_item, order: order)
       end
+
       user
       delivery_method
 
       trait :confirm_step do
         aasm_state { Order.aasm_states[:editing] }
+      end
+
+      trait :in_progress do
+        aasm_state { Order.aasm_states[:in_progress] }
+      end
+
+      trait :in_queue do
+        aasm_state { Order.aasm_states[:in_queue] }
+      end
+
+      trait :in_delivery do
+        aasm_state { Order.aasm_states[:in_delivery] }
       end
 
       trait :delivered do

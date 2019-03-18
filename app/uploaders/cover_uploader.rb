@@ -1,10 +1,11 @@
 class CoverUploader < CarrierWave::Uploader::Base
-  DEFAULT_IMG_FILE_NAME = 'w500_default.png'.freeze
+  DEFAULT_IMG_FILE_NAME = 'width_500_default.png'.freeze
   MAIN_COVER_SIZE = 554
   SMALL_COVER_SIZE = 165
 
   include CarrierWave::MiniMagick
-  storage :aws
+
+  Rails.env.production? ? (storage :aws) : (storage :file)
 
   def download_url(filename)
     url(response_content_disposition: %Q{attachment; filename="#{filename}"})
@@ -16,11 +17,11 @@ class CoverUploader < CarrierWave::Uploader::Base
     DEFAULT_IMG_FILE_NAME
   end
 
-  version :w500 do
+  version :width_500 do
     process resize_to_fit: [MAIN_COVER_SIZE, nil]
   end
 
-  version :w150 do
+  version :width_150 do
     process resize_to_fit: [SMALL_COVER_SIZE, nil]
   end
 

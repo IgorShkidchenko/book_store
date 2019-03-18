@@ -215,6 +215,9 @@ en:
     title: Order Info
   cancan:
     error: Access Denied
+  facebook:
+    error_authentication: Something went wrong, invalid Facebook data
+    error: Something went wrong, can not log in via Facebook
   mailer:
     order:
       subject: Book Order
