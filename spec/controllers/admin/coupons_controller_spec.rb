@@ -45,12 +45,12 @@ RSpec.describe Admin::CouponsController, type: :controller do
 
     describe 'when create' do
       before do |example|
-        post :create unless example.metadata[:skip_before]
+        post :create, params: { coupon: { key: coupon.key.succ } } unless example.metadata[:skip_before]
       end
 
       it 'when Coupon incrases', skip_before: true do
         expect do
-          post :create
+          post :create, params: { coupon: { key: coupon.key.succ } }
         end.to change(Coupon, :count).by(1)
       end
 

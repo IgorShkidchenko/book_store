@@ -1,5 +1,18 @@
-ActiveRecord::Schema.define(version: 2019_02_05_143753) do
+# This file is auto-generated from the current state of the database. Instead
+# of editing this file, please use the migrations feature of Active Record to
+# incrementally modify your database, and then regenerate this schema definition.
+#
+# Note that this schema.rb definition is the authoritative source for your
+# database schema. If you need to create the application database on another
+# system, you should be using db:schema:load, not running all the migrations
+# from scratch. The latter is a flawed and unsustainable approach (the more migrations
+# you'll amass, the slower it'll run and the greater likelihood for issues).
+#
+# It's strongly recommended that you check this file into your version control system.
 
+ActiveRecord::Schema.define(version: 2019_03_19_082237) do
+
+  # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "active_admin_comments", force: :cascade do |t|
@@ -17,14 +30,14 @@ ActiveRecord::Schema.define(version: 2019_02_05_143753) do
   end
 
   create_table "addresses", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "street"
-    t.string "city"
-    t.integer "zip"
-    t.string "country"
-    t.string "phone"
-    t.integer "kind"
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "street", null: false
+    t.string "city", null: false
+    t.integer "zip", null: false
+    t.string "country", null: false
+    t.string "phone", null: false
+    t.integer "kind", null: false
     t.string "addressable_type"
     t.bigint "addressable_id"
     t.datetime "created_at", null: false
@@ -50,7 +63,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_143753) do
   end
 
   create_table "authors", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -65,7 +78,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_143753) do
   end
 
   create_table "books", force: :cascade do |t|
-    t.string "title"
+    t.string "title", null: false
     t.float "price"
     t.text "description"
     t.integer "published_year"
@@ -82,7 +95,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_143753) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.integer "books_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -90,9 +103,9 @@ ActiveRecord::Schema.define(version: 2019_02_05_143753) do
 
   create_table "coupons", force: :cascade do |t|
     t.bigint "order_id"
-    t.string "key"
-    t.boolean "used", default: false
-    t.integer "discount", default: 10
+    t.string "key", null: false
+    t.boolean "used", default: false, null: false
+    t.integer "discount", default: 10, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_coupons_on_order_id"
@@ -107,10 +120,10 @@ ActiveRecord::Schema.define(version: 2019_02_05_143753) do
   end
 
   create_table "credit_cards", force: :cascade do |t|
-    t.string "number"
-    t.string "name"
-    t.string "expire_date"
-    t.integer "cvv"
+    t.string "number", null: false
+    t.string "name", null: false
+    t.string "expire_date", null: false
+    t.integer "cvv", null: false
     t.bigint "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -118,10 +131,10 @@ ActiveRecord::Schema.define(version: 2019_02_05_143753) do
   end
 
   create_table "delivery_methods", force: :cascade do |t|
-    t.string "name"
-    t.integer "min_days"
-    t.integer "max_days"
-    t.float "cost"
+    t.string "name", null: false
+    t.integer "min_days", null: false
+    t.integer "max_days", null: false
+    t.float "cost", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -140,7 +153,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_143753) do
   create_table "order_items", force: :cascade do |t|
     t.bigint "book_id"
     t.bigint "order_id"
-    t.integer "quantity"
+    t.integer "quantity", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_order_items_on_book_id"
@@ -148,7 +161,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_143753) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "aasm_state"
+    t.integer "aasm_state", null: false
     t.string "number"
     t.bigint "user_id"
     t.bigint "delivery_method_id"
@@ -159,10 +172,10 @@ ActiveRecord::Schema.define(version: 2019_02_05_143753) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.string "title"
-    t.text "body"
-    t.integer "rating", default: 0
-    t.integer "status", default: 0
+    t.string "title", null: false
+    t.text "body", null: false
+    t.integer "rating", default: 0, null: false
+    t.integer "status", default: 0, null: false
     t.bigint "user_id"
     t.bigint "book_id"
     t.datetime "created_at", null: false
