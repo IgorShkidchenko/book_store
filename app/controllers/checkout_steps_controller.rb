@@ -18,12 +18,12 @@ class CheckoutStepsController < ApplicationController
 
   def show
     session.delete(:order_id) if step.eql?(STEPS[:complete])
-    @checkout.show
+    @checkout_delegator.show
     render_wizard
   end
 
   def update
-    @checkout.update(checkout_params) ? redirect_to(next_or_edit_step) : render_wizard
+    @checkout_delegator.update(checkout_params) ? redirect_to(next_or_edit_step) : render_wizard
   end
 
   private
@@ -33,13 +33,13 @@ class CheckoutStepsController < ApplicationController
   end
 
   def validate_step
-    return redirect_to(books_path) if @checkout.cart_empty?
+    return redirect_to(books_path) if @checkout_delegator.cart_empty?
 
-    redirect_to_correct_step unless @checkout.step_valid?(user_signed_in?)
+    redirect_to_correct_step unless @checkout_delegator.step_valid?(user_signed_in?)
   end
 
   def redirect_to_correct_step
-    redirect_to(wizard_path(@checkout.step_validator.correct_step), flash: { info: I18n.t('checkout.follow_steps') })
+    redirect_to(wizard_path(@checkout_delegator.step_validator.correct_step), flash: { info: I18n.t('checkout.follow_steps') })
   end
 
   def checkout_params
@@ -50,6 +50,6 @@ class CheckoutStepsController < ApplicationController
   end
 
   def set_checkout_delegator
-    @checkout = Checkout::DelegatorService.new(order: current_order, step: step)
+    @checkout_delegator = Checkout::DelegatorService.new(order: current_order, step: step)
   end
 end

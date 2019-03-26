@@ -1,5 +1,5 @@
 Devise.setup do |config|
-  config.secret_key = 'cb4b4119c6c456f5e66ad202e27a77bbc6a0fc9fa631f9f0dd404b57b80a2d68aba5d3c373387f1b19e211beb565ff1ab110e0c9aa03162f8dc13a2453eb8870'
+  config.secret_key = Rails.application.credentials.devise[:secret_key]
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
   require 'devise/orm/active_record'
   config.case_insensitive_keys = [:email]

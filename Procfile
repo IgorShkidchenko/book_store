@@ -1,1 +1,1 @@
-order_confirmation_mailer_worker: bundle exec sidekiq -c 2
+worker: bundle exec sidekiq -C config/sidekiq.yml

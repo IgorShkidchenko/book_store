@@ -15,17 +15,21 @@ RSpec.describe AddressesController, type: :controller do
     context 'when #create' do
       before { post :create, xhr: true, params: { address_form: params } }
 
-      it { is_expected.to respond_with(200) }
-      it { is_expected.to render_template 'create' }
-      it { is_expected.to set_flash.now[:success].to I18n.t('user_settings.success', kind: address_kind) }
+      it do
+        is_expected.to respond_with(200)
+        is_expected.to render_template 'create'
+        is_expected.to set_flash.now[:success].to I18n.t('user_settings.success', kind: address_kind)
+      end
     end
 
     context 'when #update' do
       before { put :update, xhr: true, params: { id: some_id, address_form: params } }
 
-      it { is_expected.to respond_with(200) }
-      it { is_expected.to render_template 'update' }
-      it { is_expected.to set_flash.now[:success].to I18n.t('user_settings.success', kind: address_kind) }
+      it do
+        is_expected.to respond_with(200)
+        is_expected.to render_template 'update'
+        is_expected.to set_flash.now[:success].to I18n.t('user_settings.success', kind: address_kind)
+      end
     end
   end
 
@@ -40,17 +44,21 @@ RSpec.describe AddressesController, type: :controller do
     context 'when #create' do
       before { post :create, xhr: true, params: { address_form: params } }
 
-      it { is_expected.to respond_with(200) }
-      it { is_expected.to render_template 'create' }
-      it { is_expected.to set_flash.now[:danger].to error }
+      it do
+        is_expected.to respond_with(200)
+        is_expected.to render_template 'create'
+        is_expected.to set_flash.now[:danger].to error
+      end
     end
 
     context 'when #update' do
       before { put :update, xhr: true, params: { id: some_id, address_form: params } }
 
-      it { is_expected.to respond_with(200) }
-      it { is_expected.to render_template 'update' }
-      it { is_expected.to set_flash.now[:danger].to error }
+      it do
+        is_expected.to respond_with(200)
+        is_expected.to render_template 'update'
+        is_expected.to set_flash.now[:danger].to error
+      end
     end
   end
 

@@ -11,9 +11,11 @@ class AddressesController < ApplicationController
 
   def change_address
     @address = AddressForm.new(address_params)
-    return flash.now[:success] = I18n.t('user_settings.success', kind: kind_name) if @address.save(current_user)
-
-    flash.now[:danger] = @address.errors.full_messages.to_sentence
+    if @address.save(current_user)
+      flash.now[:success] = I18n.t('user_settings.success', kind: kind_name)
+    else
+      flash.now[:danger] = @address.errors.full_messages.to_sentence
+    end
   end
 
   def kind_name

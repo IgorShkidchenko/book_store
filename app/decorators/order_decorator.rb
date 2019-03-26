@@ -27,7 +27,7 @@ class OrderDecorator < Draper::Decorator
   end
 
   def clone_address
-    cloned_status = same_addresses?(self)
+    cloned_status = order.use_the_same_address
     h.check_box_tag 'order[clone_address]', cloned_status,
                     cloned_status, class: 'checkbox-input checkbox-class clone_check', hidden: true
   end
@@ -40,16 +40,5 @@ class OrderDecorator < Draper::Decorator
 
   def price_calculator
     @price_calculator ||= Orders::PriceCalculatorService.new(self)
-  end
-
-  def same_addresses?(order)
-    addresses = order.addresses
-    return if addresses.empty?
-
-    checked_attributes = %w[first_name last_name street country zip phone city]
-    billing_attributes = addresses.billing.take.attributes.slice(*checked_attributes)
-    shipping_attributes = addresses.shipping.take.attributes.slice(*checked_attributes)
-
-    billing_attributes.eql?(shipping_attributes)
   end
 end

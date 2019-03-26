@@ -9,6 +9,6 @@ class Users::VerifiedQuery < ApplicationQuery
          .joins(:order_items)
          .select(:book_id)
          .group(:book_id)
-         .having("book_id = #{@book.id}")
+         .having("book_id = ?", @book.id)
   end
 end

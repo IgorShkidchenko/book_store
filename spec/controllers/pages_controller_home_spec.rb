@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe PagesController, type: :controller do
   describe 'when #home' do
     before do
-      allow(Books::LatestThreeQuery).to receive(:call)
+      allow(Books::LatestThreeBooksQuery).to receive(:call)
       allow(Books::BestSellersQuery).to receive(:call)
       get :home
     end

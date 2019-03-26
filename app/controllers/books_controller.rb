@@ -4,9 +4,8 @@ class BooksController < ApplicationController
   include BackUrl
   include BooksHelper
 
-  load_resource only: :show
-  load_resource :category, only: :index
-  authorize_resource
+  load_and_authorize_resource only: :show
+  load_and_authorize_resource :category, only: :index
   decorates_assigned :book, :chosen_books
 
   def index

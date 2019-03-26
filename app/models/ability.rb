@@ -13,6 +13,7 @@ class Ability
     end
 
     can :read, Book
+    can :read, Category
     can :read, Review
     can :update, Coupon
     can :create, Order

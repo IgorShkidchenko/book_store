@@ -6,7 +6,7 @@
       %li{ 'data-target': '#slider', 'data-slide-to': '1' }
       %li{ 'data-target': '#slider', 'data-slide-to': '2' }
     .carousel-inner{ role: 'listbox' }
-      - latest_three.each_with_index do |book, index|
+      - latest_three_book.each_with_index do |book, index|
         %div{ class: "item #{'active' if index.zero?}" }
           .row
             .col-sm-5

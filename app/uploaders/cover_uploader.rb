@@ -5,8 +5,6 @@ class CoverUploader < CarrierWave::Uploader::Base
 
   include CarrierWave::MiniMagick
 
-  Rails.env.production? ? (storage :aws) : (storage :file)
-
   def download_url(filename)
     url(response_content_disposition: %Q{attachment; filename="#{filename}"})
   end

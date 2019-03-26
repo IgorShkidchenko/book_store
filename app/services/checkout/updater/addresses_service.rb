@@ -19,9 +19,17 @@ class Checkout::Updater::AddressesService < Checkout::Updater::BaseService
   end
 
   def chosen_shipping_address
-    return AddressForm.new(@params[:shipping]) unless @params[:clone_address]
+    @params[:clone_address] ? cloning_shipping_address_from_billing_address : set_shipping_address
+  end
 
+  def cloning_shipping_address_from_billing_address
+    @order.toggle!(:use_the_same_address) unless @order.use_the_same_address
     @params[:billing][:kind] = Address.kinds[:shipping]
     AddressForm.new(@params[:billing])
+  end
+
+  def set_shipping_address
+    @order.toggle!(:use_the_same_address) if @order.use_the_same_address
+    AddressForm.new(@params[:shipping])
   end
 end

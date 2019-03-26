@@ -38,7 +38,7 @@
     .visible-xs
       .general-cart-item.divider-lg-bottom
         %table.table
-        - @checkout.form.delivery_methods.each_with_index do |method, index|
+        - @checkout_delegator.form.delivery_methods.each_with_index do |method, index|
           %tr
             %td.col-half
               %span.in-grey-600
@@ -73,7 +73,7 @@
               %span.in-grey-600
                 = t('checkout.delivery_page.price')
         %tbody
-        - @checkout.form.delivery_methods.each_with_index do |method, index|
+        - @checkout_delegator.form.delivery_methods.each_with_index do |method, index|
           %tr
             %td
               = render 'delivery_row', method: method, index: index

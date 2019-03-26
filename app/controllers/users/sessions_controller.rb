@@ -24,6 +24,6 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def user_have_current_order?
-    Order.where(id: session[:order_id], user_id: resource.id).exists?
+    Order.exists?(id: session[:order_id], user_id: resource.id)
   end
 end

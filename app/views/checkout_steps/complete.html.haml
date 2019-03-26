@@ -51,11 +51,11 @@
       %p.general-address.mb-30
         = current_order.creation_date
   .visible-xs
-    = render partial: 'order_items/cart/mobile_cart_row', collection: @checkout.order_items, as: :order_item
+    = render partial: 'order_items/cart/mobile_cart_row', collection: @checkout_delegator.order_items, as: :order_item
   .hidden-xs.divider-lg.pt-20
     %table.table.table-hover
       = render 'order_items/cart/item_titles_row'
-      = render partial: 'order_items/cart/cart_row', collection: @checkout.order_items, as: :order_item
+      = render partial: 'order_items/cart/cart_row', collection: @checkout_delegator.order_items, as: :order_item
   .text-center.general-text-right
     = render 'orders/order_info/order_summary', right: true
   .text-center
