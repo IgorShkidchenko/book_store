@@ -10,7 +10,7 @@ class Checkout::CompleteService < ApplicationService
     @order.in_progress!
     @order.update(number: generate_order_number)
     @order.coupon&.update(used: true)
-    OrderConfirmationMailerWorker.perform_async(@order.id)
+    # OrderConfirmationMailerWorker.perform_async(@order.id)
   end
 
   private

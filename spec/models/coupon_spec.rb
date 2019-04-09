@@ -7,6 +7,7 @@ RSpec.describe Coupon, type: :model do
     it { is_expected.to have_db_column(:created_at).of_type(:datetime).with_options(null: false) }
     it { is_expected.to have_db_column(:updated_at).of_type(:datetime).with_options(null: false) }
     it { is_expected.to have_db_index(:order_id) }
+    it { is_expected.to have_db_index(:key) }
   end
 
   context 'with assosiations' do

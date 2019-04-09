@@ -18,7 +18,7 @@ RSpec.describe Checkout::CompleteService do
     expect(order).to receive(:in_progress!)
     expect(order).to receive(:update).with(number: generated_number)
     expect(order.coupon).to receive(:update).with(used: true)
-    expect(OrderConfirmationMailerWorker).to receive(:perform_async).with(order.id)
+    # expect(OrderConfirmationMailerWorker).to receive(:perform_async).with(order.id)
     complete_service.call(order)
   end
 end

@@ -1,5 +1,5 @@
 class OrderItems::QuantityUpdaterService < ApplicationService
-  ADD_COMMAND = 'add'.freeze
+  ADD_COMMAND = :add
   MIN_QUANTITY = 1
 
   def initialize(item:, params:)

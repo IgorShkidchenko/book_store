@@ -7,7 +7,7 @@ class Checkout::Updater::DeliveryMethodsService < Checkout::Updater::BaseService
 
   def call
     @id = @params[:delivery_method_id]
-    valid?(DeliveryMethod.where(id: @id).exists?) ? modernize : return_delivery_methods
+    valid?(DeliveryMethod.exists?(id: @id)) ? modernize : return_delivery_methods
   end
 
   private
