@@ -9,7 +9,7 @@ RSpec.describe Checkout::Updater::DeliveryMethodsService do
 
   describe 'when #call valid' do
     it do
-      allow(DeliveryMethod).to receive_message_chain(:where, :exists?).and_return(true)
+      allow(DeliveryMethod).to receive(:exists?).and_return(true)
       expect(order).to receive(:update).with(delivery_method_id: some_id)
       expect(order).to receive(:fill_payment!)
       delivery_methods_service.call
@@ -18,7 +18,7 @@ RSpec.describe Checkout::Updater::DeliveryMethodsService do
 
   describe 'when #call invalid' do
     it do
-      allow(DeliveryMethod).to receive_message_chain(:where, :exists?).and_return(false)
+      allow(DeliveryMethod).to receive(:exists?).and_return(false)
       expect(DeliveryMethod).to receive(:all)
       delivery_methods_service.call
     end
