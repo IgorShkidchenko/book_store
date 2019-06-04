@@ -5,7 +5,7 @@ all_authors = Author.all
 
 password = 'password'.freeze
 user = User.new(email: 'user@example.com', password: password)
-user.skip_confirmation!
+# user.skip_confirmation!
 user.save!
 AdminUser.create!(email: 'admin@example.com', password: password, password_confirmation: password)
 
