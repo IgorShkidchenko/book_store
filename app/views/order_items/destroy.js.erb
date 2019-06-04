@@ -1,0 +1,12 @@
+$('.cart_part').html("<%= j render 'layouts/header/cart' %>");
+$('tr.<%= @order_item.id %>').fadeOut();
+$('div.<%= @order_item.id %>').fadeOut();
+$('div.<%= current_order.id %>').replaceWith("<%= j render 'orders/order_info/order_summary', right: true %>");
+$('.flash').html("<%= j render partial: 'layouts/flash', locals: { message: flash[:message] } %>");
+
+var items_quantity = '<%= current_order.order_items.size %>';
+var min_quantity = '<%= OrderItem::MINIMUN_QUANTITY %>';
+
+if(items_quantity == min_quantity){
+    location.reload();
+}

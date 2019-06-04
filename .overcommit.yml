@@ -1,0 +1,16 @@
+PreCommit:
+  RuboCop:
+    enabled: true
+  Fasterer:
+    enabled: true
+  RailsBestPractices:
+    enabled: true
+  RailsSchemaUpToDate:
+    enabled: true
+  HamlLint:
+    enabled: true
+  Reek:
+    enabled: true
+PrePush:
+  Brakeman:
+    enabled: true

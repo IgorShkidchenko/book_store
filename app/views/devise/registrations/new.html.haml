@@ -1,0 +1,19 @@
+- provide(:title, t('devise_pages.sign_up'))
+%main.container.general-main-wrap
+  .text-center
+    %h3.general-login-title
+      = t('devise_pages.sign_up')
+    = render 'devise/shared/facebook'
+  = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'general-form' },
+    defaults: { input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group mb-30' },
+    label_html: { class: 'control-label input-label' } }) do |f|
+    = render 'devise/shared/form_part', f: f, forgot: nil
+    = f.input :password_confirmation,
+    label: t('devise_pages.password.edit.confirm'), placeholder: t('devise_pages.password.edit.confirm'), autocomplete: 'off'
+    .text-center
+      = f.button :submit, t('devise_pages.sign_up'), class: 'btn-default mb-20'
+  .text-center
+    = link_to t('devise_pages.back'), @back, class: 'btn btn-default mb-20'
+  %p.general-sign-text.text-center
+    = t('devise_pages.sign_up_page.have_account')
+    = link_to t('devise_pages.log_in'), new_user_session_path, class: 'in-gold-500'

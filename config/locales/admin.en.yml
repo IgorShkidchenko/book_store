@@ -1,0 +1,35 @@
+en:
+  admin:
+    delete_msg: "Are you sure you want to delete this item?
+                They are associated with %{quantity} of books"
+    actions:
+      view: View
+      edit: Edit
+      delete: Delete
+      show: Show
+      show_on_site: Show on site
+      create_with_faker: Create with faker
+    dashboard:
+      books_count: "Books quantity: %{count}"
+      users_count: "Users quantity: %{count}"
+      orders_count: "Orders quantity: %{count}"
+    column:
+      date: Date
+    book_form:
+      no_cover: no cover page yet
+      title: Book information
+      cover_title: Book covers
+    coupon:
+      generate: Generate coupon
+    order:
+      status: State
+    error:
+      not_found: Not found this records
+    batches:
+      approve: Approve
+      reject: Reject
+      delete: Delete
+      in_queue: In Queue
+      in_delivery: In Delivery
+      delivered: Delivered
+      canceled: Canceled

@@ -1,0 +1,89 @@
+- provide(:title, t('checkout.delivery'))
+%main.container.general-main-wrap
+  %h1.general-title-margin
+    = t('checkout.title')
+  %ul.steps.list-inline
+    %li.step.done
+      %span.step-number
+        %i.fa.fa-check.step-icon
+      %span.step-text.hidden-xs
+        = t('checkout.address')
+    %li.step-divider
+    %li.step.active
+      %span.step-number
+        = t('checkout.steps_numbers.second')
+      %span.step-text.hidden-xs
+        = t('checkout.delivery')
+    %li.step-divider
+    %li.step
+      %span.step-number
+        = t('checkout.steps_numbers.third')
+      %span.step-text.hidden-xs
+        = t('checkout.payment')
+    %li.step-divider
+    %li.step
+      %span.step-number
+        = t('checkout.steps_numbers.fourth')
+      %span.step-text.hidden-xs
+        = t('checkout.confirm')
+    %li.step-divider
+    %li.step
+      %span.step-number
+        = t('checkout.steps_numbers.fifth')
+      %span.step-text.hidden-xs
+        = t('checkout.complete')
+  %h3.general-subtitle
+    = t('checkout.delivery')
+  = simple_form_for(current_order, url: wizard_path, validate: true, method: :put) do |f|
+    .visible-xs
+      .general-cart-item.divider-lg-bottom
+        %table.table
+        - @checkout_delegator.form.delivery_methods.each_with_index do |method, index|
+          %tr
+            %td.col-half
+              %span.in-grey-600
+                = t('checkout.delivery_page.method')
+            %td.col-half
+              = render 'delivery_row', method: method, index: index
+          %tr
+            %td
+              %span.in-grey-600
+                = t('checkout.delivery_page.days')
+            %td
+              %span.font-16.fw-300
+                = method.decorate.delivery_days
+          %tr
+            %td
+              %span.in-grey-600
+                = t('checkout.delivery_page.price')
+            %td
+              %span.font-16.in-gold-500
+                = t('price', price: method.cost)
+    .hidden-xs.mb-res-50
+      %table.table.table-hover
+        %thead
+          %tr
+            %th.col-method
+              %span.in-grey-600.ml-40
+                = t('checkout.delivery_page.method')
+            %th
+              %span.in-grey-600
+                = t('checkout.delivery_page.days')
+            %th
+              %span.in-grey-600
+                = t('checkout.delivery_page.price')
+        %tbody
+        - @checkout_delegator.form.delivery_methods.each_with_index do |method, index|
+          %tr
+            %td
+              = render 'delivery_row', method: method, index: index
+            %td
+              %span
+                = method.decorate.delivery_days
+            %td
+              %span.font-16.in-gold-500
+                = t('price', price: method.cost)
+    .general-text-align
+      = render 'orders/order_info/order_summary', right: false
+    .text-center
+      = f.button :submit, t('checkout.buttons.next'), class: 'btn-default mb-80'

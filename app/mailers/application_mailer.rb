@@ -1,4 +1,7 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'from@example.com'
-  layout 'mailer'
+  DEFAULT_EMAIL = 'bookstore@example.com'.freeze
+  DEFAULT_LAYOUT = 'mailer'.freeze
+
+  default from: DEFAULT_EMAIL
+  layout DEFAULT_LAYOUT
 end

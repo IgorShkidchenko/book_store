@@ -1,0 +1,29 @@
+= render 'reviews/form', book: book if can? :create, Review
+.mb-80
+  %h3.in-gold-500.mb-25
+    = t('review.count', count: book.reviews.approved.size)
+  - book.reviews.approved.decorate.each do |review|
+    .general-message-wrap.divider-lg
+      .clearfix
+        %span.img-circle.logo-size.inlide-block.pull-left.logo-empty
+          = review.user_logo
+        .ml-70
+          %div
+            .general-message-date.hidden-xs
+              = review.creation_date
+            .max-240
+              .general-message-verified.pull-right
+                = review.verified
+              .general-message-name
+                = review.user_email
+          - if review.rating
+            .mb-15
+              - 1.upto(5) do |index|
+                - if review.rating >= index
+                  %i.fa.fa-star.rate-star
+                - else
+                  %i.fa.fa-star.rate-star.rate-empty
+          %h4
+            = review.title
+          %p
+            = review.body

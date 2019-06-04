@@ -1,0 +1,12 @@
+%tr
+  %td
+    = link_to t('orders.order_uniq_number', number: order.number), order_path(order), class: 'general-order-number'
+  %td
+    %span.in-grey-900.font-16.fw-300
+      = order.creation_date
+  %td
+    %span.font-16.fw-300{ class: "#{order.delivered? ? 'text-success' : 'in-grey-900'}" }
+      = order.status
+  %td
+    %p.font-16
+      = order.total_price

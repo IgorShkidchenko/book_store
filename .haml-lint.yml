@@ -1,0 +1,9 @@
+linters:
+  LineLength:
+    max: 160
+  InstanceVariables:
+    enabled: false
+
+exclude:
+  - 'app/views/admin/**/*.haml'
+  - 'app/views/books/_input_field.html.haml'

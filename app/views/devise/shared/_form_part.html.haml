@@ -1,0 +1,4 @@
+= f.input :email, label: t('devise_pages.password.new.enter_email'), autofocus: true, placeholder: t('devise_pages.password.new.enter_email')
+.form-group.mb-30
+  = f.input :password, label: t('devise_pages.form.password'), placeholder: t('devise_pages.form.password'), autocomplete: 'off', wrapper: false
+  = link_to t('devise_pages.password.new.forgot'), new_password_path(resource_name), class: 'help-block in-gold-500' if forgot

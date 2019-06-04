@@ -1,0 +1,11 @@
+- context.instance_eval do
+  - selectable_column
+  - column :number
+  - column t('cart.page.order_total') do |order|
+    - order.total_price
+  - column :created_at do |order|
+    - order.creation_date
+  - column t('admin.order.status') do |order|
+    - order.status
+  - actions defaults: false do |order|
+    - link_to t('admin.actions.show'), admin_order_path(order)

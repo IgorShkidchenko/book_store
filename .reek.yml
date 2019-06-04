@@ -1,0 +1,35 @@
+detectors:
+  IrresponsibleModule:
+    enabled: false
+  InstanceVariableAssumption:
+    enabled: false
+  UtilityFunction:
+    enabled: false
+  MissingSafeMethod:
+    enabled: false
+  ControlParameter:
+    enabled: false
+  TooManyConstants:
+    enabled: false
+  NilCheck:
+    enabled: false
+
+directories:
+  'app/services/':
+    TooManyInstanceVariables:
+      enabled: false
+    DuplicateMethodCall:
+      enabled: false
+  'app/controllers/':
+    TooManyStatements:
+      enabled: false
+  'app/decorators/':
+    TooManyStatements:
+      enabled: false
+    DuplicateMethodCall:
+      enabled: false
+
+exclude_paths:
+  - db/
+  - config/initializers/
+  - spec/

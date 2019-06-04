@@ -1,0 +1,8 @@
+.col-sm-3
+  %h3.general-subtitle
+    = t('checkout.confirm_page.payment_info')
+  %p.general-address
+    = credit_card.masked_number
+    = link_to t('checkout.confirm_page.edit_link'), wizard_path(CheckoutStepsController::STEPS[:payment]), class: 'general-edit' if checkout
+    %br
+    = credit_card.expire_date

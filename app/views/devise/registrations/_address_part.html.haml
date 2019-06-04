@@ -1,0 +1,10 @@
+.visible-xs.visible-sm
+  %h3.general-subtitle.mt-0
+    = t("user_settings.#{address_kind}")
+= simple_form_for(address, url: (address.id ? address_path(address.id) : addresses_path), method: (address.id ? :patch : :post),
+validate: true, html: { class: 'res-mb-100' }, remote: true,
+defaults: { input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group' },
+label_html: { class: 'control-label input-label' } }) do |f|
+  = render 'addresses/form', f: f, address_kind: address_kind
+  .text-center.general-text-align
+    = f.button :submit, t('user_settings.save'), class: 'btn-default'

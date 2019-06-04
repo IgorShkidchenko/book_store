@@ -1,0 +1,5 @@
+%td{ class: order_item.id.to_s }
+  .input-group
+    = order_item.minus_quantity_link if can? :update, order_item.order_item
+    %input.form-control.quantity-input{ type: 'text', value: order_item.quantity.to_s, readonly: true, min: OrderItemDecorator::MINIMUM_QUANTITY }
+    = order_item.plus_quantity_link if can? :update, order_item.order_item

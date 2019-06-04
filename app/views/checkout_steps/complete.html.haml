@@ -1,0 +1,62 @@
+- provide(:title, t('checkout.complete'))
+%main.container.general-main-wrap
+  %h1.general-title-margin
+    = t('checkout.title')
+  %ul.steps.list-inline
+    %li.step.done
+      %span.step-number
+        %i.fa.fa-check.step-icon
+      %span.step-text.hidden-xs
+        = t('checkout.address')
+    %li.step-divider
+    %li.step.done
+      %span.step-number
+        %i.fa.fa-check.step-icon
+      %span.step-text.hidden-xs
+        = t('checkout.delivery')
+    %li.step-divider
+    %li.step.done
+      %span.step-number
+        %i.fa.fa-check.step-icon
+      %span.step-text.hidden-xs
+        = t('checkout.payment')
+    %li.step-divider
+    %li.step.done
+      %span.step-number
+        %i.fa.fa-check.step-icon
+      %span.step-text.hidden-xs
+        = t('checkout.confirm')
+    %li.step-divider
+    %li.step.done
+      %span.step-number
+        %i.fa.fa-check.step-icon
+      %span.step-text.hidden-xs
+        = t('checkout.complete')
+  .text-center.mb-40
+    %h3.general-subtitle
+      = t('checkout.complete_page.thank_you')
+    %p.fw-300
+      = t('checkout.complete_page.msg_was_sent', email: current_order.user_email)
+  .row.mb-20
+    .col-sm-6
+      .visible-xs
+        %p.general-order-number.mb-0
+          = t('orders.order_number', number: current_order.number)
+        %p.general-address.mb-30
+          = current_order.creation_date
+      = render 'checkout_steps/billing_part', address: current_order.addresses.billing.first.decorate
+    .col-sm-6.hidden-xs.text-right
+      %p.general-order-number.mb-0
+        = t('orders.order_number', number: current_order.number)
+      %p.general-address.mb-30
+        = current_order.creation_date
+  .visible-xs
+    = render partial: 'order_items/cart/mobile_cart_row', collection: @checkout_delegator.order_items, as: :order_item
+  .hidden-xs.divider-lg.pt-20
+    %table.table.table-hover
+      = render 'order_items/cart/item_titles_row'
+      = render partial: 'order_items/cart/cart_row', collection: @checkout_delegator.order_items, as: :order_item
+  .text-center.general-text-right
+    = render 'orders/order_info/order_summary', right: true
+  .text-center
+    = link_to t('checkout.buttons.back_to_store'), books_path, class: 'btn btn-default mb-20'

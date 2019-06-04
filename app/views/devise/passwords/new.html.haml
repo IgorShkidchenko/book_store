@@ -1,0 +1,13 @@
+- provide(:title, t('devise_pages.form.password'))
+%main.container.general-main-wrap
+  .text-center
+    %h1.mb-30
+      = t('devise_pages.password.new.forgot')
+    %p.general-password-text
+      = t('devise_pages.password.new.instructions')
+    = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'general-form' },
+      defaults: { input_html: { class: 'form-control' }, wrapper_html: { class: 'form-group mb-30' } }) do |f|
+      = f.input :email, placeholder: t('devise_pages.password.new.enter_email'), autofocus: true, label: false
+      = f.button :submit, t('devise_pages.password.new.submit'), class: 'btn-default center-block mb-20'
+      .text-center
+        = link_to 'Cancel', new_user_session_path, class: 'in-gold-500 mb-20'

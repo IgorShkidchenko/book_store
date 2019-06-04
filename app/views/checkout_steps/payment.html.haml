@@ -1,0 +1,54 @@
+- provide(:title, t('checkout.payment'))
+%main.container.mb-res-50
+  %h1.general-title-margin
+    = t('checkout.title')
+  %ul.steps.list-inline
+    %li.step.done
+      %span.step-number
+        %i.fa.fa-check.step-icon
+      %span.step-text.hidden-xs
+        = t('checkout.address')
+    %li.step-divider
+    %li.step.done
+      %span.step-number
+        %i.fa.fa-check.step-icon
+      %span.step-text.hidden-xs
+        = t('checkout.delivery')
+    %li.step-divider
+    %li.step.active
+      %span.step-number
+        = t('checkout.steps_numbers.third')
+      %span.step-text.hidden-xs
+        = t('checkout.payment')
+    %li.step-divider
+    %li.step
+      %span.step-number
+        = t('checkout.steps_numbers.fourth')
+      %span.step-text.hidden-xs
+        = t('checkout.confirm')
+    %li.step-divider
+    %li.step
+      %span.step-number
+        = t('checkout.steps_numbers.fifth')
+      %span.step-text.hidden-xs
+        = t('checkout.complete')
+  %h3.general-subtitle
+    = t('checkout.payment_page.credit_card')
+  = simple_form_for(@checkout_delegator.form.credit_card, as: 'order[credit_card]', url: wizard_path, validate: true, method: :put, html: { class: 'max-600 mb-80' },
+  defaults: { wrapper_html: { class: 'form-group' }, input_html: { class: 'form-control' },
+  label_html: { class: 'control-label input-label' } }) do |f|
+    = f.input :number, label: t('checkout.payment_page.form.number'), placeholder: t('checkout.payment_page.form.number')
+    .row
+      .col-sm-6
+        = f.input :name, label: t('checkout.payment_page.form.name'), placeholder: t('checkout.payment_page.form.name')
+      .col-sm-3
+        = f.input :expire_date, label: t('checkout.payment_page.form.expire'), placeholder: t('checkout.payment_page.form.expire')
+      .col-sm-3
+        = f.input :cvv, as: :password, label: t('checkout.payment_page.form.cvv'), placeholder: t('checkout.payment_page.form.cvv')
+        %i.fa.fa-question-circle.general-form-help
+        %p.cvv_hint
+          = t('checkout.payment_page.form.cvv_hint')
+    .general-text-align
+      = render 'orders/order_info/order_summary', right: false
+    .text-center
+      = f.button :submit, t('checkout.buttons.next'), class: 'btn-default mb-80'

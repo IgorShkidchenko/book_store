@@ -1,0 +1,52 @@
+- provide(:title, book.title)
+%main.container
+  = link_to @back, class: 'general-back-link' do
+    %i.fa.fa-long-arrow-left.mr-15
+    = t('book.page.back')
+  .row
+    .col-sm-6
+      .product-gallery
+        .mb-20
+          = book.main_book_cover
+        .images.clearfix.small_covers
+          - book.covers.drop(1).each do |cover|
+            = image_tag cover.image_url(:width_150), alt: t('book.cover_alt', title: book.title)
+    .col-sm-6
+      %h1.mt-res-0
+        = book.title
+      %p.lead.small
+        = book.authors_as_string
+      .row
+        .col-xs-12.col-md-4
+          %p.h1.in-gold-500.mt-10
+            = t('price', price: book.price)
+        = render 'input_field'
+      .general-info-wrap.divider-lg
+        %p
+          = t('book.page.description')
+        %p.lead.small.line-height-2
+          = book.medium_description
+          %span#dots ...
+          %span#more
+            = book.the_rest_of_description
+          %button.btn.btn-link.in-gold-500.ml-10#read-more-btn{ onclick: 'readMore()' }
+            = t('book.page.read_more')
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left
+            = t('book.page.published')
+          %p.lead.small.pull-right
+            = book.published_year
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left
+            = t('book.page.dimensions')
+          %p.lead.small.pull-right
+            = book.dimensions
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left
+            = t('book.page.materials')
+          %p.lead.small.pull-right
+            = book.materials
+  = render 'reviews/review', book: book

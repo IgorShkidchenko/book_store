@@ -1,0 +1,13 @@
+.col-sm-4.coupon
+  - if current_order.coupon.present?
+    .text-center
+      %p.font-16.in-gold-500
+        = t('coupon.was_used')
+  - else
+    .input-group.general-input-group
+      = simple_form_for(:coupon, url: coupon_path(:coupon), method: :put, remote: true, html: { autocomplete: 'off' }) do |f|
+        = f.input :key, label: t('cart.page.enter_coupon'), placeholder: t('cart.page.enter_coupon'),
+        class: 'form-control mb-30', label_html: { class: 'input-label' }
+        %br
+        %div
+          = f.button :submit, t('cart.page.apply_coupon'), class: 'btn-primary mr-5 mb-15'

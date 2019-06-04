@@ -1,0 +1,11 @@
+- context.instance_eval do
+  - selectable_column
+  - column :book
+  - column :title
+  - column :body
+  - column t('admin.column.date') do |review|
+    - review.creation_date
+  - column :user
+  - column :status
+  - actions defaults: false do |review|
+    - link_to t('admin.actions.show'), admin_review_path(review)

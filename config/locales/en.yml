@@ -1,33 +1,224 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  price: "€%{price}"
+  layout:
+    link:
+      home: Home
+      shop: Shop
+      orders: Orders
+      settings: Settings
+      log_in: Log in
+      sign_up: Sign up
+      log_out: Log out
+    footer:
+      mail: support@bookstore.com
+      number: (555)-555-5555
+    header:
+      my_account: My account
+      bookstore: Bookstore
+    title: "%{title} | Bookstore"
+  devise_pages:
+    password:
+      new:
+        forgot: Forgot your password?
+        instructions: "We'll email you instructions on how to reset it"
+        enter_email: Enter your email
+        submit: Email Instructions
+      edit:
+        set: Set new password
+        type: Type a new Password
+        confirm: Confirm Password
+        submit: Change
+    log_in: Log in
+    sign_up: Sign up
+    back: Back
+    or: or
+    login_page:
+      remember: Remember me
+      dont_have_account: Don’t have an Account?
+    sign_up_page:
+      have_account: Already have an Account?
+    form:
+      password: Password
+  home:
+    welcome: Welcome to our amazing Bookstore!
+    about_us: We pore through hundreds of new books each month and select the five best we can find to share with our members.
+    start_button: Get Started
+    best_sellers: Best Sellers
+    buy_button: Buy Now
+  catalog:
+    title: Сatalog
+    view_more_button: View More
+    all: All
+    dropdown:
+      created_at: Newest first
+      popular: Popular first
+      price_asc: 'Price: Low to hight'
+      price_desc: 'Price: Hight to low'
+      title_asc: 'Title: A - Z'
+      title_desc: 'Title: Z - A'
+  book:
+    covers_max_error: Maximum %{max} cover for one book
+    page:
+      back: Back to results
+      add_to_cart: Add to Cart
+      description: Description
+      read_more: Read More
+      published: Year of publication
+      dimensions: Dimensions
+      materials: Materials
+    short_description: "%{description}..."
+    cover_alt: "%{title}"
+    cover_default: Default book cover
+  review:
+    write_review: Write a Review
+    verified: Verified Reviewer
+    score: Score
+    title: Title
+    review: Review
+    post: Post
+    count: "Reviews (%{count})"
+    success_msg: Thanks for Review. It will be published as soon as Admin approves it.
+    validation_format_msg: "permit only this special symbols !#$%&'*+-/=?^_`{|}~."
+  cart:
+    page:
+      title: Cart
+      enter_coupon: Enter Your Coupon Code
+      apply_coupon: Apply Coupon
+      order_summary: Order Summary
+      subtotal: 'Subtotal:'
+      coupon: 'Coupon:'
+      delivery: 'Delivery:'
+      order_total: 'Order Total:'
+      cheackout: Checkout
+      empty_cart: "Your cart is empty, let's remove this ugly text by buying some books"
+      book:
+        product: Product
+        price: Price
+        quantity: Quantity
+        subtotal: SubTotal
+    errors:
+      unknow: Something went wrong, please refresh the page and try again
+      min_quantity: "Quantity can't be less than 1"
+  order_item:
+    error: is not a valid order.
+  coupon:
+    error_used: Coupon was already used
+    error_havent: Coupon does not exist
+    was_used: Coupon was used successfully
+  checkout:
+    follow_steps: Please follow steps, you can edit all data on confirm step
+    title: Checkout
+    address: Address
+    delivery: Delivery
+    payment: Payment
+    confirm: Confirm
+    complete: Complete
+    buttons:
+      next: Save and Continue
+      place_order: Place Order
+      back_to_store: Back to Store
+    steps_numbers:
+      first: '1'
+      second: '2'
+      third: '3'
+      fourth: '4'
+      fifth: '5'
+    quick_sing_in:
+      title: Quick Register
+      or: or
+      login_with_pass: Log In with Password
+      returning_customer: Returning Customer
+      new_customer: New Customer
+      password_later: "You’ll be able to create password later"
+      button_quick: Proceed to Checkout
+    address_page:
+      billing: Billing Address
+      shipping: Shipping Address
+      required_fields: all fields are required
+      use_billing_button: Use Billing Adress
+      form:
+        first_name: First Name
+        last_name: Last Name
+        city: City
+        address: Address
+        zip: Zip
+        country: Country
+        country_select: Select a country
+        phone: Phone
+        phone_example: Example +355 66 123 4567
+    delivery_page:
+      method: Method
+      days: Days
+      price: Price
+      zero_days: Order will be ready after payment is confirmed
+      method_days: "%{min} to %{max} days"
+    payment_page:
+      credit_card: Credit Card
+      form:
+        number: Card Number
+        name: Card Name
+        expire: MM / YY
+        cvv: CVV
+        cvv_hint: 3-digit security code, usually can be found on the back of your card. American Express card has 4-digit code, located on the front side.
+    confirm_page:
+      edit_link: edit
+      shipments: Shipments
+      payment_info: Payment Information
+    complete_page:
+      thank_you: Thank You for your Order!
+      msg_was_sent: "An order confirmation has been sent to %{email}"
+    errors:
+      only_letters: can contain only letters
+      only_numbers: can contain only numbers
+      phone: should start with + and contain only numbers
+      address: "can contain only letters, numbers and these symbols ' ` \" -"
+      expire_date: should be in MM/YY format and contain only numbers
+      invalid_expire_date: "can't be in the past"
+    address_phone: "Phone %{number}"
+  user_settings:
+    settings: Settings
+    address: Address
+    privacy: Privacy
+    success: "%{kind} address was successfuly changed"
+    billing: Billing Address
+    shipping: Shipping Address
+    save: Save
+    email: Email
+    enter_email: Enter Email
+    password: Password
+    old_password: Old Password
+    new_password: New Password
+    confirm_password: Confirm Password
+    remove: Remove Account
+    please_remove: Please Remove My Account
+    checkbox: I understand that all data will be lost
+  orders:
+    my_orders: My Orders
+    sort_by: Sort by
+    number: Number
+    completed_at: Completed at
+    status: Status
+    total: Total
+    order_number: "Order %{number}"
+    order_uniq_number: "%{number}"
+    confirm: Order unconfirmed
+    no_orders: "You don't have any orders, let's remove this ugly text by buying some books"
+    no_orders_status: "You don't have orders in '%{status}' status"
+    filters:
+      all: All Orders
+      in_progress: Waiting for payment
+      in_queue: Waiting for processing
+      in_delivery: In Delivery
+      delivered: Delivered
+      canceled: Canceled
+  order_page:
+    title: Order Info
+  cancan:
+    error: Access Denied
+  facebook:
+    error_authentication: Something went wrong, invalid Facebook data
+    error: Something went wrong, can not log in via Facebook
+  mailer:
+    order:
+      subject: Book Order
+      message: "Your order number is %{number}."

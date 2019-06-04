@@ -1,0 +1,16 @@
+= semantic_form_for [:admin, @book], builder: ActiveAdmin::FormBuilder do |f|
+  = f.inputs t('admin.book_form.title') do
+    = f.input :title
+    = f.input :description, as: :simplemde_editor
+    = f.input :price
+    = f.input :category
+    = f.input :authors, as: :select, collection: Author.all.map { |author| [author.name, author.id] }
+    = f.input :published_year
+    = f.input :materials
+    = f.input :height
+    = f.input :width
+    = f.input :depth
+    = f.inputs multipart: true do
+      - f.has_many :covers, heading: t('admin.book_form.cover_title'), allow_destroy: true do |book_cover|
+        - book_cover.input :image, as: :file, hint: book_cover.object.image.present? ? image_tag(book_cover.object.image.url, width: 150, height: 200) : content_tag(:span, t('admin.book_form.no_cover'))
+  = f.actions

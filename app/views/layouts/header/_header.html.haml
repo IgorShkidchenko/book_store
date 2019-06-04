@@ -1,0 +1,27 @@
+%header.navbar.navbar-default
+  .container
+    .cart_part
+      = render 'layouts/header/cart'
+    .navbar-collapse.collapse.pl-30#navbar{ 'aria-expanded': 'false' }
+      .visible-xs
+        %button.close{ type: 'button', 'aria-label': 'Close' }
+          %span{ 'aria-hidden': 'true' } &times;
+        %ul.nav.navbar-nav
+          %li
+            = link_to t('layout.link.home'), root_path
+          %li
+            %a{ type: 'button', 'data-toggle': 'collapse', href: '#menu', 'aria-expanded': 'false', 'aria-controls': 'menu' }
+              = t('layout.link.shop')
+            %ul.collapse.list-unstyled.pl-30.mb-10#menu{ 'aria-expanded': 'false' }
+              = @header_presenter.header_categories(css_class: 'collapse-link')
+          = render partial: 'layouts/header/user_links'
+      .hidden-xs
+        %ul.nav.navbar-nav
+          %li
+            = link_to t('layout.link.home'), root_path
+          %li.dropdown
+            %a.dropdown-toggle{ href: '#', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false' }
+              = t('layout.link.shop')
+            %ul.dropdown-menu
+              = @header_presenter.header_categories
+          = render partial: 'layouts/header/user_links'

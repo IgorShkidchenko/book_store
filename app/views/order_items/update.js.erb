@@ -1,0 +1,5 @@
+$('.cart_part').html("<%= j render 'layouts/header/cart' %>");
+$('td.<%= @order_item.id %>').replaceWith("<%= j render 'order_items/cart/form' , order_item: @order_item.decorate %>");
+$('span.<%= @order_item.id %>').html('<%= @order_item.decorate.total_price %>');
+$('div.<%= current_order.id %>').replaceWith("<%= j render 'orders/order_info/order_summary', right: true %>");
+$('.flash').html("<%= j render partial: 'layouts/flash', locals: { message: flash[:message] } %>");

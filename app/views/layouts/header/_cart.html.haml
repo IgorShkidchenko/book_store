@@ -1,0 +1,19 @@
+.navbar-header
+  %button.navbar-toggle.pull-left{ type: 'button', 'data-toggle': 'collapse', 'data-target': '#navbar' }
+    %span.sr-only
+    %span.icon-bar
+    %span.icon-bar
+    %span.icon-bar
+  = link_to t('layout.header.bookstore'), root_path, class: 'navbar-brand in-gold-500'
+  - if current_order.persisted?
+    = link_to order_order_items_path(current_order), class: 'shop-link pull-right visible-xs' do
+      .cart_link
+        %span.shop-icon
+          %span.shop-quantity
+            = current_order.order_items_count
+- if current_order.persisted?
+  = link_to order_order_items_path(current_order), class: 'shop-link pull-right hidden-xs' do
+    .cart_link
+      %span.shop-icon
+        %span.shop-quantity
+          = current_order.order_items_count

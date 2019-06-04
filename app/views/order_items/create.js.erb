@@ -1,0 +1,3 @@
+$('.cart_part').html("<%= j render 'layouts/header/cart' %>")
+$('.flash').html("<%= j render partial: 'layouts/flash', locals: { message: flash[:message] } %>");
+cart_shake()

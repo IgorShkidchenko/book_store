@@ -1,0 +1,31 @@
+- provide(:title, t('user_settings.settings'))
+%main.container
+  %h1.general-title-margin
+    = t('user_settings.settings')
+  %ul.nav.clearfix.mb-20{ role: 'tablist' }
+    %li.tab-item.active{ role: 'presentation' }
+      %a.tab-link{ href: '#address', 'aria-controls': 'address', role: 'tab', 'data-toggle': 'tab' }
+        = t('user_settings.address')
+    %li.tab-item{ role: 'presentation' }
+      %a.tab-link{ href: '#privacy', 'aria-controls': 'privacy', role: 'tab', 'data-toggle': 'tab' }
+        = t('user_settings.privacy')
+  .tab-content
+    .tab-pane.fade.in.active.general-main-wrap#address{ role: 'tabpanel' }
+      .hidden-xs.hidden-sm
+        .row
+          .col-md-5
+            %h3.general-subtitle.mt-0
+              = t('user_settings.billing')
+          .col-md-5.col-md-offset-1
+            %h3.general-subtitle.mt-0
+              = t('user_settings.shipping')
+      .row
+        .col-md-5.mb-40
+          = render 'address_part', address: @billing, address_kind: Address.kinds[:billing]
+        .col-md-5.col-md-offset-1.mb-25
+          = render 'address_part', address: @shipping, address_kind: Address.kinds[:shipping]
+    .tab-pane.fade#privacy{ role: 'tabpanel' }
+      .row.mb-60
+        = render 'email_part'
+        = render 'password_part'
+        = render 'destroy_part'

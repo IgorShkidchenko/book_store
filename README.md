@@ -1,24 +1,15 @@
-# README
+[![Maintainability](https://api.codeclimate.com/v1/badges/05a2bdd1a6003161a089/maintainability)](https://codeclimate.com/github/IgorShkidchenko/book_store/maintainability) [![CircleCI](https://circleci.com/gh/IgorShkidchenko/book_store/tree/develop.svg?style=svg)](https://circleci.com/gh/IgorShkidchenko/book_store/tree/develop)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# book_store
 
-Things you may want to cover:
+[_To Heroku_](https://book-store-shkidchenko.herokuapp.com/)
 
-* Ruby version
+[_Coupons_](https://book-store-shkidchenko.herokuapp.com/admin/coupons)
 
-* System dependencies
+- Admin
+account: admin@example.com
+password: password
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- User
+account: user@example.com
+password: password
