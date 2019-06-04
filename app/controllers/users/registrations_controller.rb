@@ -22,7 +22,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def checkout_authenticate
     build_resource(sign_up_params)
-    resource.skip_confirmation!
+    # resource.skip_confirmation!
     if resource.save
       authenticate_user
       redirect_to checkout_step_path(CheckoutStepsController::STEPS[:address])
